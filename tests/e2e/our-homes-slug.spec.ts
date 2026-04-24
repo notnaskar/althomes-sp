@@ -7,6 +7,7 @@ test.describe('Property detail page (/our-homes/[slug])', () => {
   test.todo('renders specs strip (guests, bedrooms, bathrooms)')
   test.todo('renders location section')
   test.todo('renders highlights section')
+  test.todo('renders experiences section when experiences are linked')
   test.todo('renders amenities section')
   test.todo('renders causes section when content is present')
   test.todo('renders reviews section when published reviews exist')

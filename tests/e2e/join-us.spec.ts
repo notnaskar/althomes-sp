@@ -4,6 +4,7 @@ test.describe('Join Us page (/join-us)', () => {
   test.todo('renders heroHeadline')
   test.todo('renders pullQuote text')
   test.todo('renders bullet points list')
+  test.todo('renders body paragraph text')
   test.todo('form has NAME input')
   test.todo('form has EMAIL input')
   test.todo('form has PHONE NUMBER input')
