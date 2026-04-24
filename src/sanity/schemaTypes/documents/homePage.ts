@@ -11,6 +11,15 @@ export default defineType({
 			type: 'string',
 		}),
 		defineField({
+			name: 'heroImage',
+			title: 'Hero Image',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [
+				defineField({ name: 'alt', type: 'string', title: 'Alt text' }),
+			],
+		}),
+		defineField({
 			name: 'navLabels',
 			title: 'Navigation Labels',
 			type: 'array',
