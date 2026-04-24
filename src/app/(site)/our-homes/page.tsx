@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { urlFor } from '@/sanity/lib/image'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default async function OurHomesPage() {
 	const [page, properties] = await Promise.all([getOurHomesPage(), getAllProperties()])
@@ -17,14 +18,16 @@ export default async function OurHomesPage() {
 					{properties?.map((property) => (
 						<Link 
 							key={property._id} 
-							href={`/our-homes/${property.slug?.current}`}
+							href={`/our-homes/${property.slug}`}
 							className="group grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
 						>
 							<div className="overflow-hidden rounded-2xl aspect-[4/3]">
 								{property.cardThumbnail && (
-									<img
+									<Image
 										src={urlFor(property.cardThumbnail).width(1200).url()}
 										alt={property.cardThumbnail.alt || property.title || ''}
+										width={1200}
+										height={900}
 										className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
 									/>
 								)}

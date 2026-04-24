@@ -1,7 +1,6 @@
 import { getContactPage, getSite } from '@/sanity/lib/data'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import { PortableText } from 'next-sanity'
 
 export default async function ContactPage() {
 	const page = await getContactPage()
@@ -10,33 +9,36 @@ export default async function ContactPage() {
 	return (
 		<main className="flex-1">
 			<section className="container py-20">
-				{page.heroHeadline && (
-					<h1 className="text-4xl font-bold">{page.heroHeadline}</h1>
+				{page.sectionTitle && (
+					<h1 className="text-4xl font-bold">{page.sectionTitle}</h1>
 				)}
 			</section>
-			{page.contactDetails && page.contactDetails.length > 0 && (
+			{(page.phone || page.email || page.officeCity || page.officeAddress) && (
 				<section className="container py-8 grid gap-4 md:grid-cols-2">
-					{page.contactDetails.map((detail) => (
-						<div key={detail._key}>
-							{detail.label && (
-								<span className="font-medium">{detail.label}: </span>
-							)}
-							{detail.link ? (
-								<a href={detail.link} className="underline">
-									{detail.value}
-								</a>
-							) : (
-								<span>{detail.value}</span>
-							)}
+					{page.phone && (
+						<div>
+							<span className="font-medium">Phone: </span>
+							<a href={`tel:${page.phone}`} className="underline">{page.phone}</a>
 						</div>
-					))}
-				</section>
-			)}
-			{page.officeAddress && (
-				<section className="container py-8">
-					<div className="prose max-w-none">
-						<PortableText value={page.officeAddress} />
-					</div>
+					)}
+					{page.email && (
+						<div>
+							<span className="font-medium">Email: </span>
+							<a href={`mailto:${page.email}`} className="underline">{page.email}</a>
+						</div>
+					)}
+					{page.officeCity && (
+						<div>
+							<span className="font-medium">City: </span>
+							<span>{page.officeCity}</span>
+						</div>
+					)}
+					{page.officeAddress && (
+						<div>
+							<span className="font-medium">Address: </span>
+							<span>{page.officeAddress}</span>
+						</div>
+					)}
 				</section>
 			)}
 			{page.formHeadline && (

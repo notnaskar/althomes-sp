@@ -6,29 +6,38 @@ export default defineType({
 	type: 'document',
 	fields: [
 		defineField({
-			name: 'heroHeadline',
-			title: 'Hero Headline',
+			name: 'heroImage',
+			title: 'Hero Image',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [
+				defineField({ name: 'alt', type: 'string', title: 'Alt text' }),
+			],
+		}),
+		defineField({
+			name: 'sectionTitle',
+			title: 'Section Title',
 			type: 'string',
 		}),
 		defineField({
-			name: 'contactDetails',
-			title: 'Contact Details',
-			type: 'array',
-			of: [
-				{
-					type: 'object',
-					fields: [
-						{ name: 'label', type: 'string', title: 'Label' },
-						{ name: 'value', type: 'string', title: 'Value' },
-						{ name: 'link', type: 'string', title: 'Link (optional)' },
-					],
-				},
-			],
+			name: 'phone',
+			title: 'Phone Number',
+			type: 'string',
+		}),
+		defineField({
+			name: 'email',
+			title: 'Email Address',
+			type: 'string',
+		}),
+		defineField({
+			name: 'officeCity',
+			title: 'Office City',
+			type: 'string',
 		}),
 		defineField({
 			name: 'officeAddress',
 			title: 'Office Address',
-			type: 'blockContent',
+			type: 'text',
 		}),
 		defineField({
 			name: 'formHeadline',

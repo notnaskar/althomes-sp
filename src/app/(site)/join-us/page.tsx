@@ -1,7 +1,6 @@
 import { getJoinUsPage, getSite } from '@/sanity/lib/data'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import { PortableText } from 'next-sanity'
 
 export default async function JoinUsPage() {
 	const page = await getJoinUsPage()
@@ -13,29 +12,28 @@ export default async function JoinUsPage() {
 				{page.heroHeadline && (
 					<h1 className="text-4xl font-bold">{page.heroHeadline}</h1>
 				)}
-				{page.introBody && (
-					<div className="mt-6 prose max-w-none">
-						<PortableText value={page.introBody} />
-					</div>
+				{page.pullQuote && (
+					<p className="mt-6 text-xl italic text-muted-foreground">{page.pullQuote}</p>
+				)}
+				{page.bodyParagraph && (
+					<p className="mt-6 prose max-w-none">{page.bodyParagraph}</p>
 				)}
 			</section>
-			{page.benefits && page.benefits.length > 0 && (
-				<section className="container py-12 grid gap-6 md:grid-cols-2">
-					{page.benefits.map((benefit) => (
-						<div key={benefit._key} className="rounded-lg border p-6">
-							{benefit.title && (
-								<h3 className="font-semibold text-lg">{benefit.title}</h3>
-							)}
-							{benefit.body && (
-								<p className="mt-2 text-muted-foreground">{benefit.body}</p>
-							)}
-						</div>
-					))}
+			{page.bulletPoints && page.bulletPoints.length > 0 && (
+				<section className="container py-8">
+					<ul className="list-disc pl-6 space-y-2">
+						{page.bulletPoints.map((point, i) => (
+							<li key={i}>{point}</li>
+						))}
+					</ul>
 				</section>
 			)}
 			{page.formHeadline && (
 				<section className="container py-12">
 					<h2 className="text-2xl font-bold">{page.formHeadline}</h2>
+					{page.formCTAText && (
+						<p className="mt-4 text-muted-foreground">{page.formCTAText}</p>
+					)}
 				</section>
 			)}
 		</main>

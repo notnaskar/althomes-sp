@@ -11,6 +11,20 @@ export default defineType({
 			type: 'string',
 		}),
 		defineField({
+			name: 'heroSubtext',
+			title: 'Hero Subtext',
+			type: 'text',
+		}),
+		defineField({
+			name: 'heroBackground',
+			title: 'Hero Background',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [
+				defineField({ name: 'alt', type: 'string', title: 'Alt text' }),
+			],
+		}),
+		defineField({
 			name: 'introBody',
 			title: 'Intro Body',
 			type: 'blockContent',

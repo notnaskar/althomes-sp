@@ -1,9 +1,6 @@
 import { getAltWayPage, getSite } from '@/sanity/lib/data'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import { PortableText } from 'next-sanity'
-import Image from 'next/image'
-import { urlFor } from '@/sanity/lib/image'
 
 export default async function AltWayPage() {
 	const page = await getAltWayPage()
@@ -15,34 +12,54 @@ export default async function AltWayPage() {
 				{page.heroHeadline && (
 					<h1 className="text-4xl font-bold">{page.heroHeadline}</h1>
 				)}
-				{page.introBody && (
-					<div className="mt-6 prose max-w-none">
-						<PortableText value={page.introBody} />
-					</div>
+				{page.heroHeadlineLine2 && (
+					<h2 className="text-3xl font-bold mt-2">{page.heroHeadlineLine2}</h2>
+				)}
+				{page.missionText && (
+					<p className="mt-6 text-xl">{page.missionText}</p>
 				)}
 			</section>
-			{page.sections?.map((section) => (
-				<section key={section._key} className="container py-12">
-					{section.title && (
-						<h2 className="text-2xl font-semibold">{section.title}</h2>
+			{page.valueProps && page.valueProps.length > 0 && (
+				<section className="container py-12">
+					{page.valuePropHeadline && (
+						<h2 className="text-2xl font-semibold mb-8">{page.valuePropHeadline}</h2>
 					)}
-					{section.body && (
-						<div className="mt-4 prose max-w-none">
-							<PortableText value={section.body} />
-						</div>
+					<div className="grid gap-6 md:grid-cols-2">
+						{page.valueProps.map((vp, i) => (
+							<div key={i} className="rounded-lg border p-6">
+								{vp.title && <h3 className="font-semibold text-lg">{vp.title}</h3>}
+								{vp.body && <p className="mt-2 text-muted-foreground">{vp.body}</p>}
+							</div>
+						))}
+					</div>
+				</section>
+			)}
+			{page.stats && page.stats.length > 0 && (
+				<section className="container py-12">
+					{page.statsHeadline && (
+						<h2 className="text-2xl font-semibold mb-8">{page.statsHeadline}</h2>
 					)}
-					{section.image?.asset && (
-						<div className="mt-6 relative w-full aspect-[16/9]">
-							<Image
-								src={urlFor(section.image).width(1200).url()}
-								alt={section.image.alt ?? ''}
-								fill
-								className="object-cover rounded-lg"
-							/>
-						</div>
+					<div className="grid gap-6 md:grid-cols-4">
+						{page.stats.map((stat, i) => (
+							<div key={i} className="text-center">
+								{stat.value && <p className="text-4xl font-bold">{stat.value}</p>}
+								{stat.label && <p className="text-sm font-medium mt-1">{stat.label}</p>}
+								{stat.subtext && <p className="text-xs text-muted-foreground mt-1">{stat.subtext}</p>}
+							</div>
+						))}
+					</div>
+				</section>
+			)}
+			{page.bottomCTAHeadline && (
+				<section className="container py-20 text-center">
+					<h2 className="text-3xl font-bold">{page.bottomCTAHeadline}</h2>
+					{page.bottomCTALabel && (
+						<button className="mt-6 px-8 py-3 bg-black text-white rounded-full font-bold">
+							{page.bottomCTALabel}
+						</button>
 					)}
 				</section>
-			))}
+			)}
 		</main>
 	)
 }
