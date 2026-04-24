@@ -55,7 +55,8 @@ export const ALL_PROPERTIES_QUERY = defineQuery(`*[_type == 'property' && status
 	bedrooms,
 	bathrooms,
 	status,
-	displayOrder
+	displayOrder,
+	rentalwisePropertyId
 }`)
 
 export const PROPERTY_QUERY = defineQuery(`*[_type == 'property' && slug.current == $slug][0]{

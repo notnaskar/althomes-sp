@@ -2,6 +2,7 @@ import { getContactPage, getSite } from '@/sanity/lib/data'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Img from '@/ui/img'
+import ContactForm from '@/ui/forms/contact-form'
 
 export default async function ContactPage() {
 	const [page, site] = await Promise.all([getContactPage(), getSite()])
@@ -125,11 +126,9 @@ export default async function ContactPage() {
 					)}
 				</div>
 
-				{/* Right: form placeholder */}
-				<div className="flex items-start">
-					<div className="w-full p-8 border-2 border-dashed border-gray-300 rounded-lg text-center text-gray-400">
-						Form coming in Phase 4
-					</div>
+				{/* Right: contact form */}
+				<div>
+					<ContactForm />
 				</div>
 			</section>
 		</main>

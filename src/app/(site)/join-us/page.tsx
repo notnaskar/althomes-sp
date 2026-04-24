@@ -2,6 +2,7 @@ import { getJoinUsPage, getSite } from '@/sanity/lib/data'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Img from '@/ui/img'
+import PartnerForm from '@/ui/forms/partner-form'
 
 export default async function JoinUsPage() {
 	const page = await getJoinUsPage()
@@ -87,9 +88,7 @@ export default async function JoinUsPage() {
 				{page.formHeadline && (
 					<h2 className="text-3xl font-bold mb-8 text-center">{page.formHeadline}</h2>
 				)}
-				<div className="p-8 border-2 border-dashed border-gray-300 rounded-lg text-center text-gray-400">
-					Form coming in Phase 4
-				</div>
+				<PartnerForm />
 			</section>
 		</main>
 	)

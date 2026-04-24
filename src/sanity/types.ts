@@ -2130,7 +2130,7 @@ export type ALL_LEGAL_PAGES_QUERY_RESULT = Array<string | null>
 
 // Source: src/sanity/lib/queries.ts
 // Variable: ALL_PROPERTIES_QUERY
-// Query: *[_type == 'property' && status != 'hidden'] | order(displayOrder asc){	_id,	title,	"slug": slug.current,	tagline,	shortDescription,	cardThumbnail { asset->, alt },	propertyType,	priceFrom,	maxGuests,	bedrooms,	bathrooms,	status,	displayOrder}
+// Query: *[_type == 'property' && status != 'hidden'] | order(displayOrder asc){	_id,	title,	"slug": slug.current,	tagline,	shortDescription,	cardThumbnail { asset->, alt },	propertyType,	priceFrom,	maxGuests,	bedrooms,	bathrooms,	status,	displayOrder,	rentalwisePropertyId}
 export type ALL_PROPERTIES_QUERY_RESULT = Array<{
 	_id: string
 	title: string | null
@@ -2169,6 +2169,7 @@ export type ALL_PROPERTIES_QUERY_RESULT = Array<{
 	bathrooms: number | null
 	status: 'active' | 'coming-soon' | 'hidden' | null
 	displayOrder: number | null
+	rentalwisePropertyId: string | null
 }>
 
 // Source: src/sanity/lib/queries.ts
@@ -2818,7 +2819,7 @@ declare module '@sanity/client' {
 		"*[_type == 'contactPage' && _id == 'contactPage'][0]{\n\t...,\n\theroImage { asset->, alt }\n}": CONTACT_PAGE_QUERY_RESULT
 		"*[_type == 'legalPage' && slug.current == $slug][0]": LEGAL_PAGE_QUERY_RESULT
 		"*[_type == 'legalPage' && defined(slug.current)].slug.current": ALL_LEGAL_PAGES_QUERY_RESULT
-		"*[_type == 'property' && status != 'hidden'] | order(displayOrder asc){\n\t_id,\n\ttitle,\n\t\"slug\": slug.current,\n\ttagline,\n\tshortDescription,\n\tcardThumbnail { asset->, alt },\n\tpropertyType,\n\tpriceFrom,\n\tmaxGuests,\n\tbedrooms,\n\tbathrooms,\n\tstatus,\n\tdisplayOrder\n}": ALL_PROPERTIES_QUERY_RESULT
+		"*[_type == 'property' && status != 'hidden'] | order(displayOrder asc){\n\t_id,\n\ttitle,\n\t\"slug\": slug.current,\n\ttagline,\n\tshortDescription,\n\tcardThumbnail { asset->, alt },\n\tpropertyType,\n\tpriceFrom,\n\tmaxGuests,\n\tbedrooms,\n\tbathrooms,\n\tstatus,\n\tdisplayOrder,\n\trentalwisePropertyId\n}": ALL_PROPERTIES_QUERY_RESULT
 		'*[_type == \'property\' && slug.current == $slug][0]{\n\t...,\n\theroImage { asset->, alt },\n\tgallery[]{ asset->, alt },\n\tcardThumbnail { asset->, alt },\n\tamenities[]->{ name, icon },\n\texperiences[]->{\n\t\ttitle,\n\t\t"slug": slug.current,\n\t\tdescription,\n\t\timage { asset->, alt }\n\t},\n\thighlights[]{ title, body, image { asset->, alt } },\n\tcauseImages[]{ asset->, alt },\n\tlocation,\n\t"reviews": *[_type==\'review\' && references(^._id) && published==true] | order(stayDate desc) [0..20]{\n\t\tguestName, rating, body, guestLocation, stayDate\n\t}\n}': PROPERTY_QUERY_RESULT
 		"*[_type == 'property' && defined(slug.current)].slug.current": ALL_PROPERTY_SLUGS_QUERY_RESULT
 		"*[_type == 'blog.post'] | order(publishDate desc)": ALL_POSTS_QUERY_RESULT
