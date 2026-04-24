@@ -1,49 +1,136 @@
 import { getContactPage, getSite } from '@/sanity/lib/data'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import { PortableText } from 'next-sanity'
+import Img from '@/ui/img'
+import ContactForm from '@/ui/forms/contact-form'
 
 export default async function ContactPage() {
-	const page = await getContactPage()
+	const [page, site] = await Promise.all([getContactPage(), getSite()])
 	if (!page) notFound()
 
 	return (
 		<main className="flex-1">
-			<section className="container py-20">
-				{page.heroHeadline && (
-					<h1 className="text-4xl font-bold">{page.heroHeadline}</h1>
-				)}
-			</section>
-			{page.contactDetails && page.contactDetails.length > 0 && (
-				<section className="container py-8 grid gap-4 md:grid-cols-2">
-					{page.contactDetails.map((detail) => (
-						<div key={detail._key}>
-							{detail.label && (
-								<span className="font-medium">{detail.label}: </span>
+			{/* Hero */}
+			{page.heroImage && (
+				<section className="relative w-full overflow-hidden bg-gray-900">
+					<Img
+						image={page.heroImage}
+						width={1440}
+						loading="eager"
+						alt={page.heroImage.alt ?? ''}
+						className="w-full h-[60vh] object-cover opacity-70"
+					/>
+					{page.formHeadline && (
+						<div className="absolute inset-0 flex items-center justify-center">
+							<h1 className="text-4xl md:text-5xl font-bold text-white text-center px-6">
+								{page.formHeadline}
+							</h1>
+						</div>
+					)}
+				</section>
+			)}
+
+			{/* Hero fallback (no image) */}
+			{!page.heroImage && page.formHeadline && (
+				<section className="container py-20 text-center">
+					<h1 className="text-4xl md:text-5xl font-bold">{page.formHeadline}</h1>
+				</section>
+			)}
+
+			{/* Two-column body */}
+			<section className="container py-16 grid gap-12 md:grid-cols-2">
+				{/* Left: contact details */}
+				<div className="space-y-6">
+					{page.sectionTitle && (
+						<h2 className="text-3xl font-bold">{page.sectionTitle}</h2>
+					)}
+					{page.phone && (
+						<div>
+							<span className="block text-sm font-semibold uppercase tracking-wide text-gray-500 mb-1">Phone</span>
+							<a
+								href={`tel:${page.phone}`}
+								className="text-lg font-medium underline hover:text-yellow-600 transition"
+							>
+								{page.phone}
+							</a>
+						</div>
+					)}
+					{page.email && (
+						<div>
+							<span className="block text-sm font-semibold uppercase tracking-wide text-gray-500 mb-1">Email</span>
+							<a
+								href={`mailto:${page.email}`}
+								className="text-lg font-medium underline hover:text-yellow-600 transition"
+							>
+								{page.email}
+							</a>
+						</div>
+					)}
+					{(page.officeCity || page.officeAddress) && (
+						<div>
+							<span className="block text-sm font-semibold uppercase tracking-wide text-gray-500 mb-1">Office</span>
+							{page.officeCity && (
+								<p className="text-lg font-medium">{page.officeCity}</p>
 							)}
-							{detail.link ? (
-								<a href={detail.link} className="underline">
-									{detail.value}
-								</a>
-							) : (
-								<span>{detail.value}</span>
+							{page.officeAddress && (
+								<p className="text-gray-600">{page.officeAddress}</p>
 							)}
 						</div>
-					))}
-				</section>
-			)}
-			{page.officeAddress && (
-				<section className="container py-8">
-					<div className="prose max-w-none">
-						<PortableText value={page.officeAddress} />
-					</div>
-				</section>
-			)}
-			{page.formHeadline && (
-				<section className="container py-12">
-					<h2 className="text-2xl font-bold">{page.formHeadline}</h2>
-				</section>
-			)}
+					)}
+					{(site?.facebookUrl || site?.instagramUrl || site?.linkedinUrl || site?.youtubeUrl) && (
+						<div>
+							<span className="block text-sm font-semibold uppercase tracking-wide text-gray-500 mb-2">Follow us</span>
+							<div className="flex gap-4">
+								{site?.facebookUrl && (
+									<a
+										href={site.facebookUrl}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="text-lg font-medium underline hover:text-yellow-600 transition"
+									>
+										Facebook
+									</a>
+								)}
+								{site?.instagramUrl && (
+									<a
+										href={site.instagramUrl}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="text-lg font-medium underline hover:text-yellow-600 transition"
+									>
+										Instagram
+									</a>
+								)}
+								{site?.linkedinUrl && (
+									<a
+										href={site.linkedinUrl}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="text-lg font-medium underline hover:text-yellow-600 transition"
+									>
+										LinkedIn
+									</a>
+								)}
+								{site?.youtubeUrl && (
+									<a
+										href={site.youtubeUrl}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="text-lg font-medium underline hover:text-yellow-600 transition"
+									>
+										YouTube
+									</a>
+								)}
+							</div>
+						</div>
+					)}
+				</div>
+
+				{/* Right: contact form */}
+				<div>
+					<ContactForm />
+				</div>
+			</section>
 		</main>
 	)
 }

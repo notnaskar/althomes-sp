@@ -12,6 +12,7 @@ import {
 	PROPERTY_QUERY,
 	ALL_POSTS_QUERY,
 	POST_BY_SLUG_QUERY,
+	ALL_EXPERIENCES_QUERY,
 } from './queries'
 import type {
 	SITE_QUERY_RESULT,
@@ -26,6 +27,7 @@ import type {
 	PROPERTY_QUERY_RESULT,
 	ALL_POSTS_QUERY_RESULT,
 	POST_BY_SLUG_QUERY_RESULT,
+	ALL_EXPERIENCES_QUERY_RESULT,
 } from '@/sanity/types'
 
 export async function getSite() {
@@ -100,5 +102,11 @@ export async function getPostBySlug(slug: string) {
 	return await sanityFetchLive<POST_BY_SLUG_QUERY_RESULT>({
 		query: POST_BY_SLUG_QUERY,
 		params: { slug },
+	})
+}
+
+export async function getAllExperiences() {
+	return await sanityFetchLive<ALL_EXPERIENCES_QUERY_RESULT>({
+		query: ALL_EXPERIENCES_QUERY,
 	})
 }

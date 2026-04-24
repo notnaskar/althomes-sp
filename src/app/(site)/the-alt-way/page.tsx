@@ -1,48 +1,200 @@
 import { getAltWayPage, getSite } from '@/sanity/lib/data'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import { PortableText } from 'next-sanity'
-import Image from 'next/image'
-import { urlFor } from '@/sanity/lib/image'
+import Link from 'next/link'
+import Img from '@/ui/img'
 
 export default async function AltWayPage() {
 	const page = await getAltWayPage()
 	if (!page) notFound()
 
+	const cappedReviews = page.reviews?.slice(0, page.reviewsMaxShown ?? 20) ?? []
+
 	return (
 		<main className="flex-1">
-			<section className="container py-20">
-				{page.heroHeadline && (
-					<h1 className="text-4xl font-bold">{page.heroHeadline}</h1>
+			{/* Hero */}
+			<section className="relative w-full overflow-hidden bg-gray-900">
+				{page.heroBackground && (
+					<Img
+						image={page.heroBackground}
+						width={1440}
+						loading="eager"
+						alt={page.heroBackground.alt ?? ''}
+						className="w-full h-[70vh] object-cover opacity-60"
+					/>
 				)}
-				{page.introBody && (
-					<div className="mt-6 prose max-w-none">
-						<PortableText value={page.introBody} />
-					</div>
-				)}
+				<div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
+					{page.heroHeadline && (
+						<h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
+							{page.heroHeadline}
+						</h1>
+					)}
+					{page.heroHeadlineLine2 && (
+						<p className="mt-2 text-5xl md:text-7xl font-bold text-white leading-tight">
+							{page.heroHeadlineLine2}
+						</p>
+					)}
+				</div>
 			</section>
-			{page.sections?.map((section) => (
-				<section key={section._key} className="container py-12">
-					{section.title && (
-						<h2 className="text-2xl font-semibold">{section.title}</h2>
-					)}
-					{section.body && (
-						<div className="mt-4 prose max-w-none">
-							<PortableText value={section.body} />
-						</div>
-					)}
-					{section.image?.asset && (
-						<div className="mt-6 relative w-full aspect-[16/9]">
-							<Image
-								src={urlFor(section.image).width(1200).url()}
-								alt={section.image.alt ?? ''}
-								fill
-								className="object-cover rounded-lg"
+
+			{/* Mission split */}
+			{(page.missionImage || page.missionText) && (
+				<section className="container py-20 grid gap-12 md:grid-cols-2 items-center">
+					{page.missionImage && (
+						<div className="overflow-hidden rounded-2xl">
+							<Img
+								image={page.missionImage}
+								width={700}
+								alt={page.missionImage.alt ?? ''}
+								className="w-full h-auto object-cover"
 							/>
 						</div>
 					)}
+					{page.missionText && (
+						<p className="text-xl md:text-2xl leading-relaxed text-gray-700">
+							{page.missionText}
+						</p>
+					)}
 				</section>
-			))}
+			)}
+
+			{/* Value props 2×2 grid */}
+			{page.valueProps && page.valueProps.length > 0 && (
+				<section className="bg-gray-50 py-20">
+					<div className="container">
+						{page.valuePropHeadline && (
+							<h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+								{page.valuePropHeadline}
+							</h2>
+						)}
+						<div className="grid gap-8 md:grid-cols-2">
+							{page.valueProps.map((vp) => (
+								<div key={vp._key} className="rounded-2xl bg-white border p-8">
+									{vp.title && <h3 className="font-bold text-xl mb-3">{vp.title}</h3>}
+									{vp.body && <p className="text-gray-600 leading-relaxed">{vp.body}</p>}
+								</div>
+							))}
+						</div>
+					</div>
+				</section>
+			)}
+
+			{/* Editorial images */}
+			{page.editorialImages && page.editorialImages.length > 0 && (
+				<section className="container py-16 overflow-x-auto">
+					<div className="flex gap-4">
+						{page.editorialImages.map((img, i) => (
+							<div key={i} className="flex-shrink-0 overflow-hidden rounded-xl">
+								<Img
+									image={img}
+									width={400}
+									alt={img.alt ?? ''}
+									className="h-64 w-auto object-cover"
+								/>
+							</div>
+						))}
+					</div>
+				</section>
+			)}
+
+			{/* Promise CTA */}
+			{(page.promiseText || page.promiseCTALabel) && (
+				<section className="container py-20 text-center">
+					{page.promiseText && (
+						<p className="text-2xl md:text-3xl font-semibold max-w-2xl mx-auto leading-relaxed">
+							{page.promiseText}
+						</p>
+					)}
+					{page.promiseCTALabel && (
+						<Link
+							href="/our-homes"
+							className="mt-8 inline-block px-10 py-4 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition"
+						>
+							{page.promiseCTALabel}
+						</Link>
+					)}
+				</section>
+			)}
+
+			{/* Stats bar */}
+			{page.stats && page.stats.length > 0 && (
+				<section className="bg-black text-white py-16">
+					<div className="container">
+						{page.statsHeadline && (
+							<h2 className="text-2xl font-semibold text-center mb-12 text-white/80">
+								{page.statsHeadline}
+							</h2>
+						)}
+						<div className="grid gap-8 grid-cols-2 md:grid-cols-4">
+							{page.stats.map((stat) => (
+								<div key={stat._key} className="text-center">
+									{stat.value && (
+										<p className="text-5xl font-bold text-white">{stat.value}</p>
+									)}
+									{stat.label && (
+										<p className="text-sm font-semibold mt-2 text-white/80 uppercase tracking-wide">
+											{stat.label}
+										</p>
+									)}
+									{stat.subtext && (
+										<p className="text-xs mt-1 text-white/50">{stat.subtext}</p>
+									)}
+								</div>
+							))}
+						</div>
+					</div>
+				</section>
+			)}
+
+			{/* Reviews carousel */}
+			{cappedReviews.length > 0 && (
+				<section className="container py-20">
+					<h2 className="text-3xl font-bold text-center mb-12">What Our Guests Say</h2>
+					<div className="overflow-x-auto">
+						<div className="flex gap-6 pb-4">
+							{cappedReviews.map((review, i) => (
+								<div
+									key={i}
+									className="flex-shrink-0 w-80 rounded-2xl border p-6 space-y-4"
+								>
+									{review.rating != null && (
+										<div className="flex gap-1">
+											{Array.from({ length: review.rating }).map((_, j) => (
+												<span key={j} className="text-yellow-400 text-lg">★</span>
+											))}
+										</div>
+									)}
+									{review.body && (
+										<p className="text-gray-700 leading-relaxed italic">&ldquo;{review.body}&rdquo;</p>
+									)}
+									<div className="text-sm text-gray-500">
+										{review.guestName && <p className="font-semibold">{review.guestName}</p>}
+										{review.guestLocation && <p>{review.guestLocation}</p>}
+										{review.stayDate && <p>{review.stayDate}</p>}
+									</div>
+								</div>
+							))}
+						</div>
+					</div>
+				</section>
+			)}
+
+			{/* Bottom CTA */}
+			{(page.bottomCTAHeadline || page.bottomCTALabel) && (
+				<section className="bg-gray-50 py-20 text-center">
+					{page.bottomCTAHeadline && (
+						<h2 className="text-3xl md:text-4xl font-bold mb-8">{page.bottomCTAHeadline}</h2>
+					)}
+					{page.bottomCTALabel && (
+						<Link
+							href="/experiences"
+							className="inline-block px-10 py-4 bg-black text-white font-bold rounded-full hover:bg-gray-800 transition"
+						>
+							{page.bottomCTALabel}
+						</Link>
+					)}
+				</section>
+			)}
 		</main>
 	)
 }
