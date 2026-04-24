@@ -1,0 +1,31 @@
+import { getLegalPage, getSite } from '@/sanity/lib/data'
+import { notFound } from 'next/navigation'
+import type { Metadata } from 'next'
+import { PortableText } from 'next-sanity'
+
+export default async function LegalPage({ params }: { params: Promise<{ slug: string }> }) {
+	const { slug } = await params
+	const page = await getLegalPage(slug)
+	if (!page) notFound()
+
+	return (
+		<main className="flex-1">
+			<section className="container py-20">
+				<h1 className="text-4xl font-bold mb-8">{page.displayTitle || page.seoTitle}</h1>
+				<div className="prose max-w-none">
+					{page.body && <PortableText value={page.body as any} />}
+				</div>
+			</section>
+		</main>
+	)
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+	const { slug } = await params
+	const [page, site] = await Promise.all([getLegalPage(slug), getSite()])
+	const { metaTitle, metaDescription } = page?.seo ?? {}
+	return {
+		title: metaTitle || `${page?.displayTitle || page?.seoTitle || 'Legal'} | AltHomes`,
+		description: metaDescription || site?.seo?.metaDescription,
+	}
+}

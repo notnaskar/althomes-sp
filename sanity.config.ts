@@ -22,7 +22,7 @@ import structure from './src/sanity/structure'
 
 export default defineConfig({
 	title: 'SanityPress',
-	basePath: '/admin',
+	basePath: '/studio',
 	projectId,
 	dataset,
 	icon,

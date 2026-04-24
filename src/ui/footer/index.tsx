@@ -1,5 +1,5 @@
 import { PortableText } from 'next-sanity'
-import { getSite } from '@/sanity/lib/queries'
+import { getSite } from '@/sanity/lib/data'
 import Logo from '@/ui/logo'
 import SocialNavigation from '@/ui/social-navigation'
 import Navigation from './navigation'

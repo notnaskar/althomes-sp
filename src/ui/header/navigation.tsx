@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import { getSite } from '@/sanity/lib/queries'
+import { getSite } from '@/sanity/lib/data'
 import type { LinkList, Megamenu as MegamenuType } from '@/sanity/types'
 import SanityLink, { type SanityLinkType } from '@/ui/sanity-link'
 import Dropdown from './dropdown'

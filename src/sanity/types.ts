@@ -18,73 +18,6 @@ import '@sanity/client'
 export declare const internalGroqTypeReferenceTo: unique symbol
 
 // Source: src/sanity/schema.json
-export type LogoImage = {
-	default?: Default
-	light?: Light
-	dark?: Dark
-}
-
-export type Author = {
-	name?: string
-	title?: string
-	image?: AuthorImage
-}
-
-export type SanityImageAssetReference = {
-	_ref: string
-	_type: 'reference'
-	_weak?: boolean
-	[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-}
-
-export type CardImage = {
-	asset?: SanityImageAssetReference
-	media?: unknown // Unable to locate the referenced type "media" in schema
-	hotspot?: SanityImageHotspot
-	crop?: SanityImageCrop
-	_type: 'image'
-}
-
-export type Icon = {
-	asset?: SanityImageAssetReference
-	media?: unknown // Unable to locate the referenced type "icon.media" in schema
-	hotspot?: SanityImageHotspot
-	crop?: SanityImageCrop
-	_type: 'image'
-}
-
-export type Default = {
-	asset?: SanityImageAssetReference
-	media?: unknown // Unable to locate the referenced type "default.media" in schema
-	hotspot?: SanityImageHotspot
-	crop?: SanityImageCrop
-	_type: 'image'
-}
-
-export type Light = {
-	asset?: SanityImageAssetReference
-	media?: unknown // Unable to locate the referenced type "light.media" in schema
-	hotspot?: SanityImageHotspot
-	crop?: SanityImageCrop
-	_type: 'image'
-}
-
-export type Dark = {
-	asset?: SanityImageAssetReference
-	media?: unknown // Unable to locate the referenced type "dark.media" in schema
-	hotspot?: SanityImageHotspot
-	crop?: SanityImageCrop
-	_type: 'image'
-}
-
-export type AuthorImage = {
-	asset?: SanityImageAssetReference
-	media?: unknown // Unable to locate the referenced type "author.image.media" in schema
-	hotspot?: SanityImageHotspot
-	crop?: SanityImageCrop
-	_type: 'image'
-}
-
 export type StepList = {
 	_type: 'step-list'
 	attributes?: ModuleAttributes
@@ -134,6 +67,12 @@ export type StepList = {
 		_key: string
 	}>
 	enableSchema?: boolean
+}
+
+export type ModuleAttributes = {
+	_type: 'module-attributes'
+	uid?: string
+	hidden?: boolean
 }
 
 export type StatList = {
@@ -207,70 +146,11 @@ export type SearchModule = {
 	scope?: 'all' | 'pages' | 'blog posts'
 }
 
-export type QuoteReference = {
+export type SanityImageAssetReference = {
 	_ref: string
 	_type: 'reference'
 	_weak?: boolean
-	[internalGroqTypeReferenceTo]?: 'quote'
-}
-
-export type QuoteList = {
-	_type: 'quote-list'
-	attributes?: ModuleAttributes
-	intro?: Array<{
-		children?: Array<{
-			marks?: Array<string>
-			text?: string
-			_type: 'span'
-			_key: string
-		}>
-		style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
-		listItem?: 'bullet' | 'number'
-		markDefs?: Array<{
-			href?: string
-			_type: 'link'
-			_key: string
-		}>
-		level?: number
-		_type: 'block'
-		_key: string
-	}>
-	testimonials?: Array<
-		| {
-				quote?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'normal'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'blockquote'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				author?: Author
-				_type: 'quote'
-				_key: string
-		  }
-		| ({
-				_key: string
-		  } & QuoteReference)
-	>
+	[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
 }
 
 export type Prose = {
@@ -340,94 +220,20 @@ export type Prose = {
 	tableOfContents?: 'left' | 'right'
 }
 
-export type PersonReference = {
-	_ref: string
-	_type: 'reference'
-	_weak?: boolean
-	[internalGroqTypeReferenceTo]?: 'person'
+export type SanityImageCrop = {
+	_type: 'sanity.imageCrop'
+	top?: number
+	bottom?: number
+	left?: number
+	right?: number
 }
 
-export type PersonList = {
-	_type: 'person-list'
-	intro?: Array<{
-		children?: Array<{
-			marks?: Array<string>
-			text?: string
-			_type: 'span'
-			_key: string
-		}>
-		style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
-		listItem?: 'bullet' | 'number'
-		markDefs?: Array<{
-			href?: string
-			_type: 'link'
-			_key: string
-		}>
-		level?: number
-		_type: 'block'
-		_key: string
-	}>
-	people?: Array<
-		| {
-				name?: string
-				image?: {
-					asset?: SanityImageAssetReference
-					media?: unknown
-					hotspot?: SanityImageHotspot
-					crop?: SanityImageCrop
-					_type: 'image'
-				}
-				_type: 'person'
-				_key: string
-		  }
-		| ({
-				_key: string
-		  } & PersonReference)
-	>
-}
-
-export type LogoReference = {
-	_ref: string
-	_type: 'reference'
-	_weak?: boolean
-	[internalGroqTypeReferenceTo]?: 'logo'
-}
-
-export type LogoList = {
-	_type: 'logo-list'
-	overline?: string
-	intro?: Array<{
-		children?: Array<{
-			marks?: Array<string>
-			text?: string
-			_type: 'span'
-			_key: string
-		}>
-		style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
-		listItem?: 'bullet' | 'number'
-		markDefs?: Array<{
-			href?: string
-			_type: 'link'
-			_key: string
-		}>
-		level?: number
-		_type: 'block'
-		_key: string
-	}>
-	logos?: Array<
-		| {
-				title?: string
-				image?: LogoImage
-				_type: 'logo'
-				_key: string
-		  }
-		| ({
-				_key: string
-		  } & LogoReference)
-	>
-	logoType?: 'default' | 'dark' | 'light'
-	autoScroll?: boolean
-	duration?: number
+export type SanityImageHotspot = {
+	_type: 'sanity.imageHotspot'
+	x?: number
+	y?: number
+	height?: number
+	width?: number
 }
 
 export type HeroSplit = {
@@ -470,38 +276,6 @@ export type HeroSplit = {
 	}
 }
 
-export type FormReference = {
-	_ref: string
-	_type: 'reference'
-	_weak?: boolean
-	[internalGroqTypeReferenceTo]?: 'form'
-}
-
-export type FormModule = {
-	_type: 'form-module'
-	attributes?: ModuleAttributes
-	overline?: string
-	intro?: Array<{
-		children?: Array<{
-			marks?: Array<string>
-			text?: string
-			_type: 'span'
-			_key: string
-		}>
-		style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
-		listItem?: 'bullet' | 'number'
-		markDefs?: Array<{
-			href?: string
-			_type: 'link'
-			_key: string
-		}>
-		level?: number
-		_type: 'block'
-		_key: string
-	}>
-	form?: FormReference
-}
-
 export type CustomHtml = {
 	_type: 'custom-html'
 	attributes?: ModuleAttributes
@@ -533,8 +307,20 @@ export type CardList = {
 		_key: string
 	}>
 	cards?: Array<{
-		image?: CardImage
-		icon?: Icon
+		image?: {
+			asset?: SanityImageAssetReference
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			_type: 'image'
+		}
+		icon?: {
+			asset?: SanityImageAssetReference
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			_type: 'image'
+		}
 		content?: Array<{
 			children?: Array<{
 				marks?: Array<string>
@@ -720,10 +506,28 @@ export type AccordionList = {
 	layout?: 'vertical' | 'horizontal'
 }
 
-export type ModuleAttributes = {
-	_type: 'module-attributes'
-	uid?: string
-	hidden?: boolean
+export type Seo = {
+	_type: 'seo'
+	metaTitle?: string
+	metaDescription?: string
+	ogImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+}
+
+export type NavLabel = {
+	_type: 'navLabel'
+	label?: string
+	link?: string
+	xDesktop?: number
+	yDesktop?: number
+	xMobile?: number
+	yMobile?: number
 }
 
 export type Metadata = {
@@ -754,6 +558,88 @@ export type Megamenu = {
 	>
 }
 
+export type HomePageReference = {
+	_ref: string
+	_type: 'reference'
+	_weak?: boolean
+	[internalGroqTypeReferenceTo]?: 'homePage'
+}
+
+export type OurHomesPageReference = {
+	_ref: string
+	_type: 'reference'
+	_weak?: boolean
+	[internalGroqTypeReferenceTo]?: 'ourHomesPage'
+}
+
+export type AltWayPageReference = {
+	_ref: string
+	_type: 'reference'
+	_weak?: boolean
+	[internalGroqTypeReferenceTo]?: 'altWayPage'
+}
+
+export type ExperiencesPageReference = {
+	_ref: string
+	_type: 'reference'
+	_weak?: boolean
+	[internalGroqTypeReferenceTo]?: 'experiencesPage'
+}
+
+export type JoinUsPageReference = {
+	_ref: string
+	_type: 'reference'
+	_weak?: boolean
+	[internalGroqTypeReferenceTo]?: 'joinUsPage'
+}
+
+export type ContactPageReference = {
+	_ref: string
+	_type: 'reference'
+	_weak?: boolean
+	[internalGroqTypeReferenceTo]?: 'contactPage'
+}
+
+export type LegalPageReference = {
+	_ref: string
+	_type: 'reference'
+	_weak?: boolean
+	[internalGroqTypeReferenceTo]?: 'legalPage'
+}
+
+export type BlogPostReference = {
+	_ref: string
+	_type: 'reference'
+	_weak?: boolean
+	[internalGroqTypeReferenceTo]?: 'blog.post'
+}
+
+export type Link = {
+	_type: 'link'
+	label?: string
+	type?: 'internal' | 'external'
+	internal?:
+		| HomePageReference
+		| OurHomesPageReference
+		| AltWayPageReference
+		| ExperiencesPageReference
+		| JoinUsPageReference
+		| ContactPageReference
+		| LegalPageReference
+		| BlogPostReference
+	external?: string
+	params?: string
+}
+
+export type Location = {
+	_type: 'location'
+	displayLocation?: string
+	distanceFromLandmark?: string
+	googleMapsUrl?: string
+	lat?: number
+	lng?: number
+}
+
 export type LinkList = {
 	_type: 'link.list'
 	link?: Link
@@ -764,79 +650,107 @@ export type LinkList = {
 	>
 }
 
-export type PageReference = {
-	_ref: string
-	_type: 'reference'
-	_weak?: boolean
-	[internalGroqTypeReferenceTo]?: 'page'
-}
-
-export type Link = {
-	_type: 'link'
-	label?: string
-	type?: 'internal' | 'external'
-	internal?: PageReference
-	external?: string
-	params?: string
-}
-
 export type Cta = {
 	_type: 'cta'
 	link?: Link
 	theme?: 'action' | 'action-outline' | 'ghost' | 'link'
 }
 
-export type Quote = {
-	_id: string
-	_type: 'quote'
-	_createdAt: string
-	_updatedAt: string
-	_rev: string
-	quote?: Array<{
-		children?: Array<{
-			marks?: Array<string>
-			text?: string
-			_type: 'span'
+export type BlockContent = Array<
+	| {
+			children?: Array<{
+				marks?: Array<string>
+				text?: string
+				_type: 'span'
+				_key: string
+			}>
+			style?: 'normal' | 'h2' | 'h3' | 'blockquote'
+			listItem?: 'bullet'
+			markDefs?: Array<{
+				href?: string
+				_type: 'link'
+				_key: string
+			}>
+			level?: number
+			_type: 'block'
 			_key: string
-		}>
-		style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
-		listItem?: 'bullet' | 'number'
-		markDefs?: Array<{
-			href?: string
-			_type: 'link'
+	  }
+	| {
+			asset?: SanityImageAssetReference
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			alt?: string
+			_type: 'image'
 			_key: string
-		}>
-		level?: number
-		_type: 'block'
-		_key: string
-	}>
-	author?: Author
-}
+	  }
+>
 
-export type Logo = {
+export type Site = {
 	_id: string
-	_type: 'logo'
+	_type: 'site'
 	_createdAt: string
 	_updatedAt: string
 	_rev: string
 	title?: string
-	image?: LogoImage
+	logoImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	logoText?: string
+	navCtaLabel?: string
+	navCtaLink?: string
+	whatsappNumber?: string
+	bookDirectLink?: string
+	instagramUrl?: string
+	facebookUrl?: string
+	linkedinUrl?: string
+	youtubeUrl?: string
+	contactFormEmail?: string
+	partnerEnquiryEmail?: string
+	colours?: {
+		primary?: string
+		primaryForeground?: string
+		accent?: string
+		accentForeground?: string
+		background?: string
+		foreground?: string
+		muted?: string
+		border?: string
+	}
+	seo?: Seo
+	announcement?: {
+		enabled?: boolean
+		message?: string
+		link?: string
+	}
 }
 
-export type BlogCategory = {
+export type PropertyReference = {
+	_ref: string
+	_type: 'reference'
+	_weak?: boolean
+	[internalGroqTypeReferenceTo]?: 'property'
+}
+
+export type Review = {
 	_id: string
-	_type: 'blog.category'
+	_type: 'review'
 	_createdAt: string
 	_updatedAt: string
 	_rev: string
-	title?: string
-	slug?: Slug
-}
-
-export type Slug = {
-	_type: 'slug'
-	current?: string
-	source?: string
+	guestName?: string
+	property?: PropertyReference
+	guestLocation?: string
+	rating?: number
+	stayDate?: string
+	body?: string
+	published?: boolean
+	featured?: boolean
 }
 
 export type Redirect = {
@@ -849,11 +763,246 @@ export type Redirect = {
 	destination?: Link
 }
 
-export type BlogCategoryReference = {
+export type AmenityReference = {
 	_ref: string
 	_type: 'reference'
 	_weak?: boolean
-	[internalGroqTypeReferenceTo]?: 'blog.category'
+	[internalGroqTypeReferenceTo]?: 'amenity'
+}
+
+export type ExperienceReference = {
+	_ref: string
+	_type: 'reference'
+	_weak?: boolean
+	[internalGroqTypeReferenceTo]?: 'experience'
+}
+
+export type Property = {
+	_id: string
+	_type: 'property'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	title?: string
+	slug?: Slug
+	status?: 'active' | 'hidden' | 'coming-soon'
+	displayOrder?: number
+	rentalwisePropertyId?: string
+	rentalwiseIdentifier?: string
+	tagline?: string
+	shortDescription?: string
+	cardThumbnail?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	cardAmenities?: string
+	propertyType?: string
+	priceFrom?: string
+	heroImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	description?: BlockContent
+	pullQuote?: string
+	gallery?: Array<{
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+		_key: string
+	}>
+	maxGuests?: number
+	bedrooms?: number
+	bathrooms?: number
+	amenities?: Array<
+		{
+			_key: string
+		} & AmenityReference
+	>
+	houseRulesTeaser?: string
+	houseRules?: BlockContent
+	location?: Location
+	locationHeadline?: string
+	locationDescription?: string
+	highlights?: Array<{
+		title?: string
+		body?: string
+		image?: {
+			asset?: SanityImageAssetReference
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			alt?: string
+			_type: 'image'
+		}
+		_key: string
+	}>
+	experiences?: Array<
+		{
+			_key: string
+		} & ExperienceReference
+	>
+	experiencesMaxShown?: number
+	causeHeadline?: string
+	causeBody?: BlockContent
+	causeImages?: Array<{
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+		_key: string
+	}>
+	reviewsMaxShown?: number
+	ctaHeadline?: string
+	seo?: Seo
+}
+
+export type Slug = {
+	_type: 'slug'
+	current?: string
+	source?: string
+}
+
+export type OurHomesPage = {
+	_id: string
+	_type: 'ourHomesPage'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	heroHeadline?: string
+	heroImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	experiencesCtaBody?: BlockContent
+	experiencesCtaLabel?: string
+	seo?: Seo
+}
+
+export type LegalPage = {
+	_id: string
+	_type: 'legalPage'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	displayTitle?: string
+	seoTitle?: string
+	slug?: Slug
+	body?: BlockContent
+	backgroundImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	seo?: Seo
+}
+
+export type JoinUsPage = {
+	_id: string
+	_type: 'joinUsPage'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	heroHeadline?: string
+	introBody?: BlockContent
+	benefits?: Array<{
+		title?: string
+		body?: string
+		_key: string
+	}>
+	formHeadline?: string
+	seo?: Seo
+}
+
+export type HomePage = {
+	_id: string
+	_type: 'homePage'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	heroHeadline?: string
+	navLabels?: Array<
+		{
+			_key: string
+		} & NavLabel
+	>
+	seo?: Seo
+}
+
+export type ExperiencesPage = {
+	_id: string
+	_type: 'experiencesPage'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	heroHeadline?: string
+	introBody?: BlockContent
+	discountBadgeText?: string
+	cardsMaxShown?: number
+	seo?: Seo
+}
+
+export type Experience = {
+	_id: string
+	_type: 'experience'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	title?: string
+	slug?: Slug
+	description?: string
+	image?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	properties?: Array<
+		{
+			_key: string
+		} & PropertyReference
+	>
+	displayOrder?: number
+	seo?: Seo
+}
+
+export type ContactPage = {
+	_id: string
+	_type: 'contactPage'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	heroHeadline?: string
+	contactDetails?: Array<{
+		label?: string
+		value?: string
+		link?: string
+		_key: string
+	}>
+	officeAddress?: BlockContent
+	formHeadline?: string
+	seo?: Seo
 }
 
 export type BlogPost = {
@@ -925,230 +1074,6 @@ export type BlogPost = {
 		  } & CustomHtml)
 	>
 	publishDate?: string
-	categories?: Array<
-		{
-			_key: string
-		} & BlogCategoryReference
-	>
-	author?: PersonReference
-	metadata?: Metadata
-}
-
-export type Person = {
-	_id: string
-	_type: 'person'
-	_createdAt: string
-	_updatedAt: string
-	_rev: string
-	name?: string
-	image?: {
-		asset?: SanityImageAssetReference
-		media?: unknown
-		hotspot?: SanityImageHotspot
-		crop?: SanityImageCrop
-		_type: 'image'
-	}
-}
-
-export type SanityImageCrop = {
-	_type: 'sanity.imageCrop'
-	top?: number
-	bottom?: number
-	left?: number
-	right?: number
-}
-
-export type SanityImageHotspot = {
-	_type: 'sanity.imageHotspot'
-	x?: number
-	y?: number
-	height?: number
-	width?: number
-}
-
-export type GlobalModule = {
-	_id: string
-	_type: 'global-module'
-	_createdAt: string
-	_updatedAt: string
-	_rev: string
-	path?: string
-	excludePaths?: Array<string>
-	before?: Array<
-		| ({
-				_key: string
-		  } & AccordionList)
-		| ({
-				_key: string
-		  } & BlogIndex)
-		| ({
-				_key: string
-		  } & BlogPostList)
-		| ({
-				_key: string
-		  } & Breadcrumbs)
-		| ({
-				_key: string
-		  } & Callout)
-		| ({
-				_key: string
-		  } & CardList)
-		| ({
-				_key: string
-		  } & CustomHtml)
-		| ({
-				_key: string
-		  } & FormModule)
-		| ({
-				_key: string
-		  } & HeroSplit)
-		| ({
-				_key: string
-		  } & LogoList)
-		| ({
-				_key: string
-		  } & PersonList)
-		| ({
-				_key: string
-		  } & Prose)
-		| ({
-				_key: string
-		  } & QuoteList)
-		| ({
-				_key: string
-		  } & SearchModule)
-		| ({
-				_key: string
-		  } & StatList)
-		| ({
-				_key: string
-		  } & StepList)
-		| ({
-				_key: string
-		  } & BlogPostContent)
-	>
-	after?: Array<
-		| ({
-				_key: string
-		  } & AccordionList)
-		| ({
-				_key: string
-		  } & BlogIndex)
-		| ({
-				_key: string
-		  } & BlogPostList)
-		| ({
-				_key: string
-		  } & Breadcrumbs)
-		| ({
-				_key: string
-		  } & Callout)
-		| ({
-				_key: string
-		  } & CardList)
-		| ({
-				_key: string
-		  } & CustomHtml)
-		| ({
-				_key: string
-		  } & FormModule)
-		| ({
-				_key: string
-		  } & HeroSplit)
-		| ({
-				_key: string
-		  } & LogoList)
-		| ({
-				_key: string
-		  } & PersonList)
-		| ({
-				_key: string
-		  } & Prose)
-		| ({
-				_key: string
-		  } & QuoteList)
-		| ({
-				_key: string
-		  } & SearchModule)
-		| ({
-				_key: string
-		  } & StatList)
-		| ({
-				_key: string
-		  } & StepList)
-		| ({
-				_key: string
-		  } & BlogPostContent)
-	>
-}
-
-export type Form = {
-	_id: string
-	_type: 'form'
-	_createdAt: string
-	_updatedAt: string
-	_rev: string
-	identifier?: string
-	endpoint?: string
-}
-
-export type Page = {
-	_id: string
-	_type: 'page'
-	_createdAt: string
-	_updatedAt: string
-	_rev: string
-	title?: string
-	modules?: Array<
-		| ({
-				_key: string
-		  } & AccordionList)
-		| ({
-				_key: string
-		  } & BlogIndex)
-		| ({
-				_key: string
-		  } & BlogPostList)
-		| ({
-				_key: string
-		  } & Breadcrumbs)
-		| ({
-				_key: string
-		  } & Callout)
-		| ({
-				_key: string
-		  } & CardList)
-		| ({
-				_key: string
-		  } & CustomHtml)
-		| ({
-				_key: string
-		  } & FormModule)
-		| ({
-				_key: string
-		  } & HeroSplit)
-		| ({
-				_key: string
-		  } & LogoList)
-		| ({
-				_key: string
-		  } & PersonList)
-		| ({
-				_key: string
-		  } & Prose)
-		| ({
-				_key: string
-		  } & QuoteList)
-		| ({
-				_key: string
-		  } & SearchModule)
-		| ({
-				_key: string
-		  } & StatList)
-		| ({
-				_key: string
-		  } & StepList)
-	>
 	metadata?: Metadata
 }
 
@@ -1160,96 +1085,39 @@ export type Code = {
 	highlightedLines?: Array<number>
 }
 
-export type NavigationReference = {
-	_ref: string
-	_type: 'reference'
-	_weak?: boolean
-	[internalGroqTypeReferenceTo]?: 'navigation'
-}
-
-export type Site = {
+export type Amenity = {
 	_id: string
-	_type: 'site'
+	_type: 'amenity'
 	_createdAt: string
 	_updatedAt: string
 	_rev: string
-	title?: string
-	logo?: {
+	name?: string
+	icon?: string
+}
+
+export type AltWayPage = {
+	_id: string
+	_type: 'altWayPage'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	heroHeadline?: string
+	introBody?: BlockContent
+	sections?: Array<{
 		title?: string
-		image?: LogoImage
-		_type: 'logo'
-	}
-	ogimage?: {
-		asset?: SanityImageAssetReference
-		media?: unknown
-		hotspot?: SanityImageHotspot
-		crop?: SanityImageCrop
-		_type: 'image'
-	}
-	header?: NavigationReference
-	ctas?: Array<
-		{
-			_key: string
-		} & Cta
-	>
-	footer?: NavigationReference
-	social?: NavigationReference
-	footerContent?: Array<{
-		children?: Array<{
-			marks?: Array<string>
-			text?: string
-			_type: 'span'
-			_key: string
-		}>
-		style?: 'normal'
-		listItem?: never
-		markDefs?: Array<{
-			href?: string
-			_type: 'link'
-			_key: string
-		}>
-		level?: number
-		_type: 'block'
+		body?: BlockContent
+		image?: {
+			asset?: SanityImageAssetReference
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			alt?: string
+			_type: 'image'
+		}
 		_key: string
 	}>
-	copyright?: Array<{
-		children?: Array<{
-			marks?: Array<string>
-			text?: string
-			_type: 'span'
-			_key: string
-		}>
-		style?: 'normal'
-		listItem?: never
-		markDefs?: Array<{
-			href?: string
-			_type: 'link'
-			_key: string
-		}>
-		level?: number
-		_type: 'block'
-		_key: string
-	}>
-}
-
-export type Navigation = {
-	_id: string
-	_type: 'navigation'
-	_createdAt: string
-	_updatedAt: string
-	_rev: string
-	title?: string
-	items?: Array<
-		| ({
-				_key: string
-		  } & Link)
-		| ({
-				_key: string
-		  } & LinkList)
-		| ({
-				_key: string
-		  } & Megamenu)
-	>
+	reviewsMaxShown?: number
+	seo?: Seo
 }
 
 export type SanityAssistInstructionTask = {
@@ -1487,28 +1355,15 @@ export type Geopoint = {
 }
 
 export type AllSanitySchemaTypes =
-	| LogoImage
-	| Author
-	| SanityImageAssetReference
-	| CardImage
-	| Icon
-	| Default
-	| Light
-	| Dark
-	| AuthorImage
 	| StepList
+	| ModuleAttributes
 	| StatList
 	| SearchModule
-	| QuoteReference
-	| QuoteList
+	| SanityImageAssetReference
 	| Prose
-	| PersonReference
-	| PersonList
-	| LogoReference
-	| LogoList
+	| SanityImageCrop
+	| SanityImageHotspot
 	| HeroSplit
-	| FormReference
-	| FormModule
 	| CustomHtml
 	| CardList
 	| Callout
@@ -1517,30 +1372,42 @@ export type AllSanitySchemaTypes =
 	| BlogPostContent
 	| BlogIndex
 	| AccordionList
-	| ModuleAttributes
+	| Seo
+	| NavLabel
 	| Metadata
 	| Megamenu
-	| LinkList
-	| PageReference
+	| HomePageReference
+	| OurHomesPageReference
+	| AltWayPageReference
+	| ExperiencesPageReference
+	| JoinUsPageReference
+	| ContactPageReference
+	| LegalPageReference
+	| BlogPostReference
 	| Link
+	| Location
+	| LinkList
 	| Cta
-	| Quote
-	| Logo
-	| BlogCategory
-	| Slug
-	| Redirect
-	| BlogCategoryReference
-	| BlogPost
-	| Person
-	| SanityImageCrop
-	| SanityImageHotspot
-	| GlobalModule
-	| Form
-	| Page
-	| Code
-	| NavigationReference
+	| BlockContent
 	| Site
-	| Navigation
+	| PropertyReference
+	| Review
+	| Redirect
+	| AmenityReference
+	| ExperienceReference
+	| Property
+	| Slug
+	| OurHomesPage
+	| LegalPage
+	| JoinUsPage
+	| HomePage
+	| ExperiencesPage
+	| Experience
+	| ContactPage
+	| BlogPost
+	| Code
+	| Amenity
+	| AltWayPage
 	| SanityAssistInstructionTask
 	| SanityAssistTaskStatus
 	| SanityAssistSchemaTypeAnnotations
@@ -1563,1060 +1430,7 @@ export type AllSanitySchemaTypes =
 	| SanityImageAsset
 	| Geopoint
 
-// Source: src/app/(frontend)/[[...slug]]/page.tsx
-// Variable: PAGE_QUERY
-// Query: *[_type == 'page' && metadata.slug.current == $slug][0]{		...,		'modules': (			// global moddules (before)			*[_type == 'global-module' && path == '*'].before[]{ 	...,	ctas[]{		...,		link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'form-module' => {		form->	},	_type == 'breadcrumbs' => {		crumbs[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'card-list' => {		cards[]{			...,			ctas[]{				...,				link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }			}		}	},	_type == 'logo-list' => {		logos[]{			...,			_type == 'reference' => @->		}	},	_type == 'person-list' => {		people[]{			...,			_type == 'reference' => @->		}	},	_type == 'prose' => {		content[]{			...,			_type == 'image' => {				...,				asset->{					...,					metadata				}			}		},		'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{			style,			'text': pt::text(@)		}	},	_type == 'quote-list' => {		testimonials[]{			...,			_type == 'reference' => @->		}	}, }			// path modules (before)			+ *[_type == 'global-module' && path != '*' && 	string::startsWith($slug, path)	&& select(		defined(excludePaths) => count(excludePaths[string::startsWith($slug, @)]) == 0,		true	)].before[]{ 	...,	ctas[]{		...,		link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'form-module' => {		form->	},	_type == 'breadcrumbs' => {		crumbs[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'card-list' => {		cards[]{			...,			ctas[]{				...,				link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }			}		}	},	_type == 'logo-list' => {		logos[]{			...,			_type == 'reference' => @->		}	},	_type == 'person-list' => {		people[]{			...,			_type == 'reference' => @->		}	},	_type == 'prose' => {		content[]{			...,			_type == 'image' => {				...,				asset->{					...,					metadata				}			}		},		'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{			style,			'text': pt::text(@)		}	},	_type == 'quote-list' => {		testimonials[]{			...,			_type == 'reference' => @->		}	}, }			// page modules			+ modules[]{ 	...,	ctas[]{		...,		link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'form-module' => {		form->	},	_type == 'breadcrumbs' => {		crumbs[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'card-list' => {		cards[]{			...,			ctas[]{				...,				link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }			}		}	},	_type == 'logo-list' => {		logos[]{			...,			_type == 'reference' => @->		}	},	_type == 'person-list' => {		people[]{			...,			_type == 'reference' => @->		}	},	_type == 'prose' => {		content[]{			...,			_type == 'image' => {				...,				asset->{					...,					metadata				}			}		},		'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{			style,			'text': pt::text(@)		}	},	_type == 'quote-list' => {		testimonials[]{			...,			_type == 'reference' => @->		}	}, }			// path modules (after)			+ *[_type == 'global-module' && path != '*' && 	string::startsWith($slug, path)	&& select(		defined(excludePaths) => count(excludePaths[string::startsWith($slug, @)]) == 0,		true	)].after[]{ 	...,	ctas[]{		...,		link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'form-module' => {		form->	},	_type == 'breadcrumbs' => {		crumbs[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'card-list' => {		cards[]{			...,			ctas[]{				...,				link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }			}		}	},	_type == 'logo-list' => {		logos[]{			...,			_type == 'reference' => @->		}	},	_type == 'person-list' => {		people[]{			...,			_type == 'reference' => @->		}	},	_type == 'prose' => {		content[]{			...,			_type == 'image' => {				...,				asset->{					...,					metadata				}			}		},		'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{			style,			'text': pt::text(@)		}	},	_type == 'quote-list' => {		testimonials[]{			...,			_type == 'reference' => @->		}	}, }			// global moddules (after)			+ *[_type == 'global-module' && path == '*'].after[]{ 	...,	ctas[]{		...,		link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'form-module' => {		form->	},	_type == 'breadcrumbs' => {		crumbs[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'card-list' => {		cards[]{			...,			ctas[]{				...,				link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }			}		}	},	_type == 'logo-list' => {		logos[]{			...,			_type == 'reference' => @->		}	},	_type == 'person-list' => {		people[]{			...,			_type == 'reference' => @->		}	},	_type == 'prose' => {		content[]{			...,			_type == 'image' => {				...,				asset->{					...,					metadata				}			}		},		'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{			style,			'text': pt::text(@)		}	},	_type == 'quote-list' => {		testimonials[]{			...,			_type == 'reference' => @->		}	}, }		)	}
-export type PAGE_QUERY_RESULT = {
-	_id: string
-	_type: 'page'
-	_createdAt: string
-	_updatedAt: string
-	_rev: string
-	title?: string
-	modules: Array<
-		| {
-				_key: string
-				_type: 'accordion-list'
-				attributes?: ModuleAttributes
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				ctas: Array<{
-					_key: string
-					_type: 'cta'
-					link:
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-						| null
-					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
-				}> | null
-				accordions?: Array<{
-					summary?: string
-					content?: Array<{
-						children?: Array<{
-							marks?: Array<string>
-							text?: string
-							_type: 'span'
-							_key: string
-						}>
-						style?:
-							| 'blockquote'
-							| 'h1'
-							| 'h2'
-							| 'h3'
-							| 'h4'
-							| 'h5'
-							| 'h6'
-							| 'normal'
-						listItem?: 'bullet' | 'number'
-						markDefs?: Array<{
-							href?: string
-							_type: 'link'
-							_key: string
-						}>
-						level?: number
-						_type: 'block'
-						_key: string
-					}>
-					open?: boolean
-					_type: 'accordion'
-					_key: string
-				}>
-				exclusive?: boolean
-				enableSchema?: boolean
-				layout?: 'horizontal' | 'vertical'
-		  }
-		| {
-				_key: string
-				_type: 'blog-index'
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				postsPerPage?: number
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'blog-post-content'
-				attributes?: ModuleAttributes
-				tableOfContents?: 'left' | 'right'
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'blog-post-list'
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				ctas: Array<{
-					_key: string
-					_type: 'cta'
-					link:
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-						| null
-					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
-				}> | null
-				limit?: number
-		  }
-		| {
-				_key: string
-				_type: 'breadcrumbs'
-				structuredDataOnly?: boolean
-				crumbs: Array<
-					| {
-							_key: string
-							_type: 'link'
-							label?: string
-							type?: 'external' | 'internal'
-							internal?: PageReference
-							external?: string
-							params?: string
-					  }
-					| {
-							_key: string
-							_type: 'link'
-							label?: string
-							type?: 'external' | 'internal'
-							internal: {
-								_type: 'page'
-								title: string | null
-								slug: string | '/' | null
-							} | null
-							external?: string
-							params?: string
-					  }
-				> | null
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'callout'
-				attributes?: ModuleAttributes
-				overline?: string
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				ctas: Array<{
-					_key: string
-					_type: 'cta'
-					link:
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-						| null
-					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
-				}> | null
-		  }
-		| {
-				_key: string
-				_type: 'card-list'
-				attributes?: ModuleAttributes
-				overline?: string
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				cards: Array<{
-					image?: CardImage
-					icon?: Icon
-					content?: Array<{
-						children?: Array<{
-							marks?: Array<string>
-							text?: string
-							_type: 'span'
-							_key: string
-						}>
-						style?:
-							| 'blockquote'
-							| 'h1'
-							| 'h2'
-							| 'h3'
-							| 'h4'
-							| 'h5'
-							| 'h6'
-							| 'normal'
-						listItem?: 'bullet' | 'number'
-						markDefs?: Array<{
-							href?: string
-							_type: 'link'
-							_key: string
-						}>
-						level?: number
-						_type: 'block'
-						_key: string
-					}>
-					ctas: Array<{
-						_key: string
-						_type: 'cta'
-						link:
-							| {
-									_type: 'link'
-									label?: string
-									type?: 'external' | 'internal'
-									internal?: PageReference
-									external?: string
-									params?: string
-							  }
-							| {
-									_type: 'link'
-									label?: string
-									type?: 'external' | 'internal'
-									internal: {
-										_type: 'page'
-										title: string | null
-										slug: string | '/' | null
-									} | null
-									external?: string
-									params?: string
-							  }
-							| null
-						theme?: 'action-outline' | 'action' | 'ghost' | 'link'
-					}> | null
-					_type: 'card'
-					_key: string
-				}> | null
-				ctas: Array<{
-					_key: string
-					_type: 'cta'
-					link:
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-						| null
-					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
-				}> | null
-				columns?: number
-		  }
-		| {
-				_key: string
-				_type: 'custom-html'
-				attributes?: ModuleAttributes
-				className?: string
-				html?: Code
-				css?: Code
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'form-module'
-				attributes?: ModuleAttributes
-				overline?: string
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				form: {
-					_id: string
-					_type: 'form'
-					_createdAt: string
-					_updatedAt: string
-					_rev: string
-					identifier?: string
-					endpoint?: string
-				} | null
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'hero.split'
-				attributes?: ModuleAttributes
-				overline?: string
-				content?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				ctas: Array<{
-					_key: string
-					_type: 'cta'
-					link:
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-						| null
-					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
-				}> | null
-				image?: {
-					asset?: SanityImageAssetReference
-					media?: unknown
-					hotspot?: SanityImageHotspot
-					crop?: SanityImageCrop
-					alt?: string
-					loading?: 'eager' | 'lazy'
-					onRight?: boolean
-					afterContent?: boolean
-					_type: 'image'
-				}
-		  }
-		| {
-				_key: string
-				_type: 'logo-list'
-				overline?: string
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				logos: Array<
-					| {
-							_key: string
-							_ref: string
-							_type: 'logo'
-							_weak?: boolean
-							_id: string
-							_createdAt: string
-							_updatedAt: string
-							_rev: string
-							title?: string
-							image?: LogoImage
-					  }
-					| {
-							title?: string
-							image?: LogoImage
-							_type: 'logo'
-							_key: string
-					  }
-				> | null
-				logoType?: 'dark' | 'default' | 'light'
-				autoScroll?: boolean
-				duration?: number
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'person-list'
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				people: Array<
-					| {
-							_key: string
-							_ref: string
-							_type: 'person'
-							_weak?: boolean
-							_id: string
-							_createdAt: string
-							_updatedAt: string
-							_rev: string
-							name?: string
-							image?: {
-								asset?: SanityImageAssetReference
-								media?: unknown
-								hotspot?: SanityImageHotspot
-								crop?: SanityImageCrop
-								_type: 'image'
-							}
-					  }
-					| {
-							name?: string
-							image?: {
-								asset?: SanityImageAssetReference
-								media?: unknown
-								hotspot?: SanityImageHotspot
-								crop?: SanityImageCrop
-								_type: 'image'
-							}
-							_type: 'person'
-							_key: string
-					  }
-				> | null
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'prose'
-				attributes?: ModuleAttributes
-				content: Array<
-					| {
-							children?: Array<{
-								marks?: Array<string>
-								text?: string
-								_type: 'span'
-								_key: string
-							}>
-							style?:
-								| 'blockquote'
-								| 'h1'
-								| 'h2'
-								| 'h3'
-								| 'h4'
-								| 'h5'
-								| 'h6'
-								| 'normal'
-							listItem?: 'bullet' | 'number'
-							markDefs?: Array<{
-								href?: string
-								_type: 'link'
-								_key: string
-							}>
-							level?: number
-							_type: 'block'
-							_key: string
-					  }
-					| {
-							_key: string
-							_type: 'code'
-							language?: string
-							filename?: string
-							code?: string
-							highlightedLines?: Array<number>
-					  }
-					| {
-							_key: string
-							_type: 'custom-html'
-							attributes?: ModuleAttributes
-							className?: string
-							html?: Code
-							css?: Code
-					  }
-					| {
-							asset: {
-								_id: string
-								_type: 'sanity.imageAsset'
-								_createdAt: string
-								_updatedAt: string
-								_rev: string
-								originalFilename?: string
-								label?: string
-								title?: string
-								description?: string
-								altText?: string
-								sha1hash?: string
-								extension?: string
-								mimeType?: string
-								size?: number
-								assetId?: string
-								uploadId?: string
-								path?: string
-								url?: string
-								metadata: SanityImageMetadata | null
-								source?: SanityAssetSourceData
-							} | null
-							media?: unknown
-							hotspot?: SanityImageHotspot
-							crop?: SanityImageCrop
-							alt?: string
-							figcaption?: Array<{
-								children?: Array<{
-									marks?: Array<string>
-									text?: string
-									_type: 'span'
-									_key: string
-								}>
-								style?: 'normal'
-								listItem?: 'bullet' | 'number'
-								markDefs?: Array<{
-									href?: string
-									_type: 'link'
-									_key: string
-								}>
-								level?: number
-								_type: 'block'
-								_key: string
-							}>
-							_type: 'image'
-							_key: string
-					  }
-				> | null
-				tableOfContents?: 'left' | 'right'
-				ctas: null
-				headings: Array<{
-					style:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-						| null
-					text: string
-				}> | null
-		  }
-		| {
-				_key: string
-				_type: 'quote-list'
-				attributes?: ModuleAttributes
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				testimonials: Array<
-					| {
-							_key: string
-							_ref: string
-							_type: 'quote'
-							_weak?: boolean
-							_id: string
-							_createdAt: string
-							_updatedAt: string
-							_rev: string
-							quote?: Array<{
-								children?: Array<{
-									marks?: Array<string>
-									text?: string
-									_type: 'span'
-									_key: string
-								}>
-								style?:
-									| 'blockquote'
-									| 'h1'
-									| 'h2'
-									| 'h3'
-									| 'h4'
-									| 'h5'
-									| 'h6'
-									| 'normal'
-								listItem?: 'bullet' | 'number'
-								markDefs?: Array<{
-									href?: string
-									_type: 'link'
-									_key: string
-								}>
-								level?: number
-								_type: 'block'
-								_key: string
-							}>
-							author?: Author
-					  }
-					| {
-							quote?: Array<{
-								children?: Array<{
-									marks?: Array<string>
-									text?: string
-									_type: 'span'
-									_key: string
-								}>
-								style?:
-									| 'blockquote'
-									| 'h1'
-									| 'h2'
-									| 'h3'
-									| 'h4'
-									| 'h5'
-									| 'h6'
-									| 'normal'
-								listItem?: 'bullet' | 'number'
-								markDefs?: Array<{
-									href?: string
-									_type: 'link'
-									_key: string
-								}>
-								level?: number
-								_type: 'block'
-								_key: string
-							}>
-							author?: Author
-							_type: 'quote'
-							_key: string
-					  }
-				> | null
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'search-module'
-				overline?: string
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				scope?: 'all' | 'blog posts' | 'pages'
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'stat-list'
-				attributes?: ModuleAttributes
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				stats?: Array<{
-					value?: string
-					suffix?: string
-					content?: Array<{
-						children?: Array<{
-							marks?: Array<string>
-							text?: string
-							_type: 'span'
-							_key: string
-						}>
-						style?:
-							| 'blockquote'
-							| 'h1'
-							| 'h2'
-							| 'h3'
-							| 'h4'
-							| 'h5'
-							| 'h6'
-							| 'normal'
-						listItem?: 'bullet' | 'number'
-						markDefs?: Array<{
-							href?: string
-							_type: 'link'
-							_key: string
-						}>
-						level?: number
-						_type: 'block'
-						_key: string
-					}>
-					_type: 'stat'
-					_key: string
-				}>
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'step-list'
-				attributes?: ModuleAttributes
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				ctas: Array<{
-					_key: string
-					_type: 'cta'
-					link:
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-						| null
-					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
-				}> | null
-				steps?: Array<{
-					content?: Array<{
-						children?: Array<{
-							marks?: Array<string>
-							text?: string
-							_type: 'span'
-							_key: string
-						}>
-						style?:
-							| 'blockquote'
-							| 'h1'
-							| 'h2'
-							| 'h3'
-							| 'h4'
-							| 'h5'
-							| 'h6'
-							| 'normal'
-						listItem?: 'bullet' | 'number'
-						markDefs?: Array<{
-							href?: string
-							_type: 'link'
-							_key: string
-						}>
-						level?: number
-						_type: 'block'
-						_key: string
-					}>
-					_type: 'step'
-					_key: string
-				}>
-				enableSchema?: boolean
-		  }
-		| null
-	> | null
-	metadata?: Metadata
-} | null
-
-// Source: src/app/(frontend)/api/og/route.tsx
+// Source: src/app/(site)/api/og/route.tsx
 // Variable: OG_QUERY
 // Query: *[_type == $type && metadata.slug.current == $slug][0]{	'title': coalesce(metadata.title, title),}
 export type OG_QUERY_RESULT =
@@ -2631,9 +1445,9 @@ export type OG_QUERY_RESULT =
 	  }
 	| null
 
-// Source: src/app/(frontend)/blog/[slug]/page.tsx
+// Source: src/app/(site)/blog/[slug]/page.tsx
 // Variable: BLOG_POST_QUERY
-// Query: *[_type == 'blog.post' && metadata.slug.current == $slug][0]{	...,	content[]{		...,		_type == 'image' => {			...,			asset->		}	},	'contentPlainText': pt::text(content),	'readTime': length(string::split(pt::text(content), ' ')) / 200,	'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{		style,		'text': pt::text(@)	},	categories[]->{		title,		slug	},	author->{		name,		image{			...,			asset->		}	},	'modules': (		// global modules (before)		*[_type == 'global-module' && path == '*'].before[]{ 	...,	ctas[]{		...,		link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'form-module' => {		form->	},	_type == 'breadcrumbs' => {		crumbs[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'card-list' => {		cards[]{			...,			ctas[]{				...,				link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }			}		}	},	_type == 'logo-list' => {		logos[]{			...,			_type == 'reference' => @->		}	},	_type == 'person-list' => {		people[]{			...,			_type == 'reference' => @->		}	},	_type == 'prose' => {		content[]{			...,			_type == 'image' => {				...,				asset->{					...,					metadata				}			}		},		'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{			style,			'text': pt::text(@)		}	},	_type == 'quote-list' => {		testimonials[]{			...,			_type == 'reference' => @->		}	}, }		// path modules (before)		+ *[_type == 'global-module' && path == $blogDir].before[]{ 	...,	ctas[]{		...,		link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'form-module' => {		form->	},	_type == 'breadcrumbs' => {		crumbs[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'card-list' => {		cards[]{			...,			ctas[]{				...,				link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }			}		}	},	_type == 'logo-list' => {		logos[]{			...,			_type == 'reference' => @->		}	},	_type == 'person-list' => {		people[]{			...,			_type == 'reference' => @->		}	},	_type == 'prose' => {		content[]{			...,			_type == 'image' => {				...,				asset->{					...,					metadata				}			}		},		'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{			style,			'text': pt::text(@)		}	},	_type == 'quote-list' => {		testimonials[]{			...,			_type == 'reference' => @->		}	}, }		// path modules (after)		+ *[_type == 'global-module' && path == $blogDir].after[]{ 	...,	ctas[]{		...,		link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'form-module' => {		form->	},	_type == 'breadcrumbs' => {		crumbs[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'card-list' => {		cards[]{			...,			ctas[]{				...,				link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }			}		}	},	_type == 'logo-list' => {		logos[]{			...,			_type == 'reference' => @->		}	},	_type == 'person-list' => {		people[]{			...,			_type == 'reference' => @->		}	},	_type == 'prose' => {		content[]{			...,			_type == 'image' => {				...,				asset->{					...,					metadata				}			}		},		'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{			style,			'text': pt::text(@)		}	},	_type == 'quote-list' => {		testimonials[]{			...,			_type == 'reference' => @->		}	}, }		// global modules (after)		+ *[_type == 'global-module' && path == '*'].after[]{ 	...,	ctas[]{		...,		link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'form-module' => {		form->	},	_type == 'breadcrumbs' => {		crumbs[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'card-list' => {		cards[]{			...,			ctas[]{				...,				link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }			}		}	},	_type == 'logo-list' => {		logos[]{			...,			_type == 'reference' => @->		}	},	_type == 'person-list' => {		people[]{			...,			_type == 'reference' => @->		}	},	_type == 'prose' => {		content[]{			...,			_type == 'image' => {				...,				asset->{					...,					metadata				}			}		},		'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{			style,			'text': pt::text(@)		}	},	_type == 'quote-list' => {		testimonials[]{			...,			_type == 'reference' => @->		}	}, }	)}
+// Query: *[_type == 'blog.post' && metadata.slug.current == $slug][0]{	...,	content[]{		...,		_type == 'image' => {			...,			asset->		}	},	'contentPlainText': pt::text(content),	'readTime': length(string::split(pt::text(content), ' ')) / 200,	'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{		style,		'text': pt::text(@)	},	categories[]->{		title,		slug	},	author->{		name,		image{			...,			asset->		}	}}
 export type BLOG_POST_QUERY_RESULT = {
 	_id: string
 	_type: 'blog.post'
@@ -2734,41 +1548,6 @@ export type BLOG_POST_QUERY_RESULT = {
 		  }
 	> | null
 	publishDate?: string
-	categories: Array<{
-		title: string | null
-		slug: Slug | null
-	}> | null
-	author: {
-		name: string | null
-		image: {
-			asset: {
-				_id: string
-				_type: 'sanity.imageAsset'
-				_createdAt: string
-				_updatedAt: string
-				_rev: string
-				originalFilename?: string
-				label?: string
-				title?: string
-				description?: string
-				altText?: string
-				sha1hash?: string
-				extension?: string
-				mimeType?: string
-				size?: number
-				assetId?: string
-				uploadId?: string
-				path?: string
-				url?: string
-				metadata?: SanityImageMetadata
-				source?: SanityAssetSourceData
-			} | null
-			media?: unknown
-			hotspot?: SanityImageHotspot
-			crop?: SanityImageCrop
-			_type: 'image'
-		} | null
-	} | null
 	metadata?: Metadata
 	contentPlainText: string
 	readTime: number
@@ -2785,1054 +1564,19 @@ export type BLOG_POST_QUERY_RESULT = {
 			| null
 		text: string
 	}> | null
-	modules: Array<
-		| {
-				_key: string
-				_type: 'accordion-list'
-				attributes?: ModuleAttributes
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				ctas: Array<{
-					_key: string
-					_type: 'cta'
-					link:
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-						| null
-					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
-				}> | null
-				accordions?: Array<{
-					summary?: string
-					content?: Array<{
-						children?: Array<{
-							marks?: Array<string>
-							text?: string
-							_type: 'span'
-							_key: string
-						}>
-						style?:
-							| 'blockquote'
-							| 'h1'
-							| 'h2'
-							| 'h3'
-							| 'h4'
-							| 'h5'
-							| 'h6'
-							| 'normal'
-						listItem?: 'bullet' | 'number'
-						markDefs?: Array<{
-							href?: string
-							_type: 'link'
-							_key: string
-						}>
-						level?: number
-						_type: 'block'
-						_key: string
-					}>
-					open?: boolean
-					_type: 'accordion'
-					_key: string
-				}>
-				exclusive?: boolean
-				enableSchema?: boolean
-				layout?: 'horizontal' | 'vertical'
-		  }
-		| {
-				_key: string
-				_type: 'blog-index'
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				postsPerPage?: number
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'blog-post-content'
-				attributes?: ModuleAttributes
-				tableOfContents?: 'left' | 'right'
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'blog-post-list'
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				ctas: Array<{
-					_key: string
-					_type: 'cta'
-					link:
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-						| null
-					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
-				}> | null
-				limit?: number
-		  }
-		| {
-				_key: string
-				_type: 'breadcrumbs'
-				structuredDataOnly?: boolean
-				crumbs: Array<
-					| {
-							_key: string
-							_type: 'link'
-							label?: string
-							type?: 'external' | 'internal'
-							internal?: PageReference
-							external?: string
-							params?: string
-					  }
-					| {
-							_key: string
-							_type: 'link'
-							label?: string
-							type?: 'external' | 'internal'
-							internal: {
-								_type: 'page'
-								title: string | null
-								slug: string | '/' | null
-							} | null
-							external?: string
-							params?: string
-					  }
-				> | null
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'callout'
-				attributes?: ModuleAttributes
-				overline?: string
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				ctas: Array<{
-					_key: string
-					_type: 'cta'
-					link:
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-						| null
-					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
-				}> | null
-		  }
-		| {
-				_key: string
-				_type: 'card-list'
-				attributes?: ModuleAttributes
-				overline?: string
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				cards: Array<{
-					image?: CardImage
-					icon?: Icon
-					content?: Array<{
-						children?: Array<{
-							marks?: Array<string>
-							text?: string
-							_type: 'span'
-							_key: string
-						}>
-						style?:
-							| 'blockquote'
-							| 'h1'
-							| 'h2'
-							| 'h3'
-							| 'h4'
-							| 'h5'
-							| 'h6'
-							| 'normal'
-						listItem?: 'bullet' | 'number'
-						markDefs?: Array<{
-							href?: string
-							_type: 'link'
-							_key: string
-						}>
-						level?: number
-						_type: 'block'
-						_key: string
-					}>
-					ctas: Array<{
-						_key: string
-						_type: 'cta'
-						link:
-							| {
-									_type: 'link'
-									label?: string
-									type?: 'external' | 'internal'
-									internal?: PageReference
-									external?: string
-									params?: string
-							  }
-							| {
-									_type: 'link'
-									label?: string
-									type?: 'external' | 'internal'
-									internal: {
-										_type: 'page'
-										title: string | null
-										slug: string | '/' | null
-									} | null
-									external?: string
-									params?: string
-							  }
-							| null
-						theme?: 'action-outline' | 'action' | 'ghost' | 'link'
-					}> | null
-					_type: 'card'
-					_key: string
-				}> | null
-				ctas: Array<{
-					_key: string
-					_type: 'cta'
-					link:
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-						| null
-					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
-				}> | null
-				columns?: number
-		  }
-		| {
-				_key: string
-				_type: 'custom-html'
-				attributes?: ModuleAttributes
-				className?: string
-				html?: Code
-				css?: Code
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'form-module'
-				attributes?: ModuleAttributes
-				overline?: string
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				form: {
-					_id: string
-					_type: 'form'
-					_createdAt: string
-					_updatedAt: string
-					_rev: string
-					identifier?: string
-					endpoint?: string
-				} | null
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'hero.split'
-				attributes?: ModuleAttributes
-				overline?: string
-				content?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				ctas: Array<{
-					_key: string
-					_type: 'cta'
-					link:
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-						| null
-					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
-				}> | null
-				image?: {
-					asset?: SanityImageAssetReference
-					media?: unknown
-					hotspot?: SanityImageHotspot
-					crop?: SanityImageCrop
-					alt?: string
-					loading?: 'eager' | 'lazy'
-					onRight?: boolean
-					afterContent?: boolean
-					_type: 'image'
-				}
-		  }
-		| {
-				_key: string
-				_type: 'logo-list'
-				overline?: string
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				logos: Array<
-					| {
-							_key: string
-							_ref: string
-							_type: 'logo'
-							_weak?: boolean
-							_id: string
-							_createdAt: string
-							_updatedAt: string
-							_rev: string
-							title?: string
-							image?: LogoImage
-					  }
-					| {
-							title?: string
-							image?: LogoImage
-							_type: 'logo'
-							_key: string
-					  }
-				> | null
-				logoType?: 'dark' | 'default' | 'light'
-				autoScroll?: boolean
-				duration?: number
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'person-list'
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				people: Array<
-					| {
-							_key: string
-							_ref: string
-							_type: 'person'
-							_weak?: boolean
-							_id: string
-							_createdAt: string
-							_updatedAt: string
-							_rev: string
-							name?: string
-							image?: {
-								asset?: SanityImageAssetReference
-								media?: unknown
-								hotspot?: SanityImageHotspot
-								crop?: SanityImageCrop
-								_type: 'image'
-							}
-					  }
-					| {
-							name?: string
-							image?: {
-								asset?: SanityImageAssetReference
-								media?: unknown
-								hotspot?: SanityImageHotspot
-								crop?: SanityImageCrop
-								_type: 'image'
-							}
-							_type: 'person'
-							_key: string
-					  }
-				> | null
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'prose'
-				attributes?: ModuleAttributes
-				content: Array<
-					| {
-							children?: Array<{
-								marks?: Array<string>
-								text?: string
-								_type: 'span'
-								_key: string
-							}>
-							style?:
-								| 'blockquote'
-								| 'h1'
-								| 'h2'
-								| 'h3'
-								| 'h4'
-								| 'h5'
-								| 'h6'
-								| 'normal'
-							listItem?: 'bullet' | 'number'
-							markDefs?: Array<{
-								href?: string
-								_type: 'link'
-								_key: string
-							}>
-							level?: number
-							_type: 'block'
-							_key: string
-					  }
-					| {
-							_key: string
-							_type: 'code'
-							language?: string
-							filename?: string
-							code?: string
-							highlightedLines?: Array<number>
-					  }
-					| {
-							_key: string
-							_type: 'custom-html'
-							attributes?: ModuleAttributes
-							className?: string
-							html?: Code
-							css?: Code
-					  }
-					| {
-							asset: {
-								_id: string
-								_type: 'sanity.imageAsset'
-								_createdAt: string
-								_updatedAt: string
-								_rev: string
-								originalFilename?: string
-								label?: string
-								title?: string
-								description?: string
-								altText?: string
-								sha1hash?: string
-								extension?: string
-								mimeType?: string
-								size?: number
-								assetId?: string
-								uploadId?: string
-								path?: string
-								url?: string
-								metadata: SanityImageMetadata | null
-								source?: SanityAssetSourceData
-							} | null
-							media?: unknown
-							hotspot?: SanityImageHotspot
-							crop?: SanityImageCrop
-							alt?: string
-							figcaption?: Array<{
-								children?: Array<{
-									marks?: Array<string>
-									text?: string
-									_type: 'span'
-									_key: string
-								}>
-								style?: 'normal'
-								listItem?: 'bullet' | 'number'
-								markDefs?: Array<{
-									href?: string
-									_type: 'link'
-									_key: string
-								}>
-								level?: number
-								_type: 'block'
-								_key: string
-							}>
-							_type: 'image'
-							_key: string
-					  }
-				> | null
-				tableOfContents?: 'left' | 'right'
-				ctas: null
-				headings: Array<{
-					style:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-						| null
-					text: string
-				}> | null
-		  }
-		| {
-				_key: string
-				_type: 'quote-list'
-				attributes?: ModuleAttributes
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				testimonials: Array<
-					| {
-							_key: string
-							_ref: string
-							_type: 'quote'
-							_weak?: boolean
-							_id: string
-							_createdAt: string
-							_updatedAt: string
-							_rev: string
-							quote?: Array<{
-								children?: Array<{
-									marks?: Array<string>
-									text?: string
-									_type: 'span'
-									_key: string
-								}>
-								style?:
-									| 'blockquote'
-									| 'h1'
-									| 'h2'
-									| 'h3'
-									| 'h4'
-									| 'h5'
-									| 'h6'
-									| 'normal'
-								listItem?: 'bullet' | 'number'
-								markDefs?: Array<{
-									href?: string
-									_type: 'link'
-									_key: string
-								}>
-								level?: number
-								_type: 'block'
-								_key: string
-							}>
-							author?: Author
-					  }
-					| {
-							quote?: Array<{
-								children?: Array<{
-									marks?: Array<string>
-									text?: string
-									_type: 'span'
-									_key: string
-								}>
-								style?:
-									| 'blockquote'
-									| 'h1'
-									| 'h2'
-									| 'h3'
-									| 'h4'
-									| 'h5'
-									| 'h6'
-									| 'normal'
-								listItem?: 'bullet' | 'number'
-								markDefs?: Array<{
-									href?: string
-									_type: 'link'
-									_key: string
-								}>
-								level?: number
-								_type: 'block'
-								_key: string
-							}>
-							author?: Author
-							_type: 'quote'
-							_key: string
-					  }
-				> | null
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'search-module'
-				overline?: string
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				scope?: 'all' | 'blog posts' | 'pages'
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'stat-list'
-				attributes?: ModuleAttributes
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				stats?: Array<{
-					value?: string
-					suffix?: string
-					content?: Array<{
-						children?: Array<{
-							marks?: Array<string>
-							text?: string
-							_type: 'span'
-							_key: string
-						}>
-						style?:
-							| 'blockquote'
-							| 'h1'
-							| 'h2'
-							| 'h3'
-							| 'h4'
-							| 'h5'
-							| 'h6'
-							| 'normal'
-						listItem?: 'bullet' | 'number'
-						markDefs?: Array<{
-							href?: string
-							_type: 'link'
-							_key: string
-						}>
-						level?: number
-						_type: 'block'
-						_key: string
-					}>
-					_type: 'stat'
-					_key: string
-				}>
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'step-list'
-				attributes?: ModuleAttributes
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				ctas: Array<{
-					_key: string
-					_type: 'cta'
-					link:
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-						| null
-					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
-				}> | null
-				steps?: Array<{
-					content?: Array<{
-						children?: Array<{
-							marks?: Array<string>
-							text?: string
-							_type: 'span'
-							_key: string
-						}>
-						style?:
-							| 'blockquote'
-							| 'h1'
-							| 'h2'
-							| 'h3'
-							| 'h4'
-							| 'h5'
-							| 'h6'
-							| 'normal'
-						listItem?: 'bullet' | 'number'
-						markDefs?: Array<{
-							href?: string
-							_type: 'link'
-							_key: string
-						}>
-						level?: number
-						_type: 'block'
-						_key: string
-					}>
-					_type: 'step'
-					_key: string
-				}>
-				enableSchema?: boolean
-		  }
-		| null
-	>
+	categories: null
+	author: null
 } | null
 
-// Source: src/app/(frontend)/blog/rss.xml/route.ts
+// Source: src/app/(site)/blog/rss.xml/route.ts
 // Variable: BLOG_RSS_QUERY
-// Query: {	'blog': *[_type == 'page' && metadata.slug.current == $blogDir][0]{		metadata	},	'posts': *[_type == 'blog.post' && metadata.noIndex != true]|order(publishDate desc){		title,		content,		publishDate,		categories[]->{ title },		author->{ name },		metadata	}}
+// Query: {	'blog': *[_type == 'site'][0]{		"metadata": {			"title": coalesce(seo.metaTitle, title) + " Blog",			"description": seo.metaDescription		}	},	'posts': *[_type == 'blog.post' && metadata.noIndex != true]|order(publishDate desc){		title,		content,		publishDate,		metadata	}}
 export type BLOG_RSS_QUERY_RESULT = {
 	blog: {
-		metadata: Metadata | null
+		metadata: {
+			title: string | null
+			description: string | null
+		}
 	} | null
 	posts: Array<{
 		title: string | null
@@ -3898,1064 +1642,13 @@ export type BLOG_RSS_QUERY_RESULT = {
 			  }
 		> | null
 		publishDate: string | null
-		categories: Array<{
-			title: string | null
-		}> | null
-		author: {
-			name: string | null
-		} | null
 		metadata: Metadata | null
 	}>
 }
 
-// Source: src/app/(frontend)/not-found.tsx
-// Variable: NOT_FOUND_QUERY
-// Query: *[_type == 'page' && metadata.slug.current == '404'][0]{		...,		modules[]{ 	...,	ctas[]{		...,		link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'form-module' => {		form->	},	_type == 'breadcrumbs' => {		crumbs[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'card-list' => {		cards[]{			...,			ctas[]{				...,				link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }			}		}	},	_type == 'logo-list' => {		logos[]{			...,			_type == 'reference' => @->		}	},	_type == 'person-list' => {		people[]{			...,			_type == 'reference' => @->		}	},	_type == 'prose' => {		content[]{			...,			_type == 'image' => {				...,				asset->{					...,					metadata				}			}		},		'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{			style,			'text': pt::text(@)		}	},	_type == 'quote-list' => {		testimonials[]{			...,			_type == 'reference' => @->		}	}, }	}
-export type NOT_FOUND_QUERY_RESULT = {
-	_id: string
-	_type: 'page'
-	_createdAt: string
-	_updatedAt: string
-	_rev: string
-	title?: string
-	modules: Array<
-		| {
-				_key: string
-				_type: 'accordion-list'
-				attributes?: ModuleAttributes
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				ctas: Array<{
-					_key: string
-					_type: 'cta'
-					link:
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-						| null
-					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
-				}> | null
-				accordions?: Array<{
-					summary?: string
-					content?: Array<{
-						children?: Array<{
-							marks?: Array<string>
-							text?: string
-							_type: 'span'
-							_key: string
-						}>
-						style?:
-							| 'blockquote'
-							| 'h1'
-							| 'h2'
-							| 'h3'
-							| 'h4'
-							| 'h5'
-							| 'h6'
-							| 'normal'
-						listItem?: 'bullet' | 'number'
-						markDefs?: Array<{
-							href?: string
-							_type: 'link'
-							_key: string
-						}>
-						level?: number
-						_type: 'block'
-						_key: string
-					}>
-					open?: boolean
-					_type: 'accordion'
-					_key: string
-				}>
-				exclusive?: boolean
-				enableSchema?: boolean
-				layout?: 'horizontal' | 'vertical'
-		  }
-		| {
-				_key: string
-				_type: 'blog-index'
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				postsPerPage?: number
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'blog-post-list'
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				ctas: Array<{
-					_key: string
-					_type: 'cta'
-					link:
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-						| null
-					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
-				}> | null
-				limit?: number
-		  }
-		| {
-				_key: string
-				_type: 'breadcrumbs'
-				structuredDataOnly?: boolean
-				crumbs: Array<
-					| {
-							_key: string
-							_type: 'link'
-							label?: string
-							type?: 'external' | 'internal'
-							internal?: PageReference
-							external?: string
-							params?: string
-					  }
-					| {
-							_key: string
-							_type: 'link'
-							label?: string
-							type?: 'external' | 'internal'
-							internal: {
-								_type: 'page'
-								title: string | null
-								slug: string | '/' | null
-							} | null
-							external?: string
-							params?: string
-					  }
-				> | null
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'callout'
-				attributes?: ModuleAttributes
-				overline?: string
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				ctas: Array<{
-					_key: string
-					_type: 'cta'
-					link:
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-						| null
-					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
-				}> | null
-		  }
-		| {
-				_key: string
-				_type: 'card-list'
-				attributes?: ModuleAttributes
-				overline?: string
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				cards: Array<{
-					image?: CardImage
-					icon?: Icon
-					content?: Array<{
-						children?: Array<{
-							marks?: Array<string>
-							text?: string
-							_type: 'span'
-							_key: string
-						}>
-						style?:
-							| 'blockquote'
-							| 'h1'
-							| 'h2'
-							| 'h3'
-							| 'h4'
-							| 'h5'
-							| 'h6'
-							| 'normal'
-						listItem?: 'bullet' | 'number'
-						markDefs?: Array<{
-							href?: string
-							_type: 'link'
-							_key: string
-						}>
-						level?: number
-						_type: 'block'
-						_key: string
-					}>
-					ctas: Array<{
-						_key: string
-						_type: 'cta'
-						link:
-							| {
-									_type: 'link'
-									label?: string
-									type?: 'external' | 'internal'
-									internal?: PageReference
-									external?: string
-									params?: string
-							  }
-							| {
-									_type: 'link'
-									label?: string
-									type?: 'external' | 'internal'
-									internal: {
-										_type: 'page'
-										title: string | null
-										slug: string | '/' | null
-									} | null
-									external?: string
-									params?: string
-							  }
-							| null
-						theme?: 'action-outline' | 'action' | 'ghost' | 'link'
-					}> | null
-					_type: 'card'
-					_key: string
-				}> | null
-				ctas: Array<{
-					_key: string
-					_type: 'cta'
-					link:
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-						| null
-					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
-				}> | null
-				columns?: number
-		  }
-		| {
-				_key: string
-				_type: 'custom-html'
-				attributes?: ModuleAttributes
-				className?: string
-				html?: Code
-				css?: Code
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'form-module'
-				attributes?: ModuleAttributes
-				overline?: string
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				form: {
-					_id: string
-					_type: 'form'
-					_createdAt: string
-					_updatedAt: string
-					_rev: string
-					identifier?: string
-					endpoint?: string
-				} | null
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'hero.split'
-				attributes?: ModuleAttributes
-				overline?: string
-				content?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				ctas: Array<{
-					_key: string
-					_type: 'cta'
-					link:
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-						| null
-					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
-				}> | null
-				image?: {
-					asset?: SanityImageAssetReference
-					media?: unknown
-					hotspot?: SanityImageHotspot
-					crop?: SanityImageCrop
-					alt?: string
-					loading?: 'eager' | 'lazy'
-					onRight?: boolean
-					afterContent?: boolean
-					_type: 'image'
-				}
-		  }
-		| {
-				_key: string
-				_type: 'logo-list'
-				overline?: string
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				logos: Array<
-					| {
-							_key: string
-							_ref: string
-							_type: 'logo'
-							_weak?: boolean
-							_id: string
-							_createdAt: string
-							_updatedAt: string
-							_rev: string
-							title?: string
-							image?: LogoImage
-					  }
-					| {
-							title?: string
-							image?: LogoImage
-							_type: 'logo'
-							_key: string
-					  }
-				> | null
-				logoType?: 'dark' | 'default' | 'light'
-				autoScroll?: boolean
-				duration?: number
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'person-list'
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				people: Array<
-					| {
-							_key: string
-							_ref: string
-							_type: 'person'
-							_weak?: boolean
-							_id: string
-							_createdAt: string
-							_updatedAt: string
-							_rev: string
-							name?: string
-							image?: {
-								asset?: SanityImageAssetReference
-								media?: unknown
-								hotspot?: SanityImageHotspot
-								crop?: SanityImageCrop
-								_type: 'image'
-							}
-					  }
-					| {
-							name?: string
-							image?: {
-								asset?: SanityImageAssetReference
-								media?: unknown
-								hotspot?: SanityImageHotspot
-								crop?: SanityImageCrop
-								_type: 'image'
-							}
-							_type: 'person'
-							_key: string
-					  }
-				> | null
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'prose'
-				attributes?: ModuleAttributes
-				content: Array<
-					| {
-							children?: Array<{
-								marks?: Array<string>
-								text?: string
-								_type: 'span'
-								_key: string
-							}>
-							style?:
-								| 'blockquote'
-								| 'h1'
-								| 'h2'
-								| 'h3'
-								| 'h4'
-								| 'h5'
-								| 'h6'
-								| 'normal'
-							listItem?: 'bullet' | 'number'
-							markDefs?: Array<{
-								href?: string
-								_type: 'link'
-								_key: string
-							}>
-							level?: number
-							_type: 'block'
-							_key: string
-					  }
-					| {
-							_key: string
-							_type: 'code'
-							language?: string
-							filename?: string
-							code?: string
-							highlightedLines?: Array<number>
-					  }
-					| {
-							_key: string
-							_type: 'custom-html'
-							attributes?: ModuleAttributes
-							className?: string
-							html?: Code
-							css?: Code
-					  }
-					| {
-							asset: {
-								_id: string
-								_type: 'sanity.imageAsset'
-								_createdAt: string
-								_updatedAt: string
-								_rev: string
-								originalFilename?: string
-								label?: string
-								title?: string
-								description?: string
-								altText?: string
-								sha1hash?: string
-								extension?: string
-								mimeType?: string
-								size?: number
-								assetId?: string
-								uploadId?: string
-								path?: string
-								url?: string
-								metadata: SanityImageMetadata | null
-								source?: SanityAssetSourceData
-							} | null
-							media?: unknown
-							hotspot?: SanityImageHotspot
-							crop?: SanityImageCrop
-							alt?: string
-							figcaption?: Array<{
-								children?: Array<{
-									marks?: Array<string>
-									text?: string
-									_type: 'span'
-									_key: string
-								}>
-								style?: 'normal'
-								listItem?: 'bullet' | 'number'
-								markDefs?: Array<{
-									href?: string
-									_type: 'link'
-									_key: string
-								}>
-								level?: number
-								_type: 'block'
-								_key: string
-							}>
-							_type: 'image'
-							_key: string
-					  }
-				> | null
-				tableOfContents?: 'left' | 'right'
-				ctas: null
-				headings: Array<{
-					style:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-						| null
-					text: string
-				}> | null
-		  }
-		| {
-				_key: string
-				_type: 'quote-list'
-				attributes?: ModuleAttributes
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				testimonials: Array<
-					| {
-							_key: string
-							_ref: string
-							_type: 'quote'
-							_weak?: boolean
-							_id: string
-							_createdAt: string
-							_updatedAt: string
-							_rev: string
-							quote?: Array<{
-								children?: Array<{
-									marks?: Array<string>
-									text?: string
-									_type: 'span'
-									_key: string
-								}>
-								style?:
-									| 'blockquote'
-									| 'h1'
-									| 'h2'
-									| 'h3'
-									| 'h4'
-									| 'h5'
-									| 'h6'
-									| 'normal'
-								listItem?: 'bullet' | 'number'
-								markDefs?: Array<{
-									href?: string
-									_type: 'link'
-									_key: string
-								}>
-								level?: number
-								_type: 'block'
-								_key: string
-							}>
-							author?: Author
-					  }
-					| {
-							quote?: Array<{
-								children?: Array<{
-									marks?: Array<string>
-									text?: string
-									_type: 'span'
-									_key: string
-								}>
-								style?:
-									| 'blockquote'
-									| 'h1'
-									| 'h2'
-									| 'h3'
-									| 'h4'
-									| 'h5'
-									| 'h6'
-									| 'normal'
-								listItem?: 'bullet' | 'number'
-								markDefs?: Array<{
-									href?: string
-									_type: 'link'
-									_key: string
-								}>
-								level?: number
-								_type: 'block'
-								_key: string
-							}>
-							author?: Author
-							_type: 'quote'
-							_key: string
-					  }
-				> | null
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'search-module'
-				overline?: string
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				scope?: 'all' | 'blog posts' | 'pages'
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'stat-list'
-				attributes?: ModuleAttributes
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				stats?: Array<{
-					value?: string
-					suffix?: string
-					content?: Array<{
-						children?: Array<{
-							marks?: Array<string>
-							text?: string
-							_type: 'span'
-							_key: string
-						}>
-						style?:
-							| 'blockquote'
-							| 'h1'
-							| 'h2'
-							| 'h3'
-							| 'h4'
-							| 'h5'
-							| 'h6'
-							| 'normal'
-						listItem?: 'bullet' | 'number'
-						markDefs?: Array<{
-							href?: string
-							_type: 'link'
-							_key: string
-						}>
-						level?: number
-						_type: 'block'
-						_key: string
-					}>
-					_type: 'stat'
-					_key: string
-				}>
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'step-list'
-				attributes?: ModuleAttributes
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				ctas: Array<{
-					_key: string
-					_type: 'cta'
-					link:
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-						| null
-					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
-				}> | null
-				steps?: Array<{
-					content?: Array<{
-						children?: Array<{
-							marks?: Array<string>
-							text?: string
-							_type: 'span'
-							_key: string
-						}>
-						style?:
-							| 'blockquote'
-							| 'h1'
-							| 'h2'
-							| 'h3'
-							| 'h4'
-							| 'h5'
-							| 'h6'
-							| 'normal'
-						listItem?: 'bullet' | 'number'
-						markDefs?: Array<{
-							href?: string
-							_type: 'link'
-							_key: string
-						}>
-						level?: number
-						_type: 'block'
-						_key: string
-					}>
-					_type: 'step'
-					_key: string
-				}>
-				enableSchema?: boolean
-		  }
-	> | null
-	metadata?: Metadata
-} | null
-
 // Source: src/sanity/lib/queries.ts
 // Variable: SITE_QUERY
-// Query: *[_type == 'site'][0]{	...,	header->{ 	items[]{			...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	},		defined(link) => { link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} } },		defined(links[]) => { links[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} } },		_type == 'megamenu' => {			defined(link) => { link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} } },			items[]{				...,				_type == 'link' => { 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} },				_type == 'link.list' => {					defined(link) => { link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} } },					links[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }				}			}		}	} },	ctas[]{		...,		link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	footer->{ 	items[]{			...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	},		defined(link) => { link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} } },		defined(links[]) => { links[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} } },		_type == 'megamenu' => {			defined(link) => { link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} } },			items[]{				...,				_type == 'link' => { 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} },				_type == 'link.list' => {					defined(link) => { link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} } },					links[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }				}			}		}	} },	social->{ 	items[]{			...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	},		defined(link) => { link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} } },		defined(links[]) => { links[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} } },		_type == 'megamenu' => {			defined(link) => { link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} } },			items[]{				...,				_type == 'link' => { 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} },				_type == 'link.list' => {					defined(link) => { link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} } },					links[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }				}			}		}	} },}
+// Query: *[_type == 'site'][0]
 export type SITE_QUERY_RESULT = {
 	_id: string
 	_type: 'site'
@@ -4963,1377 +1656,398 @@ export type SITE_QUERY_RESULT = {
 	_updatedAt: string
 	_rev: string
 	title?: string
-	logo?: {
-		title?: string
-		image?: LogoImage
-		_type: 'logo'
-	}
-	ogimage?: {
+	logoImage?: {
 		asset?: SanityImageAssetReference
 		media?: unknown
 		hotspot?: SanityImageHotspot
 		crop?: SanityImageCrop
+		alt?: string
 		_type: 'image'
 	}
-	header: {
-		items: Array<
-			| {
-					_key: string
-					_type: 'link.list'
-					link?: Link
-					links?: Array<
-						{
-							_key: string
-						} & Link
-					>
-			  }
-			| {
-					_key: string
-					_type: 'link.list'
-					link?: Link
-					links: Array<
-						| {
-								_key: string
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_key: string
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-					> | null
-			  }
-			| {
-					_key: string
-					_type: 'link.list'
-					link:
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-						| null
-					links?: Array<
-						{
-							_key: string
-						} & Link
-					>
-			  }
-			| {
-					_key: string
-					_type: 'link.list'
-					link:
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-						| null
-					links: Array<
-						| {
-								_key: string
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_key: string
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-					> | null
-			  }
-			| {
-					_key: string
-					_type: 'link'
-					label?: string
-					type?: 'external' | 'internal'
-					internal?: PageReference
-					external?: string
-					params?: string
-			  }
-			| {
-					_key: string
-					_type: 'link'
-					label?: string
-					type?: 'external' | 'internal'
-					internal: {
-						_type: 'page'
-						title: string | null
-						slug: string | '/' | null
-					} | null
-					external?: string
-					params?: string
-			  }
-			| {
-					_key: string
-					_type: 'megamenu'
-					link?: Link
-					items?: Array<
-						| ({
-								_key: string
-						  } & LinkList)
-						| ({
-								_key: string
-						  } & Link)
-					>
-			  }
-			| {
-					_key: string
-					_type: 'megamenu'
-					link:
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-						| null
-					items?: Array<
-						| ({
-								_key: string
-						  } & LinkList)
-						| ({
-								_key: string
-						  } & Link)
-					>
-			  }
-			| {
-					_key: string
-					_type: 'megamenu'
-					link?: Link
-					items: Array<
-						| {
-								_key: string
-								_type: 'link.list'
-								link?: Link
-								links: Array<
-									| {
-											_key: string
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal?: PageReference
-											external?: string
-											params?: string
-									  }
-									| {
-											_key: string
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal: {
-												_type: 'page'
-												title: string | null
-												slug: string | '/' | null
-											} | null
-											external?: string
-											params?: string
-									  }
-								> | null
-						  }
-						| {
-								_key: string
-								_type: 'link.list'
-								link:
-									| {
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal?: PageReference
-											external?: string
-											params?: string
-									  }
-									| {
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal: {
-												_type: 'page'
-												title: string | null
-												slug: string | '/' | null
-											} | null
-											external?: string
-											params?: string
-									  }
-									| null
-								links: Array<
-									| {
-											_key: string
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal?: PageReference
-											external?: string
-											params?: string
-									  }
-									| {
-											_key: string
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal: {
-												_type: 'page'
-												title: string | null
-												slug: string | '/' | null
-											} | null
-											external?: string
-											params?: string
-									  }
-								> | null
-						  }
-						| {
-								_key: string
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_key: string
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-					> | null
-			  }
-			| {
-					_key: string
-					_type: 'megamenu'
-					link:
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-						| null
-					items: Array<
-						| {
-								_key: string
-								_type: 'link.list'
-								link?: Link
-								links: Array<
-									| {
-											_key: string
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal?: PageReference
-											external?: string
-											params?: string
-									  }
-									| {
-											_key: string
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal: {
-												_type: 'page'
-												title: string | null
-												slug: string | '/' | null
-											} | null
-											external?: string
-											params?: string
-									  }
-								> | null
-						  }
-						| {
-								_key: string
-								_type: 'link.list'
-								link:
-									| {
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal?: PageReference
-											external?: string
-											params?: string
-									  }
-									| {
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal: {
-												_type: 'page'
-												title: string | null
-												slug: string | '/' | null
-											} | null
-											external?: string
-											params?: string
-									  }
-									| null
-								links: Array<
-									| {
-											_key: string
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal?: PageReference
-											external?: string
-											params?: string
-									  }
-									| {
-											_key: string
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal: {
-												_type: 'page'
-												title: string | null
-												slug: string | '/' | null
-											} | null
-											external?: string
-											params?: string
-									  }
-								> | null
-						  }
-						| {
-								_key: string
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_key: string
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-					> | null
-			  }
-		> | null
-	} | null
-	ctas: Array<{
-		_key: string
-		_type: 'cta'
-		link:
-			| {
-					_type: 'link'
-					label?: string
-					type?: 'external' | 'internal'
-					internal?: PageReference
-					external?: string
-					params?: string
-			  }
-			| {
-					_type: 'link'
-					label?: string
-					type?: 'external' | 'internal'
-					internal: {
-						_type: 'page'
-						title: string | null
-						slug: string | '/' | null
-					} | null
-					external?: string
-					params?: string
-			  }
-			| null
-		theme?: 'action-outline' | 'action' | 'ghost' | 'link'
-	}> | null
-	footer: {
-		items: Array<
-			| {
-					_key: string
-					_type: 'link.list'
-					link?: Link
-					links?: Array<
-						{
-							_key: string
-						} & Link
-					>
-			  }
-			| {
-					_key: string
-					_type: 'link.list'
-					link?: Link
-					links: Array<
-						| {
-								_key: string
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_key: string
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-					> | null
-			  }
-			| {
-					_key: string
-					_type: 'link.list'
-					link:
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-						| null
-					links?: Array<
-						{
-							_key: string
-						} & Link
-					>
-			  }
-			| {
-					_key: string
-					_type: 'link.list'
-					link:
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-						| null
-					links: Array<
-						| {
-								_key: string
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_key: string
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-					> | null
-			  }
-			| {
-					_key: string
-					_type: 'link'
-					label?: string
-					type?: 'external' | 'internal'
-					internal?: PageReference
-					external?: string
-					params?: string
-			  }
-			| {
-					_key: string
-					_type: 'link'
-					label?: string
-					type?: 'external' | 'internal'
-					internal: {
-						_type: 'page'
-						title: string | null
-						slug: string | '/' | null
-					} | null
-					external?: string
-					params?: string
-			  }
-			| {
-					_key: string
-					_type: 'megamenu'
-					link?: Link
-					items?: Array<
-						| ({
-								_key: string
-						  } & LinkList)
-						| ({
-								_key: string
-						  } & Link)
-					>
-			  }
-			| {
-					_key: string
-					_type: 'megamenu'
-					link:
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-						| null
-					items?: Array<
-						| ({
-								_key: string
-						  } & LinkList)
-						| ({
-								_key: string
-						  } & Link)
-					>
-			  }
-			| {
-					_key: string
-					_type: 'megamenu'
-					link?: Link
-					items: Array<
-						| {
-								_key: string
-								_type: 'link.list'
-								link?: Link
-								links: Array<
-									| {
-											_key: string
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal?: PageReference
-											external?: string
-											params?: string
-									  }
-									| {
-											_key: string
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal: {
-												_type: 'page'
-												title: string | null
-												slug: string | '/' | null
-											} | null
-											external?: string
-											params?: string
-									  }
-								> | null
-						  }
-						| {
-								_key: string
-								_type: 'link.list'
-								link:
-									| {
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal?: PageReference
-											external?: string
-											params?: string
-									  }
-									| {
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal: {
-												_type: 'page'
-												title: string | null
-												slug: string | '/' | null
-											} | null
-											external?: string
-											params?: string
-									  }
-									| null
-								links: Array<
-									| {
-											_key: string
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal?: PageReference
-											external?: string
-											params?: string
-									  }
-									| {
-											_key: string
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal: {
-												_type: 'page'
-												title: string | null
-												slug: string | '/' | null
-											} | null
-											external?: string
-											params?: string
-									  }
-								> | null
-						  }
-						| {
-								_key: string
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_key: string
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-					> | null
-			  }
-			| {
-					_key: string
-					_type: 'megamenu'
-					link:
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-						| null
-					items: Array<
-						| {
-								_key: string
-								_type: 'link.list'
-								link?: Link
-								links: Array<
-									| {
-											_key: string
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal?: PageReference
-											external?: string
-											params?: string
-									  }
-									| {
-											_key: string
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal: {
-												_type: 'page'
-												title: string | null
-												slug: string | '/' | null
-											} | null
-											external?: string
-											params?: string
-									  }
-								> | null
-						  }
-						| {
-								_key: string
-								_type: 'link.list'
-								link:
-									| {
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal?: PageReference
-											external?: string
-											params?: string
-									  }
-									| {
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal: {
-												_type: 'page'
-												title: string | null
-												slug: string | '/' | null
-											} | null
-											external?: string
-											params?: string
-									  }
-									| null
-								links: Array<
-									| {
-											_key: string
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal?: PageReference
-											external?: string
-											params?: string
-									  }
-									| {
-											_key: string
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal: {
-												_type: 'page'
-												title: string | null
-												slug: string | '/' | null
-											} | null
-											external?: string
-											params?: string
-									  }
-								> | null
-						  }
-						| {
-								_key: string
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_key: string
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-					> | null
-			  }
-		> | null
-	} | null
-	social: {
-		items: Array<
-			| {
-					_key: string
-					_type: 'link.list'
-					link?: Link
-					links?: Array<
-						{
-							_key: string
-						} & Link
-					>
-			  }
-			| {
-					_key: string
-					_type: 'link.list'
-					link?: Link
-					links: Array<
-						| {
-								_key: string
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_key: string
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-					> | null
-			  }
-			| {
-					_key: string
-					_type: 'link.list'
-					link:
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-						| null
-					links?: Array<
-						{
-							_key: string
-						} & Link
-					>
-			  }
-			| {
-					_key: string
-					_type: 'link.list'
-					link:
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-						| null
-					links: Array<
-						| {
-								_key: string
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_key: string
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-					> | null
-			  }
-			| {
-					_key: string
-					_type: 'link'
-					label?: string
-					type?: 'external' | 'internal'
-					internal?: PageReference
-					external?: string
-					params?: string
-			  }
-			| {
-					_key: string
-					_type: 'link'
-					label?: string
-					type?: 'external' | 'internal'
-					internal: {
-						_type: 'page'
-						title: string | null
-						slug: string | '/' | null
-					} | null
-					external?: string
-					params?: string
-			  }
-			| {
-					_key: string
-					_type: 'megamenu'
-					link?: Link
-					items?: Array<
-						| ({
-								_key: string
-						  } & LinkList)
-						| ({
-								_key: string
-						  } & Link)
-					>
-			  }
-			| {
-					_key: string
-					_type: 'megamenu'
-					link:
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-						| null
-					items?: Array<
-						| ({
-								_key: string
-						  } & LinkList)
-						| ({
-								_key: string
-						  } & Link)
-					>
-			  }
-			| {
-					_key: string
-					_type: 'megamenu'
-					link?: Link
-					items: Array<
-						| {
-								_key: string
-								_type: 'link.list'
-								link?: Link
-								links: Array<
-									| {
-											_key: string
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal?: PageReference
-											external?: string
-											params?: string
-									  }
-									| {
-											_key: string
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal: {
-												_type: 'page'
-												title: string | null
-												slug: string | '/' | null
-											} | null
-											external?: string
-											params?: string
-									  }
-								> | null
-						  }
-						| {
-								_key: string
-								_type: 'link.list'
-								link:
-									| {
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal?: PageReference
-											external?: string
-											params?: string
-									  }
-									| {
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal: {
-												_type: 'page'
-												title: string | null
-												slug: string | '/' | null
-											} | null
-											external?: string
-											params?: string
-									  }
-									| null
-								links: Array<
-									| {
-											_key: string
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal?: PageReference
-											external?: string
-											params?: string
-									  }
-									| {
-											_key: string
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal: {
-												_type: 'page'
-												title: string | null
-												slug: string | '/' | null
-											} | null
-											external?: string
-											params?: string
-									  }
-								> | null
-						  }
-						| {
-								_key: string
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_key: string
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-					> | null
-			  }
-			| {
-					_key: string
-					_type: 'megamenu'
-					link:
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-						| null
-					items: Array<
-						| {
-								_key: string
-								_type: 'link.list'
-								link?: Link
-								links: Array<
-									| {
-											_key: string
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal?: PageReference
-											external?: string
-											params?: string
-									  }
-									| {
-											_key: string
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal: {
-												_type: 'page'
-												title: string | null
-												slug: string | '/' | null
-											} | null
-											external?: string
-											params?: string
-									  }
-								> | null
-						  }
-						| {
-								_key: string
-								_type: 'link.list'
-								link:
-									| {
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal?: PageReference
-											external?: string
-											params?: string
-									  }
-									| {
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal: {
-												_type: 'page'
-												title: string | null
-												slug: string | '/' | null
-											} | null
-											external?: string
-											params?: string
-									  }
-									| null
-								links: Array<
-									| {
-											_key: string
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal?: PageReference
-											external?: string
-											params?: string
-									  }
-									| {
-											_key: string
-											_type: 'link'
-											label?: string
-											type?: 'external' | 'internal'
-											internal: {
-												_type: 'page'
-												title: string | null
-												slug: string | '/' | null
-											} | null
-											external?: string
-											params?: string
-									  }
-								> | null
-						  }
-						| {
-								_key: string
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal?: PageReference
-								external?: string
-								params?: string
-						  }
-						| {
-								_key: string
-								_type: 'link'
-								label?: string
-								type?: 'external' | 'internal'
-								internal: {
-									_type: 'page'
-									title: string | null
-									slug: string | '/' | null
-								} | null
-								external?: string
-								params?: string
-						  }
-					> | null
-			  }
-		> | null
-	} | null
-	footerContent?: Array<{
-		children?: Array<{
-			marks?: Array<string>
-			text?: string
-			_type: 'span'
-			_key: string
-		}>
-		style?: 'normal'
-		listItem?: never
-		markDefs?: Array<{
-			href?: string
-			_type: 'link'
-			_key: string
-		}>
-		level?: number
-		_type: 'block'
-		_key: string
-	}>
-	copyright?: Array<{
-		children?: Array<{
-			marks?: Array<string>
-			text?: string
-			_type: 'span'
-			_key: string
-		}>
-		style?: 'normal'
-		listItem?: never
-		markDefs?: Array<{
-			href?: string
-			_type: 'link'
-			_key: string
-		}>
-		level?: number
-		_type: 'block'
-		_key: string
-	}>
+	logoText?: string
+	navCtaLabel?: string
+	navCtaLink?: string
+	whatsappNumber?: string
+	bookDirectLink?: string
+	instagramUrl?: string
+	facebookUrl?: string
+	linkedinUrl?: string
+	youtubeUrl?: string
+	contactFormEmail?: string
+	partnerEnquiryEmail?: string
+	colours?: {
+		primary?: string
+		primaryForeground?: string
+		accent?: string
+		accentForeground?: string
+		background?: string
+		foreground?: string
+		muted?: string
+		border?: string
+	}
+	seo?: Seo
+	announcement?: {
+		enabled?: boolean
+		message?: string
+		link?: string
+	}
 } | null
 
 // Source: src/sanity/lib/queries.ts
-// Variable: GLOBAL_MODULE_PATH_QUERY
-// Query: string::startsWith($slug, path)	&& select(		defined(excludePaths) => count(excludePaths[string::startsWith($slug, @)]) == 0,		true	)
-export type GLOBAL_MODULE_PATH_QUERY_RESULT = never
+// Variable: HOME_PAGE_QUERY
+// Query: *[_type == 'homePage'][0]{	...,	navLabels[]{		...,		target->{ _type, "slug": slug.current }	}}
+export type HOME_PAGE_QUERY_RESULT = {
+	_id: string
+	_type: 'homePage'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	heroHeadline?: string
+	navLabels: Array<{
+		_key: string
+		_type: 'navLabel'
+		label?: string
+		link?: string
+		xDesktop?: number
+		yDesktop?: number
+		xMobile?: number
+		yMobile?: number
+		target: null
+	}> | null
+	seo?: Seo
+} | null
+
+// Source: src/sanity/lib/queries.ts
+// Variable: OUR_HOMES_PAGE_QUERY
+// Query: *[_type == 'ourHomesPage'][0]
+export type OUR_HOMES_PAGE_QUERY_RESULT = {
+	_id: string
+	_type: 'ourHomesPage'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	heroHeadline?: string
+	heroImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	experiencesCtaBody?: BlockContent
+	experiencesCtaLabel?: string
+	seo?: Seo
+} | null
+
+// Source: src/sanity/lib/queries.ts
+// Variable: ALT_WAY_PAGE_QUERY
+// Query: *[_type == 'altWayPage'][0]
+export type ALT_WAY_PAGE_QUERY_RESULT = {
+	_id: string
+	_type: 'altWayPage'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	heroHeadline?: string
+	introBody?: BlockContent
+	sections?: Array<{
+		title?: string
+		body?: BlockContent
+		image?: {
+			asset?: SanityImageAssetReference
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			alt?: string
+			_type: 'image'
+		}
+		_key: string
+	}>
+	reviewsMaxShown?: number
+	seo?: Seo
+} | null
+
+// Source: src/sanity/lib/queries.ts
+// Variable: EXPERIENCES_PAGE_QUERY
+// Query: *[_type == 'experiencesPage'][0]
+export type EXPERIENCES_PAGE_QUERY_RESULT = {
+	_id: string
+	_type: 'experiencesPage'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	heroHeadline?: string
+	introBody?: BlockContent
+	discountBadgeText?: string
+	cardsMaxShown?: number
+	seo?: Seo
+} | null
+
+// Source: src/sanity/lib/queries.ts
+// Variable: JOIN_US_PAGE_QUERY
+// Query: *[_type == 'joinUsPage'][0]
+export type JOIN_US_PAGE_QUERY_RESULT = {
+	_id: string
+	_type: 'joinUsPage'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	heroHeadline?: string
+	introBody?: BlockContent
+	benefits?: Array<{
+		title?: string
+		body?: string
+		_key: string
+	}>
+	formHeadline?: string
+	seo?: Seo
+} | null
+
+// Source: src/sanity/lib/queries.ts
+// Variable: CONTACT_PAGE_QUERY
+// Query: *[_type == 'contactPage'][0]
+export type CONTACT_PAGE_QUERY_RESULT = {
+	_id: string
+	_type: 'contactPage'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	heroHeadline?: string
+	contactDetails?: Array<{
+		label?: string
+		value?: string
+		link?: string
+		_key: string
+	}>
+	officeAddress?: BlockContent
+	formHeadline?: string
+	seo?: Seo
+} | null
+
+// Source: src/sanity/lib/queries.ts
+// Variable: LEGAL_PAGE_QUERY
+// Query: *[_type == 'legalPage' && slug.current == $slug][0]
+export type LEGAL_PAGE_QUERY_RESULT = {
+	_id: string
+	_type: 'legalPage'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	displayTitle?: string
+	seoTitle?: string
+	slug?: Slug
+	body?: BlockContent
+	backgroundImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	seo?: Seo
+} | null
+
+// Source: src/sanity/lib/queries.ts
+// Variable: ALL_LEGAL_PAGES_QUERY
+// Query: *[_type == 'legalPage' && defined(slug.current)].slug.current
+export type ALL_LEGAL_PAGES_QUERY_RESULT = Array<string | null>
+
+// Source: src/sanity/lib/queries.ts
+// Variable: ALL_PROPERTIES_QUERY
+// Query: *[_type == 'property' && status != 'hidden'] | order(displayOrder asc)
+export type ALL_PROPERTIES_QUERY_RESULT = Array<{
+	_id: string
+	_type: 'property'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	title?: string
+	slug?: Slug
+	status?: 'active' | 'coming-soon' | 'hidden'
+	displayOrder?: number
+	rentalwisePropertyId?: string
+	rentalwiseIdentifier?: string
+	tagline?: string
+	shortDescription?: string
+	cardThumbnail?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	cardAmenities?: string
+	propertyType?: string
+	priceFrom?: string
+	heroImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	description?: BlockContent
+	pullQuote?: string
+	gallery?: Array<{
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+		_key: string
+	}>
+	maxGuests?: number
+	bedrooms?: number
+	bathrooms?: number
+	amenities?: Array<
+		{
+			_key: string
+		} & AmenityReference
+	>
+	houseRulesTeaser?: string
+	houseRules?: BlockContent
+	location?: Location
+	locationHeadline?: string
+	locationDescription?: string
+	highlights?: Array<{
+		title?: string
+		body?: string
+		image?: {
+			asset?: SanityImageAssetReference
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			alt?: string
+			_type: 'image'
+		}
+		_key: string
+	}>
+	experiences?: Array<
+		{
+			_key: string
+		} & ExperienceReference
+	>
+	experiencesMaxShown?: number
+	causeHeadline?: string
+	causeBody?: BlockContent
+	causeImages?: Array<{
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+		_key: string
+	}>
+	reviewsMaxShown?: number
+	ctaHeadline?: string
+	seo?: Seo
+}>
+
+// Source: src/sanity/lib/queries.ts
+// Variable: PROPERTY_QUERY
+// Query: *[_type == 'property' && slug.current == $slug][0]
+export type PROPERTY_QUERY_RESULT = {
+	_id: string
+	_type: 'property'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	title?: string
+	slug?: Slug
+	status?: 'active' | 'coming-soon' | 'hidden'
+	displayOrder?: number
+	rentalwisePropertyId?: string
+	rentalwiseIdentifier?: string
+	tagline?: string
+	shortDescription?: string
+	cardThumbnail?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	cardAmenities?: string
+	propertyType?: string
+	priceFrom?: string
+	heroImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	description?: BlockContent
+	pullQuote?: string
+	gallery?: Array<{
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+		_key: string
+	}>
+	maxGuests?: number
+	bedrooms?: number
+	bathrooms?: number
+	amenities?: Array<
+		{
+			_key: string
+		} & AmenityReference
+	>
+	houseRulesTeaser?: string
+	houseRules?: BlockContent
+	location?: Location
+	locationHeadline?: string
+	locationDescription?: string
+	highlights?: Array<{
+		title?: string
+		body?: string
+		image?: {
+			asset?: SanityImageAssetReference
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			alt?: string
+			_type: 'image'
+		}
+		_key: string
+	}>
+	experiences?: Array<
+		{
+			_key: string
+		} & ExperienceReference
+	>
+	experiencesMaxShown?: number
+	causeHeadline?: string
+	causeBody?: BlockContent
+	causeImages?: Array<{
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+		_key: string
+	}>
+	reviewsMaxShown?: number
+	ctaHeadline?: string
+	seo?: Seo
+} | null
+
+// Source: src/sanity/lib/queries.ts
+// Variable: ALL_PROPERTY_SLUGS_QUERY
+// Query: *[_type == 'property' && defined(slug.current)].slug.current
+export type ALL_PROPERTY_SLUGS_QUERY_RESULT = Array<string | null>
 
 // Source: src/ui/modules/blog/blog-index/index.tsx
 // Variable: BLOG_INDEX_QUERY
@@ -6407,46 +2121,6 @@ export type BLOG_INDEX_QUERY_RESULT = Array<{
 		  }
 	>
 	publishDate?: string
-	categories: Array<{
-		_id: string
-		_type: 'blog.category'
-		_createdAt: string
-		_updatedAt: string
-		_rev: string
-		title?: string
-		slug?: Slug
-	}> | null
-	author: {
-		name: string | null
-		image: {
-			asset: {
-				_id: string
-				_type: 'sanity.imageAsset'
-				_createdAt: string
-				_updatedAt: string
-				_rev: string
-				originalFilename?: string
-				label?: string
-				title?: string
-				description?: string
-				altText?: string
-				sha1hash?: string
-				extension?: string
-				mimeType?: string
-				size?: number
-				assetId?: string
-				uploadId?: string
-				path?: string
-				url?: string
-				metadata?: SanityImageMetadata
-				source?: SanityAssetSourceData
-			} | null
-			media?: unknown
-			hotspot?: SanityImageHotspot
-			crop?: SanityImageCrop
-			_type: 'image'
-		} | null
-	} | null
 	metadata: {
 		_type: 'metadata'
 		title?: string
@@ -6482,6 +2156,8 @@ export type BLOG_INDEX_QUERY_RESULT = Array<{
 		} | null
 		noIndex?: boolean
 	} | null
+	categories: null
+	author: null
 	slug: unknown
 }>
 
@@ -6557,41 +2233,6 @@ export type BLOG_POST_LIST_QUERY_RESULT = Array<{
 		  }
 	>
 	publishDate?: string
-	categories: Array<{
-		title: string | null
-		slug: Slug | null
-	}> | null
-	author: {
-		name: string | null
-		image: {
-			asset: {
-				_id: string
-				_type: 'sanity.imageAsset'
-				_createdAt: string
-				_updatedAt: string
-				_rev: string
-				originalFilename?: string
-				label?: string
-				title?: string
-				description?: string
-				altText?: string
-				sha1hash?: string
-				extension?: string
-				mimeType?: string
-				size?: number
-				assetId?: string
-				uploadId?: string
-				path?: string
-				url?: string
-				metadata?: SanityImageMetadata
-				source?: SanityAssetSourceData
-			} | null
-			media?: unknown
-			hotspot?: SanityImageHotspot
-			crop?: SanityImageCrop
-			_type: 'image'
-		} | null
-	} | null
 	metadata: {
 		_type: 'metadata'
 		title?: string
@@ -6627,49 +2268,43 @@ export type BLOG_POST_LIST_QUERY_RESULT = Array<{
 		} | null
 		noIndex?: boolean
 	} | null
+	categories: null
+	author: null
 	slug: unknown
 }>
 
 // Source: src/ui/modules/blog/filter-list.tsx
 // Variable: CATEGORIES_QUERY
 // Query: *[		_type == 'blog.category'		&& count(*[_type == 'blog.post' && references(^._id)]) > 0	]|order(title)
-export type CATEGORIES_QUERY_RESULT = Array<{
-	_id: string
-	_type: 'blog.category'
-	_createdAt: string
-	_updatedAt: string
-	_rev: string
-	title?: string
-	slug?: Slug
-}>
+export type CATEGORIES_QUERY_RESULT = Array<never>
 
 // Source: src/ui/modules/search/store.ts
 // Variable: SEARCH_QUERY
 // Query: *[	_type in $scope	&& defined(metadata.slug.current)	&& metadata.noIndex != true	&& !(metadata.slug.current in ['404'])	&& [		modules[].intro[].children[].text,		modules[].content[].children[].text,		content[].children[].text,		title,		metadata.title,		metadata.description	] match $queryMatch]{	_id,	_type,	title,	'slug': select(		_type == 'blog.post' => $blogDir + metadata.slug.current,		metadata.slug.current == 'index' => '/',		'/' + metadata.slug.current	)}
-export type SEARCH_QUERY_RESULT = Array<
-	| {
-			_id: string
-			_type: 'blog.post'
-			title: string | null
-			slug: '/' | unknown
-	  }
-	| {
-			_id: string
-			_type: 'page'
-			title: string | null
-			slug: string | '/' | null
-	  }
->
+export type SEARCH_QUERY_RESULT = Array<{
+	_id: string
+	_type: 'blog.post'
+	title: string | null
+	slug: '/' | unknown
+}>
 
 declare module '@sanity/client' {
 	interface SanityQueries {
-		"\n\t*[_type == 'page' && metadata.slug.current == $slug][0]{\n\t\t...,\n\t\t'modules': (\n\t\t\t// global moddules (before)\n\t\t\t*[_type == 'global-module' && path == '*'].before[]{ \n\t...,\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'form-module' => {\n\t\tform->\n\t},\n\t_type == 'breadcrumbs' => {\n\t\tcrumbs[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'card-list' => {\n\t\tcards[]{\n\t\t\t...,\n\t\t\tctas[]{\n\t\t\t\t...,\n\t\t\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t\t\t}\n\t\t}\n\t},\n\t_type == 'logo-list' => {\n\t\tlogos[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'person-list' => {\n\t\tpeople[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\tstyle,\n\t\t\t'text': pt::text(@)\n\t\t}\n\t},\n\t_type == 'quote-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t\t\t// path modules (before)\n\t\t\t+ *[_type == 'global-module' && path != '*' && \n\tstring::startsWith($slug, path)\n\t&& select(\n\t\tdefined(excludePaths) => count(excludePaths[string::startsWith($slug, @)]) == 0,\n\t\ttrue\n\t)\n].before[]{ \n\t...,\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'form-module' => {\n\t\tform->\n\t},\n\t_type == 'breadcrumbs' => {\n\t\tcrumbs[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'card-list' => {\n\t\tcards[]{\n\t\t\t...,\n\t\t\tctas[]{\n\t\t\t\t...,\n\t\t\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t\t\t}\n\t\t}\n\t},\n\t_type == 'logo-list' => {\n\t\tlogos[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'person-list' => {\n\t\tpeople[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\tstyle,\n\t\t\t'text': pt::text(@)\n\t\t}\n\t},\n\t_type == 'quote-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t\t\t// page modules\n\t\t\t+ modules[]{ \n\t...,\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'form-module' => {\n\t\tform->\n\t},\n\t_type == 'breadcrumbs' => {\n\t\tcrumbs[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'card-list' => {\n\t\tcards[]{\n\t\t\t...,\n\t\t\tctas[]{\n\t\t\t\t...,\n\t\t\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t\t\t}\n\t\t}\n\t},\n\t_type == 'logo-list' => {\n\t\tlogos[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'person-list' => {\n\t\tpeople[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\tstyle,\n\t\t\t'text': pt::text(@)\n\t\t}\n\t},\n\t_type == 'quote-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t\t\t// path modules (after)\n\t\t\t+ *[_type == 'global-module' && path != '*' && \n\tstring::startsWith($slug, path)\n\t&& select(\n\t\tdefined(excludePaths) => count(excludePaths[string::startsWith($slug, @)]) == 0,\n\t\ttrue\n\t)\n].after[]{ \n\t...,\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'form-module' => {\n\t\tform->\n\t},\n\t_type == 'breadcrumbs' => {\n\t\tcrumbs[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'card-list' => {\n\t\tcards[]{\n\t\t\t...,\n\t\t\tctas[]{\n\t\t\t\t...,\n\t\t\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t\t\t}\n\t\t}\n\t},\n\t_type == 'logo-list' => {\n\t\tlogos[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'person-list' => {\n\t\tpeople[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\tstyle,\n\t\t\t'text': pt::text(@)\n\t\t}\n\t},\n\t_type == 'quote-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t\t\t// global moddules (after)\n\t\t\t+ *[_type == 'global-module' && path == '*'].after[]{ \n\t...,\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'form-module' => {\n\t\tform->\n\t},\n\t_type == 'breadcrumbs' => {\n\t\tcrumbs[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'card-list' => {\n\t\tcards[]{\n\t\t\t...,\n\t\t\tctas[]{\n\t\t\t\t...,\n\t\t\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t\t\t}\n\t\t}\n\t},\n\t_type == 'logo-list' => {\n\t\tlogos[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'person-list' => {\n\t\tpeople[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\tstyle,\n\t\t\t'text': pt::text(@)\n\t\t}\n\t},\n\t_type == 'quote-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t\t)\n\t}\n": PAGE_QUERY_RESULT
 		"*[_type == $type && metadata.slug.current == $slug][0]{\n\t'title': coalesce(metadata.title, title),\n}": OG_QUERY_RESULT
-		"*[_type == 'blog.post' && metadata.slug.current == $slug][0]{\n\t...,\n\tcontent[]{\n\t\t...,\n\t\t_type == 'image' => {\n\t\t\t...,\n\t\t\tasset->\n\t\t}\n\t},\n\t'contentPlainText': pt::text(content),\n\t'readTime': length(string::split(pt::text(content), ' ')) / 200,\n\t'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\tstyle,\n\t\t'text': pt::text(@)\n\t},\n\tcategories[]->{\n\t\ttitle,\n\t\tslug\n\t},\n\tauthor->{\n\t\tname,\n\t\timage{\n\t\t\t...,\n\t\t\tasset->\n\t\t}\n\t},\n\t'modules': (\n\t\t// global modules (before)\n\t\t*[_type == 'global-module' && path == '*'].before[]{ \n\t...,\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'form-module' => {\n\t\tform->\n\t},\n\t_type == 'breadcrumbs' => {\n\t\tcrumbs[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'card-list' => {\n\t\tcards[]{\n\t\t\t...,\n\t\t\tctas[]{\n\t\t\t\t...,\n\t\t\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t\t\t}\n\t\t}\n\t},\n\t_type == 'logo-list' => {\n\t\tlogos[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'person-list' => {\n\t\tpeople[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\tstyle,\n\t\t\t'text': pt::text(@)\n\t\t}\n\t},\n\t_type == 'quote-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t\t// path modules (before)\n\t\t+ *[_type == 'global-module' && path == $blogDir].before[]{ \n\t...,\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'form-module' => {\n\t\tform->\n\t},\n\t_type == 'breadcrumbs' => {\n\t\tcrumbs[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'card-list' => {\n\t\tcards[]{\n\t\t\t...,\n\t\t\tctas[]{\n\t\t\t\t...,\n\t\t\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t\t\t}\n\t\t}\n\t},\n\t_type == 'logo-list' => {\n\t\tlogos[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'person-list' => {\n\t\tpeople[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\tstyle,\n\t\t\t'text': pt::text(@)\n\t\t}\n\t},\n\t_type == 'quote-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t\t// path modules (after)\n\t\t+ *[_type == 'global-module' && path == $blogDir].after[]{ \n\t...,\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'form-module' => {\n\t\tform->\n\t},\n\t_type == 'breadcrumbs' => {\n\t\tcrumbs[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'card-list' => {\n\t\tcards[]{\n\t\t\t...,\n\t\t\tctas[]{\n\t\t\t\t...,\n\t\t\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t\t\t}\n\t\t}\n\t},\n\t_type == 'logo-list' => {\n\t\tlogos[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'person-list' => {\n\t\tpeople[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\tstyle,\n\t\t\t'text': pt::text(@)\n\t\t}\n\t},\n\t_type == 'quote-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t\t// global modules (after)\n\t\t+ *[_type == 'global-module' && path == '*'].after[]{ \n\t...,\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'form-module' => {\n\t\tform->\n\t},\n\t_type == 'breadcrumbs' => {\n\t\tcrumbs[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'card-list' => {\n\t\tcards[]{\n\t\t\t...,\n\t\t\tctas[]{\n\t\t\t\t...,\n\t\t\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t\t\t}\n\t\t}\n\t},\n\t_type == 'logo-list' => {\n\t\tlogos[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'person-list' => {\n\t\tpeople[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\tstyle,\n\t\t\t'text': pt::text(@)\n\t\t}\n\t},\n\t_type == 'quote-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t)\n}": BLOG_POST_QUERY_RESULT
-		"{\n\t'blog': *[_type == 'page' && metadata.slug.current == $blogDir][0]{\n\t\tmetadata\n\t},\n\t'posts': *[_type == 'blog.post' && metadata.noIndex != true]|order(publishDate desc){\n\t\ttitle,\n\t\tcontent,\n\t\tpublishDate,\n\t\tcategories[]->{ title },\n\t\tauthor->{ name },\n\t\tmetadata\n\t}\n}": BLOG_RSS_QUERY_RESULT
-		"\n\t*[_type == 'page' && metadata.slug.current == '404'][0]{\n\t\t...,\n\t\tmodules[]{ \n\t...,\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'form-module' => {\n\t\tform->\n\t},\n\t_type == 'breadcrumbs' => {\n\t\tcrumbs[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'card-list' => {\n\t\tcards[]{\n\t\t\t...,\n\t\t\tctas[]{\n\t\t\t\t...,\n\t\t\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t\t\t}\n\t\t}\n\t},\n\t_type == 'logo-list' => {\n\t\tlogos[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'person-list' => {\n\t\tpeople[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\tstyle,\n\t\t\t'text': pt::text(@)\n\t\t}\n\t},\n\t_type == 'quote-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t}\n": NOT_FOUND_QUERY_RESULT
-		"*[_type == 'site'][0]{\n\t...,\n\theader->{ \n\titems[]{\n\t\t\n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n,\n\t\tdefined(link) => { link{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\tdefined(links[]) => { links[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\t_type == 'megamenu' => {\n\t\t\tdefined(link) => { link{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\t\titems[]{\n\t\t\t\t...,\n\t\t\t\t_type == 'link' => { \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n },\n\t\t\t\t_type == 'link.list' => {\n\t\t\t\t\tdefined(link) => { link{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\t\t\t\tlinks[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n },\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\tfooter->{ \n\titems[]{\n\t\t\n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n,\n\t\tdefined(link) => { link{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\tdefined(links[]) => { links[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\t_type == 'megamenu' => {\n\t\t\tdefined(link) => { link{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\t\titems[]{\n\t\t\t\t...,\n\t\t\t\t_type == 'link' => { \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n },\n\t\t\t\t_type == 'link.list' => {\n\t\t\t\t\tdefined(link) => { link{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\t\t\t\tlinks[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n },\n\tsocial->{ \n\titems[]{\n\t\t\n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n,\n\t\tdefined(link) => { link{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\tdefined(links[]) => { links[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\t_type == 'megamenu' => {\n\t\t\tdefined(link) => { link{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\t\titems[]{\n\t\t\t\t...,\n\t\t\t\t_type == 'link' => { \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n },\n\t\t\t\t_type == 'link.list' => {\n\t\t\t\t\tdefined(link) => { link{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\t\t\t\tlinks[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n },\n}": SITE_QUERY_RESULT
-		'\n\tstring::startsWith($slug, path)\n\t&& select(\n\t\tdefined(excludePaths) => count(excludePaths[string::startsWith($slug, @)]) == 0,\n\t\ttrue\n\t)\n': GLOBAL_MODULE_PATH_QUERY_RESULT
+		"*[_type == 'blog.post' && metadata.slug.current == $slug][0]{\n\t...,\n\tcontent[]{\n\t\t...,\n\t\t_type == 'image' => {\n\t\t\t...,\n\t\t\tasset->\n\t\t}\n\t},\n\t'contentPlainText': pt::text(content),\n\t'readTime': length(string::split(pt::text(content), ' ')) / 200,\n\t'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\tstyle,\n\t\t'text': pt::text(@)\n\t},\n\tcategories[]->{\n\t\ttitle,\n\t\tslug\n\t},\n\tauthor->{\n\t\tname,\n\t\timage{\n\t\t\t...,\n\t\t\tasset->\n\t\t}\n\t}\n}": BLOG_POST_QUERY_RESULT
+		'{\n\t\'blog\': *[_type == \'site\'][0]{\n\t\t"metadata": {\n\t\t\t"title": coalesce(seo.metaTitle, title) + " Blog",\n\t\t\t"description": seo.metaDescription\n\t\t}\n\t},\n\t\'posts\': *[_type == \'blog.post\' && metadata.noIndex != true]|order(publishDate desc){\n\t\ttitle,\n\t\tcontent,\n\t\tpublishDate,\n\t\tmetadata\n\t}\n}': BLOG_RSS_QUERY_RESULT
+		"*[_type == 'site'][0]": SITE_QUERY_RESULT
+		'*[_type == \'homePage\'][0]{\n\t...,\n\tnavLabels[]{\n\t\t...,\n\t\ttarget->{ _type, "slug": slug.current }\n\t}\n}': HOME_PAGE_QUERY_RESULT
+		"*[_type == 'ourHomesPage'][0]": OUR_HOMES_PAGE_QUERY_RESULT
+		"*[_type == 'altWayPage'][0]": ALT_WAY_PAGE_QUERY_RESULT
+		"*[_type == 'experiencesPage'][0]": EXPERIENCES_PAGE_QUERY_RESULT
+		"*[_type == 'joinUsPage'][0]": JOIN_US_PAGE_QUERY_RESULT
+		"*[_type == 'contactPage'][0]": CONTACT_PAGE_QUERY_RESULT
+		"*[_type == 'legalPage' && slug.current == $slug][0]": LEGAL_PAGE_QUERY_RESULT
+		"*[_type == 'legalPage' && defined(slug.current)].slug.current": ALL_LEGAL_PAGES_QUERY_RESULT
+		"*[_type == 'property' && status != 'hidden'] | order(displayOrder asc)": ALL_PROPERTIES_QUERY_RESULT
+		"*[_type == 'property' && slug.current == $slug][0]": PROPERTY_QUERY_RESULT
+		"*[_type == 'property' && defined(slug.current)].slug.current": ALL_PROPERTY_SLUGS_QUERY_RESULT
 		"\n\t*[_type == 'blog.post']|order(publishDate desc){\n\t\t...,\n\t\tcategories[]->,\n\t\tauthor->{\n\t\t\tname,\n\t\t\timage{\n\t\t\t\t...,\n\t\t\t\tasset->\n\t\t\t}\n\t\t},\n\t\tmetadata{\n\t\t\t...,\n\t\t\timage{\n\t\t\t\t...,\n\t\t\t\tasset->\n\t\t\t}\n\t\t},\n\t\t'slug': $blogDir + metadata.slug.current,\n\t}\n": BLOG_INDEX_QUERY_RESULT
 		"\n\t*[_type == 'blog.post']|order(publishDate desc)[0...$limit]{\n\t\t...,\n\t\tcategories[]->{\n\t\t\ttitle,\n\t\t\tslug\n\t\t},\n\t\tauthor->{\n\t\t\tname,\n\t\t\timage{\n\t\t\t\t...,\n\t\t\t\tasset->\n\t\t\t}\n\t\t},\n\t\tmetadata{\n\t\t\t...,\n\t\t\timage{\n\t\t\t\t...,\n\t\t\t\tasset->\n\t\t\t}\n\t\t},\n\t\t'slug': $blogDir + metadata.slug.current,\n\t}\n": BLOG_POST_LIST_QUERY_RESULT
 		"\n\t*[\n\t\t_type == 'blog.category'\n\t\t&& count(*[_type == 'blog.post' && references(^._id)]) > 0\n\t]|order(title)\n": CATEGORIES_QUERY_RESULT

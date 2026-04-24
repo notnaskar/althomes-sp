@@ -22,7 +22,7 @@ export default async function () {
 								</a>
 							</li>
 							<li>
-								<a href="/admin" className="link">
+								<a href="/studio" className="link">
 									Open the Studio
 								</a>
 							</li>

@@ -10,23 +10,26 @@ export default structureTool({
 			.items([
 				S.divider().title('Global'),
 				singleton(S, 'site').title('Site').icon(VscServerProcess),
-				S.documentTypeListItem('global-module').title('Global modules'),
 
-				S.divider().title('Pages'),
-				S.documentTypeListItem('page').title('Pages'),
+				S.divider().title('Core Pages'),
+				singleton(S, 'homePage').title('Home Page'),
+				singleton(S, 'ourHomesPage').title('Our Homes Page'),
+				singleton(S, 'altWayPage').title('The Alt Way Page'),
+				singleton(S, 'experiencesPage').title('Experiences Page'),
+				singleton(S, 'joinUsPage').title('Join Us Page'),
+				singleton(S, 'contactPage').title('Contact Page'),
+				S.documentTypeListItem('legalPage').title('Legal Pages'),
+
+				S.divider().title('Properties & Experiences'),
+				S.documentTypeListItem('property').title('Properties'),
+				S.documentTypeListItem('amenity').title('Amenities'),
+				S.documentTypeListItem('experience').title('Experiences'),
+				S.documentTypeListItem('review').title('Reviews'),
 
 				S.divider().title('Blog'),
 				S.documentTypeListItem('blog.post').title('Posts'),
-				S.documentTypeListItem('blog.category').title('Categories'),
 
-				S.divider().title('Navigation'),
-				S.documentTypeListItem('navigation'),
+				S.divider().title('Settings'),
 				S.documentTypeListItem('redirect').title('Redirects'),
-
-				S.divider().title('References'),
-				S.documentTypeListItem('form').title('Forms'),
-				S.documentTypeListItem('logo').title('Logos'),
-				S.documentTypeListItem('person').title('People'),
-				S.documentTypeListItem('quote').title('Quotes'),
 			]),
 })

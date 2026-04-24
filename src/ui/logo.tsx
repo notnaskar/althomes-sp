@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
-import { getSite } from '@/sanity/lib/queries'
+import { getSite } from '@/sanity/lib/data'
 import Img from './img'
 
 export default async function ({

@@ -26,7 +26,16 @@ export default defineType({
 		defineField({
 			name: 'internal',
 			type: 'reference',
-			to: [{ type: 'page' } /* { type: 'blog.post' } */],
+			to: [
+				{ type: 'homePage' },
+				{ type: 'ourHomesPage' },
+				{ type: 'altWayPage' },
+				{ type: 'experiencesPage' },
+				{ type: 'joinUsPage' },
+				{ type: 'contactPage' },
+				{ type: 'legalPage' },
+				{ type: 'blog.post' },
+			],
 			hidden: ({ parent }) => parent?.type !== 'internal',
 		}),
 		defineField({

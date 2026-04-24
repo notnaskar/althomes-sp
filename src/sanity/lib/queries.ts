@@ -1,125 +1,27 @@
 import { groq } from 'next-sanity'
-import type { SITE_QUERY_RESULT } from '@/sanity/types'
-import { sanityFetchLive } from './live'
 
-/* fragments */
+export const SITE_QUERY = groq`*[_type == 'site'][0]`
 
-// @sanity-typegen-ignore
-const LINK_QUERY = groq`
+export const HOME_PAGE_QUERY = groq`*[_type == 'homePage'][0]{
 	...,
-	type == 'internal' => {
-		internal->{
-			_type,
-			title,
-			'slug': select(
-				metadata.slug.current == 'index' => '/',
-				'/' + metadata.slug.current
-			)
-		}
-	}
-`
-
-// @sanity-typegen-ignore
-const NAVIGATION_QUERY = groq`
-	items[]{
-		${LINK_QUERY},
-		defined(link) => { link{ ${LINK_QUERY} } },
-		defined(links[]) => { links[]{ ${LINK_QUERY} } },
-		_type == 'megamenu' => {
-			defined(link) => { link{ ${LINK_QUERY} } },
-			items[]{
-				...,
-				_type == 'link' => { ${LINK_QUERY} },
-				_type == 'link.list' => {
-					defined(link) => { link{ ${LINK_QUERY} } },
-					links[]{ ${LINK_QUERY} }
-				}
-			}
-		}
-	}
-`
-
-const SITE_QUERY = groq`*[_type == 'site'][0]{
-	...,
-	header->{ ${NAVIGATION_QUERY} },
-	ctas[]{
+	navLabels[]{
 		...,
-		link{ ${LINK_QUERY} }
-	},
-	footer->{ ${NAVIGATION_QUERY} },
-	social->{ ${NAVIGATION_QUERY} },
+		target->{ _type, "slug": slug.current }
+	}
 }`
 
-export const GLOBAL_MODULE_PATH_QUERY = groq`
-	string::startsWith($slug, path)
-	&& select(
-		defined(excludePaths) => count(excludePaths[string::startsWith($slug, @)]) == 0,
-		true
-	)
-`
+export const OUR_HOMES_PAGE_QUERY = groq`*[_type == 'ourHomesPage'][0]`
+export const ALT_WAY_PAGE_QUERY = groq`*[_type == 'altWayPage'][0]`
+export const EXPERIENCES_PAGE_QUERY = groq`*[_type == 'experiencesPage'][0]`
+export const JOIN_US_PAGE_QUERY = groq`*[_type == 'joinUsPage'][0]`
+export const CONTACT_PAGE_QUERY = groq`*[_type == 'contactPage'][0]`
 
-// @sanity-typegen-ignore
-export const MODULES_QUERY = groq`
-	...,
-	ctas[]{
-		...,
-		link{ ${LINK_QUERY} }
-	},
-	_type == 'form-module' => {
-		form->
-	},
-	_type == 'breadcrumbs' => {
-		crumbs[]{ ${LINK_QUERY} }
-	},
-	_type == 'card-list' => {
-		cards[]{
-			...,
-			ctas[]{
-				...,
-				link{ ${LINK_QUERY} }
-			}
-		}
-	},
-	_type == 'logo-list' => {
-		logos[]{
-			...,
-			_type == 'reference' => @->
-		}
-	},
-	_type == 'person-list' => {
-		people[]{
-			...,
-			_type == 'reference' => @->
-		}
-	},
-	_type == 'prose' => {
-		content[]{
-			...,
-			_type == 'image' => {
-				...,
-				asset->{
-					...,
-					metadata
-				}
-			}
-		},
-		'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{
-			style,
-			'text': pt::text(@)
-		}
-	},
-	_type == 'quote-list' => {
-		testimonials[]{
-			...,
-			_type == 'reference' => @->
-		}
-	},
-`
+export const LEGAL_PAGE_QUERY = groq`*[_type == 'legalPage' && slug.current == $slug][0]`
+export const ALL_LEGAL_PAGES_QUERY = groq`*[_type == 'legalPage' && defined(slug.current)].slug.current`
 
-/* queries */
+export const ALL_PROPERTIES_QUERY = groq`*[_type == 'property' && status != 'hidden'] | order(displayOrder asc)`
+export const PROPERTY_QUERY = groq`*[_type == 'property' && slug.current == $slug][0]`
+export const ALL_PROPERTY_SLUGS_QUERY = groq`*[_type == 'property' && defined(slug.current)].slug.current`
 
-export async function getSite() {
-	return await sanityFetchLive<SITE_QUERY_RESULT>({
-		query: SITE_QUERY,
-	})
-}
+export const ALL_POSTS_QUERY = groq`*[_type == 'blog.post'] | order(publishDate desc)`
+export const POST_BY_SLUG_QUERY = groq`*[_type == 'blog.post' && metadata.slug.current == $slug][0]`

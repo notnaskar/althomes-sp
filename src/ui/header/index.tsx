@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import { getSite } from '@/sanity/lib/queries'
+import { getSite } from '@/sanity/lib/data'
 import type { Cta } from '@/sanity/types'
 import CTAList from '@/ui/cta-list'
 import Logo from '@/ui/logo'

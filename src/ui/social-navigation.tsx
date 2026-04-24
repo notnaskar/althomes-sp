@@ -9,7 +9,7 @@ import {
 	FaYelp,
 	FaYoutube,
 } from 'react-icons/fa6'
-import { getSite } from '@/sanity/lib/queries'
+import { getSite } from '@/sanity/lib/data'
 import SanityLink, { type SanityLinkType } from './sanity-link'
 
 export default async function (props: React.ComponentProps<'nav'>) {
