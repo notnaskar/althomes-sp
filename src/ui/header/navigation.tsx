@@ -1,55 +1,29 @@
+import Link from 'next/link'
 import { cn } from '@/lib/utils'
-import { getSite } from '@/sanity/lib/data'
-import type { LinkList, Megamenu as MegamenuType } from '@/sanity/types'
-import SanityLink, { type SanityLinkType } from '@/ui/sanity-link'
-import Dropdown from './dropdown'
-import Megamenu from './megamenu'
+
+const NAV_ITEMS = [
+	{ href: '/our-homes', label: 'Our Homes' },
+	{ href: '/experiences', label: 'Experiences' },
+	{ href: '/the-alt-way', label: 'The Alt Way' },
+	{ href: '/blog', label: 'Blog' },
+]
 
 const topLevelClassName = cn(
 	'grid md:place-content-center md:text-center md:text-balance leading-tight py-[.5ch] md:py-ch',
 )
 
-export default async function () {
-	const site = await getSite()
-
+export default function () {
 	return (
 		<nav className="max-md:header-not-open:hidden max-md:anim-fade-to-b gap-x-lh flex items-stretch [grid-area:navigation] max-md:my-4 max-md:flex-col">
-			{site?.header?.items?.map((item) => {
-				switch (item._type) {
-					case 'link':
-						return (
-							<SanityLink
-								link={item as SanityLinkType}
-								className={cn(
-									topLevelClassName,
-									'text-current hover:underline',
-								)}
-								key={item._key}
-							/>
-						)
-
-					case 'link.list':
-						return (
-							<Dropdown
-								{...(item as LinkList & { _key: string })}
-								summaryClassName={topLevelClassName}
-								key={item._key}
-							/>
-						)
-
-					case 'megamenu':
-						return (
-							<Megamenu
-								{...(item as MegamenuType)}
-								summaryClassName={topLevelClassName}
-								key={item._key}
-							/>
-						)
-
-					default:
-						return null
-				}
-			})}
+			{NAV_ITEMS.map(({ href, label }) => (
+				<Link
+					key={href}
+					href={href}
+					className={cn(topLevelClassName, 'text-current hover:underline')}
+				>
+					{label}
+				</Link>
+			))}
 		</nav>
 	)
 }

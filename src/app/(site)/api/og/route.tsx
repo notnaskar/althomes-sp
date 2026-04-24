@@ -6,7 +6,9 @@ import { sanityFetchLive } from '@/sanity/lib/live'
 import { getSite } from '@/sanity/lib/data'
 import type { OG_QUERY_RESULT } from '@/sanity/types'
 
-const { hostname } = new URL(process.env.NEXT_PUBLIC_BASE_URL!)
+const hostname = process.env.NEXT_PUBLIC_BASE_URL
+	? new URL(process.env.NEXT_PUBLIC_BASE_URL).hostname
+	: ''
 const blogDir = `${ROUTES.blog}/`
 
 const OG_QUERY = groq`*[_type == $type && metadata.slug.current == $slug][0]{

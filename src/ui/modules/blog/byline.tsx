@@ -1,11 +1,12 @@
 import { cn } from '@/lib/utils'
-import type { Person } from '@/sanity/types'
 import Img from '@/ui/img'
+
+type Person = { name?: string; image?: unknown }
 
 export default function ({
 	author,
 	className,
-}: { author: Person } & React.ComponentProps<'div'>) {
+}: { author?: Person } & React.ComponentProps<'div'>) {
 	if (!author?.name) return null
 
 	return (

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { ROUTES } from '@/lib/env'
 import { cn } from '@/lib/utils'
-import type { BlogCategory } from '@/sanity/types'
+type BlogCategory = { _id?: string; title?: string; slug?: { current?: string } }
 
 export default function ({
 	categories,

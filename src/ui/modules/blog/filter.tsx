@@ -1,7 +1,7 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import type { BlogCategory } from '@/sanity/types'
+type BlogCategory = { _id?: string; title?: string; slug?: { current?: string } }
 import { useBlogIndexStore } from './blog-index/store'
 
 export default function ({

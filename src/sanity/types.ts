@@ -2049,6 +2049,156 @@ export type PROPERTY_QUERY_RESULT = {
 // Query: *[_type == 'property' && defined(slug.current)].slug.current
 export type ALL_PROPERTY_SLUGS_QUERY_RESULT = Array<string | null>
 
+// Source: src/sanity/lib/queries.ts
+// Variable: ALL_POSTS_QUERY
+// Query: *[_type == 'blog.post'] | order(publishDate desc)
+export type ALL_POSTS_QUERY_RESULT = Array<{
+	_id: string
+	_type: 'blog.post'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	title?: string
+	content?: Array<
+		| ({
+				_key: string
+		  } & Code)
+		| ({
+				_key: string
+		  } & CustomHtml)
+		| {
+				children?: Array<{
+					marks?: Array<string>
+					text?: string
+					_type: 'span'
+					_key: string
+				}>
+				style?:
+					| 'blockquote'
+					| 'h1'
+					| 'h2'
+					| 'h3'
+					| 'h4'
+					| 'h5'
+					| 'h6'
+					| 'normal'
+				listItem?: 'bullet' | 'number'
+				markDefs?: Array<{
+					href?: string
+					_type: 'link'
+					_key: string
+				}>
+				level?: number
+				_type: 'block'
+				_key: string
+		  }
+		| {
+				asset?: SanityImageAssetReference
+				media?: unknown
+				hotspot?: SanityImageHotspot
+				crop?: SanityImageCrop
+				alt?: string
+				figcaption?: Array<{
+					children?: Array<{
+						marks?: Array<string>
+						text?: string
+						_type: 'span'
+						_key: string
+					}>
+					style?: 'normal'
+					listItem?: 'bullet' | 'number'
+					markDefs?: Array<{
+						href?: string
+						_type: 'link'
+						_key: string
+					}>
+					level?: number
+					_type: 'block'
+					_key: string
+				}>
+				_type: 'image'
+				_key: string
+		  }
+	>
+	publishDate?: string
+	metadata?: Metadata
+}>
+
+// Source: src/sanity/lib/queries.ts
+// Variable: POST_BY_SLUG_QUERY
+// Query: *[_type == 'blog.post' && metadata.slug.current == $slug][0]
+export type POST_BY_SLUG_QUERY_RESULT = {
+	_id: string
+	_type: 'blog.post'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	title?: string
+	content?: Array<
+		| ({
+				_key: string
+		  } & Code)
+		| ({
+				_key: string
+		  } & CustomHtml)
+		| {
+				children?: Array<{
+					marks?: Array<string>
+					text?: string
+					_type: 'span'
+					_key: string
+				}>
+				style?:
+					| 'blockquote'
+					| 'h1'
+					| 'h2'
+					| 'h3'
+					| 'h4'
+					| 'h5'
+					| 'h6'
+					| 'normal'
+				listItem?: 'bullet' | 'number'
+				markDefs?: Array<{
+					href?: string
+					_type: 'link'
+					_key: string
+				}>
+				level?: number
+				_type: 'block'
+				_key: string
+		  }
+		| {
+				asset?: SanityImageAssetReference
+				media?: unknown
+				hotspot?: SanityImageHotspot
+				crop?: SanityImageCrop
+				alt?: string
+				figcaption?: Array<{
+					children?: Array<{
+						marks?: Array<string>
+						text?: string
+						_type: 'span'
+						_key: string
+					}>
+					style?: 'normal'
+					listItem?: 'bullet' | 'number'
+					markDefs?: Array<{
+						href?: string
+						_type: 'link'
+						_key: string
+					}>
+					level?: number
+					_type: 'block'
+					_key: string
+				}>
+				_type: 'image'
+				_key: string
+		  }
+	>
+	publishDate?: string
+	metadata?: Metadata
+} | null
+
 // Source: src/ui/modules/blog/blog-index/index.tsx
 // Variable: BLOG_INDEX_QUERY
 // Query: *[_type == 'blog.post']|order(publishDate desc){		...,		categories[]->,		author->{			name,			image{				...,				asset->			}		},		metadata{			...,			image{				...,				asset->			}		},		'slug': $blogDir + metadata.slug.current,	}
@@ -2305,6 +2455,8 @@ declare module '@sanity/client' {
 		"*[_type == 'property' && status != 'hidden'] | order(displayOrder asc)": ALL_PROPERTIES_QUERY_RESULT
 		"*[_type == 'property' && slug.current == $slug][0]": PROPERTY_QUERY_RESULT
 		"*[_type == 'property' && defined(slug.current)].slug.current": ALL_PROPERTY_SLUGS_QUERY_RESULT
+		"*[_type == 'blog.post'] | order(publishDate desc)": ALL_POSTS_QUERY_RESULT
+		"*[_type == 'blog.post' && metadata.slug.current == $slug][0]": POST_BY_SLUG_QUERY_RESULT
 		"\n\t*[_type == 'blog.post']|order(publishDate desc){\n\t\t...,\n\t\tcategories[]->,\n\t\tauthor->{\n\t\t\tname,\n\t\t\timage{\n\t\t\t\t...,\n\t\t\t\tasset->\n\t\t\t}\n\t\t},\n\t\tmetadata{\n\t\t\t...,\n\t\t\timage{\n\t\t\t\t...,\n\t\t\t\tasset->\n\t\t\t}\n\t\t},\n\t\t'slug': $blogDir + metadata.slug.current,\n\t}\n": BLOG_INDEX_QUERY_RESULT
 		"\n\t*[_type == 'blog.post']|order(publishDate desc)[0...$limit]{\n\t\t...,\n\t\tcategories[]->{\n\t\t\ttitle,\n\t\t\tslug\n\t\t},\n\t\tauthor->{\n\t\t\tname,\n\t\t\timage{\n\t\t\t\t...,\n\t\t\t\tasset->\n\t\t\t}\n\t\t},\n\t\tmetadata{\n\t\t\t...,\n\t\t\timage{\n\t\t\t\t...,\n\t\t\t\tasset->\n\t\t\t}\n\t\t},\n\t\t'slug': $blogDir + metadata.slug.current,\n\t}\n": BLOG_POST_LIST_QUERY_RESULT
 		"\n\t*[\n\t\t_type == 'blog.category'\n\t\t&& count(*[_type == 'blog.post' && references(^._id)]) > 0\n\t]|order(title)\n": CATEGORIES_QUERY_RESULT

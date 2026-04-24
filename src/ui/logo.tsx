@@ -4,23 +4,20 @@ import { getSite } from '@/sanity/lib/data'
 import Img from './img'
 
 export default async function ({
-	variant: style = 'default',
 	className,
 }: {
-	variant?: 'default' | 'light' | 'dark'
 	className?: string
 }) {
 	const site = await getSite()
-	const logo = site?.logo?.image?.[style]
 
 	return (
 		<Link
 			href="/"
 			className={cn('text-foreground inline-block font-bold', className)}
 		>
-			{logo ? (
+			{site?.logoImage ? (
 				<Img
-					image={logo}
+					image={site.logoImage}
 					width={100}
 					className="inline-block h-full w-auto object-contain"
 					alt={site?.title ?? ''}

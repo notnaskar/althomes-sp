@@ -1,7 +1,10 @@
 import Image from 'next/image'
 import { ROUTES } from '@/lib/env'
 import { cn } from '@/lib/utils'
-import type { BlogCategory, BlogPost, Person } from '@/sanity/types'
+import type { BlogPost } from '@/sanity/types'
+
+type BlogCategory = { _id?: string; title?: string; slug?: { current?: string } }
+type Person = { name?: string; image?: unknown }
 import Img from '@/ui/img'
 import SanityLink, { type SanityLinkType } from '@/ui/sanity-link'
 import Byline from './byline'
@@ -45,11 +48,11 @@ export default function ({
 			)} */}
 
 			<div className="flex flex-wrap items-center justify-between gap-x-4">
-				<Categories categories={post.categories as unknown as BlogCategory[]} />
+				<Categories categories={(post as any).categories as BlogCategory[]} />
 				<Date date={post.publishDate} className="text-foreground/50" />
 			</div>
 
-			<Byline author={post.author as unknown as Person} />
+			<Byline author={(post as any).author as Person} />
 		</li>
 	)
 }

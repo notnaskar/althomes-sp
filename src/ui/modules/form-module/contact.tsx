@@ -1,4 +1,4 @@
-import type { Form } from '@/sanity/types'
+type Form = { endpoint?: string; identifier?: string }
 
 export default function ({ form }: { form: Form }) {
 	return (

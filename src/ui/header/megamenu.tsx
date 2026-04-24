@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import type { Megamenu, Page } from '@/sanity/types'
+import type { Megamenu } from '@/sanity/types'
 import HoverDetails from '@/ui/hover-details'
 import SanityLink, { type SanityLinkType } from '@/ui/sanity-link'
 import MobileOnlyDetails from './mobile-only-details'
@@ -23,7 +23,7 @@ export default function ({
 					summaryClassName,
 				)}
 			>
-				{link?.label || (link?.internal as unknown as Page)?.title}
+				{link?.label || (link?.internal as { title?: string })?.title}
 			</summary>
 
 			<div className="anim-fade-to-b md:bg-background border-stroke inset-x-0 top-full md:absolute md:max-h-[calc(100vh-var(--header-height))] md:overflow-y-auto md:border-b md:shadow-lg">

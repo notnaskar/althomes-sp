@@ -20,7 +20,7 @@ export default function ({
 		?.filter((post, i) =>
 			!category
 				? i !== 0
-				: post.categories?.some((c) => c.slug?.current === category),
+				: (post as any).categories?.some((c: any) => c?.slug?.current === category),
 		)
 		?.sort((a, b) => {
 			if (sortBy === 'publishDate_desc')

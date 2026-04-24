@@ -1,17 +1,11 @@
-import { PortableText, stegaClean } from 'next-sanity'
+import { PortableText } from 'next-sanity'
 import { cn } from '@/lib/utils'
-import type {
-	BLOG_POST_QUERY_RESULT,
-	BlogCategory,
-	BlogPostContent,
-	Person,
-} from '@/sanity/types'
+import type { BLOG_POST_QUERY_RESULT, BlogPostContent } from '@/sanity/types'
 import Img from '@/ui/img'
 import CustomHTML from '@/ui/modules/custom-html'
 import AnchoredHeading from '@/ui/modules/prose/anchored-heading'
 import Code from '@/ui/modules/prose/code'
 import Image from '@/ui/modules/prose/image'
-import TableOfContents from '@/ui/table-of-contents'
 import { moduleAttributes } from '..'
 import css from './blog-post-content.module.css'
 import Byline from './byline'
@@ -19,14 +13,14 @@ import Categories from './categories'
 import Date from './date'
 import Schema from './schema'
 
+type BlogCategory = { _id?: string; title?: string; slug?: { current?: string } }
+type Person = { name?: string; image?: unknown }
+
 export default function ({
 	post,
-	tableOfContents,
 	...props
 }: { post: BLOG_POST_QUERY_RESULT } & BlogPostContent) {
 	if (!post) return null
-
-	const toc = stegaClean(tableOfContents)
 
 	return (
 		<>
@@ -48,29 +42,17 @@ export default function ({
 						</h1>
 
 						<div className="gap-x-lh gap-y-ch flex flex-wrap items-center justify-center">
-							<Byline author={post.author as unknown as Person} />
+							<Byline author={(post as any).author as Person} />
 							<Categories
-								categories={post.categories as BlogCategory[]}
+								categories={(post as any).categories as BlogCategory[]}
 								linked
 							/>
 							<Date date={post.publishDate} />
-							<span>{Math.ceil(post.readTime)} min read</span>
 						</div>
 					</div>
 				</header>
 
 				<section className="section gap-lh flex max-md:flex-col md:items-start">
-					{(toc === 'left' || toc === 'right') && (
-						<TableOfContents
-							summary="On this page"
-							headings={post.headings}
-							className={cn(
-								'md:sticky-below-header max-md:p-ch max-md:bg-stroke/50 shrink-0 [--offset:1rem] md:w-[20ch]',
-								toc === 'right' && 'md:order-last',
-							)}
-							open
-						/>
-					)}
 
 					<div className={cn(css.body, 'prose mx-auto grid w-full max-w-4xl')}>
 						<PortableText

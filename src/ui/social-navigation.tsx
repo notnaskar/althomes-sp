@@ -1,60 +1,39 @@
 import {
 	FaFacebook,
-	FaGithub,
 	FaInstagram,
-	FaLink,
 	FaLinkedinIn,
-	FaTiktok,
-	FaXTwitter,
-	FaYelp,
 	FaYoutube,
 } from 'react-icons/fa6'
 import { getSite } from '@/sanity/lib/data'
-import SanityLink, { type SanityLinkType } from './sanity-link'
 
 export default async function (props: React.ComponentProps<'nav'>) {
 	const site = await getSite()
 
+	const socials = [
+		{ url: site?.instagramUrl, icon: FaInstagram, label: 'Instagram' },
+		{ url: site?.facebookUrl, icon: FaFacebook, label: 'Facebook' },
+		{ url: site?.linkedinUrl, icon: FaLinkedinIn, label: 'LinkedIn' },
+		{ url: site?.youtubeUrl, icon: FaYoutube, label: 'YouTube' },
+	].filter((s): s is { url: string; icon: typeof FaInstagram; label: string } =>
+		Boolean(s.url),
+	)
+
+	if (!socials.length) return null
+
 	return (
 		<nav {...props}>
-			{site?.social?.items?.map((link) => {
-				switch (link._type) {
-					case 'link':
-						const url = link.external
-
-						return (
-							<SanityLink
-								link={link as SanityLinkType}
-								className="text-current"
-								aria-label={link.label || url}
-								key={link._key}
-							>
-								{url?.includes('facebook.com') ? (
-									<FaFacebook />
-								) : url?.includes('github.com') ? (
-									<FaGithub />
-								) : url?.includes('instagram.com') ? (
-									<FaInstagram />
-								) : url?.includes('linkedin.com') ? (
-									<FaLinkedinIn />
-								) : url?.includes('tiktok.com') ? (
-									<FaTiktok />
-								) : url?.includes('twitter.com') || url?.includes('x.com') ? (
-									<FaXTwitter />
-								) : url?.includes('yelp.com') ? (
-									<FaYelp />
-								) : url?.includes('youtube.com') ? (
-									<FaYoutube />
-								) : (
-									<FaLink />
-								)}
-							</SanityLink>
-						)
-
-					default:
-						return null
-				}
-			})}
+			{socials.map(({ url, icon: Icon, label }) => (
+				<a
+					key={label}
+					href={url}
+					target="_blank"
+					rel="noopener noreferrer"
+					aria-label={label}
+					className="text-current"
+				>
+					<Icon />
+				</a>
+			))}
 		</nav>
 	)
 }

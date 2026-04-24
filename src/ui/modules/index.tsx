@@ -1,10 +1,5 @@
-import type { Get } from '@sanity/codegen'
 import { createDataAttribute, stegaClean } from 'next-sanity'
-import type {
-	BLOG_POST_QUERY_RESULT,
-	ModuleAttributes,
-	PAGE_QUERY_RESULT,
-} from '@/sanity/types'
+import type { BLOG_POST_QUERY_RESULT, ModuleAttributes } from '@/sanity/types'
 import AccordionList from './accordion-list'
 import BlogIndex from './blog/blog-index'
 import BlogPostContent from './blog/blog-post-content'
@@ -13,15 +8,24 @@ import Breadcrumbs from './breadcrumbs'
 import Callout from './callout'
 import CardList from './card-list'
 import CustomHTML from './custom-html'
-import FormModule from './form-module'
 import HeroSplit from './hero.split'
-import LogoList from './logo-list'
-import PersonList from './person-list'
 import Prose from './prose'
-import QuoteList from './quote-list'
 import SearchModule from './search'
 import StatList from './stat-list'
 import StepList from './step-list'
+
+export type ModuleProps = {
+	_type?: string
+	_key?: string
+	attributes?: ModuleAttributes
+} & Record<string, unknown>
+
+type AnyPage = {
+	_id: string
+	_type: string
+	title?: string
+	modules?: Array<ModuleProps> | null
+}
 
 const MODULES_MAP = {
 	'accordion-list': AccordionList,
@@ -32,12 +36,8 @@ const MODULES_MAP = {
 	callout: Callout,
 	'card-list': CardList,
 	'custom-html': CustomHTML,
-	'form-module': FormModule,
 	'hero.split': HeroSplit,
-	'logo-list': LogoList,
-	'person-list': PersonList,
 	prose: Prose,
-	'quote-list': QuoteList,
 	'search-module': SearchModule,
 	'stat-list': StatList,
 	'step-list': StepList,
@@ -47,17 +47,17 @@ export default function ({
 	page,
 	post,
 }: {
-	page?: PAGE_QUERY_RESULT
+	page?: AnyPage
 	post?: BLOG_POST_QUERY_RESULT
 }) {
-	const modules = [page, post].flatMap((item) => item?.modules ?? [])
+	const modules = page?.modules ?? []
 
 	const moduleSpecificProps = (module: ModuleProps) => {
 		switch (module._type) {
 			case 'blog-post-content':
 				return { post }
 			case 'breadcrumbs':
-				return { currentPage: page || post }
+				return { currentPage: page ?? (post as { title?: string } | undefined) }
 			default:
 				return {}
 		}
@@ -100,10 +100,6 @@ export default function ({
 		</>
 	)
 }
-
-export type ModuleProps = Partial<
-	Get<PAGE_QUERY_RESULT | BLOG_POST_QUERY_RESULT, 'modules', 0>
-> & { attributes?: ModuleAttributes }
 
 export function moduleAttributes({ _key, _type, attributes }: ModuleProps) {
 	return {

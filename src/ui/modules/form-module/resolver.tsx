@@ -1,5 +1,5 @@
 import { stegaClean } from 'next-sanity'
-import type { Form } from '@/sanity/types'
+type Form = { endpoint?: string; identifier?: string }
 import Contact from './contact'
 
 export default function ({ form }: { form?: Form }) {

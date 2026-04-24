@@ -1,10 +1,12 @@
 import NextLink, { type LinkProps } from 'next/link'
-import type { Link, Page } from '@/sanity/types'
+import type { Link } from '@/sanity/types'
+
+type InternalPage = { _type?: string; title?: string; slug: string }
 
 export type SanityLinkType = Omit<Link, 'internal'> & {
 	_type?: 'link'
 	_key?: string
-	internal?: Omit<Page, 'metadata'> & { slug: string }
+	internal?: InternalPage
 }
 
 export default function ({

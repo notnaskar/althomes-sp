@@ -1,6 +1,7 @@
 import { PortableText } from 'next-sanity'
 import { cn } from '@/lib/utils'
-import type { Logo, LogoList } from '@/sanity/types'
+type Logo = { title?: string; image?: Record<string, any> }
+type LogoList = { overline?: any; intro?: any[]; logos?: Logo[]; logoType?: string; autoScroll?: boolean; duration?: number } & Record<string, unknown>
 import Img from '@/ui/img'
 import Overline from '@/ui/overline'
 import css from './logo-list.module.css'

@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import type { LinkList, Page } from '@/sanity/types'
+import type { LinkList } from '@/sanity/types'
 import HoverDetails from '@/ui/hover-details'
 import SanityLink, { type SanityLinkType } from '@/ui/sanity-link'
 
@@ -27,7 +27,7 @@ export default function ({
 				)}
 				style={{ anchorName }}
 			>
-				{summary?.label || (summary?.internal as unknown as Page)?.title}
+				{summary?.label || (summary?.internal as { title?: string })?.title}
 			</summary>
 
 			<ul

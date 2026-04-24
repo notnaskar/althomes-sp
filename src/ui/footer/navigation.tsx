@@ -1,38 +1,25 @@
-import { getSite } from '@/sanity/lib/data'
-import type { LinkList as LinkListType } from '@/sanity/types'
-import SanityLink, { type SanityLinkType } from '@/ui/sanity-link'
-import LinkList from './link.list'
+import Link from 'next/link'
 
-export default async function () {
-	const site = await getSite()
+const FOOTER_NAV = [
+	{ href: '/our-homes', label: 'Our Homes' },
+	{ href: '/experiences', label: 'Experiences' },
+	{ href: '/the-alt-way', label: 'The Alt Way' },
+	{ href: '/join-us', label: 'Join Us' },
+	{ href: '/contact', label: 'Contact' },
+	{ href: '/blog', label: 'Blog' },
+]
 
+export default function () {
 	return (
 		<nav>
 			<ul className="gap-y-lh flex items-start justify-center gap-x-[2lh] max-md:flex-col">
-				{site?.footer?.items?.map((item) => {
-					switch (item._type) {
-						case 'link':
-							return (
-								<li key={item._key}>
-									<SanityLink
-										link={item as SanityLinkType}
-										className="text-current hover:underline"
-									/>
-								</li>
-							)
-
-						case 'link.list':
-							return (
-								<LinkList
-									{...(item as unknown as LinkListType)}
-									key={item._key}
-								/>
-							)
-
-						default:
-							return null
-					}
-				})}
+				{FOOTER_NAV.map(({ href, label }) => (
+					<li key={href}>
+						<Link href={href} className="text-current hover:underline">
+							{label}
+						</Link>
+					</li>
+				))}
 			</ul>
 		</nav>
 	)

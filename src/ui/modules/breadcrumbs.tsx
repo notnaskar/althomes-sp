@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react'
 import { cn } from '@/lib/utils'
-import type { Breadcrumbs, Page } from '@/sanity/types'
+import type { Breadcrumbs } from '@/sanity/types'
 import SanityLink, { type SanityLinkType } from '@/ui/sanity-link'
 import { moduleAttributes } from '.'
 
@@ -9,7 +9,7 @@ export default function ({
 	crumbs,
 	currentPage,
 	...props
-}: Breadcrumbs & { currentPage?: Page }) {
+}: Breadcrumbs & { currentPage?: { title?: string } }) {
 	return (
 		<nav
 			className={cn('section py-4 text-sm', structuredDataOnly && 'sr-only')}

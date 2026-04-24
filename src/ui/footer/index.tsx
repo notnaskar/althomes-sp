@@ -1,4 +1,3 @@
-import { PortableText } from 'next-sanity'
 import { getSite } from '@/sanity/lib/data'
 import Logo from '@/ui/logo'
 import SocialNavigation from '@/ui/social-navigation'
@@ -13,16 +12,17 @@ export default async function () {
 				<div className="flex justify-between gap-4 max-md:flex-col md:items-start">
 					<div className="flex flex-col items-center gap-4 max-md:text-center md:items-start">
 						<Logo className="[&_img]:h-[2lh]" />
-						<PortableText value={site?.footerContent ?? []} />
 						<SocialNavigation className="[&_svg]:size-lh link flex items-center gap-4 max-md:justify-center" />
 					</div>
 
 					<Navigation />
 				</div>
 
-				<div className="[&_a]:link text-center">
-					<PortableText value={site?.copyright ?? []} />
-				</div>
+				{site?.title && (
+					<div className="text-center text-sm opacity-60">
+						© {new Date().getFullYear()} {site.title}. All rights reserved.
+					</div>
+				)}
 			</div>
 		</footer>
 	)
