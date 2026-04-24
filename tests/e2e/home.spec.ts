@@ -1,7 +1,7 @@
 import { test } from '@playwright/test'
 
 test.describe('Home page (/)', () => {
-  test.skip('renders heroHeadline text')
-  test.skip('renders 6 navLabel buttons with correct links')
-  test.skip('nav links navigate to correct pages')
+  test.fixme('renders heroHeadline text', async ({ page }) => {})
+  test.fixme('renders 6 navLabel buttons with correct links', async ({ page }) => {})
+  test.fixme('nav links navigate to correct pages', async ({ page }) => {})
 })

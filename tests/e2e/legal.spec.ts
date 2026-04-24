@@ -1,6 +1,6 @@
 import { test } from '@playwright/test'
 
 test.describe('Legal page (/[slug])', () => {
-  test.skip('renders displayTitle')
-  test.skip('renders body content')
+  test.fixme('renders displayTitle', async ({ page }) => {})
+  test.fixme('renders body content', async ({ page }) => {})
 })
