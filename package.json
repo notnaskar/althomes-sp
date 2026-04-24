@@ -45,7 +45,7 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "typegen": "NEXT_PUBLIC_SANITY_PROJECT_ID=0uc19iuo NEXT_PUBLIC_SANITY_DATASET=production sanity schema extract --path=./src/sanity && sanity typegen generate",
+    "typegen": "sanity schema extract --path=./src/sanity && sanity typegen generate",
     "format": "prettier --write '**/*.{ts,tsx,js,jsx}'",
     "test:e2e": "playwright test",
     "test:unit": "vitest run"

@@ -25,8 +25,8 @@ export default async function AltWayPage() {
 						<h2 className="text-2xl font-semibold mb-8">{page.valuePropHeadline}</h2>
 					)}
 					<div className="grid gap-6 md:grid-cols-2">
-						{page.valueProps.map((vp, i) => (
-							<div key={i} className="rounded-lg border p-6">
+						{page.valueProps.map((vp) => (
+							<div key={vp._key} className="rounded-lg border p-6">
 								{vp.title && <h3 className="font-semibold text-lg">{vp.title}</h3>}
 								{vp.body && <p className="mt-2 text-muted-foreground">{vp.body}</p>}
 							</div>
@@ -40,8 +40,8 @@ export default async function AltWayPage() {
 						<h2 className="text-2xl font-semibold mb-8">{page.statsHeadline}</h2>
 					)}
 					<div className="grid gap-6 md:grid-cols-4">
-						{page.stats.map((stat, i) => (
-							<div key={i} className="text-center">
+						{page.stats.map((stat) => (
+							<div key={stat._key} className="text-center">
 								{stat.value && <p className="text-4xl font-bold">{stat.value}</p>}
 								{stat.label && <p className="text-sm font-medium mt-1">{stat.label}</p>}
 								{stat.subtext && <p className="text-xs text-muted-foreground mt-1">{stat.subtext}</p>}
