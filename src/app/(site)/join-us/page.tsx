@@ -15,7 +15,8 @@ export default async function JoinUsPage() {
 					<Img
 						image={page.heroImage}
 						width={1440}
-						alt=""
+						loading="eager"
+						alt={page.heroImage.alt ?? ''}
 						className="w-full h-[60vh] object-cover opacity-70"
 					/>
 					<div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
@@ -73,7 +74,7 @@ export default async function JoinUsPage() {
 							<Img
 								image={page.propertyImage}
 								width={600}
-								alt=""
+								alt={page.propertyImage.alt ?? ''}
 								className="w-full h-auto object-cover"
 							/>
 						</div>

@@ -15,7 +15,8 @@ export default async function ContactPage() {
 					<Img
 						image={page.heroImage}
 						width={1440}
-						alt=""
+						loading="eager"
+						alt={page.heroImage.alt ?? ''}
 						className="w-full h-[60vh] object-cover opacity-70"
 					/>
 					{page.formHeadline && (
@@ -25,6 +26,13 @@ export default async function ContactPage() {
 							</h1>
 						</div>
 					)}
+				</section>
+			)}
+
+			{/* Hero fallback (no image) */}
+			{!page.heroImage && page.formHeadline && (
+				<section className="container py-20 text-center">
+					<h1 className="text-4xl md:text-5xl font-bold">{page.formHeadline}</h1>
 				</section>
 			)}
 
@@ -68,7 +76,7 @@ export default async function ContactPage() {
 							)}
 						</div>
 					)}
-					{(site?.facebookUrl || site?.instagramUrl) && (
+					{(site?.facebookUrl || site?.instagramUrl || site?.linkedinUrl || site?.youtubeUrl) && (
 						<div>
 							<span className="block text-sm font-semibold uppercase tracking-wide text-gray-500 mb-2">Follow us</span>
 							<div className="flex gap-4">
@@ -90,6 +98,26 @@ export default async function ContactPage() {
 										className="text-lg font-medium underline hover:text-yellow-600 transition"
 									>
 										Instagram
+									</a>
+								)}
+								{site?.linkedinUrl && (
+									<a
+										href={site.linkedinUrl}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="text-lg font-medium underline hover:text-yellow-600 transition"
+									>
+										LinkedIn
+									</a>
+								)}
+								{site?.youtubeUrl && (
+									<a
+										href={site.youtubeUrl}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="text-lg font-medium underline hover:text-yellow-600 transition"
+									>
+										YouTube
 									</a>
 								)}
 							</div>
