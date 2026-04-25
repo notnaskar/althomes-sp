@@ -2,12 +2,17 @@
 
 @theme {
 	--font-sans: 'Geist', sans-serif;
+	--font-heading: var(--font-sans);
+	--font-mono: 'JetBrains Mono', monospace;
 
 	--color-background: var(--color-neutral-100);
 	--color-foreground: var(--color-neutral-900);
 	--color-stroke: var(--color-neutral-200);
-
 	--color-primary: LinkText;
+	--color-primary-foreground: white;
+	--color-accent: var(--color-primary);
+	--color-accent-foreground: white;
+	--color-muted: var(--color-neutral-300);
 
 	--spacing-lh: 1lh;
 	--spacing-ch: 1ch;
@@ -52,6 +57,10 @@
 
 	* {
 		min-width: 0;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		font-family: var(--font-heading);
 	}
 
 	html {

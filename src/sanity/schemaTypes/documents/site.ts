@@ -10,6 +10,7 @@ export default defineType({
 		{ name: 'socials' },
 		{ name: 'forms' },
 		{ name: 'colours' },
+		{ name: 'fonts' },
 		{ name: 'seo' },
 		{ name: 'announcement' },
 	],
@@ -115,6 +116,58 @@ export default defineType({
 				{ name: 'foreground', type: 'string', title: 'Foreground (Hex)' },
 				{ name: 'muted', type: 'string', title: 'Muted (Hex)' },
 				{ name: 'border', type: 'string', title: 'Border (Hex)' },
+			],
+		}),
+		defineField({
+			name: 'fonts',
+			title: 'Fonts',
+			type: 'object',
+			group: 'fonts',
+			fields: [
+				defineField({
+					name: 'body',
+					title: 'Body Font',
+					type: 'string',
+					initialValue: 'geist',
+					options: {
+						list: [
+							{ title: 'Geist (default)', value: 'geist' },
+							{ title: 'Inter', value: 'inter' },
+							{ title: 'DM Sans', value: 'dm-sans' },
+							{ title: 'Plus Jakarta Sans', value: 'plus-jakarta-sans' },
+						],
+					},
+				}),
+				defineField({
+					name: 'heading',
+					title: 'Heading Font',
+					type: 'string',
+					initialValue: 'geist',
+					options: {
+						list: [
+							{ title: 'Geist (same as body)', value: 'geist' },
+							{ title: 'Inter', value: 'inter' },
+							{ title: 'DM Sans', value: 'dm-sans' },
+							{ title: 'Plus Jakarta Sans', value: 'plus-jakarta-sans' },
+							{ title: 'Playfair Display', value: 'playfair-display' },
+							{ title: 'Lora', value: 'lora' },
+							{ title: 'Libre Baskerville', value: 'libre-baskerville' },
+							{ title: 'Cormorant Garamond', value: 'cormorant-garamond' },
+						],
+					},
+				}),
+				defineField({
+					name: 'mono',
+					title: 'Monospace Font',
+					type: 'string',
+					initialValue: 'jetbrains-mono',
+					options: {
+						list: [
+							{ title: 'JetBrains Mono (default)', value: 'jetbrains-mono' },
+							{ title: 'Space Mono', value: 'space-mono' },
+						],
+					},
+				}),
 			],
 		}),
 		defineField({

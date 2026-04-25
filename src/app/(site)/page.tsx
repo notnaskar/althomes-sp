@@ -4,19 +4,24 @@ import type { Metadata } from 'next'
 import { urlFor } from '@/sanity/lib/image'
 import { ROUTES } from '@/lib/env'
 import pkg from '@@/package.json'
+import NavLabels from '@/ui/NavLabels'
 
 export default async function HomePage() {
 	const page = await getHomePage()
 	if (!page) notFound()
 
-	// Later we will render components, but for now we just return a placeholder.
-	// We have not built the component resolver for the new structure yet.
 	return (
 		<main className="flex-1">
-			<section className="container py-20 text-center">
-				<h1 className="text-4xl font-bold">{page.heroHeadline || 'AltHomes'}</h1>
-				<p className="mt-4">Navigation Labels count: {page.navLabels?.length}</p>
-			</section>
+			{page.heroImage ? (
+				<NavLabels
+					heroImage={page.heroImage}
+					navLabels={page.navLabels ?? []}
+				/>
+			) : (
+				<section className="container py-20 text-center">
+					<h1 className="text-4xl font-bold">{page.heroHeadline || 'AltHomes'}</h1>
+				</section>
+			)}
 		</main>
 	)
 }

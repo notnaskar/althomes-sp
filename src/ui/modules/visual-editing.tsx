@@ -1,13 +1,10 @@
 import { VisualEditing } from 'next-sanity/visual-editing'
 import { draftMode } from 'next/headers'
-import { SanityLive } from '@/sanity/lib/live'
 import HoverDetails from '@/ui/hover-details'
 
 export default async function () {
 	return (
 		<>
-			<SanityLive />
-
 			{(await draftMode()).isEnabled && (
 				<>
 					<VisualEditing />

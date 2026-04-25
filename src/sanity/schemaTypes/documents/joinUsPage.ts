@@ -11,22 +11,42 @@ export default defineType({
 			type: 'string',
 		}),
 		defineField({
-			name: 'introBody',
-			title: 'Intro Body',
-			type: 'blockContent',
+			name: 'pullQuote',
+			title: 'Pull Quote',
+			type: 'text',
 		}),
 		defineField({
-			name: 'benefits',
-			title: 'Benefits',
+			name: 'heroImage',
+			title: 'Hero Image',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [
+				defineField({ name: 'alt', type: 'string', title: 'Alt text' }),
+			],
+		}),
+		defineField({
+			name: 'bodyParagraph',
+			title: 'Body Paragraph',
+			type: 'text',
+		}),
+		defineField({
+			name: 'bulletPoints',
+			title: 'Bullet Points',
 			type: 'array',
-			of: [
-				{
-					type: 'object',
-					fields: [
-						{ name: 'title', type: 'string', title: 'Title' },
-						{ name: 'body', type: 'text', title: 'Body' },
-					],
-				},
+			of: [{ type: 'string' }],
+		}),
+		defineField({
+			name: 'formCTAText',
+			title: 'Form CTA Text',
+			type: 'string',
+		}),
+		defineField({
+			name: 'propertyImage',
+			title: 'Property Image',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [
+				defineField({ name: 'alt', type: 'string', title: 'Alt text' }),
 			],
 		}),
 		defineField({

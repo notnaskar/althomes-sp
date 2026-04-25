@@ -1,7 +1,7 @@
 import { getAllPosts, getSite } from '@/sanity/lib/data'
 import type { Metadata } from 'next'
-import { urlFor } from '@/sanity/lib/image'
 import Link from 'next/link'
+import Img from '@/ui/img'
 
 export default async function BlogIndexPage() {
 	const posts = await getAllPosts()
@@ -20,8 +20,9 @@ export default async function BlogIndexPage() {
 						>
 							{post.metadata?.image && (
 								<div className="aspect-video overflow-hidden">
-									<img
-										src={urlFor(post.metadata.image).width(600).url()}
+									<Img
+										image={post.metadata.image}
+										width={600}
 										alt={post.title || ''}
 										className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
 									/>

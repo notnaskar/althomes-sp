@@ -1,5 +1,3 @@
-'use client'
-
 /**
  * This configuration is used to for the Sanity Studio that’s mounted on the `/app/admin/[[...tool]]/page.tsx` route
  */
