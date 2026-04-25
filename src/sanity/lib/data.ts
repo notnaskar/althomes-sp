@@ -33,6 +33,8 @@ import type {
 export async function getSite() {
 	return await sanityFetchLive<SITE_QUERY_RESULT>({
 		query: SITE_QUERY,
+		perspective: 'published',
+		stega: false,
 	})
 }
 

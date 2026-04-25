@@ -722,6 +722,19 @@ export type Site = {
 		muted?: string
 		border?: string
 	}
+	fonts?: {
+		body?: 'geist' | 'inter' | 'dm-sans' | 'plus-jakarta-sans'
+		heading?:
+			| 'geist'
+			| 'inter'
+			| 'dm-sans'
+			| 'plus-jakarta-sans'
+			| 'playfair-display'
+			| 'lora'
+			| 'libre-baskerville'
+			| 'cormorant-garamond'
+		mono?: 'jetbrains-mono' | 'space-mono'
+	}
 	seo?: Seo
 	announcement?: {
 		enabled?: boolean
@@ -1750,6 +1763,19 @@ export type SITE_QUERY_RESULT = {
 		foreground?: string
 		muted?: string
 		border?: string
+	}
+	fonts?: {
+		body?: 'dm-sans' | 'geist' | 'inter' | 'plus-jakarta-sans'
+		heading?:
+			| 'cormorant-garamond'
+			| 'dm-sans'
+			| 'geist'
+			| 'inter'
+			| 'libre-baskerville'
+			| 'lora'
+			| 'playfair-display'
+			| 'plus-jakarta-sans'
+		mono?: 'jetbrains-mono' | 'space-mono'
 	}
 	seo?: Seo
 	announcement?: {
