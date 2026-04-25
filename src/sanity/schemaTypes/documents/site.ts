@@ -1,4 +1,4 @@
-import { defineType, defineField } from 'sanity'
+import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export default defineType({
 	name: 'site',
@@ -6,7 +6,9 @@ export default defineType({
 	type: 'document',
 	groups: [
 		{ name: 'branding', default: true },
-		{ name: 'navigation' },
+		{ name: 'navbar' },
+		{ name: 'footer' },
+		{ name: 'assets' },
 		{ name: 'socials' },
 		{ name: 'forms' },
 		{ name: 'colours' },
@@ -45,26 +47,60 @@ export default defineType({
 			name: 'navCtaLabel',
 			title: 'Nav CTA Label',
 			type: 'string',
-			group: 'navigation',
+			group: 'navbar',
 		}),
 		defineField({
 			name: 'navCtaLink',
 			title: 'Nav CTA Link',
 			type: 'string',
-			group: 'navigation',
+			group: 'navbar',
 		}),
 		defineField({
 			name: 'whatsappNumber',
 			title: 'WhatsApp Number',
 			type: 'string',
 			description: 'Digits only (e.g. 447123456789)',
-			group: 'navigation',
+			group: 'navbar',
 		}),
 		defineField({
 			name: 'bookDirectLink',
 			title: 'Book Direct Link',
 			type: 'string',
-			group: 'navigation',
+			group: 'navbar',
+		}),
+		defineField({
+			name: 'overlayNavLinks',
+			title: 'Overlay Nav Links',
+			type: 'array',
+			of: [
+				defineArrayMember({
+					type: 'object',
+					fields: [
+						defineField({ name: 'label', type: 'string', title: 'Label' }),
+						defineField({ name: 'url', type: 'string', title: 'URL' }),
+					],
+				}),
+			],
+			group: 'navbar',
+		}),
+		defineField({
+			name: 'menuPhoto',
+			title: 'Menu Overlay Photo',
+			type: 'image',
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
+			group: 'navbar',
+		}),
+		defineField({
+			name: 'contactEmail',
+			title: 'Contact Email',
+			type: 'string',
+			group: 'navbar',
+		}),
+		defineField({
+			name: 'contactPhone',
+			title: 'Contact Phone',
+			type: 'string',
+			group: 'navbar',
 		}),
 		defineField({
 			name: 'instagramUrl',
@@ -89,6 +125,78 @@ export default defineType({
 			title: 'YouTube URL',
 			type: 'string',
 			group: 'socials',
+		}),
+		defineField({
+			name: 'footerBrandName',
+			title: 'Footer Brand Name',
+			type: 'string',
+			description: 'Italic brand text in footer. Falls back to Site Title if empty.',
+			group: 'footer',
+		}),
+		defineField({
+			name: 'footerAboutLinks',
+			title: 'Footer About Column Links',
+			type: 'array',
+			of: [
+				defineArrayMember({
+					type: 'object',
+					fields: [
+						defineField({ name: 'label', type: 'string', title: 'Label' }),
+						defineField({ name: 'url', type: 'string', title: 'URL' }),
+					],
+				}),
+			],
+			group: 'footer',
+		}),
+		defineField({
+			name: 'footerPolicyLinks',
+			title: 'Footer Policies Column Links',
+			type: 'array',
+			of: [
+				defineArrayMember({
+					type: 'object',
+					fields: [
+						defineField({ name: 'label', type: 'string', title: 'Label' }),
+						defineField({ name: 'url', type: 'string', title: 'URL' }),
+					],
+				}),
+			],
+			group: 'footer',
+		}),
+		defineField({
+			name: 'heroBgCircle',
+			title: 'Hero Background Circle',
+			type: 'image',
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text', initialValue: '' })],
+			group: 'assets',
+		}),
+		defineField({
+			name: 'heroFgCircle',
+			title: 'Hero Foreground Circle (photo frame)',
+			type: 'image',
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text', initialValue: '' })],
+			group: 'assets',
+		}),
+		defineField({
+			name: 'heroDecorStars',
+			title: 'Hero Decor — Stars',
+			type: 'image',
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text', initialValue: '' })],
+			group: 'assets',
+		}),
+		defineField({
+			name: 'heroDecorFlowers',
+			title: 'Hero Decor — Flowers',
+			type: 'image',
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text', initialValue: '' })],
+			group: 'assets',
+		}),
+		defineField({
+			name: 'heroDecorStripes',
+			title: 'Hero Decor — Stripes',
+			type: 'image',
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text', initialValue: '' })],
+			group: 'assets',
 		}),
 		defineField({
 			name: 'contactFormEmail',

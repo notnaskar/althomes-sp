@@ -706,10 +706,76 @@ export type Site = {
 	navCtaLink?: string
 	whatsappNumber?: string
 	bookDirectLink?: string
+	overlayNavLinks?: Array<{
+		label?: string
+		url?: string
+		_key: string
+	}>
+	menuPhoto?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	contactEmail?: string
+	contactPhone?: string
 	instagramUrl?: string
 	facebookUrl?: string
 	linkedinUrl?: string
 	youtubeUrl?: string
+	footerBrandName?: string
+	footerAboutLinks?: Array<{
+		label?: string
+		url?: string
+		_key: string
+	}>
+	footerPolicyLinks?: Array<{
+		label?: string
+		url?: string
+		_key: string
+	}>
+	heroBgCircle?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	heroFgCircle?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	heroDecorStars?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	heroDecorFlowers?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	heroDecorStripes?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
 	contactFormEmail?: string
 	partnerEnquiryEmail?: string
 	colours?: {
@@ -1748,10 +1814,76 @@ export type SITE_QUERY_RESULT = {
 	navCtaLink?: string
 	whatsappNumber?: string
 	bookDirectLink?: string
+	overlayNavLinks?: Array<{
+		label?: string
+		url?: string
+		_key: string
+	}>
+	menuPhoto?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	contactEmail?: string
+	contactPhone?: string
 	instagramUrl?: string
 	facebookUrl?: string
 	linkedinUrl?: string
 	youtubeUrl?: string
+	footerBrandName?: string
+	footerAboutLinks?: Array<{
+		label?: string
+		url?: string
+		_key: string
+	}>
+	footerPolicyLinks?: Array<{
+		label?: string
+		url?: string
+		_key: string
+	}>
+	heroBgCircle?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	heroFgCircle?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	heroDecorStars?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	heroDecorFlowers?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	heroDecorStripes?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
 	contactFormEmail?: string
 	partnerEnquiryEmail?: string
 	colours?: {
