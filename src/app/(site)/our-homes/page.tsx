@@ -1,17 +1,23 @@
-import { getOurHomesPage, getSite, getAllProperties } from '@/sanity/lib/data'
-import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import { getAllProperties, getOurHomesPage, getSite } from '@/sanity/lib/data'
+import OurHomesCta from '@/ui/pages/our-homes/our-homes-cta'
 import OurHomesHero from '@/ui/pages/our-homes/our-homes-hero'
 import PropertyShowcase from '@/ui/pages/our-homes/property-showcase'
-import OurHomesCta from '@/ui/pages/our-homes/our-homes-cta'
 
 export default async function OurHomesPage() {
-	const [page, properties] = await Promise.all([getOurHomesPage(), getAllProperties()])
+	const [page, properties] = await Promise.all([
+		getOurHomesPage(),
+		getAllProperties(),
+	])
 	if (!page) notFound()
 
 	return (
 		<main>
-			<OurHomesHero heroHeadline={page.heroHeadline ?? null} heroBackground={page.heroImage ?? null} />
+			<OurHomesHero
+				heroHeadline={page.heroHeadline ?? null}
+				heroBackground={page.heroImage ?? null}
+			/>
 
 			{(properties ?? []).map((property, index) => (
 				<div key={property._id} className={index > 0 ? 'mt-10' : undefined}>

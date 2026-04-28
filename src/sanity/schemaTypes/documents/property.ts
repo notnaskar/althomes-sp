@@ -1,4 +1,4 @@
-import { defineType, defineField } from 'sanity'
+import { defineField, defineType } from 'sanity'
 
 export default defineType({
 	name: 'property',
@@ -90,8 +90,16 @@ export default defineType({
 			title: 'Card Thumbnail (SEO / OG Image)',
 			type: 'image',
 			options: { hotspot: true },
-			fields: [{ name: 'alt', type: 'string', title: 'Alt text', validation: (Rule) => Rule.required() }],
-			description: 'Used for social sharing / Open Graph previews. Not shown on the listing page.',
+			fields: [
+				{
+					name: 'alt',
+					type: 'string',
+					title: 'Alt text',
+					validation: (Rule) => Rule.required(),
+				},
+			],
+			description:
+				'Used for social sharing / Open Graph previews. Not shown on the listing page.',
 			group: 'listingCard',
 		}),
 		defineField({
@@ -105,8 +113,16 @@ export default defineType({
 			title: 'Showcase Secondary Image',
 			type: 'image',
 			options: { hotspot: true },
-			fields: [{ name: 'alt', type: 'string', title: 'Alt text', validation: (Rule) => Rule.required() }],
-			description: 'Right-panel secondary photo shown in the Our Homes listing page',
+			fields: [
+				{
+					name: 'alt',
+					type: 'string',
+					title: 'Alt text',
+					validation: (Rule) => Rule.required(),
+				},
+			],
+			description:
+				'Right-panel secondary photo shown in the Our Homes listing page',
 			group: 'listingCard',
 		}),
 		defineField({
@@ -115,7 +131,8 @@ export default defineType({
 			type: 'image',
 			options: { hotspot: false },
 			fields: [{ name: 'alt', type: 'string', title: 'Alt text' }],
-			description: 'Botanical/decorative asset (flower, hills, etc.) — leave empty for no decoration',
+			description:
+				'Botanical/decorative asset (flower, hills, etc.) — leave empty for no decoration',
 			group: 'listingCard',
 		}),
 		defineField({
@@ -170,15 +187,24 @@ export default defineType({
 			title: 'Main Listing Photo',
 			type: 'image',
 			options: { hotspot: true },
-			fields: [{ name: 'alt', type: 'string', title: 'Alt text', validation: (Rule) => Rule.required() }],
-			description: 'Full-bleed left photo on the Our Homes listing page. Also used as the hero on the property detail page.',
+			fields: [
+				{
+					name: 'alt',
+					type: 'string',
+					title: 'Alt text',
+					validation: (Rule) => Rule.required(),
+				},
+			],
+			description:
+				'Full-bleed left photo on the Our Homes listing page. Also used as the hero on the property detail page.',
 			group: 'listingCard',
 		}),
 		defineField({
 			name: 'pullQuote',
 			title: 'Pull Quote',
 			type: 'text',
-			description: 'Italic quote shown on the Our Homes listing card (right panel).',
+			description:
+				'Italic quote shown on the Our Homes listing card (right panel).',
 			group: 'listingCard',
 		}),
 
@@ -197,7 +223,14 @@ export default defineType({
 				{
 					type: 'image',
 					options: { hotspot: true },
-					fields: [{ name: 'alt', type: 'string', title: 'Alt text', validation: (Rule) => Rule.required() }],
+					fields: [
+						{
+							name: 'alt',
+							type: 'string',
+							title: 'Alt text',
+							validation: (Rule) => Rule.required(),
+						},
+					],
 				},
 			],
 			validation: (Rule) => Rule.min(2),
@@ -254,7 +287,8 @@ export default defineType({
 			name: 'locationHeadline',
 			title: 'Location Headline',
 			type: 'string',
-			description: 'Short location text shown on the Our Homes listing card, e.g. "12.5 kms from Ooty Main Bazaar".',
+			description:
+				'Short location text shown on the Our Homes listing card, e.g. "12.5 kms from Ooty Main Bazaar".',
 			group: 'listingCard',
 		}),
 		defineField({
@@ -273,8 +307,18 @@ export default defineType({
 				{
 					type: 'object',
 					fields: [
-						{ name: 'title', type: 'string', title: 'Title', validation: (Rule) => Rule.required() },
-						{ name: 'body', type: 'text', title: 'Body', validation: (Rule) => Rule.required() },
+						{
+							name: 'title',
+							type: 'string',
+							title: 'Title',
+							validation: (Rule) => Rule.required(),
+						},
+						{
+							name: 'body',
+							type: 'text',
+							title: 'Body',
+							validation: (Rule) => Rule.required(),
+						},
 						{
 							name: 'image',
 							type: 'image',
@@ -326,7 +370,14 @@ export default defineType({
 				{
 					type: 'image',
 					options: { hotspot: true },
-					fields: [{ name: 'alt', type: 'string', title: 'Alt text', validation: (Rule) => Rule.required() }],
+					fields: [
+						{
+							name: 'alt',
+							type: 'string',
+							title: 'Alt text',
+							validation: (Rule) => Rule.required(),
+						},
+					],
 				},
 			],
 			validation: (Rule) => Rule.length(2),

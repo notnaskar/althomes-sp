@@ -1,7 +1,8 @@
 import { PortableText } from 'next-sanity'
+import Img from '@/ui/img'
+
 type Person = { name?: string; image?: any }
 type PersonList = { intro?: any[]; people?: Person[] } & Record<string, unknown>
-import Img from '@/ui/img'
 
 export default function ({ intro = [], people }: PersonList) {
 	return (

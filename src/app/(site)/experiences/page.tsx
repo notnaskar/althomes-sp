@@ -1,8 +1,13 @@
-import { getExperiencesPage, getSite, getAllProperties, getAllExperiences } from '@/sanity/lib/data'
-import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import ExperiencesHero from '@/ui/pages/experiences/experiences-updated/experiences-hero'
+import { notFound } from 'next/navigation'
+import {
+	getAllExperiences,
+	getAllProperties,
+	getExperiencesPage,
+	getSite,
+} from '@/sanity/lib/data'
 import ExperienceGrid from '@/ui/pages/experiences/experiences-updated/experience-grid'
+import ExperiencesHero from '@/ui/pages/experiences/experiences-updated/experiences-hero'
 
 export default async function ExperiencesPage() {
 	const [page, properties, experiences] = await Promise.all([

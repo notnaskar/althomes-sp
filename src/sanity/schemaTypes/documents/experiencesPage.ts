@@ -1,4 +1,4 @@
-import { defineType, defineField } from 'sanity'
+import { defineField, defineType } from 'sanity'
 
 export default defineType({
 	name: 'experiencesPage',
@@ -15,9 +15,7 @@ export default defineType({
 			title: 'Hero Background',
 			type: 'image',
 			options: { hotspot: true },
-			fields: [
-				defineField({ name: 'alt', type: 'string', title: 'Alt text' }),
-			],
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
 		}),
 		defineField({
 			name: 'cardsMaxShown',

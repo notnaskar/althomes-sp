@@ -18,7 +18,7 @@ export default function NavLabels({ heroImage, navLabels }: Props) {
 	if (!imageUrl) return null
 
 	return (
-		<div className="relative w-full aspect-[16/9] overflow-hidden">
+		<div className="relative aspect-[16/9] w-full overflow-hidden">
 			<Image
 				src={imageUrl}
 				alt={heroImage.alt ?? ''}
@@ -37,7 +37,7 @@ export default function NavLabels({ heroImage, navLabels }: Props) {
 						key={item._key ?? i}
 						href={item.link ?? '#'}
 						data-nav-label={i}
-						className="nav-label absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/90 px-4 py-2 text-sm font-semibold shadow-md hover:bg-white transition-colors"
+						className="nav-label absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/90 px-4 py-2 text-sm font-semibold shadow-md transition-colors hover:bg-white"
 						style={
 							{
 								'--xm': `${xM}%`,

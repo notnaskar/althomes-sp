@@ -1,11 +1,11 @@
 'use client'
 
-import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useState } from 'react'
 import Link from 'next/link'
-import { partnerSchema, type PartnerInput } from '@/lib/schemas/partner'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { submitPartner } from '@/actions/partner-enquiry'
+import { partnerSchema, type PartnerInput } from '@/lib/schemas/partner'
 
 export default function PartnerForm() {
 	const [success, setSuccess] = useState(false)
@@ -33,7 +33,8 @@ export default function PartnerForm() {
 		return (
 			<div className="rounded-xl border border-green-200 bg-green-50 p-8 text-center">
 				<p className="text-lg font-semibold text-green-800">
-					Thank you! We&rsquo;ll review your enquiry and get back to you shortly.
+					Thank you! We&rsquo;ll review your enquiry and get back to you
+					shortly.
 				</p>
 			</div>
 		)
@@ -46,54 +47,139 @@ export default function PartnerForm() {
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
 			{/* Honeypot */}
-			<input type="text" {...register('_hp')} className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+			<input
+				type="text"
+				{...register('_hp')}
+				className="hidden"
+				tabIndex={-1}
+				autoComplete="off"
+				aria-hidden="true"
+			/>
 
 			<div>
-				<label htmlFor="pf-name" className={labelClass}>Name</label>
-				<input id="pf-name" type="text" {...register('name')} className={inputClass} />
-				{errors.name && <p className="mt-1 text-xs text-red-600">{errors.name.message}</p>}
+				<label htmlFor="pf-name" className={labelClass}>
+					Name
+				</label>
+				<input
+					id="pf-name"
+					type="text"
+					{...register('name')}
+					className={inputClass}
+				/>
+				{errors.name && (
+					<p className="mt-1 text-xs text-red-600">{errors.name.message}</p>
+				)}
 			</div>
 
 			<div>
-				<label htmlFor="pf-email" className={labelClass}>Email</label>
-				<input id="pf-email" type="email" {...register('email')} className={inputClass} />
-				{errors.email && <p className="mt-1 text-xs text-red-600">{errors.email.message}</p>}
+				<label htmlFor="pf-email" className={labelClass}>
+					Email
+				</label>
+				<input
+					id="pf-email"
+					type="email"
+					{...register('email')}
+					className={inputClass}
+				/>
+				{errors.email && (
+					<p className="mt-1 text-xs text-red-600">{errors.email.message}</p>
+				)}
 			</div>
 
 			<div>
-				<label htmlFor="pf-phone" className={labelClass}>Phone Number</label>
-				<input id="pf-phone" type="tel" {...register('phone')} className={inputClass} />
-				{errors.phone && <p className="mt-1 text-xs text-red-600">{errors.phone.message}</p>}
+				<label htmlFor="pf-phone" className={labelClass}>
+					Phone Number
+				</label>
+				<input
+					id="pf-phone"
+					type="tel"
+					{...register('phone')}
+					className={inputClass}
+				/>
+				{errors.phone && (
+					<p className="mt-1 text-xs text-red-600">{errors.phone.message}</p>
+				)}
 			</div>
 
 			<div>
-				<label htmlFor="pf-location" className={labelClass}>Location</label>
-				<input id="pf-location" type="text" {...register('location')} className={inputClass} />
-				{errors.location && <p className="mt-1 text-xs text-red-600">{errors.location.message}</p>}
+				<label htmlFor="pf-location" className={labelClass}>
+					Location
+				</label>
+				<input
+					id="pf-location"
+					type="text"
+					{...register('location')}
+					className={inputClass}
+				/>
+				{errors.location && (
+					<p className="mt-1 text-xs text-red-600">{errors.location.message}</p>
+				)}
 			</div>
 
 			<div>
-				<label htmlFor="pf-propertyType" className={labelClass}>Type of Property</label>
-				<input id="pf-propertyType" type="text" {...register('propertyType')} className={inputClass} />
-				{errors.propertyType && <p className="mt-1 text-xs text-red-600">{errors.propertyType.message}</p>}
+				<label htmlFor="pf-propertyType" className={labelClass}>
+					Type of Property
+				</label>
+				<input
+					id="pf-propertyType"
+					type="text"
+					{...register('propertyType')}
+					className={inputClass}
+				/>
+				{errors.propertyType && (
+					<p className="mt-1 text-xs text-red-600">
+						{errors.propertyType.message}
+					</p>
+				)}
 			</div>
 
 			<div>
-				<label htmlFor="pf-status" className={labelClass}>Status</label>
-				<input id="pf-status" type="text" {...register('status')} className={inputClass} />
-				{errors.status && <p className="mt-1 text-xs text-red-600">{errors.status.message}</p>}
+				<label htmlFor="pf-status" className={labelClass}>
+					Status
+				</label>
+				<input
+					id="pf-status"
+					type="text"
+					{...register('status')}
+					className={inputClass}
+				/>
+				{errors.status && (
+					<p className="mt-1 text-xs text-red-600">{errors.status.message}</p>
+				)}
 			</div>
 
 			<div>
-				<label htmlFor="pf-operational" className={labelClass}>Operational</label>
-				<input id="pf-operational" type="text" {...register('operational')} className={inputClass} />
-				{errors.operational && <p className="mt-1 text-xs text-red-600">{errors.operational.message}</p>}
+				<label htmlFor="pf-operational" className={labelClass}>
+					Operational
+				</label>
+				<input
+					id="pf-operational"
+					type="text"
+					{...register('operational')}
+					className={inputClass}
+				/>
+				{errors.operational && (
+					<p className="mt-1 text-xs text-red-600">
+						{errors.operational.message}
+					</p>
+				)}
 			</div>
 
 			<div>
-				<label htmlFor="pf-photosLink" className={labelClass}>Photos / Website Link</label>
-				<input id="pf-photosLink" type="url" {...register('photosLink')} className={inputClass} />
-				{errors.photosLink && <p className="mt-1 text-xs text-red-600">{errors.photosLink.message}</p>}
+				<label htmlFor="pf-photosLink" className={labelClass}>
+					Photos / Website Link
+				</label>
+				<input
+					id="pf-photosLink"
+					type="url"
+					{...register('photosLink')}
+					className={inputClass}
+				/>
+				{errors.photosLink && (
+					<p className="mt-1 text-xs text-red-600">
+						{errors.photosLink.message}
+					</p>
+				)}
 			</div>
 
 			<div className="flex items-start gap-3">
@@ -119,7 +205,7 @@ export default function PartnerForm() {
 			<button
 				type="submit"
 				disabled={isSubmitting}
-				className="w-full rounded-full bg-black py-4 text-sm font-bold text-white hover:bg-gray-800 transition disabled:opacity-50"
+				className="w-full rounded-full bg-black py-4 text-sm font-bold text-white transition hover:bg-gray-800 disabled:opacity-50"
 			>
 				{isSubmitting ? 'Sending…' : 'SUBMIT ENQUIRY'}
 			</button>

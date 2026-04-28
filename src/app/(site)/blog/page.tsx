@@ -1,6 +1,6 @@
-import { getAllPosts, getSite } from '@/sanity/lib/data'
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { getAllPosts, getSite } from '@/sanity/lib/data'
 import Img from '@/ui/img'
 
 export default async function BlogIndexPage() {
@@ -9,12 +9,12 @@ export default async function BlogIndexPage() {
 	return (
 		<main className="flex-1">
 			<section className="container py-20">
-				<h1 className="text-4xl font-bold mb-12 text-center">Blog</h1>
-				
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+				<h1 className="mb-12 text-center text-4xl font-bold">Blog</h1>
+
+				<div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
 					{posts?.map((post) => (
-						<Link 
-							key={post._id} 
+						<Link
+							key={post._id}
 							href={`/blog/${post.metadata?.slug?.current}`}
 							className="group block overflow-hidden rounded-xl border border-gray-200 bg-white transition hover:shadow-lg"
 						>
@@ -29,7 +29,7 @@ export default async function BlogIndexPage() {
 								</div>
 							)}
 							<div className="p-6">
-								<h2 className="text-xl font-bold group-hover:text-yellow-600 transition">
+								<h2 className="text-xl font-bold transition group-hover:text-yellow-600">
 									{post.title}
 								</h2>
 								{post.publishDate && (
@@ -48,7 +48,7 @@ export default async function BlogIndexPage() {
 
 export async function generateMetadata(): Promise<Metadata> {
 	const site = await getSite()
-	
+
 	return {
 		title: `Blog | AltHomes`,
 		description: site?.seo?.metaDescription,

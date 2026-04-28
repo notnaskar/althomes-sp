@@ -1,8 +1,8 @@
-import { getContactPage, getSite } from '@/sanity/lib/data'
-import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import Img from '@/ui/img'
+import { notFound } from 'next/navigation'
+import { getContactPage, getSite } from '@/sanity/lib/data'
 import ContactForm from '@/ui/forms/contact-form'
+import Img from '@/ui/img'
 
 export default async function ContactPage() {
 	const [page, site] = await Promise.all([getContactPage(), getSite()])
@@ -18,11 +18,11 @@ export default async function ContactPage() {
 						width={1440}
 						loading="eager"
 						alt={page.heroImage.alt ?? ''}
-						className="w-full h-[60vh] object-cover opacity-70"
+						className="h-[60vh] w-full object-cover opacity-70"
 					/>
 					{page.formHeadline && (
 						<div className="absolute inset-0 flex items-center justify-center">
-							<h1 className="text-4xl md:text-5xl font-bold text-white text-center px-6">
+							<h1 className="px-6 text-center text-4xl font-bold text-white md:text-5xl">
 								{page.formHeadline}
 							</h1>
 						</div>
@@ -33,12 +33,14 @@ export default async function ContactPage() {
 			{/* Hero fallback (no image) */}
 			{!page.heroImage && page.formHeadline && (
 				<section className="container py-20 text-center">
-					<h1 className="text-4xl md:text-5xl font-bold">{page.formHeadline}</h1>
+					<h1 className="text-4xl font-bold md:text-5xl">
+						{page.formHeadline}
+					</h1>
 				</section>
 			)}
 
 			{/* Two-column body */}
-			<section className="container py-16 grid gap-12 md:grid-cols-2">
+			<section className="container grid gap-12 py-16 md:grid-cols-2">
 				{/* Left: contact details */}
 				<div className="space-y-6">
 					{page.sectionTitle && (
@@ -46,10 +48,12 @@ export default async function ContactPage() {
 					)}
 					{page.phone && (
 						<div>
-							<span className="block text-sm font-semibold uppercase tracking-wide text-gray-500 mb-1">Phone</span>
+							<span className="mb-1 block text-sm font-semibold tracking-wide text-gray-500 uppercase">
+								Phone
+							</span>
 							<a
 								href={`tel:${page.phone}`}
-								className="text-lg font-medium underline hover:text-yellow-600 transition"
+								className="text-lg font-medium underline transition hover:text-yellow-600"
 							>
 								{page.phone}
 							</a>
@@ -57,10 +61,12 @@ export default async function ContactPage() {
 					)}
 					{page.email && (
 						<div>
-							<span className="block text-sm font-semibold uppercase tracking-wide text-gray-500 mb-1">Email</span>
+							<span className="mb-1 block text-sm font-semibold tracking-wide text-gray-500 uppercase">
+								Email
+							</span>
 							<a
 								href={`mailto:${page.email}`}
-								className="text-lg font-medium underline hover:text-yellow-600 transition"
+								className="text-lg font-medium underline transition hover:text-yellow-600"
 							>
 								{page.email}
 							</a>
@@ -68,7 +74,9 @@ export default async function ContactPage() {
 					)}
 					{(page.officeCity || page.officeAddress) && (
 						<div>
-							<span className="block text-sm font-semibold uppercase tracking-wide text-gray-500 mb-1">Office</span>
+							<span className="mb-1 block text-sm font-semibold tracking-wide text-gray-500 uppercase">
+								Office
+							</span>
 							{page.officeCity && (
 								<p className="text-lg font-medium">{page.officeCity}</p>
 							)}
@@ -77,16 +85,21 @@ export default async function ContactPage() {
 							)}
 						</div>
 					)}
-					{(site?.facebookUrl || site?.instagramUrl || site?.linkedinUrl || site?.youtubeUrl) && (
+					{(site?.facebookUrl ||
+						site?.instagramUrl ||
+						site?.linkedinUrl ||
+						site?.youtubeUrl) && (
 						<div>
-							<span className="block text-sm font-semibold uppercase tracking-wide text-gray-500 mb-2">Follow us</span>
+							<span className="mb-2 block text-sm font-semibold tracking-wide text-gray-500 uppercase">
+								Follow us
+							</span>
 							<div className="flex gap-4">
 								{site?.facebookUrl && (
 									<a
 										href={site.facebookUrl}
 										target="_blank"
 										rel="noopener noreferrer"
-										className="text-lg font-medium underline hover:text-yellow-600 transition"
+										className="text-lg font-medium underline transition hover:text-yellow-600"
 									>
 										Facebook
 									</a>
@@ -96,7 +109,7 @@ export default async function ContactPage() {
 										href={site.instagramUrl}
 										target="_blank"
 										rel="noopener noreferrer"
-										className="text-lg font-medium underline hover:text-yellow-600 transition"
+										className="text-lg font-medium underline transition hover:text-yellow-600"
 									>
 										Instagram
 									</a>
@@ -106,7 +119,7 @@ export default async function ContactPage() {
 										href={site.linkedinUrl}
 										target="_blank"
 										rel="noopener noreferrer"
-										className="text-lg font-medium underline hover:text-yellow-600 transition"
+										className="text-lg font-medium underline transition hover:text-yellow-600"
 									>
 										LinkedIn
 									</a>
@@ -116,7 +129,7 @@ export default async function ContactPage() {
 										href={site.youtubeUrl}
 										target="_blank"
 										rel="noopener noreferrer"
-										className="text-lg font-medium underline hover:text-yellow-600 transition"
+										className="text-lg font-medium underline transition hover:text-yellow-600"
 									>
 										YouTube
 									</a>

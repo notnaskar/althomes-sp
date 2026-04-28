@@ -1,10 +1,10 @@
 'use client'
 
-import { useState } from 'react'
 import Link from 'next/link'
-import Img from '@/ui/img'
-import AvailabilityForm from '@/ui/forms/availability-form'
+import { useState } from 'react'
 import type { ALL_PROPERTIES_QUERY_RESULT } from '@/sanity/types'
+import AvailabilityForm from '@/ui/forms/availability-form'
+import Img from '@/ui/img'
 
 type Props = {
 	properties: ALL_PROPERTIES_QUERY_RESULT
@@ -15,7 +15,9 @@ export default function PropertySearch({ properties }: Props) {
 
 	const displayed = availableIds
 		? properties.filter(
-				(p) => p.rentalwisePropertyId && availableIds.includes(p.rentalwisePropertyId),
+				(p) =>
+					p.rentalwisePropertyId &&
+					availableIds.includes(p.rentalwisePropertyId),
 			)
 		: properties
 
@@ -29,7 +31,7 @@ export default function PropertySearch({ properties }: Props) {
 			{/* Property grid */}
 			<section className="container py-10">
 				{availableIds !== null && displayed.length === 0 ? (
-					<p className="text-center text-gray-500 py-12">
+					<p className="py-12 text-center text-gray-500">
 						No properties available for the selected dates. Try different dates.
 					</p>
 				) : (
@@ -38,9 +40,9 @@ export default function PropertySearch({ properties }: Props) {
 							<Link
 								key={property._id}
 								href={`/our-homes/${property.slug}`}
-								className="group grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
+								className="group grid grid-cols-1 items-center gap-8 md:grid-cols-2"
 							>
-								<div className="overflow-hidden rounded-2xl aspect-[4/3]">
+								<div className="aspect-[4/3] overflow-hidden rounded-2xl">
 									{property.cardThumbnail && (
 										<Img
 											image={property.cardThumbnail}
@@ -53,14 +55,20 @@ export default function PropertySearch({ properties }: Props) {
 								<div className="space-y-4">
 									<h2 className="text-3xl font-bold">{property.title}</h2>
 									{property.shortDescription && (
-										<p className="text-lg text-gray-600">{property.shortDescription}</p>
+										<p className="text-lg text-gray-600">
+											{property.shortDescription}
+										</p>
 									)}
 									<div className="flex gap-4 text-sm font-medium">
-										{property.bedrooms != null && <span>{property.bedrooms} Bedrooms</span>}
-										{property.maxGuests != null && <span>Up to {property.maxGuests} Guests</span>}
+										{property.bedrooms != null && (
+											<span>{property.bedrooms} Bedrooms</span>
+										)}
+										{property.maxGuests != null && (
+											<span>Up to {property.maxGuests} Guests</span>
+										)}
 									</div>
 									<div className="pt-4">
-										<span className="inline-block px-6 py-3 bg-black text-white rounded-full font-bold group-hover:bg-yellow-600 transition">
+										<span className="inline-block rounded-full bg-black px-6 py-3 font-bold text-white transition group-hover:bg-yellow-600">
 											Explore Property
 										</span>
 									</div>

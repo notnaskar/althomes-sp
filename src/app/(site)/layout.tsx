@@ -1,37 +1,85 @@
 import {
+	Cormorant_Garamond,
+	DM_Sans,
 	Geist,
 	Inter,
-	DM_Sans,
-	Plus_Jakarta_Sans,
-	Playfair_Display,
-	Lora,
-	Libre_Baskerville,
-	Cormorant_Garamond,
 	JetBrains_Mono,
-	Space_Mono,
+	Libre_Baskerville,
+	Lora,
+	Playfair_Display,
+	Plus_Jakarta_Sans,
 	Poppins,
+	Space_Mono,
 } from 'next/font/google'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { preconnect } from 'react-dom'
+import { getSite } from '@/sanity/lib/data'
+import { SanityLive } from '@/sanity/lib/live'
 import Footer from '@/ui/footer'
 import Header from '@/ui/header'
 import VisualEditing from '@/ui/modules/visual-editing'
-import { SanityLive } from '@/sanity/lib/live'
-import { getSite } from '@/sanity/lib/data'
 import { ThemeProvider } from '@/ui/theme-provider'
 import '@/app.css'
 
-const geist = Geist({ subsets: ['latin'], variable: '--font-geist', display: 'swap' })
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' })
-const dmSans = DM_Sans({ subsets: ['latin'], variable: '--font-dm-sans', display: 'swap' })
-const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-plus-jakarta-sans', display: 'swap' })
-const playfairDisplay = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair-display', display: 'swap' })
-const lora = Lora({ subsets: ['latin'], variable: '--font-lora', display: 'swap' })
-const libreBaskerville = Libre_Baskerville({ subsets: ['latin'], weight: ['400', '700'], variable: '--font-libre-baskerville', display: 'swap' })
-const cormorantGaramond = Cormorant_Garamond({ subsets: ['latin'], weight: ['400', '600', '700'], variable: '--font-cormorant-garamond', display: 'swap' })
-const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains-mono', display: 'swap' })
-const spaceMono = Space_Mono({ subsets: ['latin'], weight: ['400', '700'], variable: '--font-space-mono', display: 'swap' })
-const poppins = Poppins({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-poppins', display: 'swap' })
+const geist = Geist({
+	subsets: ['latin'],
+	variable: '--font-geist',
+	display: 'swap',
+})
+const inter = Inter({
+	subsets: ['latin'],
+	variable: '--font-inter',
+	display: 'swap',
+})
+const dmSans = DM_Sans({
+	subsets: ['latin'],
+	variable: '--font-dm-sans',
+	display: 'swap',
+})
+const plusJakartaSans = Plus_Jakarta_Sans({
+	subsets: ['latin'],
+	variable: '--font-plus-jakarta-sans',
+	display: 'swap',
+})
+const playfairDisplay = Playfair_Display({
+	subsets: ['latin'],
+	variable: '--font-playfair-display',
+	display: 'swap',
+})
+const lora = Lora({
+	subsets: ['latin'],
+	variable: '--font-lora',
+	display: 'swap',
+})
+const libreBaskerville = Libre_Baskerville({
+	subsets: ['latin'],
+	weight: ['400', '700'],
+	variable: '--font-libre-baskerville',
+	display: 'swap',
+})
+const cormorantGaramond = Cormorant_Garamond({
+	subsets: ['latin'],
+	weight: ['400', '600', '700'],
+	variable: '--font-cormorant-garamond',
+	display: 'swap',
+})
+const jetbrainsMono = JetBrains_Mono({
+	subsets: ['latin'],
+	variable: '--font-jetbrains-mono',
+	display: 'swap',
+})
+const spaceMono = Space_Mono({
+	subsets: ['latin'],
+	weight: ['400', '700'],
+	variable: '--font-space-mono',
+	display: 'swap',
+})
+const poppins = Poppins({
+	subsets: ['latin'],
+	weight: ['400', '500', '600', '700'],
+	variable: '--font-poppins',
+	display: 'swap',
+})
 
 const ALL_FONT_CLASSES = [
 	geist.variable,
@@ -48,17 +96,17 @@ const ALL_FONT_CLASSES = [
 ].join(' ')
 
 const FONT_VAR_MAP: Record<string, string> = {
-	'geist': 'var(--font-geist)',
-	'inter': 'var(--font-inter)',
+	geist: 'var(--font-geist)',
+	inter: 'var(--font-inter)',
 	'dm-sans': 'var(--font-dm-sans)',
 	'plus-jakarta-sans': 'var(--font-plus-jakarta-sans)',
 	'playfair-display': 'var(--font-playfair-display)',
-	'lora': 'var(--font-lora)',
+	lora: 'var(--font-lora)',
 	'libre-baskerville': 'var(--font-libre-baskerville)',
 	'cormorant-garamond': 'var(--font-cormorant-garamond)',
 	'jetbrains-mono': 'var(--font-jetbrains-mono)',
 	'space-mono': 'var(--font-space-mono)',
-	'poppins': 'var(--font-poppins)',
+	poppins: 'var(--font-poppins)',
 }
 
 function sanitizeHex(v: string | undefined): string | undefined {
@@ -92,11 +140,15 @@ export default async function RootLayout({
 	}
 
 	const themeVars = Object.fromEntries(
-		Object.entries(rawVars).filter((e): e is [string, string] => e[1] !== undefined),
+		Object.entries(rawVars).filter(
+			(e): e is [string, string] => e[1] !== undefined,
+		),
 	)
 
 	const themeCSS = Object.keys(themeVars).length
-		? `:root{${Object.entries(themeVars).map(([k, v]) => `${k}:${v};`).join('')}}`
+		? `:root{${Object.entries(themeVars)
+				.map(([k, v]) => `${k}:${v};`)
+				.join('')}}`
 		: ''
 
 	return (
@@ -107,7 +159,10 @@ export default async function RootLayout({
 			suppressHydrationWarning
 		>
 			<NuqsAdapter>
-				<body className="bg-background text-foreground antialiased" suppressHydrationWarning>
+				<body
+					className="bg-background text-foreground antialiased"
+					suppressHydrationWarning
+				>
 					{themeCSS && <style>{themeCSS}</style>}
 					<ThemeProvider vars={themeVars} />
 					<Header />

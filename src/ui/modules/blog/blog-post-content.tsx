@@ -13,7 +13,11 @@ import Categories from './categories'
 import Date from './date'
 import Schema from './schema'
 
-type BlogCategory = { _id?: string; title?: string; slug?: { current?: string } }
+type BlogCategory = {
+	_id?: string
+	title?: string
+	slug?: { current?: string }
+}
 type Person = { name?: string; image?: unknown }
 
 export default function ({
@@ -53,7 +57,6 @@ export default function ({
 				</header>
 
 				<section className="section gap-lh flex max-md:flex-col md:items-start">
-
 					<div className={cn(css.body, 'prose mx-auto grid w-full max-w-4xl')}>
 						<PortableText
 							value={post.content ?? []}

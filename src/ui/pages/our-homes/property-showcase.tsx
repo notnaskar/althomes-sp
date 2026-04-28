@@ -52,7 +52,7 @@ export default function PropertyShowcase({
 	priceFrom,
 }: Props) {
 	return (
-		<section className="relative grid grid-cols-[768fr_625fr] min-h-[912px] overflow-visible max-[820px]:grid-cols-1 max-[820px]:min-h-0">
+		<section className="relative grid min-h-[912px] grid-cols-[768fr_625fr] overflow-visible max-[820px]:min-h-0 max-[820px]:grid-cols-1">
 			{/* CONTENT: showcaseDecorImage */}
 			{showcaseDecorImage?.asset && (
 				<div
@@ -88,46 +88,46 @@ export default function PropertyShowcase({
 						sizes="(max-width: 820px) 100vw, 55vw"
 						loading="eager"
 						priority
-						className="object-cover rounded-[10px_5px_5px_10px] max-[820px]:rounded-none"
+						className="rounded-[10px_5px_5px_10px] object-cover max-[820px]:rounded-none"
 					/>
 				) : (
-					<div className="absolute inset-0 bg-muted rounded-[10px_5px_5px_10px] max-[820px]:rounded-none" />
+					<div className="bg-muted absolute inset-0 rounded-[10px_5px_5px_10px] max-[820px]:rounded-none" />
 				)}
 
 				{/* Overlay */}
-				<div className="absolute bottom-0 inset-x-0 pt-[120px] pb-[40px] px-[140px] z-[2] bg-gradient-to-t from-black/[0.55] to-transparent flex flex-col items-center gap-1 max-[820px]:px-[40px] max-[820px]:pb-6">
+				<div className="absolute inset-x-0 bottom-0 z-[2] flex flex-col items-center gap-1 bg-gradient-to-t from-black/[0.55] to-transparent px-[140px] pt-[120px] pb-[40px] max-[820px]:px-[40px] max-[820px]:pb-6">
 					{/* CONTENT: tagline */}
 					{tagline && (
-						<span className="text-[14px] tracking-[0.07em] text-white text-center">
+						<span className="text-center text-[14px] tracking-[0.07em] text-white">
 							{tagline}
 						</span>
 					)}
 					{/* CONTENT: title */}
-					<h2 className="font-heading italic text-[55px] leading-[1] tracking-[0.07em] text-white text-center max-[820px]:text-[36px]">
+					<h2 className="font-heading text-center text-[55px] leading-[1] tracking-[0.07em] text-white italic max-[820px]:text-[36px]">
 						{title}
 					</h2>
 				</div>
 			</div>
 
 			{/* Right panel — content */}
-			<div className="flex flex-col justify-start pt-[44px] pb-[44px] pl-[90px] pr-0 gap-[33px] max-[820px]:px-[18px] max-[820px]:py-8 max-[820px]:gap-6">
+			<div className="flex flex-col justify-start gap-[33px] pt-[44px] pr-0 pb-[44px] pl-[90px] max-[820px]:gap-6 max-[820px]:px-[18px] max-[820px]:py-8">
 				{/* CONTENT: shortDescription */}
 				{shortDescription && (
-					<p className="text-[15px] leading-[1.533] tracking-[0.1em] text-foreground whitespace-pre-line">
+					<p className="text-foreground text-[15px] leading-[1.533] tracking-[0.1em] whitespace-pre-line">
 						{shortDescription}
 					</p>
 				)}
 
 				{/* CONTENT: pullQuote */}
 				{pullQuote && (
-					<p className="font-heading italic text-[30px] leading-[40px] tracking-[0.1em] text-foreground max-w-[432px] max-[820px]:text-[22px] max-[820px]:leading-[32px] max-[820px]:max-w-full">
+					<p className="font-heading text-foreground max-w-[432px] text-[30px] leading-[40px] tracking-[0.1em] italic max-[820px]:max-w-full max-[820px]:text-[22px] max-[820px]:leading-[32px]">
 						{pullQuote}
 					</p>
 				)}
 
 				{/* CONTENT: showcaseSecondaryImage */}
 				{showcaseSecondaryImage?.asset && (
-					<div className="relative w-full max-w-[625px] h-[337px] rounded-[5px_10px_10px_5px] overflow-hidden flex-shrink-0 max-[820px]:h-[200px]">
+					<div className="relative h-[337px] w-full max-w-[625px] flex-shrink-0 overflow-hidden rounded-[5px_10px_10px_5px] max-[820px]:h-[200px]">
 						<Image
 							src={urlFor(showcaseSecondaryImage.asset).url()}
 							alt={showcaseSecondaryImage.alt ?? ''}
@@ -140,12 +140,12 @@ export default function PropertyShowcase({
 
 				{/* Meta row: location + amenities */}
 				{(locationHeadline || cardAmenities) && (
-					<div className="flex flex-row gap-[40px] items-start max-[820px]:flex-col max-[820px]:gap-5">
+					<div className="flex flex-row items-start gap-[40px] max-[820px]:flex-col max-[820px]:gap-5">
 						{/* CONTENT: locationHeadline */}
 						{locationHeadline && (
-							<div className="flex flex-col gap-2 flex-shrink-0">
+							<div className="flex flex-shrink-0 flex-col gap-2">
 								<FiMapPin size={33} className="text-foreground" />
-								<p className="font-bold text-[15px] leading-[16px] tracking-[0.1em] text-foreground max-w-[189px]">
+								<p className="text-foreground max-w-[189px] text-[15px] leading-[16px] font-bold tracking-[0.1em]">
 									{locationHeadline}
 								</p>
 							</div>
@@ -153,14 +153,14 @@ export default function PropertyShowcase({
 						<div className="flex flex-col gap-1">
 							{/* CONTENT: cardAmenities */}
 							{cardAmenities && (
-								<p className="text-[15px] leading-[23px] tracking-[0.1em] text-foreground whitespace-pre-line">
+								<p className="text-foreground text-[15px] leading-[23px] tracking-[0.1em] whitespace-pre-line">
 									{cardAmenities}
 								</p>
 							)}
 							{/* STATIC */}
 							<Link
 								href={`/our-homes/${slug}`}
-								className="font-bold text-[12px] tracking-[0.3em] underline text-foreground uppercase"
+								className="text-foreground text-[12px] font-bold tracking-[0.3em] uppercase underline"
 							>
 								VIEW DETAILS
 							</Link>
@@ -172,17 +172,17 @@ export default function PropertyShowcase({
 				{priceFrom && (
 					<div className="flex flex-col gap-[5px]">
 						<div className="flex flex-col">
-							<span className="font-bold text-[15px] leading-[16px] tracking-[0.1em] text-foreground">
+							<span className="text-foreground text-[15px] leading-[16px] font-bold tracking-[0.1em]">
 								{priceFrom}
 							</span>
 							{/* STATIC */}
-							<span className="text-[9px] leading-[23px] tracking-[0.1em] text-foreground">
+							<span className="text-foreground text-[9px] leading-[23px] tracking-[0.1em]">
 								Tax Inclusive
 							</span>
 						</div>
 						<Link
 							href={`/our-homes/${slug}`}
-							className="inline-flex items-center justify-center bg-accent text-accent-foreground font-bold text-[12px] tracking-[0.3em] uppercase rounded-[5px] w-[144px] h-[33px]"
+							className="bg-accent text-accent-foreground inline-flex h-[33px] w-[144px] items-center justify-center rounded-[5px] text-[12px] font-bold tracking-[0.3em] uppercase"
 						>
 							BOOK NOW
 						</Link>

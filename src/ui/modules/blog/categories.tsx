@@ -1,7 +1,12 @@
 import Link from 'next/link'
 import { ROUTES } from '@/lib/env'
 import { cn } from '@/lib/utils'
-type BlogCategory = { _id?: string; title?: string; slug?: { current?: string } }
+
+type BlogCategory = {
+	_id?: string
+	title?: string
+	slug?: { current?: string }
+}
 
 export default function ({
 	categories,

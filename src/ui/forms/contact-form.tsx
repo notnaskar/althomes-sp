@@ -1,11 +1,11 @@
 'use client'
 
-import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useState } from 'react'
 import Link from 'next/link'
-import { contactSchema, type ContactInput } from '@/lib/schemas/contact'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { submitContact } from '@/actions/contact'
+import { contactSchema, type ContactInput } from '@/lib/schemas/contact'
 
 export default function ContactForm() {
 	const [success, setSuccess] = useState(false)
@@ -42,17 +42,24 @@ export default function ContactForm() {
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
 			{/* Honeypot */}
-			<input type="text" {...register('_hp')} className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+			<input
+				type="text"
+				{...register('_hp')}
+				className="hidden"
+				tabIndex={-1}
+				autoComplete="off"
+				aria-hidden="true"
+			/>
 
 			<div>
-				<label htmlFor="cf-name" className="block text-sm font-semibold mb-1">
+				<label htmlFor="cf-name" className="mb-1 block text-sm font-semibold">
 					NAME
 				</label>
 				<input
 					id="cf-name"
 					type="text"
 					{...register('name')}
-					className="w-full rounded-lg border px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black"
+					className="w-full rounded-lg border px-4 py-3 text-sm focus:ring-2 focus:ring-black focus:outline-none"
 				/>
 				{errors.name && (
 					<p className="mt-1 text-xs text-red-600">{errors.name.message}</p>
@@ -60,14 +67,14 @@ export default function ContactForm() {
 			</div>
 
 			<div>
-				<label htmlFor="cf-email" className="block text-sm font-semibold mb-1">
+				<label htmlFor="cf-email" className="mb-1 block text-sm font-semibold">
 					EMAIL
 				</label>
 				<input
 					id="cf-email"
 					type="email"
 					{...register('email')}
-					className="w-full rounded-lg border px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black"
+					className="w-full rounded-lg border px-4 py-3 text-sm focus:ring-2 focus:ring-black focus:outline-none"
 				/>
 				{errors.email && (
 					<p className="mt-1 text-xs text-red-600">{errors.email.message}</p>
@@ -75,14 +82,14 @@ export default function ContactForm() {
 			</div>
 
 			<div>
-				<label htmlFor="cf-phone" className="block text-sm font-semibold mb-1">
+				<label htmlFor="cf-phone" className="mb-1 block text-sm font-semibold">
 					PHONE
 				</label>
 				<input
 					id="cf-phone"
 					type="tel"
 					{...register('phone')}
-					className="w-full rounded-lg border px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black"
+					className="w-full rounded-lg border px-4 py-3 text-sm focus:ring-2 focus:ring-black focus:outline-none"
 				/>
 				{errors.phone && (
 					<p className="mt-1 text-xs text-red-600">{errors.phone.message}</p>
@@ -90,14 +97,17 @@ export default function ContactForm() {
 			</div>
 
 			<div>
-				<label htmlFor="cf-message" className="block text-sm font-semibold mb-1">
+				<label
+					htmlFor="cf-message"
+					className="mb-1 block text-sm font-semibold"
+				>
 					MESSAGE
 				</label>
 				<textarea
 					id="cf-message"
 					rows={5}
 					{...register('message')}
-					className="w-full rounded-lg border px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black resize-none"
+					className="w-full resize-none rounded-lg border px-4 py-3 text-sm focus:ring-2 focus:ring-black focus:outline-none"
 				/>
 				{errors.message && (
 					<p className="mt-1 text-xs text-red-600">{errors.message.message}</p>
@@ -122,14 +132,12 @@ export default function ContactForm() {
 				<p className="text-xs text-red-600">{errors.privacyConsent.message}</p>
 			)}
 
-			{serverError && (
-				<p className="text-sm text-red-600">{serverError}</p>
-			)}
+			{serverError && <p className="text-sm text-red-600">{serverError}</p>}
 
 			<button
 				type="submit"
 				disabled={isSubmitting}
-				className="w-full rounded-full bg-black py-4 text-sm font-bold text-white hover:bg-gray-800 transition disabled:opacity-50"
+				className="w-full rounded-full bg-black py-4 text-sm font-bold text-white transition hover:bg-gray-800 disabled:opacity-50"
 			>
 				{isSubmitting ? 'Sending…' : 'SEND MESSAGE'}
 			</button>

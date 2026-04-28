@@ -1,9 +1,18 @@
 import { PortableText } from 'next-sanity'
-type Form = { _type?: 'form'; endpoint?: string; identifier?: string; fields?: any[] }
-type FormModule = { overline?: any; intro?: any[]; form?: Form } & Record<string, unknown>
+import Overline from '@/ui/overline'
 import { moduleAttributes } from '..'
 import Resolver from './resolver'
-import Overline from '@/ui/overline'
+
+type Form = {
+	_type?: 'form'
+	endpoint?: string
+	identifier?: string
+	fields?: any[]
+}
+type FormModule = { overline?: any; intro?: any[]; form?: Form } & Record<
+	string,
+	unknown
+>
 
 export default function ({ overline, intro, form, ...props }: FormModule) {
 	return (

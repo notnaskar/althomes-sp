@@ -1,4 +1,4 @@
-import { getSite, getAllProperties } from '@/sanity/lib/data'
+import { getAllProperties, getSite } from '@/sanity/lib/data'
 import FooterCol from '@/ui/molecules/footer-col'
 import SocialLinks from '@/ui/molecules/social-links'
 
@@ -8,16 +8,16 @@ export default async function Footer() {
 	return (
 		<footer style={{ background: '#2F5D50', color: '#FCF6EA' }}>
 			<div
-				className="flex flex-wrap gap-16 max-[820px]:flex-col max-[820px]:gap-7 max-[820px]:items-center max-[820px]:text-center"
+				className="flex flex-wrap gap-16 max-[820px]:flex-col max-[820px]:items-center max-[820px]:gap-7 max-[820px]:text-center"
 				style={{ padding: '37px 90px 30px' }}
 			>
 				{/* Brand */}
-				<div className="font-['Playfair_Display'] italic text-[49px] leading-none tracking-[0.1em] text-white self-start max-[820px]:self-auto">
+				<div className="self-start font-['Playfair_Display'] text-[49px] leading-none tracking-[0.1em] text-white italic max-[820px]:self-auto">
 					{site?.footerBrandName ?? site?.title ?? 'AltHomes'}
 				</div>
 
 				{/* Nav columns */}
-				<div className="flex gap-16 ml-auto max-[820px]:ml-0 max-[820px]:flex-wrap max-[820px]:justify-center max-[820px]:gap-7">
+				<div className="ml-auto flex gap-16 max-[820px]:ml-0 max-[820px]:flex-wrap max-[820px]:justify-center max-[820px]:gap-7">
 					{/* OUR HOMES */}
 					{properties && properties.length > 0 && (
 						<div>
@@ -52,14 +52,20 @@ export default async function Footer() {
 					{site?.footerAboutLinks && site.footerAboutLinks.length > 0 && (
 						<FooterCol
 							heading="ABOUT"
-							links={site.footerAboutLinks.map((l) => ({ label: l.label ?? '', url: l.url ?? '#' }))}
+							links={site.footerAboutLinks.map((l) => ({
+								label: l.label ?? '',
+								url: l.url ?? '#',
+							}))}
 						/>
 					)}
 
 					{site?.footerPolicyLinks && site.footerPolicyLinks.length > 0 && (
 						<FooterCol
 							heading="POLICIES"
-							links={site.footerPolicyLinks.map((l) => ({ label: l.label ?? '', url: l.url ?? '#' }))}
+							links={site.footerPolicyLinks.map((l) => ({
+								label: l.label ?? '',
+								url: l.url ?? '#',
+							}))}
 						/>
 					)}
 				</div>

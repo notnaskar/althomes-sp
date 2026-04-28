@@ -15,23 +15,33 @@ export default presentationTool({
 			}),
 			ourHomesPage: defineLocations({
 				select: { title: 'heroHeadline' },
-				resolve: () => ({ locations: [{ title: 'Our Homes', href: '/our-homes' }] }),
+				resolve: () => ({
+					locations: [{ title: 'Our Homes', href: '/our-homes' }],
+				}),
 			}),
 			altWayPage: defineLocations({
 				select: { title: 'heroHeadline' },
-				resolve: () => ({ locations: [{ title: 'The Alt Way', href: '/the-alt-way' }] }),
+				resolve: () => ({
+					locations: [{ title: 'The Alt Way', href: '/the-alt-way' }],
+				}),
 			}),
 			experiencesPage: defineLocations({
 				select: { title: 'heroHeadline' },
-				resolve: () => ({ locations: [{ title: 'Experiences', href: '/experiences' }] }),
+				resolve: () => ({
+					locations: [{ title: 'Experiences', href: '/experiences' }],
+				}),
 			}),
 			joinUsPage: defineLocations({
 				select: { title: 'heroHeadline' },
-				resolve: () => ({ locations: [{ title: 'Join Us', href: '/join-us' }] }),
+				resolve: () => ({
+					locations: [{ title: 'Join Us', href: '/join-us' }],
+				}),
 			}),
 			contactPage: defineLocations({
 				select: { title: 'heroHeadline' },
-				resolve: () => ({ locations: [{ title: 'Contact', href: '/contact' }] }),
+				resolve: () => ({
+					locations: [{ title: 'Contact', href: '/contact' }],
+				}),
 			}),
 			page: defineLocations({
 				select: {

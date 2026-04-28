@@ -1,4 +1,4 @@
-import { defineType, defineField } from 'sanity'
+import { defineField, defineType } from 'sanity'
 
 export default defineType({
 	name: 'joinUsPage',
@@ -20,9 +20,7 @@ export default defineType({
 			title: 'Hero Image',
 			type: 'image',
 			options: { hotspot: true },
-			fields: [
-				defineField({ name: 'alt', type: 'string', title: 'Alt text' }),
-			],
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
 		}),
 		defineField({
 			name: 'bodyParagraph',
@@ -45,9 +43,7 @@ export default defineType({
 			title: 'Property Image',
 			type: 'image',
 			options: { hotspot: true },
-			fields: [
-				defineField({ name: 'alt', type: 'string', title: 'Alt text' }),
-			],
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
 		}),
 		defineField({
 			name: 'formHeadline',

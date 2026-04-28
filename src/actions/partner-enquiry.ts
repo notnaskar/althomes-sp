@@ -1,8 +1,8 @@
 'use server'
 
 import { Resend } from 'resend'
-import { getSite } from '@/sanity/lib/data'
 import type { PartnerInput } from '@/lib/schemas/partner'
+import { getSite } from '@/sanity/lib/data'
 
 export async function submitPartner(data: PartnerInput) {
 	if (data._hp) return { success: false, error: 'Bot detected' }

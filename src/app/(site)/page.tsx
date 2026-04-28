@@ -1,8 +1,8 @@
-import { getHomePage, getSite } from '@/sanity/lib/data'
-import { notFound } from 'next/navigation'
-import type { Metadata } from 'next'
-import { urlFor } from '@/sanity/lib/image'
 import pkg from '@@/package.json'
+import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import { getHomePage, getSite } from '@/sanity/lib/data'
+import { urlFor } from '@/sanity/lib/image'
 import HomeHero from '@/ui/home-hero'
 
 export default async function HomePage() {

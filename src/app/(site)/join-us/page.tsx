@@ -1,8 +1,8 @@
-import { getJoinUsPage, getSite } from '@/sanity/lib/data'
-import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import Img from '@/ui/img'
+import { notFound } from 'next/navigation'
+import { getJoinUsPage, getSite } from '@/sanity/lib/data'
 import PartnerForm from '@/ui/forms/partner-form'
+import Img from '@/ui/img'
 
 export default async function JoinUsPage() {
 	const page = await getJoinUsPage()
@@ -18,16 +18,16 @@ export default async function JoinUsPage() {
 						width={1440}
 						loading="eager"
 						alt={page.heroImage.alt ?? ''}
-						className="w-full h-[60vh] object-cover opacity-70"
+						className="h-[60vh] w-full object-cover opacity-70"
 					/>
 					<div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
 						{page.heroHeadline && (
-							<h1 className="text-4xl md:text-6xl font-bold text-white">
+							<h1 className="text-4xl font-bold text-white md:text-6xl">
 								{page.heroHeadline}
 							</h1>
 						)}
 						{page.pullQuote && (
-							<p className="mt-6 text-xl md:text-2xl italic text-white/80 max-w-2xl">
+							<p className="mt-6 max-w-2xl text-xl text-white/80 italic md:text-2xl">
 								{page.pullQuote}
 							</p>
 						)}
@@ -39,10 +39,12 @@ export default async function JoinUsPage() {
 			{!page.heroImage && (page.heroHeadline || page.pullQuote) && (
 				<section className="container py-20 text-center">
 					{page.heroHeadline && (
-						<h1 className="text-4xl md:text-6xl font-bold">{page.heroHeadline}</h1>
+						<h1 className="text-4xl font-bold md:text-6xl">
+							{page.heroHeadline}
+						</h1>
 					)}
 					{page.pullQuote && (
-						<p className="mt-6 text-xl italic text-gray-500 max-w-2xl mx-auto">
+						<p className="mx-auto mt-6 max-w-2xl text-xl text-gray-500 italic">
 							{page.pullQuote}
 						</p>
 					)}
@@ -50,14 +52,16 @@ export default async function JoinUsPage() {
 			)}
 
 			{/* Body section — two-column */}
-			<section className="container py-16 grid gap-12 md:grid-cols-2">
+			<section className="container grid gap-12 py-16 md:grid-cols-2">
 				{/* Left: body paragraph + bullet points */}
 				<div className="space-y-6">
 					{page.bodyParagraph && (
-						<p className="text-lg text-gray-700 leading-relaxed">{page.bodyParagraph}</p>
+						<p className="text-lg leading-relaxed text-gray-700">
+							{page.bodyParagraph}
+						</p>
 					)}
 					{page.bulletPoints && page.bulletPoints.length > 0 && (
-						<ul className="list-disc pl-6 space-y-2 text-gray-700">
+						<ul className="list-disc space-y-2 pl-6 text-gray-700">
 							{page.bulletPoints.map((point, i) => (
 								<li key={i}>{point}</li>
 							))}
@@ -68,7 +72,9 @@ export default async function JoinUsPage() {
 				{/* Right: CTA text + property image */}
 				<div className="space-y-6">
 					{page.formCTAText && (
-						<p className="text-xl font-semibold text-gray-800">{page.formCTAText}</p>
+						<p className="text-xl font-semibold text-gray-800">
+							{page.formCTAText}
+						</p>
 					)}
 					{page.propertyImage && (
 						<div className="overflow-hidden rounded-xl">
@@ -76,7 +82,7 @@ export default async function JoinUsPage() {
 								image={page.propertyImage}
 								width={600}
 								alt={page.propertyImage.alt ?? ''}
-								className="w-full h-auto object-cover"
+								className="h-auto w-full object-cover"
 							/>
 						</div>
 					)}
@@ -86,7 +92,9 @@ export default async function JoinUsPage() {
 			{/* Form section */}
 			<section className="container py-16">
 				{page.formHeadline && (
-					<h2 className="text-3xl font-bold mb-8 text-center">{page.formHeadline}</h2>
+					<h2 className="mb-8 text-center text-3xl font-bold">
+						{page.formHeadline}
+					</h2>
 				)}
 				<PartnerForm />
 			</section>

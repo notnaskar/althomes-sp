@@ -1,8 +1,8 @@
 'use server'
 
 import { Resend } from 'resend'
-import { getSite } from '@/sanity/lib/data'
 import type { ContactInput } from '@/lib/schemas/contact'
+import { getSite } from '@/sanity/lib/data'
 
 export async function submitContact(data: ContactInput) {
 	if (data._hp) return { success: false, error: 'Bot detected' }
