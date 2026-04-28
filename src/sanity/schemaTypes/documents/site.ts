@@ -144,7 +144,8 @@ export default defineType({
 			name: 'footerBrandName',
 			title: 'Footer Brand Name',
 			type: 'string',
-			description: 'Italic brand text in footer. Falls back to Site Title if empty.',
+			description:
+				'Italic brand text in footer. Falls back to Site Title if empty.',
 			group: 'footer',
 		}),
 		defineField({
@@ -181,35 +182,70 @@ export default defineType({
 			name: 'heroBgCircle',
 			title: 'Hero Background Circle',
 			type: 'image',
-			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text', initialValue: '' })],
+			fields: [
+				defineField({
+					name: 'alt',
+					type: 'string',
+					title: 'Alt text',
+					initialValue: '',
+				}),
+			],
 			group: 'assets',
 		}),
 		defineField({
 			name: 'heroFgCircle',
 			title: 'Hero Foreground Circle (photo frame)',
 			type: 'image',
-			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text', initialValue: '' })],
+			fields: [
+				defineField({
+					name: 'alt',
+					type: 'string',
+					title: 'Alt text',
+					initialValue: '',
+				}),
+			],
 			group: 'assets',
 		}),
 		defineField({
 			name: 'heroDecorStars',
 			title: 'Hero Decor — Stars',
 			type: 'image',
-			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text', initialValue: '' })],
+			fields: [
+				defineField({
+					name: 'alt',
+					type: 'string',
+					title: 'Alt text',
+					initialValue: '',
+				}),
+			],
 			group: 'assets',
 		}),
 		defineField({
 			name: 'heroDecorFlowers',
 			title: 'Hero Decor — Flowers',
 			type: 'image',
-			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text', initialValue: '' })],
+			fields: [
+				defineField({
+					name: 'alt',
+					type: 'string',
+					title: 'Alt text',
+					initialValue: '',
+				}),
+			],
 			group: 'assets',
 		}),
 		defineField({
 			name: 'heroDecorStripes',
 			title: 'Hero Decor — Stripes',
 			type: 'image',
-			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text', initialValue: '' })],
+			fields: [
+				defineField({
+					name: 'alt',
+					type: 'string',
+					title: 'Alt text',
+					initialValue: '',
+				}),
+			],
 			group: 'assets',
 		}),
 		defineField({
@@ -231,9 +267,17 @@ export default defineType({
 			group: 'colours',
 			fields: [
 				{ name: 'primary', type: 'string', title: 'Primary (Hex)' },
-				{ name: 'primaryForeground', type: 'string', title: 'Primary Foreground (Hex)' },
+				{
+					name: 'primaryForeground',
+					type: 'string',
+					title: 'Primary Foreground (Hex)',
+				},
 				{ name: 'accent', type: 'string', title: 'Accent (Hex)' },
-				{ name: 'accentForeground', type: 'string', title: 'Accent Foreground (Hex)' },
+				{
+					name: 'accentForeground',
+					type: 'string',
+					title: 'Accent Foreground (Hex)',
+				},
 				{ name: 'background', type: 'string', title: 'Background (Hex)' },
 				{ name: 'foreground', type: 'string', title: 'Foreground (Hex)' },
 				{ name: 'muted', type: 'string', title: 'Muted (Hex)' },
