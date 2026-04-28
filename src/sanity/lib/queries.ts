@@ -11,7 +11,14 @@ export const HOME_PAGE_QUERY = defineQuery(`*[_type == 'homePage' && _id == 'hom
 	}
 }`)
 
-export const OUR_HOMES_PAGE_QUERY = defineQuery(`*[_type == 'ourHomesPage' && _id == 'ourHomesPage'][0]`)
+export const OUR_HOMES_PAGE_QUERY = defineQuery(`*[_type == 'ourHomesPage' && _id == 'ourHomesPage'][0]{
+	heroHeadline,
+	heroImage { asset->, alt },
+	ctaQuestion,
+	experiencesCtaLabel,
+	ctaBackground { asset->, alt },
+	seo
+}`)
 
 export const ALT_WAY_PAGE_QUERY = defineQuery(`*[_type == 'altWayPage' && _id == 'altWayPage'][0]{
 	...,
@@ -25,7 +32,11 @@ export const ALT_WAY_PAGE_QUERY = defineQuery(`*[_type == 'altWayPage' && _id ==
 
 export const EXPERIENCES_PAGE_QUERY = defineQuery(`*[_type == 'experiencesPage' && _id == 'experiencesPage'][0]{
 	...,
-	heroBackground { asset->, alt }
+	heroBackground { asset->, alt },
+	heroFlower { asset->, alt },
+	decorBasket { asset->, alt },
+	decorStars { asset->, alt },
+	decorDaisy { asset->, alt }
 }`)
 
 export const JOIN_US_PAGE_QUERY = defineQuery(`*[_type == 'joinUsPage' && _id == 'joinUsPage'][0]{
@@ -49,6 +60,17 @@ export const ALL_PROPERTIES_QUERY = defineQuery(`*[_type == 'property' && status
 	tagline,
 	shortDescription,
 	cardThumbnail { asset->, alt },
+	heroImage { asset->, alt },
+	showcaseSecondaryImage { asset->, alt },
+	showcaseDecorImage { asset->, alt },
+	showcaseDecorTop,
+	showcaseDecorRight,
+	showcaseDecorWidth,
+	showcaseDecorHeight,
+	showcaseDecorRotation,
+	pullQuote,
+	locationHeadline,
+	cardAmenities,
 	propertyType,
 	priceFrom,
 	maxGuests,

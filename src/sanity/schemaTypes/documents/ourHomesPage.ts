@@ -28,6 +28,20 @@ export default defineType({
 			type: 'string',
 		}),
 		defineField({
+			name: 'ctaQuestion',
+			title: 'CTA Question',
+			type: 'text',
+			description: 'Italic question/headline above the experiences CTA button',
+		}),
+		defineField({
+			name: 'ctaBackground',
+			title: 'CTA Background Image',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [{ name: 'alt', type: 'string', title: 'Alt text' }],
+			description: 'Mountain/landscape background for the bottom CTA section',
+		}),
+		defineField({
 			name: 'seo',
 			title: 'SEO',
 			type: 'seo',

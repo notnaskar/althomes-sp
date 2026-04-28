@@ -879,6 +879,27 @@ export type Property = {
 		_type: 'image'
 	}
 	cardAmenities?: string
+	showcaseSecondaryImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	showcaseDecorImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	showcaseDecorTop?: string
+	showcaseDecorRight?: string
+	showcaseDecorWidth?: number
+	showcaseDecorHeight?: number
+	showcaseDecorRotation?: number
 	propertyType?: string
 	priceFrom?: string
 	heroImage?: {
@@ -889,8 +910,8 @@ export type Property = {
 		alt?: string
 		_type: 'image'
 	}
-	description?: BlockContent
 	pullQuote?: string
+	description?: BlockContent
 	gallery?: Array<{
 		asset?: SanityImageAssetReference
 		media?: unknown
@@ -971,6 +992,15 @@ export type OurHomesPage = {
 	}
 	experiencesCtaBody?: BlockContent
 	experiencesCtaLabel?: string
+	ctaQuestion?: string
+	ctaBackground?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
 	seo?: Seo
 }
 
@@ -1056,7 +1086,6 @@ export type ExperiencesPage = {
 	_updatedAt: string
 	_rev: string
 	heroHeadline?: string
-	heroSubtext?: string
 	heroBackground?: {
 		asset?: SanityImageAssetReference
 		media?: unknown
@@ -1065,9 +1094,41 @@ export type ExperiencesPage = {
 		alt?: string
 		_type: 'image'
 	}
-	introBody?: BlockContent
-	discountBadgeText?: string
 	cardsMaxShown?: number
+	leadingTagline?: string
+	supportingTagline?: string
+	heroFlower?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	decorBasket?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	decorStars?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	decorDaisy?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
 	seo?: Seo
 }
 
@@ -1968,25 +2029,62 @@ export type HOME_PAGE_QUERY_RESULT = {
 
 // Source: src/sanity/lib/queries.ts
 // Variable: OUR_HOMES_PAGE_QUERY
-// Query: *[_type == 'ourHomesPage' && _id == 'ourHomesPage'][0]
+// Query: *[_type == 'ourHomesPage' && _id == 'ourHomesPage'][0]{	heroHeadline,	heroImage { asset->, alt },	ctaQuestion,	experiencesCtaLabel,	ctaBackground { asset->, alt },	seo}
 export type OUR_HOMES_PAGE_QUERY_RESULT = {
-	_id: 'ourHomesPage'
-	_type: 'ourHomesPage'
-	_createdAt: string
-	_updatedAt: string
-	_rev: string
-	heroHeadline?: string
-	heroImage?: {
-		asset?: SanityImageAssetReference
-		media?: unknown
-		hotspot?: SanityImageHotspot
-		crop?: SanityImageCrop
-		alt?: string
-		_type: 'image'
-	}
-	experiencesCtaBody?: BlockContent
-	experiencesCtaLabel?: string
-	seo?: Seo
+	heroHeadline: string | null
+	heroImage: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
+	ctaQuestion: string | null
+	experiencesCtaLabel: string | null
+	ctaBackground: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
+	seo: Seo | null
 } | null
 
 // Source: src/sanity/lib/queries.ts
@@ -2106,7 +2204,7 @@ export type ALT_WAY_PAGE_QUERY_RESULT = {
 
 // Source: src/sanity/lib/queries.ts
 // Variable: EXPERIENCES_PAGE_QUERY
-// Query: *[_type == 'experiencesPage' && _id == 'experiencesPage'][0]{	...,	heroBackground { asset->, alt }}
+// Query: *[_type == 'experiencesPage' && _id == 'experiencesPage'][0]{	...,	heroBackground { asset->, alt },	heroFlower { asset->, alt },	decorBasket { asset->, alt },	decorStars { asset->, alt },	decorDaisy { asset->, alt }}
 export type EXPERIENCES_PAGE_QUERY_RESULT = {
 	_id: 'experiencesPage'
 	_type: 'experiencesPage'
@@ -2114,7 +2212,6 @@ export type EXPERIENCES_PAGE_QUERY_RESULT = {
 	_updatedAt: string
 	_rev: string
 	heroHeadline?: string
-	heroSubtext?: string
 	heroBackground: {
 		asset: {
 			_id: string
@@ -2140,9 +2237,109 @@ export type EXPERIENCES_PAGE_QUERY_RESULT = {
 		} | null
 		alt: string | null
 	} | null
-	introBody?: BlockContent
-	discountBadgeText?: string
 	cardsMaxShown?: number
+	leadingTagline?: string
+	supportingTagline?: string
+	heroFlower: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
+	decorBasket: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
+	decorStars: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
+	decorDaisy: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
 	seo?: Seo
 } | null
 
@@ -2288,7 +2485,7 @@ export type ALL_LEGAL_PAGES_QUERY_RESULT = Array<string | null>
 
 // Source: src/sanity/lib/queries.ts
 // Variable: ALL_PROPERTIES_QUERY
-// Query: *[_type == 'property' && status != 'hidden'] | order(displayOrder asc){	_id,	title,	"slug": slug.current,	tagline,	shortDescription,	cardThumbnail { asset->, alt },	propertyType,	priceFrom,	maxGuests,	bedrooms,	bathrooms,	status,	displayOrder,	rentalwisePropertyId}
+// Query: *[_type == 'property' && status != 'hidden'] | order(displayOrder asc){	_id,	title,	"slug": slug.current,	tagline,	shortDescription,	cardThumbnail { asset->, alt },	heroImage { asset->, alt },	showcaseSecondaryImage { asset->, alt },	showcaseDecorImage { asset->, alt },	showcaseDecorTop,	showcaseDecorRight,	showcaseDecorWidth,	showcaseDecorHeight,	showcaseDecorRotation,	pullQuote,	locationHeadline,	cardAmenities,	propertyType,	priceFrom,	maxGuests,	bedrooms,	bathrooms,	status,	displayOrder,	rentalwisePropertyId}
 export type ALL_PROPERTIES_QUERY_RESULT = Array<{
 	_id: string
 	title: string | null
@@ -2320,6 +2517,89 @@ export type ALL_PROPERTIES_QUERY_RESULT = Array<{
 		} | null
 		alt: string | null
 	} | null
+	heroImage: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
+	showcaseSecondaryImage: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
+	showcaseDecorImage: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
+	showcaseDecorTop: string | null
+	showcaseDecorRight: string | null
+	showcaseDecorWidth: number | null
+	showcaseDecorHeight: number | null
+	showcaseDecorRotation: number | null
+	pullQuote: string | null
+	locationHeadline: string | null
+	cardAmenities: string | null
 	propertyType: string | null
 	priceFrom: string | null
 	maxGuests: number | null
@@ -2373,6 +2653,27 @@ export type PROPERTY_QUERY_RESULT = {
 		alt: string | null
 	} | null
 	cardAmenities?: string
+	showcaseSecondaryImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	showcaseDecorImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	showcaseDecorTop?: string
+	showcaseDecorRight?: string
+	showcaseDecorWidth?: number
+	showcaseDecorHeight?: number
+	showcaseDecorRotation?: number
 	propertyType?: string
 	priceFrom?: string
 	heroImage: {
@@ -2400,8 +2701,8 @@ export type PROPERTY_QUERY_RESULT = {
 		} | null
 		alt: string | null
 	} | null
-	description?: BlockContent
 	pullQuote?: string
+	description?: BlockContent
 	gallery: Array<{
 		asset: {
 			_id: string
@@ -2970,14 +3271,14 @@ declare module '@sanity/client' {
 		'{\n\t\'blog\': *[_type == \'site\'][0]{\n\t\t"metadata": {\n\t\t\t"title": coalesce(seo.metaTitle, title) + " Blog",\n\t\t\t"description": seo.metaDescription\n\t\t}\n\t},\n\t\'posts\': *[_type == \'blog.post\' && metadata.noIndex != true]|order(publishDate desc){\n\t\ttitle,\n\t\tcontent,\n\t\tpublishDate,\n\t\tmetadata\n\t}\n}': BLOG_RSS_QUERY_RESULT
 		"*[_type == 'site' && _id == 'site'][0]": SITE_QUERY_RESULT
 		"*[_type == 'homePage' && _id == 'homePage'][0]{\n\t...,\n\theroImage { asset->, alt },\n\tnavLabels[]{\n\t\t...,\n\t\ttarget->{ _type, \"slug\": slug.current }\n\t}\n}": HOME_PAGE_QUERY_RESULT
-		"*[_type == 'ourHomesPage' && _id == 'ourHomesPage'][0]": OUR_HOMES_PAGE_QUERY_RESULT
+		"*[_type == 'ourHomesPage' && _id == 'ourHomesPage'][0]{\n\theroHeadline,\n\theroImage { asset->, alt },\n\tctaQuestion,\n\texperiencesCtaLabel,\n\tctaBackground { asset->, alt },\n\tseo\n}": OUR_HOMES_PAGE_QUERY_RESULT
 		"*[_type == 'altWayPage' && _id == 'altWayPage'][0]{\n\t...,\n\theroBackground { asset->, alt },\n\tmissionImage { asset->, alt },\n\teditorialImages[]{ asset->, alt },\n\t\"reviews\": *[_type=='review' && featured==true && published==true] | order(stayDate desc) [0..20]{\n\t\tguestName, rating, body, guestLocation, stayDate\n\t}\n}": ALT_WAY_PAGE_QUERY_RESULT
-		"*[_type == 'experiencesPage' && _id == 'experiencesPage'][0]{\n\t...,\n\theroBackground { asset->, alt }\n}": EXPERIENCES_PAGE_QUERY_RESULT
+		"*[_type == 'experiencesPage' && _id == 'experiencesPage'][0]{\n\t...,\n\theroBackground { asset->, alt },\n\theroFlower { asset->, alt },\n\tdecorBasket { asset->, alt },\n\tdecorStars { asset->, alt },\n\tdecorDaisy { asset->, alt }\n}": EXPERIENCES_PAGE_QUERY_RESULT
 		"*[_type == 'joinUsPage' && _id == 'joinUsPage'][0]{\n\t...,\n\theroImage { asset->, alt },\n\tpropertyImage { asset->, alt }\n}": JOIN_US_PAGE_QUERY_RESULT
 		"*[_type == 'contactPage' && _id == 'contactPage'][0]{\n\t...,\n\theroImage { asset->, alt }\n}": CONTACT_PAGE_QUERY_RESULT
 		"*[_type == 'legalPage' && slug.current == $slug][0]": LEGAL_PAGE_QUERY_RESULT
 		"*[_type == 'legalPage' && defined(slug.current)].slug.current": ALL_LEGAL_PAGES_QUERY_RESULT
-		"*[_type == 'property' && status != 'hidden'] | order(displayOrder asc){\n\t_id,\n\ttitle,\n\t\"slug\": slug.current,\n\ttagline,\n\tshortDescription,\n\tcardThumbnail { asset->, alt },\n\tpropertyType,\n\tpriceFrom,\n\tmaxGuests,\n\tbedrooms,\n\tbathrooms,\n\tstatus,\n\tdisplayOrder,\n\trentalwisePropertyId\n}": ALL_PROPERTIES_QUERY_RESULT
+		"*[_type == 'property' && status != 'hidden'] | order(displayOrder asc){\n\t_id,\n\ttitle,\n\t\"slug\": slug.current,\n\ttagline,\n\tshortDescription,\n\tcardThumbnail { asset->, alt },\n\theroImage { asset->, alt },\n\tshowcaseSecondaryImage { asset->, alt },\n\tshowcaseDecorImage { asset->, alt },\n\tshowcaseDecorTop,\n\tshowcaseDecorRight,\n\tshowcaseDecorWidth,\n\tshowcaseDecorHeight,\n\tshowcaseDecorRotation,\n\tpullQuote,\n\tlocationHeadline,\n\tcardAmenities,\n\tpropertyType,\n\tpriceFrom,\n\tmaxGuests,\n\tbedrooms,\n\tbathrooms,\n\tstatus,\n\tdisplayOrder,\n\trentalwisePropertyId\n}": ALL_PROPERTIES_QUERY_RESULT
 		'*[_type == \'property\' && slug.current == $slug][0]{\n\t...,\n\theroImage { asset->, alt },\n\tgallery[]{ asset->, alt },\n\tcardThumbnail { asset->, alt },\n\tamenities[]->{ name, icon },\n\texperiences[]->{\n\t\ttitle,\n\t\t"slug": slug.current,\n\t\tdescription,\n\t\timage { asset->, alt }\n\t},\n\thighlights[]{ title, body, image { asset->, alt } },\n\tcauseImages[]{ asset->, alt },\n\tlocation,\n\t"reviews": *[_type==\'review\' && references(^._id) && published==true] | order(stayDate desc) [0..20]{\n\t\tguestName, rating, body, guestLocation, stayDate\n\t}\n}': PROPERTY_QUERY_RESULT
 		"*[_type == 'property' && defined(slug.current)].slug.current": ALL_PROPERTY_SLUGS_QUERY_RESULT
 		"*[_type == 'blog.post'] | order(publishDate desc)": ALL_POSTS_QUERY_RESULT

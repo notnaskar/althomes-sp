@@ -1,0 +1,16 @@
+.deco {
+	position: absolute;
+	pointer-events: none;
+	z-index: 3;
+	top: var(--deco-top);
+	right: var(--deco-right);
+	width: var(--deco-width);
+	height: var(--deco-height);
+	transform: rotate(var(--deco-rotation));
+}
+
+@media (max-width: 820px) {
+	.deco {
+		display: none;
+	}
+}

@@ -9,6 +9,7 @@ import {
 	Cormorant_Garamond,
 	JetBrains_Mono,
 	Space_Mono,
+	Poppins,
 } from 'next/font/google'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { preconnect } from 'react-dom'
@@ -30,6 +31,7 @@ const libreBaskerville = Libre_Baskerville({ subsets: ['latin'], weight: ['400',
 const cormorantGaramond = Cormorant_Garamond({ subsets: ['latin'], weight: ['400', '600', '700'], variable: '--font-cormorant-garamond', display: 'swap' })
 const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-jetbrains-mono', display: 'swap' })
 const spaceMono = Space_Mono({ subsets: ['latin'], weight: ['400', '700'], variable: '--font-space-mono', display: 'swap' })
+const poppins = Poppins({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-poppins', display: 'swap' })
 
 const ALL_FONT_CLASSES = [
 	geist.variable,
@@ -42,6 +44,7 @@ const ALL_FONT_CLASSES = [
 	cormorantGaramond.variable,
 	jetbrainsMono.variable,
 	spaceMono.variable,
+	poppins.variable,
 ].join(' ')
 
 const FONT_VAR_MAP: Record<string, string> = {
@@ -55,6 +58,7 @@ const FONT_VAR_MAP: Record<string, string> = {
 	'cormorant-garamond': 'var(--font-cormorant-garamond)',
 	'jetbrains-mono': 'var(--font-jetbrains-mono)',
 	'space-mono': 'var(--font-space-mono)',
+	'poppins': 'var(--font-poppins)',
 }
 
 function sanitizeHex(v: string | undefined): string | undefined {

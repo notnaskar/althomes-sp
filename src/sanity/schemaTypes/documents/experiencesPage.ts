@@ -11,11 +11,6 @@ export default defineType({
 			type: 'string',
 		}),
 		defineField({
-			name: 'heroSubtext',
-			title: 'Hero Subtext',
-			type: 'text',
-		}),
-		defineField({
 			name: 'heroBackground',
 			title: 'Hero Background',
 			type: 'image',
@@ -25,20 +20,48 @@ export default defineType({
 			],
 		}),
 		defineField({
-			name: 'introBody',
-			title: 'Intro Body',
-			type: 'blockContent',
-		}),
-		defineField({
-			name: 'discountBadgeText',
-			title: 'Discount Badge Text',
-			type: 'string',
-		}),
-		defineField({
 			name: 'cardsMaxShown',
 			title: 'Max Cards Shown',
 			type: 'number',
 			initialValue: 9,
+		}),
+		defineField({
+			name: 'leadingTagline',
+			title: 'Hero Leading Tagline',
+			type: 'string',
+		}),
+		defineField({
+			name: 'supportingTagline',
+			title: 'Hero Supporting Tagline',
+			type: 'string',
+		}),
+		defineField({
+			name: 'heroFlower',
+			title: 'Hero Flower Image',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
+		}),
+		defineField({
+			name: 'decorBasket',
+			title: 'Grid Decoration — Basket',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
+		}),
+		defineField({
+			name: 'decorStars',
+			title: 'Grid Decoration — Stars',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
+		}),
+		defineField({
+			name: 'decorDaisy',
+			title: 'Grid Decoration — Daisy',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
 		}),
 		defineField({
 			name: 'seo',

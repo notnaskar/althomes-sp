@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { urlFor } from '@/sanity/lib/image'
 
 interface HeroDecorImageProps {
-  asset?: { asset?: { _ref: string; _type: string } | null } | null
+  asset?: { asset?: { _ref?: string; _id?: string; _type?: string; url?: string } | null } | null
   alt?: string
   sizes?: string
   className?: string

@@ -245,6 +245,116 @@ No test suite. TypeScript is the quality gate.
 
 ---
 
+## Organism Config Reference
+
+Exact data each organism consumes. Use as the config input when invoking the Page Config Contract workflow.
+
+---
+
+### `src/ui/header/index.tsx`
+
+```ts
+{
+  // from getSite()
+  navCtaLabel: string       // CTA button text — fallback 'STAY WITH US'
+  navCtaLink: string        // CTA button href — button hidden if absent
+  logoImage: SanityImage    // passed to <Logo />
+  logoText: string          // passed to <Logo />
+}
+```
+
+---
+
+### `src/ui/home-hero.tsx`
+
+Receives `{ page, site }` as props. `page` = `homePage` document, `site` = `getSite()`.
+
+```ts
+{
+  // from page (homePage document)
+  page: {
+    heroImage: { asset: SanityImageAsset, alt: string }  // foreground circle photo
+    heroHeadline: string        // <h1> text — fallback 'Travel Beyond, Discover Within'
+    navLabels: Array<{
+      _key: string
+      label: string             // badge button text
+      link: string              // badge button href
+      xDesktop: number          // % position desktop
+      yDesktop: number
+      xMobile: number           // % position mobile
+      yMobile: number
+    }>
+  }
+
+  // from site (getSite())
+  site: {
+    heroBgCircle: SanityImage   // background circle decor
+    heroDecorStars: SanityImage
+    heroDecorFlowers: SanityImage
+    heroDecorStripes: SanityImage
+    bookDirectLink: string      // Book Direct pill href
+    whatsappNumber: string      // used to build wa.me href
+  }
+}
+```
+
+---
+
+### `src/ui/menu-overlay.tsx`
+
+Receives `{ isOpen, onCloseAction, site }` as props. `site` = `getSite()` passed from parent.
+
+```ts
+{
+  isOpen: boolean
+  onCloseAction: () => void
+
+  site: {
+    menuPhoto: { asset: SanityImageAsset, alt: string }  // left photo panel — hidden mobile
+    navCtaLabel: string         // CTA button label — fallback 'STAY WITH US'
+    navCtaLink: string          // CTA button href — button hidden if absent
+    overlayNavLinks: Array<{
+      label: string
+      url: string
+    }>
+    instagramUrl: string
+    facebookUrl: string
+    linkedinUrl: string
+    youtubeUrl: string
+    contactPhone: string
+    contactEmail: string
+  }
+}
+```
+
+---
+
+### `src/ui/footer/index.tsx`
+
+```ts
+{
+  // from getSite()
+  site: {
+    footerBrandName: string     // italic brand text — fallback site.title ?? 'AltHomes'
+    footerAboutLinks: Array<{ label: string, url: string }>    // ABOUT column
+    footerPolicyLinks: Array<{ label: string, url: string }>   // POLICIES column
+    instagramUrl: string
+    facebookUrl: string
+    linkedinUrl: string
+    youtubeUrl: string
+  }
+
+  // from getAllProperties()
+  properties: Array<{
+    _id: string                 // React key
+    slug: string                // href: /our-homes/${slug}
+    title: string               // uppercased link label
+  }>
+}
+```
+
+---
+
 ## Adding a New UI Component
 
 1. Pick tier: no data → atom/molecule, fetches data → organism
@@ -255,3 +365,41 @@ No test suite. TypeScript is the quality gate.
 6. Decorative image slots → `HeroDecorImage`, never inline SVG
 7. Add to table in `src/ui/COMPONENT_DESIGN.md`
 8. `npm run typecheck`
+
+---
+
+## Page Config Contract
+
+When building a page, you will be provided a **config structure** — an object or list describing the expected sections, fields, and slots for that page.
+
+### Workflow
+
+1. Receive config before writing any code.
+2. Build the page using the config as the source of truth.
+3. After implementation, produce a **Config → UI Map** at the end of your response.
+
+### Config → UI Map Format
+
+List every config key and its mapped component/prop. Flag mismatches explicitly.
+
+```
+Config key              → UI location
+────────────────────────────────────────────────────
+heroHeadline            → HomeHero → <h1> text
+heroSubtext             → HomeHero → <p> subtitle
+navCtaLabel             → Header → NavCta label prop
+...
+
+MISSING IN CONFIG (present in UI):
+  - HomeHero: decorBadges[]   ← rendered from page.navLabels[], no config key provided
+
+MISSING IN UI (present in config):
+  - promoBanner.text          ← config key exists, no component renders it
+```
+
+### Rules
+
+- Every config key must map to exactly one component + prop. No orphaned config.
+- Every rendered slot that consumes Sanity data must trace back to a config key.
+- If a UI slot renders with a hardcoded fallback (e.g. `?? 'STAY WITH US'`), note it as `[fallback only — no config key]`.
+- If config is partially provided (some keys missing), flag all gaps before building — do not invent data.

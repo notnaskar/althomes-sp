@@ -1,3 +1,4 @@
+import { cache } from 'react'
 import { sanityFetchLive } from './live'
 import {
 	SITE_QUERY,
@@ -30,13 +31,13 @@ import type {
 	ALL_EXPERIENCES_QUERY_RESULT,
 } from '@/sanity/types'
 
-export async function getSite() {
+export const getSite = cache(async () => {
 	return await sanityFetchLive<SITE_QUERY_RESULT>({
 		query: SITE_QUERY,
 		perspective: 'published',
 		stega: false,
 	})
-}
+})
 
 export async function getHomePage() {
 	return await sanityFetchLive<HOME_PAGE_QUERY_RESULT>({

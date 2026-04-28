@@ -149,3 +149,4 @@ Covers:
 - Menu overlay nav driven by `site.overlayNavLinks`
 - `src/ui/COMPONENT_DESIGN.md` exists and covers all 8 documented areas
 - All decorative image slots render `null` (not SVG) when Sanity field is empty
+
