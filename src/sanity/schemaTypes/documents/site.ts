@@ -103,6 +103,20 @@ export default defineType({
 			group: 'navbar',
 		}),
 		defineField({
+			name: 'checkinTime',
+			title: 'Check-in Time',
+			type: 'string',
+			description: '24-hour format, e.g. 14:00',
+			group: 'navbar',
+		}),
+		defineField({
+			name: 'checkoutTime',
+			title: 'Check-out Time',
+			type: 'string',
+			description: '24-hour format, e.g. 11:00',
+			group: 'navbar',
+		}),
+		defineField({
 			name: 'instagramUrl',
 			title: 'Instagram URL',
 			type: 'string',

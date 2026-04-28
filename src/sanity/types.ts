@@ -638,6 +638,11 @@ export type Location = {
 	googleMapsUrl?: string
 	lat?: number
 	lng?: number
+	streetAddress?: string
+	addressLocality?: string
+	addressRegion?: string
+	postalCode?: string
+	addressCountry?: string
 }
 
 export type LinkList = {
@@ -721,6 +726,8 @@ export type Site = {
 	}
 	contactEmail?: string
 	contactPhone?: string
+	checkinTime?: string
+	checkoutTime?: string
 	instagramUrl?: string
 	facebookUrl?: string
 	linkedinUrl?: string
@@ -1890,6 +1897,8 @@ export type SITE_QUERY_RESULT = {
 	}
 	contactEmail?: string
 	contactPhone?: string
+	checkinTime?: string
+	checkoutTime?: string
 	instagramUrl?: string
 	facebookUrl?: string
 	linkedinUrl?: string
