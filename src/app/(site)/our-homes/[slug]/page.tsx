@@ -1,4 +1,5 @@
 import { getProperty, getSite } from '@/sanity/lib/data'
+import { buildLodgingSchema } from '@/lib/schema-org'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Link from 'next/link'
@@ -12,14 +13,26 @@ type Props = {
 
 export default async function PropertyDetailPage({ params }: Props) {
 	const { slug } = await params
-	const property = await getProperty(slug)
+	const [property, site] = await Promise.all([getProperty(slug), getSite()])
 	if (!property) notFound()
 
 	const cappedExperiences = property.experiences?.slice(0, property.experiencesMaxShown ?? 6) ?? []
 	const cappedReviews = property.reviews?.slice(0, property.reviewsMaxShown ?? 20) ?? []
 
+	const schema = site ? buildLodgingSchema(property, site, process.env.NEXT_PUBLIC_BASE_URL ?? '') : null
+
+	// JSON-LD injection — data is server-side Sanity CMS only; JSON.stringify escapes <, >, &
+	// This is the standard Next.js App Router structured data pattern (no XSS risk)
 	return (
-		<main className="flex-1">
+		<>
+			{schema && (
+				<script
+					type="application/ld+json"
+					// eslint-disable-next-line react/no-danger
+					dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+				/>
+			)}
+			<main className="flex-1">
 			{/* 1. Hero */}
 			<section id="booking" className="relative w-full overflow-hidden bg-gray-900">
 				{property.heroImage && (
@@ -333,6 +346,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 				</a>
 			</section>
 		</main>
+		</>
 	)
 }
 
