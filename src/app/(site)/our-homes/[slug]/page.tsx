@@ -8,6 +8,7 @@ import { urlFor } from '@/sanity/lib/image'
 import Img from '@/ui/img'
 import PropertyGallerySection from '@/ui/pages/our-homes/property-gallery-section'
 import PropertyExperiencesSection from '@/ui/pages/our-homes/property-experiences-section'
+import ReactIcon from '@/ui/atoms/react-icon'
 
 type Props = {
 	params: Promise<{ slug: string }>
@@ -151,7 +152,9 @@ export default async function PropertyDetailPage({ params }: Props) {
 								)}
 								{property.amenities?.slice(0, 2).map((amenity, i) => (
 									<div key={i} className="flex w-[82px] flex-col items-center gap-[3px]">
-										<div className="h-[46px] w-[46px]" />
+										<div className="flex h-[46px] w-[46px] items-center justify-center text-foreground">
+											<ReactIcon name={amenity.icon} size={36} />
+										</div>
 										<p className="text-center font-sans text-[15px] font-medium leading-[23px] tracking-[0.1em] text-foreground">
 											{amenity.name}
 										</p>
@@ -393,7 +396,9 @@ export default async function PropertyDetailPage({ params }: Props) {
 										className="flex items-center gap-3 rounded-xl border p-4"
 									>
 										{amenity.icon && (
-											<span className="text-xl">{amenity.icon}</span>
+											<span className="text-foreground">
+												<ReactIcon name={amenity.icon} size={24} />
+											</span>
 										)}
 										{amenity.name && (
 											<span className="font-medium">{amenity.name}</span>
