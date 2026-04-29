@@ -3,9 +3,18 @@
 import { Resend } from 'resend'
 import type { ContactInput } from '@/lib/schemas/contact'
 import { getSite } from '@/sanity/lib/data'
+import { checkOrigin, checkRateLimit, getClientIp } from '@/lib/server/security'
+import { contactEmailHtml } from '@/lib/server/email-templates/contact'
 
 export async function submitContact(data: ContactInput) {
 	if (data._hp) return { success: false, error: 'Bot detected' }
+
+	if (!(await checkOrigin())) return { success: false, error: 'Forbidden' }
+
+	const ip = await getClientIp()
+	if (!checkRateLimit('contact', ip)) {
+		return { success: false, error: 'Too many requests. Please wait before trying again.' }
+	}
 
 	const apiKey = process.env.RESEND_API_KEY
 	if (!apiKey) {
@@ -14,8 +23,9 @@ export async function submitContact(data: ContactInput) {
 	}
 
 	const site = await getSite()
-	const to = site?.contactFormEmail ?? process.env.RESEND_TO_EMAIL
-	const from = process.env.RESEND_FROM_EMAIL ?? 'noreply@althomes.co'
+	const to =
+		site?.contactFormEmail ?? site?.formNotificationEmail ?? process.env.RESEND_TO_EMAIL
+	const from = process.env.RESEND_FROM_EMAIL ?? 'onboarding@resend.dev'
 
 	if (!to) {
 		console.error('No contact form destination email configured')
@@ -27,17 +37,18 @@ export async function submitContact(data: ContactInput) {
 	const { error } = await resend.emails.send({
 		from,
 		to,
-		subject: `Contact form: ${data.name}`,
-		text: [
-			`Name: ${data.name}`,
-			`Email: ${data.email}`,
-			`Phone: ${data.phone}`,
-			`Message:\n${data.message}`,
-		].join('\n'),
+		replyTo: data.email,
+		subject: `New Contact: ${data.name}`,
+		html: contactEmailHtml({
+			name: data.name,
+			email: data.email,
+			phone: data.phone,
+			message: data.message,
+		}),
 	})
 
 	if (error) {
-		console.error('Resend error:', error)
+		console.error('Resend error (contact):', error)
 		return { success: false, error: 'Failed to send message' }
 	}
 
