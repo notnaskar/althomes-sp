@@ -1,16 +1,10 @@
-function esc(str: string): string {
-	return str
-		.replace(/&/g, '&amp;')
-		.replace(/</g, '&lt;')
-		.replace(/>/g, '&gt;')
-		.replace(/"/g, '&quot;')
-}
+import { esc } from './utils'
 
 function row(label: string, value: string, isLast = false): string {
 	const border = isLast ? '' : 'border-bottom:1px solid #f3f4f6;'
 	return `<tr>
     <td style="padding:10px 0;${border}width:40%;vertical-align:top;">
-      <span style="font-size:11px;font-weight:600;color:#9ca3af;text-transform:uppercase;letter-spacing:0.06em;">${label}</span>
+      <span style="font-size:11px;font-weight:600;color:#9ca3af;text-transform:uppercase;letter-spacing:0.06em;">${esc(label)}</span>
     </td>
     <td style="padding:10px 0 10px 16px;${border}vertical-align:top;">
       <span style="font-size:14px;color:#111827;">${esc(value)}</span>
