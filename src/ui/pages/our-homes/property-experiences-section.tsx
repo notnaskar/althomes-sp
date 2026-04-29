@@ -41,19 +41,17 @@ export default function PropertyExperiencesSection({
   return (
     <section
       data-section="experiences"
-      className="relative overflow-hidden px-[90px] py-[80px] max-[820px]:px-[24px] max-[820px]:py-[48px]"
+      className={`relative overflow-hidden px-[90px] py-[80px] max-[820px]:px-[24px] max-[820px]:py-[48px]${!hasBg ? ' bg-background' : ''}`}
     >
       {bgUrl && (
         <Image
           src={bgUrl}
           alt={bgImage?.alt ?? ''}
           fill
-          className="absolute inset-0 object-cover"
+          className="object-cover"
           sizes="100vw"
         />
       )}
-      {!hasBg && <div className="absolute inset-0 bg-background" />}
-
       <div className="relative z-10">
         <h2
           className={[
