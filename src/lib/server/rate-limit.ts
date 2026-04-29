@@ -1,3 +1,5 @@
+import 'server-only'
+
 interface Entry {
 	count: number
 	resetAt: number
