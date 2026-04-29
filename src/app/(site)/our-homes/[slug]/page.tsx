@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import { PortableText } from 'next-sanity'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { buildLodgingSchema } from '@/lib/schema-org'
 import { getProperty, getSite } from '@/sanity/lib/data'
