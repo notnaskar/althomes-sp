@@ -1,6 +1,6 @@
 import { vi } from 'vitest'
 
-export const sanityFetch = vi.fn(async (query: any) => ({ data: {} }))
+export const sanityFetch = vi.fn(async (_args: unknown) => ({ data: {} }))
 
 export const SanityLive = vi.fn(() => null)
 

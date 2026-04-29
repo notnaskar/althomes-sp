@@ -21,7 +21,7 @@ vi.mock('next/headers', () => ({
 // Mock next-sanity/live to avoid server component errors
 vi.mock('next-sanity/live', () => ({
 	defineLive: vi.fn(() => ({
-		sanityFetch: vi.fn(async (query: any) => ({ data: {} })),
+		sanityFetch: vi.fn(async () => ({ data: {} })),
 		SanityLive: vi.fn(() => null),
 	})),
 }))
