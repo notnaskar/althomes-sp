@@ -1,10 +1,17 @@
+import 'server-only'
 import { headers } from 'next/headers'
 
 export function isAllowedOrigin(source: string | null): boolean {
 	const base = process.env.NEXT_PUBLIC_BASE_URL
 	if (!base) return true
 	if (!source) return false
-	return source.startsWith(base)
+	try {
+		const sourceUrl = new URL(source)
+		const baseUrl = new URL(base)
+		return sourceUrl.hostname === baseUrl.hostname
+	} catch {
+		return false
+	}
 }
 
 export async function checkOrigin(): Promise<boolean> {

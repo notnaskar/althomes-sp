@@ -26,4 +26,9 @@ describe('isAllowedOrigin', () => {
 		delete process.env.NEXT_PUBLIC_BASE_URL
 		expect(isAllowedOrigin(null)).toBe(true)
 	})
+
+	it('blocks subdomain-spoofed origin', () => {
+		process.env.NEXT_PUBLIC_BASE_URL = 'https://althomes.co'
+		expect(isAllowedOrigin('https://althomes.co.evil.com')).toBe(false)
+	})
 })
