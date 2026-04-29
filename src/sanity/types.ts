@@ -783,6 +783,7 @@ export type Site = {
 		alt?: string
 		_type: 'image'
 	}
+	formNotificationEmail?: string
 	contactFormEmail?: string
 	partnerEnquiryEmail?: string
 	colours?: {
@@ -1954,6 +1955,7 @@ export type SITE_QUERY_RESULT = {
 		alt?: string
 		_type: 'image'
 	}
+	formNotificationEmail?: string
 	contactFormEmail?: string
 	partnerEnquiryEmail?: string
 	colours?: {

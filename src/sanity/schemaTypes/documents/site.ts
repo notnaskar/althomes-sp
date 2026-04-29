@@ -249,6 +249,14 @@ export default defineType({
 			group: 'assets',
 		}),
 		defineField({
+			name: 'formNotificationEmail',
+			title: 'Form Notification Email',
+			type: 'string',
+			description:
+				'Default address for all form submission notifications. Per-form overrides below take precedence.',
+			group: 'forms',
+		}),
+		defineField({
 			name: 'contactFormEmail',
 			title: 'Contact Form Email',
 			type: 'string',
