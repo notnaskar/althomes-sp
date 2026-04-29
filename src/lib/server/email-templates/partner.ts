@@ -58,7 +58,14 @@ export function partnerEmailHtml(data: PartnerEmailData): string {
                 ${row('Property Type', data.propertyType)}
                 ${row('Status', data.status)}
                 ${row('Operational', data.operational)}
-                ${row('Photos / Website', data.photosLink, true)}
+                <tr>
+    <td style="padding:10px 0;width:40%;vertical-align:top;">
+      <span style="font-size:11px;font-weight:600;color:#9ca3af;text-transform:uppercase;letter-spacing:0.06em;">Photos / Website</span>
+    </td>
+    <td style="padding:10px 0 10px 16px;vertical-align:top;">
+      <a href="${esc(data.photosLink)}" style="font-size:14px;color:#2563eb;text-decoration:underline;">${esc(data.photosLink)}</a>
+    </td>
+  </tr>
               </table>
             </td>
           </tr>
