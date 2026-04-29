@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { PortableText } from 'next-sanity'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -6,6 +7,8 @@ import { buildLodgingSchema } from '@/lib/schema-org'
 import { getProperty, getSite } from '@/sanity/lib/data'
 import { urlFor } from '@/sanity/lib/image'
 import Img from '@/ui/img'
+import PropertyGallerySection from '@/ui/pages/our-homes/property-gallery-section'
+import PropertyExperiencesSection from '@/ui/pages/our-homes/property-experiences-section'
 
 type Props = {
 	params: Promise<{ slug: string }>
@@ -20,6 +23,10 @@ export default async function PropertyDetailPage({ params }: Props) {
 		property.experiences?.slice(0, property.experiencesMaxShown ?? 6) ?? []
 	const cappedReviews =
 		property.reviews?.slice(0, property.reviewsMaxShown ?? 20) ?? []
+
+	const heroUrl = property.heroImage?.asset
+		? urlFor(property.heroImage.asset).width(1440).url()
+		: null
 
 	const schemaJson = site
 		? JSON.stringify(
@@ -42,232 +49,333 @@ export default async function PropertyDetailPage({ params }: Props) {
 			)}
 			<main className="flex-1">
 				{/* 1. Hero */}
-				<section
-					id="booking"
-					className="relative w-full overflow-hidden bg-gray-900"
-				>
-					{property.heroImage && (
-						<Img
-							image={property.heroImage}
-							width={1440}
-							loading="eager"
-							alt={property.heroImage.alt ?? ''}
-							className="h-[70vh] w-full object-cover opacity-70"
+				<section className="relative h-[672px] overflow-hidden bg-background">
+					{heroUrl && (
+						<Image
+							src={heroUrl}
+							alt={property.heroImage?.alt ?? ''}
+							fill
+							priority
+							className="object-cover"
+							sizes="1440px"
 						/>
 					)}
-					<div className="absolute inset-0 flex flex-col items-end justify-end p-8 md:p-16">
-						<div className="w-full rounded-2xl bg-white p-6 shadow-xl md:max-w-sm">
-							<h2 className="mb-2 text-xl font-bold">{property.title}</h2>
-							{property.tagline && (
-								<p className="mb-4 text-sm text-gray-500">{property.tagline}</p>
-							)}
-							<div className="flex min-h-[200px] items-center justify-center rounded-xl border-2 border-dashed border-gray-200 bg-gray-50">
-								<p className="px-4 text-center text-xs text-gray-400">
-									BOOKING WIDGET — RentalWise
-								</p>
-							</div>
+					{property.tagline && (
+						<div className="absolute inset-0 flex items-center justify-center">
+							<p className="font-sans text-[12px] uppercase tracking-[0.1em] text-white">
+								{property.tagline}
+							</p>
 						</div>
-					</div>
-					<div className="absolute top-8 left-8 md:left-16">
-						{property.title && (
-							<h1 className="text-4xl font-bold text-white drop-shadow-lg md:text-6xl">
-								{property.title}
-							</h1>
-						)}
-					</div>
+					)}
 				</section>
 
-				{/* 2. Intro */}
-				<section className="container space-y-10 py-16">
-					{/* Property type + specs strip */}
-					<div className="flex flex-wrap items-center gap-6 border-b border-gray-200 py-4">
-						{property.propertyType && (
-							<span className="rounded-full bg-black px-4 py-1 text-sm font-semibold text-white">
-								{property.propertyType}
-							</span>
-						)}
-						{property.maxGuests != null && (
-							<span className="text-sm font-medium text-gray-700">
-								{property.maxGuests} Guests
-							</span>
-						)}
-						{property.bedrooms != null && (
-							<span className="text-sm font-medium text-gray-700">
-								{property.bedrooms} Bedrooms
-							</span>
-						)}
-						{property.bathrooms != null && (
-							<span className="text-sm font-medium text-gray-700">
-								{property.bathrooms} Bathrooms
-							</span>
-						)}
+				{/* 2. Booking bar */}
+				<div className="mx-[96px] flex items-center justify-center gap-[40px] bg-white px-[48px] py-[12px]">
+					<div className="flex flex-col gap-[5px]">
+						<p className="font-sans text-[15px] tracking-[0.1em] text-foreground">
+							Check In &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Check Out
+						</p>
+						<div className="h-px w-[289px] bg-[#5F5D5D]" />
 					</div>
-
-					{/* Description */}
-					{property.description && (
-						<div className="prose prose-lg max-w-none">
-							<PortableText value={property.description} />
+					<div className="flex flex-col gap-[8px]">
+						<p className="font-sans text-[15px] tracking-[0.1em] text-foreground">Guests</p>
+						<div className="h-px w-[289px] bg-[#5F5D5D]" />
+					</div>
+					<div className="flex items-center gap-[32px]">
+						<div className="text-right">
+							<p className="font-sans text-[9px] leading-[23px] tracking-[0.1em] text-black">
+								TAXES INCLUDED
+							</p>
+							{property.priceFrom != null && (
+								<p className="font-sans text-[15px] font-semibold leading-[16px] tracking-[0.1em] text-black">
+									INR {property.priceFrom.toLocaleString()}
+								</p>
+							)}
 						</div>
-					)}
+						<a
+							href="#booking"
+							className="flex h-auto w-[208px] items-center justify-center rounded-[5px] bg-accent py-[5px] font-sans text-[12px] font-semibold tracking-[0.3em] text-accent-foreground"
+						>
+							BOOK NOW
+						</a>
+					</div>
+				</div>
 
-					{/* Amenity icon strip */}
-					{property.amenities && property.amenities.length > 0 && (
-						<div className="flex flex-wrap gap-3">
-							{property.amenities.map((amenity, i) => (
-								<span
-									key={i}
-									className="flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium"
-								>
-									{amenity.icon && <span>{amenity.icon}</span>}
-									{amenity.name}
-								</span>
-							))}
-						</div>
-					)}
+				{/* 3. Intro — subtitle + specs strip */}
+				<section
+					id="booking"
+					className="bg-background py-[48px] pl-[191px] pr-[188px]"
+				>
+					<div className="flex gap-[26px]">
+						{/* Left: subtitle (Playfair 30px) */}
+						{property.pullQuote && (
+							<div className="w-[527px] shrink-0">
+								<p className="font-heading text-[30px] leading-[40px] tracking-[0.1em] text-foreground">
+									{property.pullQuote}
+								</p>
+							</div>
+						)}
 
-					{/* Pull quote */}
-					{property.pullQuote && (
-						<blockquote className="border-l-4 border-black pl-6 text-2xl font-semibold text-gray-700 italic">
-							&ldquo;{property.pullQuote}&rdquo;
-						</blockquote>
-					)}
+						{/* Right: short description + specs strip */}
+						<div className="flex flex-1 flex-col gap-[28px]">
+							{property.shortDescription && (
+								<p className="font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground">
+									{property.shortDescription}
+								</p>
+							)}
 
-					{/* Gallery */}
-					{property.gallery && property.gallery.length > 0 && (
-						<div className="overflow-x-auto">
-							<div className="flex gap-4 pb-2">
-								{property.gallery.map((img, i) => (
-									<div
-										key={i}
-										className="flex-shrink-0 overflow-hidden rounded-xl"
-									>
-										<Img
-											image={img}
-											width={500}
-											alt={img.alt ?? ''}
-											className="h-64 w-auto object-cover"
-										/>
+							{/* Specs strip */}
+							<div className="flex items-center gap-[14px]">
+								{property.propertyType && (
+									<div className="flex w-[96px] flex-col items-center gap-[3px]">
+										<div className="h-[46px] w-[46px]" />
+										<p className="text-center font-sans text-[15px] font-medium leading-[23px] tracking-[0.1em] text-foreground">
+											{property.propertyType}
+										</p>
+									</div>
+								)}
+								{property.maxGuests != null && (
+									<div className="flex w-[96px] flex-col items-center gap-[3px]">
+										<div className="h-[46px] w-[46px]" />
+										<p className="text-center font-sans text-[15px] font-medium leading-[23px] tracking-[0.1em] text-foreground">
+											Upto {property.maxGuests} Guests
+										</p>
+									</div>
+								)}
+								{property.bedrooms != null && property.bathrooms != null && (
+									<div className="flex w-[96px] flex-col items-center gap-[3px]">
+										<div className="h-[46px] w-[46px]" />
+										<p className="text-center font-sans text-[15px] font-medium leading-[23px] tracking-[0.1em] text-foreground">
+											{property.bedrooms} Rooms {property.bathrooms} Baths
+										</p>
+									</div>
+								)}
+								{property.amenities?.slice(0, 2).map((amenity, i) => (
+									<div key={i} className="flex w-[82px] flex-col items-center gap-[3px]">
+										<div className="h-[46px] w-[46px]" />
+										<p className="text-center font-sans text-[15px] font-medium leading-[23px] tracking-[0.1em] text-foreground">
+											{amenity.name}
+										</p>
 									</div>
 								))}
 							</div>
 						</div>
-					)}
+					</div>
 				</section>
 
-				{/* 3. Location */}
-				{(property.locationHeadline ||
-					property.locationDescription ||
-					property.location?.googleMapsUrl) && (
-					<section className="bg-gray-50 py-16">
-						<div className="container space-y-6">
-							{property.locationHeadline && (
-								<h2 className="text-3xl font-bold">
-									{property.locationHeadline}
-								</h2>
+				{/* 4. Image collage + description */}
+				<section className="flex h-[490px] items-center justify-center gap-[48px] bg-background overflow-hidden">
+					{/* Left: collage */}
+					<div className="relative h-[490px] w-[575px] shrink-0">
+						{property.showcaseDecorImage?.asset && (
+							<div className="pointer-events-none absolute -left-[11px] top-[128px] h-[159px] w-[238px]">
+								<Img image={property.showcaseDecorImage} width={238} alt="" className="h-full w-full object-cover" />
+							</div>
+						)}
+						{property.gallery?.[0] && (
+							<div className="absolute left-[142px] top-0 h-[364px] w-[433px] overflow-hidden rounded-[5px]">
+								<Img image={property.gallery[0]} width={433} alt={property.gallery[0].alt ?? ''} className="h-full w-full object-cover" />
+							</div>
+						)}
+						{property.gallery?.[1] && (
+							<div className="absolute left-[46px] top-[265px] h-[216px] w-[288px] overflow-hidden rounded-[5px]">
+								<Img image={property.gallery[1]} width={288} alt={property.gallery[1].alt ?? ''} className="h-full w-full object-cover" />
+							</div>
+						)}
+					</div>
+
+					{/* Right: description */}
+					<div className="w-[479px] shrink-0">
+						{property.description && (
+							<div className="font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground [&_p]:mb-4 [&_p:last-child]:mb-0">
+								<PortableText value={property.description} />
+							</div>
+						)}
+					</div>
+				</section>
+
+				{/* 5. Gallery carousel */}
+				{property.gallery && property.gallery.length > 0 && (
+					<PropertyGallerySection
+						gallery={property.gallery}
+						quote={property.gallerySectionQuote}
+						decorImage={property.galleryDecorImage}
+					/>
+				)}
+
+				{/* 3. Location — Getting Here */}
+				{(property.locationBody || property.locationCta) && (
+					<section className="flex items-center justify-center gap-[45px] bg-background py-[48px]">
+						{property.locationImage?.asset && (
+							<div className="h-[310px] w-[576px] shrink-0 overflow-hidden">
+								<Img
+									image={property.locationImage}
+									width={576}
+									alt=""
+									className="h-full w-full object-cover"
+								/>
+							</div>
+						)}
+						<div className="flex w-[435px] shrink-0 flex-col gap-[44px]">
+							{property.locationBody && (
+								<div className="font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground [&_strong]:font-bold [&_p]:mb-[8px] [&_p:last-child]:mb-0">
+									<PortableText value={property.locationBody} />
+								</div>
 							)}
-							{property.locationDescription && (
-								<p className="max-w-2xl text-lg text-gray-700">
-									{property.locationDescription}
-								</p>
-							)}
-							{property.location?.googleMapsUrl && (
+							{property.locationCta?.url && (
 								<a
-									href={property.location.googleMapsUrl}
+									href={property.locationCta.url}
 									target="_blank"
 									rel="noopener noreferrer"
-									className="inline-block rounded-full bg-black px-6 py-3 font-semibold text-white transition hover:bg-gray-800"
+									className="w-fit font-sans text-[12px] font-semibold tracking-[0.3em] text-foreground underline underline-offset-2 hover:opacity-70"
 								>
-									View on Google Maps
+									{property.locationCta.label || 'FIND US ON THE MAP'}
 								</a>
 							)}
 						</div>
 					</section>
 				)}
 
-				{/* 4. Highlights */}
+				{/* 4. Highlights — What's Waiting For You? */}
 				{property.highlights && property.highlights.length > 0 && (
-					<section className="container py-16">
-						<h2 className="mb-10 text-3xl font-bold">
+					<section className="w-full overflow-hidden bg-background py-[72px]">
+						{/* Heading */}
+						<h2 className="mb-16 px-[90px] text-center font-heading text-[30px] font-normal leading-[40px] tracking-[0.3em] text-foreground">
 							WHAT&rsquo;S WAITING FOR YOU?
 						</h2>
-						<div className="space-y-10">
-							{property.highlights.map((highlight, i) => (
-								<div key={i} className="grid items-center gap-8 md:grid-cols-2">
-									<div>
-										{highlight.title && (
-											<h3 className="mb-3 text-2xl font-bold">
-												{highlight.title}
-											</h3>
+
+						<div className="flex w-full flex-col gap-6">
+							{/* Row 1: text right-aligned + image collage (highlights[0]) */}
+							{property.highlights[0] && (
+								<div className="flex items-end justify-end gap-12 px-[90px]">
+									<div className="w-96 text-right">
+										{property.highlights[0].title && (
+											<span className="font-sans text-[15px] font-bold leading-[23px] tracking-[0.1em] text-foreground">
+												{property.highlights[0].title}<br />
+											</span>
 										)}
-										{highlight.body && (
-											<p className="leading-relaxed text-gray-700">
-												{highlight.body}
-											</p>
+										{property.highlights[0].body && (
+											<span className="font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground">
+												<br />{property.highlights[0].body}
+											</span>
 										)}
 									</div>
-									{highlight.image && (
-										<div className="overflow-hidden rounded-xl">
-											<Img
-												image={highlight.image}
-												width={600}
-												alt={highlight.image.alt ?? ''}
-												className="h-auto w-full object-cover"
-											/>
+									<div className="relative h-96 w-[576px] shrink-0">
+										{property.highlights[0].image?.asset && (
+											<div className="absolute left-0 top-0 h-96 w-[576px] overflow-hidden rounded-[5px]">
+												<Img image={property.highlights[0].image} width={576} alt={property.highlights[0].image.alt ?? ''} className="h-full w-full object-cover" />
+											</div>
+										)}
+										{property.highlights[0].decorImage?.asset && (
+											<div className="pointer-events-none absolute -left-[72px] -top-[32px] h-[192px] w-[120px] -rotate-[21deg]">
+												<Img image={property.highlights[0].decorImage} width={120} alt="" className="h-full w-full object-cover" />
+											</div>
+										)}
+										{property.highlights[0].secondaryImage?.asset && (
+											<div className="absolute left-0 top-[121px] h-80 w-48 overflow-hidden rounded-[5px]">
+												<Img image={property.highlights[0].secondaryImage} width={192} alt={property.highlights[0].secondaryImage.alt ?? ''} className="h-full w-full object-cover" />
+											</div>
+										)}
+									</div>
+								</div>
+							)}
+
+							{/* Row 2: left image pair + two text cols (fits 1440px full-width) */}
+							{(property.highlights[1] || property.highlights[2]) && (
+								<div className="flex items-center justify-start gap-8">
+									{/* Left images: highlights[1].image + highlights[2].image overlapping */}
+									<div className="relative h-80 w-[494px] shrink-0 overflow-hidden">
+										{property.highlights[1]?.image?.asset && (
+											<div className="absolute left-0 top-0 h-80 w-full overflow-hidden">
+												<Img image={property.highlights[1].image} width={494} alt={property.highlights[1].image.alt ?? ''} className="h-full w-full object-cover" />
+											</div>
+										)}
+										{property.highlights[2]?.image?.asset && (
+											<div className="absolute left-0 top-[10px] h-72 w-full overflow-hidden opacity-80">
+												<Img image={property.highlights[2].image} width={494} alt={property.highlights[2].image.alt ?? ''} className="h-full w-full object-cover" />
+											</div>
+										)}
+									</div>
+									{/* highlights[1]: What You'll Wake Up To */}
+									{property.highlights[1] && (
+										<div className="w-[336px] shrink-0">
+											{property.highlights[1].title && (
+												<span className="font-sans text-[15px] font-bold leading-[23px] tracking-[0.1em] text-foreground">
+													{property.highlights[1].title}<br />
+												</span>
+											)}
+											{property.highlights[1].body && (
+												<span className="font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground">
+													<br />{property.highlights[1].body}
+												</span>
+											)}
+										</div>
+									)}
+									{/* highlights[2]: Hosted With Heart */}
+									{property.highlights[2] && (
+										<div className="w-[336px] shrink-0">
+											{property.highlights[2].title && (
+												<span className="font-sans text-[15px] font-bold leading-[23px] tracking-[0.1em] text-foreground">
+													{property.highlights[2].title}<br />
+												</span>
+											)}
+											{property.highlights[2].body && (
+												<span className="font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground">
+													<br />{property.highlights[2].body}
+												</span>
+											)}
 										</div>
 									)}
 								</div>
-							))}
+							)}
+
+							{/* Row 3: text + CTA left, image right (highlights[3]) */}
+							{property.highlights[3] && (
+								<div className="flex items-center justify-end gap-12 px-[90px]">
+									<div className="flex w-96 shrink-0 flex-col gap-12">
+										<div>
+											{property.highlights[3].title && (
+												<span className="font-sans text-[15px] font-bold leading-[23px] tracking-[0.1em] text-foreground">
+													{property.highlights[3].title}<br />
+												</span>
+											)}
+											{property.highlights[3].body && (
+												<span className="font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground">
+													<br />{property.highlights[3].body}
+												</span>
+											)}
+										</div>
+										{property.menuCta?.url && (
+											<a
+												href={property.menuCta.url}
+												target="_blank"
+												rel="noopener noreferrer"
+												className="font-sans text-[12px] font-semibold tracking-[0.3em] text-foreground underline underline-offset-2 hover:opacity-70"
+											>
+												{property.menuCta.label || "WHAT'S ON THE MENU?"}
+											</a>
+										)}
+									</div>
+									<div className="relative h-80 w-[788px] shrink-0 overflow-hidden rounded-tl-[5px] rounded-bl-[5px]">
+										{property.highlights[3].image?.asset && (
+											<div className="absolute left-0 top-0 h-80 w-full overflow-hidden">
+												<Img image={property.highlights[3].image} width={788} alt={property.highlights[3].image.alt ?? ''} className="h-full w-full object-cover" />
+											</div>
+										)}
+									</div>
+								</div>
+							)}
 						</div>
 					</section>
 				)}
 
 				{/* 5. Experiences */}
 				{cappedExperiences.length > 0 && (
-					<section className="bg-gray-50 py-16">
-						<div className="container">
-							<h2 className="mb-10 text-3xl font-bold">
-								EXPERIENCES NEAR {property.title?.toUpperCase()}
-							</h2>
-							<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-								{cappedExperiences.map((exp) => (
-									<Link
-										key={exp.slug ?? exp.title ?? ''}
-										href={`/experiences/${exp.slug ?? ''}`}
-										className="group block overflow-hidden rounded-xl border bg-white transition hover:shadow-md"
-									>
-										{exp.image && (
-											<div className="overflow-hidden">
-												<Img
-													image={exp.image}
-													width={500}
-													alt={exp.image.alt ?? ''}
-													className="h-48 w-full object-cover transition duration-300 group-hover:scale-105"
-												/>
-											</div>
-										)}
-										<div className="p-5">
-											{exp.title && (
-												<h3 className="text-lg font-bold">{exp.title}</h3>
-											)}
-											{exp.description && (
-												<p className="mt-2 line-clamp-2 text-sm text-gray-600">
-													{exp.description}
-												</p>
-											)}
-										</div>
-									</Link>
-								))}
-							</div>
-							<div className="mt-8 text-center">
-								<Link
-									href="/experiences"
-									className="inline-block rounded-full border-2 border-black px-8 py-3 font-bold text-black transition hover:bg-black hover:text-white"
-								>
-									View All Experiences
-								</Link>
-							</div>
-						</div>
-					</section>
+					<PropertyExperiencesSection
+						bgImage={property.experiencesBgImage}
+						experiences={cappedExperiences}
+						propertyTitle={property.title ?? ''}
+					/>
 				)}
 
 				{/* 6. Amenities + House Rules */}
