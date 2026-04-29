@@ -405,6 +405,9 @@ export default defineType({
 			description: 'Full-bleed background image for the Experiences section.',
 			options: { hotspot: true },
 			group: 'experiences',
+			fields: [
+				defineField({ name: 'alt', type: 'string', title: 'Alt text' }),
+			],
 		}),
 
 		defineField({

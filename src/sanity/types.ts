@@ -1000,6 +1000,7 @@ export type Property = {
 		media?: unknown
 		hotspot?: SanityImageHotspot
 		crop?: SanityImageCrop
+		alt?: string
 		_type: 'image'
 	}
 	menuCta?: {
@@ -3040,7 +3041,7 @@ export type PROPERTY_QUERY_RESULT = {
 			metadata?: SanityImageMetadata
 			source?: SanityAssetSourceData
 		} | null
-		alt: null
+		alt: string | null
 		hotspot: SanityImageHotspot | null
 		crop: SanityImageCrop | null
 	} | null
