@@ -1,7 +1,7 @@
 import type { StringInputProps } from 'sanity'
 import { set, unset, PatchEvent } from 'sanity'
 import { Card, Flex, Grid, Stack, Text, TextInput } from '@sanity/ui'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { ICON_MAP } from '@/ui/atoms/icon-map'
 
 export default function IconPicker({ value, onChange }: StringInputProps) {
