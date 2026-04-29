@@ -28,3 +28,7 @@ export function checkRateLimit(
 	entry.count++
 	return true
 }
+
+export function _resetForTesting(): void {
+	stores.clear()
+}

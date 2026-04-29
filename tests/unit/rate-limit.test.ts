@@ -1,9 +1,10 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { checkRateLimit } from '@/lib/server/rate-limit'
+import { checkRateLimit, _resetForTesting } from '@/lib/server/rate-limit'
 
 describe('checkRateLimit', () => {
 	beforeEach(() => {
 		vi.useFakeTimers()
+		_resetForTesting()
 	})
 
 	afterEach(() => {
