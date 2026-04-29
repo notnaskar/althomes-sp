@@ -76,11 +76,14 @@ test.describe('Property detail page (/our-homes/[slug])', () => {
 		await expect(page.locator('main')).toBeVisible()
 	})
 
-	test('renders experiences section when experiences are linked', async ({
-		page,
-	}) => {
+	test('renders experiences section when experiences exist', async ({ page }) => {
 		await page.goto(propertyUrl)
-		// Experiences section is conditional — just verify page loads without error
-		await expect(page.locator('main')).toBeVisible()
+		const section = page.locator('[data-section="experiences"]')
+		const count = await section.count()
+		if (count > 0) {
+			await expect(section).toBeVisible()
+			const cards = section.locator('a[aria-label]')
+			await expect(cards.first()).toBeVisible()
+		}
 	})
 })
