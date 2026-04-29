@@ -3,9 +3,18 @@
 import { Resend } from 'resend'
 import type { PartnerInput } from '@/lib/schemas/partner'
 import { getSite } from '@/sanity/lib/data'
+import { checkOrigin, checkRateLimit, getClientIp } from '@/lib/server/security'
+import { partnerEmailHtml } from '@/lib/server/email-templates/partner'
 
 export async function submitPartner(data: PartnerInput) {
 	if (data._hp) return { success: false, error: 'Bot detected' }
+
+	if (!(await checkOrigin())) return { success: false, error: 'Forbidden' }
+
+	const ip = await getClientIp()
+	if (!checkRateLimit('partner', ip)) {
+		return { success: false, error: 'Too many requests. Please wait before trying again.' }
+	}
 
 	const apiKey = process.env.RESEND_API_KEY
 	if (!apiKey) {
@@ -14,8 +23,9 @@ export async function submitPartner(data: PartnerInput) {
 	}
 
 	const site = await getSite()
-	const to = site?.partnerEnquiryEmail ?? process.env.RESEND_TO_EMAIL
-	const from = process.env.RESEND_FROM_EMAIL ?? 'noreply@althomes.co'
+	const to =
+		site?.partnerEnquiryEmail ?? site?.formNotificationEmail ?? process.env.RESEND_TO_EMAIL
+	const from = process.env.RESEND_FROM_EMAIL ?? 'onboarding@resend.dev'
 
 	if (!to) {
 		console.error('No partner enquiry destination email configured')
@@ -27,21 +37,22 @@ export async function submitPartner(data: PartnerInput) {
 	const { error } = await resend.emails.send({
 		from,
 		to,
-		subject: `Partner enquiry: ${data.name}`,
-		text: [
-			`Name: ${data.name}`,
-			`Email: ${data.email}`,
-			`Phone: ${data.phone}`,
-			`Location: ${data.location}`,
-			`Property Type: ${data.propertyType}`,
-			`Status: ${data.status}`,
-			`Operational: ${data.operational}`,
-			`Photos / Website: ${data.photosLink}`,
-		].join('\n'),
+		replyTo: data.email,
+		subject: `New Partner Enquiry: ${data.name}`,
+		html: partnerEmailHtml({
+			name: data.name,
+			email: data.email,
+			phone: data.phone,
+			location: data.location,
+			propertyType: data.propertyType,
+			status: data.status,
+			operational: data.operational,
+			photosLink: data.photosLink,
+		}),
 	})
 
 	if (error) {
-		console.error('Resend error:', error)
+		console.error('Resend error (partner):', error)
 		return { success: false, error: 'Failed to send enquiry' }
 	}
 
