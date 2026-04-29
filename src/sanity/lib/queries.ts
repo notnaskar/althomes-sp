@@ -47,7 +47,10 @@ export const JOIN_US_PAGE_QUERY =
 	defineQuery(`*[_type == 'joinUsPage' && _id == 'joinUsPage'][0]{
 	...,
 	heroImage { asset->, alt },
-	propertyImage { asset->, alt }
+	propertyImage { asset->, alt },
+	heroDecorFlower { asset-> },
+	contentDecorImage { asset-> },
+	formDecorBg { asset-> }
 }`)
 
 export const CONTACT_PAGE_QUERY =

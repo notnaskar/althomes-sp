@@ -51,6 +51,24 @@ export default defineType({
 			type: 'string',
 		}),
 		defineField({
+			name: 'heroDecorFlower',
+			title: 'Hero Decor — Flower (bleeds left)',
+			type: 'image',
+			options: { hotspot: true },
+		}),
+		defineField({
+			name: 'contentDecorImage',
+			title: 'Content Decor — Right Side Image',
+			type: 'image',
+			options: { hotspot: true },
+		}),
+		defineField({
+			name: 'formDecorBg',
+			title: 'Form Decor — Background Image',
+			type: 'image',
+			options: { hotspot: true },
+		}),
+		defineField({
 			name: 'seo',
 			title: 'SEO',
 			type: 'seo',

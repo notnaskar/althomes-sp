@@ -1061,6 +1061,27 @@ export type JoinUsPage = {
 		_type: 'image'
 	}
 	formHeadline?: string
+	heroDecorFlower?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		_type: 'image'
+	}
+	contentDecorImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		_type: 'image'
+	}
+	formDecorBg?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		_type: 'image'
+	}
 	seo?: Seo
 }
 
@@ -2356,7 +2377,7 @@ export type EXPERIENCES_PAGE_QUERY_RESULT = {
 
 // Source: src/sanity/lib/queries.ts
 // Variable: JOIN_US_PAGE_QUERY
-// Query: *[_type == 'joinUsPage' && _id == 'joinUsPage'][0]{	...,	heroImage { asset->, alt },	propertyImage { asset->, alt }}
+// Query: *[_type == 'joinUsPage' && _id == 'joinUsPage'][0]{	...,	heroImage { asset->, alt },	propertyImage { asset->, alt },	heroDecorFlower { asset-> },	contentDecorImage { asset-> },	formDecorBg { asset-> }}
 export type JOIN_US_PAGE_QUERY_RESULT = {
 	_id: 'joinUsPage'
 	_type: 'joinUsPage'
@@ -2419,6 +2440,78 @@ export type JOIN_US_PAGE_QUERY_RESULT = {
 		alt: string | null
 	} | null
 	formHeadline?: string
+	heroDecorFlower: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+	} | null
+	contentDecorImage: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+	} | null
+	formDecorBg: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+	} | null
 	seo?: Seo
 } | null
 
@@ -3285,7 +3378,7 @@ declare module '@sanity/client' {
 		"*[_type == 'ourHomesPage' && _id == 'ourHomesPage'][0]{\n\theroHeadline,\n\theroImage { asset->, alt },\n\tctaQuestion,\n\texperiencesCtaLabel,\n\tctaBackground { asset->, alt },\n\tseo\n}": OUR_HOMES_PAGE_QUERY_RESULT
 		"*[_type == 'altWayPage' && _id == 'altWayPage'][0]{\n\t...,\n\theroBackground { asset->, alt },\n\tmissionImage { asset->, alt },\n\teditorialImages[]{ asset->, alt },\n\t\"reviews\": *[_type=='review' && featured==true && published==true] | order(stayDate desc) [0..20]{\n\t\tguestName, rating, body, guestLocation, stayDate\n\t}\n}": ALT_WAY_PAGE_QUERY_RESULT
 		"*[_type == 'experiencesPage' && _id == 'experiencesPage'][0]{\n\t...,\n\theroBackground { asset->, alt },\n\theroFlower { asset->, alt },\n\tdecorBasket { asset->, alt },\n\tdecorStars { asset->, alt },\n\tdecorDaisy { asset->, alt }\n}": EXPERIENCES_PAGE_QUERY_RESULT
-		"*[_type == 'joinUsPage' && _id == 'joinUsPage'][0]{\n\t...,\n\theroImage { asset->, alt },\n\tpropertyImage { asset->, alt }\n}": JOIN_US_PAGE_QUERY_RESULT
+		"*[_type == 'joinUsPage' && _id == 'joinUsPage'][0]{\n\t...,\n\theroImage { asset->, alt },\n\tpropertyImage { asset->, alt },\n\theroDecorFlower { asset-> },\n\tcontentDecorImage { asset-> },\n\tformDecorBg { asset-> }\n}": JOIN_US_PAGE_QUERY_RESULT
 		"*[_type == 'contactPage' && _id == 'contactPage'][0]{\n\t...,\n\theroImage { asset->, alt }\n}": CONTACT_PAGE_QUERY_RESULT
 		"*[_type == 'legalPage' && slug.current == $slug][0]": LEGAL_PAGE_QUERY_RESULT
 		"*[_type == 'legalPage' && defined(slug.current)].slug.current": ALL_LEGAL_PAGES_QUERY_RESULT
