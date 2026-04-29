@@ -3,6 +3,10 @@
     "serena": {
       "command": "serena",
       "args": ["start-mcp-server"]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"]
     }
   }
 }

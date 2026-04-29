@@ -10,25 +10,20 @@
 	position: absolute;
 	left: 50%;
 	top: 178px;
-	transform: translateX(-50%);
+	transform: translateX(calc(-50% + 35px));
 	width: 1110px;
 	height: 1110px;
-	border-radius: 50%;
-	border: 1.5px solid rgba(58, 58, 58, 0.12);
 	pointer-events: none;
 	z-index: 1;
 }
 
-.fgCircle {
+.heroImg {
 	position: absolute;
 	left: 50%;
 	top: 213px;
-	transform: translateX(calc(-50% + 51px));
+	transform: translateX(calc(-50% - 41px));
 	width: 856px;
 	height: 856px;
-	border-radius: 50%;
-	overflow: hidden;
-	background: #F1893F;
 	pointer-events: none;
 	z-index: 2;
 }
@@ -76,13 +71,13 @@
 
 .headlineH1 {
 	margin: 0;
-	font-size: 72px;
+	font-size: 60px;
 	line-height: 1;
 	letter-spacing: 0.1em;
 	color: #000;
 	font-weight: 400;
-	padding-left: 344px;
-	max-width: 920px;
+	text-align: center;
+	white-space: nowrap;
 	font-family: var(--font-playfair-display, 'Playfair Display', serif);
 	font-style: italic;
 }
@@ -203,7 +198,7 @@
 		transform: none;
 	}
 
-	.fgCircle {
+	.heroImg {
 		display: none;
 	}
 
@@ -213,9 +208,9 @@
 	}
 
 	.headlineH1 {
-		font-size: 61px;
-		padding-left: 0;
-		max-width: none;
+		font-size: 40px;
+		white-space: normal;
+		text-align: center;
 	}
 
 	.stars {

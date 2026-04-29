@@ -50,6 +50,10 @@ next-env.d.ts
 .claude/*
 !.claude/commands/
 
+# playwright mcp artifacts
+.playwright-mcp/
+*.png
+
 # sanity
 .sanity/
 dist/

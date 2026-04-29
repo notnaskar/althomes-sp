@@ -11,12 +11,12 @@ type Props = {
 }
 
 export default function HomeHero({ page, site }: Props) {
-	const imageUrl = page.heroImage?.asset
-		? urlFor(page.heroImage.asset).width(900).height(900).url()
-		: null
-
 	const waHref = site?.whatsappNumber
 		? `https://wa.me/${site.whatsappNumber.replace(/\D/g, '')}`
+		: null
+
+	const imageUrl = page.heroImage?.asset
+		? urlFor(page.heroImage.asset).width(900).height(900).url()
 		: null
 
 	return (
@@ -26,9 +26,9 @@ export default function HomeHero({ page, site }: Props) {
 				<HeroDecorImage asset={site?.heroBgCircle} sizes="1110px" />
 			</div>
 
-			{/* Hero image in foreground circle */}
+			{/* Hero image — no clip, asset handles its own shape */}
 			{imageUrl && (
-				<div className={css.fgCircle}>
+				<div className={css.heroImg}>
 					<Image
 						src={imageUrl}
 						alt={page.heroImage?.alt ?? ''}
