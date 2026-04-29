@@ -1,12 +1,16 @@
 'use server'
 
 import { Resend } from 'resend'
-import type { PartnerInput } from '@/lib/schemas/partner'
+import { partnerSchema } from '@/lib/schemas/partner'
 import { getSite } from '@/sanity/lib/data'
 import { checkOrigin, checkRateLimit, getClientIp } from '@/lib/server/security'
 import { partnerEmailHtml } from '@/lib/server/email-templates/partner'
 
-export async function submitPartner(data: PartnerInput) {
+export async function submitPartner(rawData: unknown) {
+	const parsed = partnerSchema.safeParse(rawData)
+	if (!parsed.success) return { success: false, error: 'Invalid input' }
+	const data = parsed.data
+
 	if (data._hp) return { success: false, error: 'Bot detected' }
 
 	if (!(await checkOrigin())) return { success: false, error: 'Forbidden' }

@@ -1,12 +1,16 @@
 'use server'
 
 import { Resend } from 'resend'
-import type { ContactInput } from '@/lib/schemas/contact'
+import { contactSchema } from '@/lib/schemas/contact'
 import { getSite } from '@/sanity/lib/data'
 import { checkOrigin, checkRateLimit, getClientIp } from '@/lib/server/security'
 import { contactEmailHtml } from '@/lib/server/email-templates/contact'
 
-export async function submitContact(data: ContactInput) {
+export async function submitContact(rawData: unknown) {
+	const parsed = contactSchema.safeParse(rawData)
+	if (!parsed.success) return { success: false, error: 'Invalid input' }
+	const data = parsed.data
+
 	if (data._hp) return { success: false, error: 'Bot detected' }
 
 	if (!(await checkOrigin())) return { success: false, error: 'Forbidden' }
