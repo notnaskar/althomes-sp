@@ -25,6 +25,6 @@ describe('getIcon', () => {
   })
 
   it('ICON_MAP contains at least 60 icons', () => {
-    expect(Object.keys(ICON_MAP).length).toBeGreaterThanOrEqual(60)
+    expect(Object.keys(ICON_MAP).length).toBe(73)
   })
 })

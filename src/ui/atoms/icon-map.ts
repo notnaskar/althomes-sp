@@ -153,7 +153,8 @@ export const ICON_MAP: Record<string, IconType> = {
   MdOutlineMedicalServices,
 }
 
+/** Returns the icon component for a known key, or null for unknown/empty/nil input. */
 export function getIcon(name: string | null | undefined): IconType | null {
-  if (!name) return null
+  if (name == null || name === '') return null
   return ICON_MAP[name] ?? null
 }
