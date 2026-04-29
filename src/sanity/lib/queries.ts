@@ -108,7 +108,8 @@ export const PROPERTY_QUERY =
 		description,
 		image { asset->, alt }
 	},
-	highlights[]{ title, body, image { asset->, alt } },
+	experiencesBgImage { asset->, alt, hotspot, crop },
+	highlights[]{ title, body, image { asset->, alt }, secondaryImage { asset->, alt }, decorImage { asset-> } },
 	causeImages[]{ asset->, alt },
 	location,
 	"reviews": *[_type=='review' && references(^._id) && published==true] | order(stayDate desc) [0..20]{
