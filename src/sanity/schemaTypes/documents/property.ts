@@ -237,6 +237,30 @@ export default defineType({
 			group: 'intro',
 		}),
 
+		defineField({
+			name: 'gallerySectionQuote',
+			title: 'Gallery Section Quote',
+			type: 'text',
+			description: 'Pull quote displayed over the gallery section on the property detail page.',
+			group: 'intro',
+		}),
+		defineField({
+			name: 'galleryDecorImage',
+			title: 'Gallery Decor Image',
+			type: 'image',
+			description: 'Botanical/decorative illustration shown in the gallery section.',
+			group: 'intro',
+		}),
+
+		defineField({
+			name: 'locationImage',
+			title: 'Location Image',
+			type: 'image',
+			description: 'Organic collage image shown in the Getting Here section.',
+			options: { hotspot: true },
+			group: 'intro',
+		}),
+
 		// Specs & Amenities
 		defineField({
 			name: 'maxGuests',
@@ -292,10 +316,21 @@ export default defineType({
 			group: 'listingCard',
 		}),
 		defineField({
-			name: 'locationDescription',
-			title: 'Location Description',
-			type: 'text',
+			name: 'locationBody',
+			title: 'Location Body',
+			type: 'blockContent',
+			description: 'Rich text for the Getting Here section. Supports bold title + body paragraphs.',
 			group: 'location',
+		}),
+		defineField({
+			name: 'locationCta',
+			title: 'Location CTA',
+			type: 'object',
+			group: 'location',
+			fields: [
+				defineField({ name: 'label', title: 'Label', type: 'string' }),
+				defineField({ name: 'url', title: 'URL', type: 'url' }),
+			],
 		}),
 
 		// Highlights
@@ -326,6 +361,21 @@ export default defineType({
 							options: { hotspot: true },
 							fields: [{ name: 'alt', type: 'string', title: 'Alt text' }],
 						},
+						{
+							name: 'secondaryImage',
+							type: 'image',
+							title: 'Secondary Image',
+							description: 'Optional small overlay photo for multi-image collage layouts.',
+							options: { hotspot: true },
+							fields: [{ name: 'alt', type: 'string', title: 'Alt text' }],
+						},
+						{
+							name: 'decorImage',
+							type: 'image',
+							title: 'Decor Image',
+							description: 'Optional organic/illustrative decoration (e.g. plant, flower) for this section.',
+							options: { hotspot: true },
+						},
 					],
 				},
 			],
@@ -347,6 +397,26 @@ export default defineType({
 			type: 'number',
 			initialValue: 3,
 			group: 'experiences',
+		}),
+		defineField({
+			name: 'experiencesBgImage',
+			title: 'Experiences Background Image',
+			type: 'image',
+			description: 'Full-bleed background image for the Experiences section.',
+			options: { hotspot: true },
+			group: 'experiences',
+		}),
+
+		defineField({
+			name: 'menuCta',
+			title: 'Menu CTA',
+			type: 'object',
+			description: '"What\'s on the menu?" CTA shown at the bottom of the food highlight.',
+			group: 'highlights',
+			fields: [
+				defineField({ name: 'label', title: 'Label', type: 'string' }),
+				defineField({ name: 'url', title: 'URL', type: 'url' }),
+			],
 		}),
 
 		// Causes

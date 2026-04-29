@@ -929,6 +929,21 @@ export type Property = {
 		_type: 'image'
 		_key: string
 	}>
+	gallerySectionQuote?: string
+	galleryDecorImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		_type: 'image'
+	}
+	locationImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		_type: 'image'
+	}
 	maxGuests?: number
 	bedrooms?: number
 	bathrooms?: number
@@ -941,7 +956,11 @@ export type Property = {
 	houseRules?: BlockContent
 	location?: Location
 	locationHeadline?: string
-	locationDescription?: string
+	locationBody?: BlockContent
+	locationCta?: {
+		label?: string
+		url?: string
+	}
 	highlights?: Array<{
 		title?: string
 		body?: string
@@ -953,6 +972,21 @@ export type Property = {
 			alt?: string
 			_type: 'image'
 		}
+		secondaryImage?: {
+			asset?: SanityImageAssetReference
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			alt?: string
+			_type: 'image'
+		}
+		decorImage?: {
+			asset?: SanityImageAssetReference
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			_type: 'image'
+		}
 		_key: string
 	}>
 	experiences?: Array<
@@ -961,6 +995,17 @@ export type Property = {
 		} & ExperienceReference
 	>
 	experiencesMaxShown?: number
+	experiencesBgImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		_type: 'image'
+	}
+	menuCta?: {
+		label?: string
+		url?: string
+	}
 	causeHeadline?: string
 	causeBody?: BlockContent
 	causeImages?: Array<{
@@ -2716,7 +2761,7 @@ export type ALL_PROPERTIES_QUERY_RESULT = Array<{
 
 // Source: src/sanity/lib/queries.ts
 // Variable: PROPERTY_QUERY
-// Query: *[_type == 'property' && slug.current == $slug][0]{	...,	heroImage { asset->, alt },	gallery[]{ asset->, alt },	cardThumbnail { asset->, alt },	amenities[]->{ name, icon },	experiences[]->{		title,		"slug": slug.current,		description,		image { asset->, alt }	},	highlights[]{ title, body, image { asset->, alt } },	causeImages[]{ asset->, alt },	location,	"reviews": *[_type=='review' && references(^._id) && published==true] | order(stayDate desc) [0..20]{		guestName, rating, body, guestLocation, stayDate	}}
+// Query: *[_type == 'property' && slug.current == $slug][0]{	...,	heroImage { asset->, alt },	gallery[]{ asset->, alt },	cardThumbnail { asset->, alt },	amenities[]->{ name, icon },	experiences[]->{		title,		"slug": slug.current,		description,		image { asset->, alt }	},	highlights[]{ title, body, image { asset->, alt }, secondaryImage { asset->, alt }, decorImage { asset-> } },	causeImages[]{ asset->, alt },	location,	"reviews": *[_type=='review' && references(^._id) && published==true] | order(stayDate desc) [0..20]{		guestName, rating, body, guestLocation, stayDate	}}
 export type PROPERTY_QUERY_RESULT = {
 	_id: string
 	_type: 'property'
@@ -2832,6 +2877,21 @@ export type PROPERTY_QUERY_RESULT = {
 		} | null
 		alt: string | null
 	}> | null
+	gallerySectionQuote?: string
+	galleryDecorImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		_type: 'image'
+	}
+	locationImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		_type: 'image'
+	}
 	maxGuests?: number
 	bedrooms?: number
 	bathrooms?: number
@@ -2843,7 +2903,11 @@ export type PROPERTY_QUERY_RESULT = {
 	houseRules?: BlockContent
 	location: Location | null
 	locationHeadline?: string
-	locationDescription?: string
+	locationBody?: BlockContent
+	locationCta?: {
+		label?: string
+		url?: string
+	}
 	highlights: Array<{
 		title: string | null
 		body: string | null
@@ -2871,6 +2935,55 @@ export type PROPERTY_QUERY_RESULT = {
 				source?: SanityAssetSourceData
 			} | null
 			alt: string | null
+		} | null
+		secondaryImage: {
+			asset: {
+				_id: string
+				_type: 'sanity.imageAsset'
+				_createdAt: string
+				_updatedAt: string
+				_rev: string
+				originalFilename?: string
+				label?: string
+				title?: string
+				description?: string
+				altText?: string
+				sha1hash?: string
+				extension?: string
+				mimeType?: string
+				size?: number
+				assetId?: string
+				uploadId?: string
+				path?: string
+				url?: string
+				metadata?: SanityImageMetadata
+				source?: SanityAssetSourceData
+			} | null
+			alt: string | null
+		} | null
+		decorImage: {
+			asset: {
+				_id: string
+				_type: 'sanity.imageAsset'
+				_createdAt: string
+				_updatedAt: string
+				_rev: string
+				originalFilename?: string
+				label?: string
+				title?: string
+				description?: string
+				altText?: string
+				sha1hash?: string
+				extension?: string
+				mimeType?: string
+				size?: number
+				assetId?: string
+				uploadId?: string
+				path?: string
+				url?: string
+				metadata?: SanityImageMetadata
+				source?: SanityAssetSourceData
+			} | null
 		} | null
 	}> | null
 	experiences: Array<{
@@ -2904,6 +3017,17 @@ export type PROPERTY_QUERY_RESULT = {
 		} | null
 	}> | null
 	experiencesMaxShown?: number
+	experiencesBgImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		_type: 'image'
+	}
+	menuCta?: {
+		label?: string
+		url?: string
+	}
 	causeHeadline?: string
 	causeBody?: BlockContent
 	causeImages: Array<{
@@ -3383,7 +3507,7 @@ declare module '@sanity/client' {
 		"*[_type == 'legalPage' && slug.current == $slug][0]": LEGAL_PAGE_QUERY_RESULT
 		"*[_type == 'legalPage' && defined(slug.current)].slug.current": ALL_LEGAL_PAGES_QUERY_RESULT
 		"*[_type == 'property' && status != 'hidden'] | order(displayOrder asc){\n\t_id,\n\ttitle,\n\t\"slug\": slug.current,\n\ttagline,\n\tshortDescription,\n\tcardThumbnail { asset->, alt },\n\theroImage { asset->, alt },\n\tshowcaseSecondaryImage { asset->, alt },\n\tshowcaseDecorImage { asset->, alt },\n\tshowcaseDecorTop,\n\tshowcaseDecorRight,\n\tshowcaseDecorWidth,\n\tshowcaseDecorHeight,\n\tshowcaseDecorRotation,\n\tpullQuote,\n\tlocationHeadline,\n\tcardAmenities,\n\tpropertyType,\n\tpriceFrom,\n\tmaxGuests,\n\tbedrooms,\n\tbathrooms,\n\tstatus,\n\tdisplayOrder,\n\trentalwisePropertyId\n}": ALL_PROPERTIES_QUERY_RESULT
-		'*[_type == \'property\' && slug.current == $slug][0]{\n\t...,\n\theroImage { asset->, alt },\n\tgallery[]{ asset->, alt },\n\tcardThumbnail { asset->, alt },\n\tamenities[]->{ name, icon },\n\texperiences[]->{\n\t\ttitle,\n\t\t"slug": slug.current,\n\t\tdescription,\n\t\timage { asset->, alt }\n\t},\n\thighlights[]{ title, body, image { asset->, alt } },\n\tcauseImages[]{ asset->, alt },\n\tlocation,\n\t"reviews": *[_type==\'review\' && references(^._id) && published==true] | order(stayDate desc) [0..20]{\n\t\tguestName, rating, body, guestLocation, stayDate\n\t}\n}': PROPERTY_QUERY_RESULT
+		'*[_type == \'property\' && slug.current == $slug][0]{\n\t...,\n\theroImage { asset->, alt },\n\tgallery[]{ asset->, alt },\n\tcardThumbnail { asset->, alt },\n\tamenities[]->{ name, icon },\n\texperiences[]->{\n\t\ttitle,\n\t\t"slug": slug.current,\n\t\tdescription,\n\t\timage { asset->, alt }\n\t},\n\thighlights[]{ title, body, image { asset->, alt }, secondaryImage { asset->, alt }, decorImage { asset-> } },\n\tcauseImages[]{ asset->, alt },\n\tlocation,\n\t"reviews": *[_type==\'review\' && references(^._id) && published==true] | order(stayDate desc) [0..20]{\n\t\tguestName, rating, body, guestLocation, stayDate\n\t}\n}': PROPERTY_QUERY_RESULT
 		"*[_type == 'property' && defined(slug.current)].slug.current": ALL_PROPERTY_SLUGS_QUERY_RESULT
 		"*[_type == 'blog.post'] | order(publishDate desc)": ALL_POSTS_QUERY_RESULT
 		"*[_type == 'blog.post' && metadata.slug.current == $slug][0]": POST_BY_SLUG_QUERY_RESULT
