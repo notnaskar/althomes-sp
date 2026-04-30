@@ -61,8 +61,8 @@ export default function SocialLinks({
 					key={link.label}
 					href={link.href!}
 					aria-label={link.label}
-					className="inline-flex"
-					style={{ width: size, height: size, color: 'inherit' }}
+					className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center"
+					style={{ color: 'inherit' }}
 				>
 					{link.icon}
 				</a>
