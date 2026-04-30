@@ -10,7 +10,7 @@ export default function MenuToggle({ onOpen }: MenuToggleProps) {
 			type="button"
 			aria-label="Open menu"
 			onClick={onOpen}
-			className="inline-flex h-8 w-8 items-center justify-center"
+			className="inline-flex h-11 w-11 items-center justify-center"
 		>
 			<svg viewBox="0 0 25 18" width="25" height="18" fill="none">
 				<line
