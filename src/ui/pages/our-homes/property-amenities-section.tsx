@@ -23,7 +23,7 @@ export default function PropertyAmenitiesSection({
   houseRules,
 }: Props) {
   const [modalOpen, setModalOpen] = useState(false)
-  const [col1, col2, col3] = splitAmenityColumns(amenities)
+  const columns = splitAmenityColumns(amenities)
 
   return (
     <section className="flex bg-background max-[820px]:flex-col">
@@ -48,11 +48,11 @@ export default function PropertyAmenitiesSection({
 
         {amenities.length > 0 && (
           <div className="mb-[48px] flex gap-[32px] max-[820px]:flex-col">
-            {([col1, col2, col3] as Amenity[][]).map((col, ci) =>
+            {columns.map((col, ci) =>
               col.length > 0 ? (
                 <div key={ci} className="flex flex-col gap-[16px]">
                   {col.map((amenity, ai) => (
-                    <div key={ai} className="flex items-center gap-[12px]">
+                    <div key={amenity.name ?? ai} className="flex items-center gap-[12px]">
                       <ReactIcon name={amenity.icon} size={24} />
                       <span className="font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground">
                         {amenity.name}
@@ -66,7 +66,7 @@ export default function PropertyAmenitiesSection({
         )}
 
         {(houseRulesTeaser || houseRules) && (
-          <p className="font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground">
+          <span className="block font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground">
             {houseRulesTeaser && <span>{houseRulesTeaser} </span>}
             {houseRules && (
               <button
@@ -76,17 +76,20 @@ export default function PropertyAmenitiesSection({
                 House Rules
               </button>
             )}
-          </p>
+          </span>
         )}
       </div>
 
       {/* House rules modal */}
       {modalOpen && houseRules && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/60"
           onClick={() => setModalOpen(false)}
         >
           <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="amenities-modal-title"
             className="relative max-h-[80vh] w-full max-w-[640px] overflow-y-auto bg-background px-[48px] py-[40px]"
             onClick={e => e.stopPropagation()}
           >
@@ -97,7 +100,7 @@ export default function PropertyAmenitiesSection({
             >
               ×
             </button>
-            <h3 className="mb-[24px] font-heading italic text-[24px] leading-[32px] tracking-[0.1em] text-foreground">
+            <h3 id="amenities-modal-title" className="mb-[24px] font-heading italic text-[24px] leading-[32px] tracking-[0.1em] text-foreground">
               House Rules
             </h3>
             <div className="font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground [&_p]:mb-[8px] [&_p:last-child]:mb-0">
