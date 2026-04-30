@@ -33,14 +33,14 @@ export default async function ContactPage() {
 			{/* Hero fallback (no image) */}
 			{!page.heroImage && page.formHeadline && (
 				<section className="px-[90px] max-[820px]:px-[18px] py-20 text-center">
-					<h1 className="text-4xl font-bold md:text-5xl">
+					<h1 className="text-4xl font-bold max-[820px]:text-[32px]">
 						{page.formHeadline}
 					</h1>
 				</section>
 			)}
 
 			{/* Two-column body */}
-			<section className="px-[90px] max-[820px]:px-[18px] grid gap-12 py-16 md:grid-cols-2">
+			<section className="px-[90px] max-[820px]:px-[18px] grid gap-12 py-16 max-[820px]:grid-cols-1 min-[821px]:grid-cols-2">
 				{/* Left: contact details */}
 				<div className="space-y-6">
 					{page.sectionTitle && (
