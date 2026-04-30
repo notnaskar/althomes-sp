@@ -102,6 +102,7 @@ export const PROPERTY_QUERY =
 	gallery[]{ asset->, alt },
 	cardThumbnail { asset->, alt },
 	amenities[]->{ name, icon },
+	amenitiesSectionImage { asset->, alt },
 	experiences[]->{
 		title,
 		"slug": slug.current,
