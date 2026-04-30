@@ -46,21 +46,21 @@ export default function OurHomesHero({ heroHeadline, heroBackground }: Props) {
 					<span className="text-foreground text-[15px] tracking-[0.1em]">
 						Check In &nbsp;&nbsp;→&nbsp;&nbsp; Check Out
 					</span>
-					<div className="h-px w-full bg-[#5F5D5D]" />
+					<div className="h-px w-full bg-muted" />
 				</div>
 
 				<div className="flex flex-1 flex-col gap-1.5 max-[820px]:flex-none">
 					<span className="text-foreground text-[15px] tracking-[0.1em]">
 						Guests
 					</span>
-					<div className="h-px w-full bg-[#5F5D5D]" />
+					<div className="h-px w-full bg-muted" />
 				</div>
 
 				<div className="flex flex-1 flex-col gap-1.5 max-[820px]:flex-none">
 					<span className="text-foreground text-[15px] tracking-[0.1em]">
 						Promo Code
 					</span>
-					<div className="h-px w-full bg-[#5F5D5D]" />
+					<div className="h-px w-full bg-muted" />
 				</div>
 
 				<div className="bg-accent text-accent-foreground inline-flex flex-shrink-0 cursor-default items-center justify-center rounded-[5px] px-[22px] py-3 text-[12px] font-bold tracking-[0.3em] whitespace-nowrap uppercase select-none">
