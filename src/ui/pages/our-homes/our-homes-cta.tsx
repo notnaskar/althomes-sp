@@ -24,7 +24,7 @@ export default function OurHomesCta({
 			{/* CONTENT: ctaBackground */}
 			{ctaBackground?.asset && (
 				<Image
-					src={urlFor(ctaBackground.asset).url()}
+					src={urlFor(ctaBackground.asset).width(1440).quality(85).url()}
 					alt={ctaBackground.alt ?? ''}
 					fill
 					sizes="100vw"
