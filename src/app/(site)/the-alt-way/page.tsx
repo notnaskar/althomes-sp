@@ -18,7 +18,8 @@ export default async function AltWayPage() {
 					<Img
 						image={page.heroBackground}
 						width={1440}
-						loading="eager"
+						priority
+						imageOptions={{ q: 85 }}
 						alt={page.heroBackground.alt ?? ''}
 						className="h-[70vh] w-full object-cover opacity-60"
 					/>
