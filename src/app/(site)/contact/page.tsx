@@ -32,7 +32,7 @@ export default async function ContactPage() {
 
 			{/* Hero fallback (no image) */}
 			{!page.heroImage && page.formHeadline && (
-				<section className="container py-20 text-center">
+				<section className="px-[90px] max-[820px]:px-[18px] py-20 text-center">
 					<h1 className="text-4xl font-bold md:text-5xl">
 						{page.formHeadline}
 					</h1>
@@ -40,7 +40,7 @@ export default async function ContactPage() {
 			)}
 
 			{/* Two-column body */}
-			<section className="container grid gap-12 py-16 md:grid-cols-2">
+			<section className="px-[90px] max-[820px]:px-[18px] grid gap-12 py-16 md:grid-cols-2">
 				{/* Left: contact details */}
 				<div className="space-y-6">
 					{page.sectionTitle && (
