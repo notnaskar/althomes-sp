@@ -127,11 +127,11 @@ export default function ExperienceGrid({
 							height="6"
 							viewBox="0 0 9 6"
 							fill="none"
-							className={`transition-transform duration-200 ${filterOpen ? 'rotate-180' : ''}`}
+							className={`text-foreground transition-transform duration-200 ${filterOpen ? 'rotate-180' : ''}`}
 						>
 							<path
 								d="M1 1L4.5 5L8 1"
-								stroke="rgb(58,58,58)"
+								stroke="currentColor"
 								strokeWidth="1.2"
 								strokeLinecap="round"
 								strokeLinejoin="round"
@@ -144,7 +144,7 @@ export default function ExperienceGrid({
 						<div
 							id="filter-panel"
 							role="menu"
-							className="absolute top-[44px] left-0 z-10 w-[288px] rounded-b-[16px] bg-white py-[8px] shadow-[0_8px_24px_rgba(0,0,0,0.08)] max-[820px]:w-[calc(100vw-36px)]"
+							className="absolute top-[44px] left-0 z-10 w-[288px] rounded-b-[16px] bg-background py-[8px] shadow-[0_8px_24px_rgba(0,0,0,0.08)] max-[820px]:w-[calc(100vw-36px)]"
 						>
 							{/* All locations row */}
 							<label className="text-foreground hover:bg-background flex cursor-pointer items-center gap-[12px] px-[24px] font-sans text-[15px] leading-[42px] tracking-[0.1em] transition-colors">
