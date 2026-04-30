@@ -15,13 +15,13 @@ export default function ({
 }: HeroSplit) {
 	return (
 		<section
-			className="section grid items-center gap-8 md:grid-cols-2"
+			className="section grid items-center gap-8 max-[820px]:grid-cols-1 min-[821px]:grid-cols-2"
 			{...moduleAttributes(props)}
 		>
 			<figure
 				className={cn(
-					image?.onRight && 'md:order-last',
-					image?.afterContent && 'max-md:order-last',
+					image?.onRight && 'min-[821px]:order-last',
+					image?.afterContent && 'max-[820px]:order-last',
 				)}
 			>
 				<Img
@@ -35,7 +35,7 @@ export default function ({
 			<header className="prose">
 				<Overline value={overline} />
 				<PortableText value={content} />
-				<CTAList ctas={ctas} className="max-md:*:w-full" />
+				<CTAList ctas={ctas} className="max-[820px]:*:w-full" />
 			</header>
 		</section>
 	)
