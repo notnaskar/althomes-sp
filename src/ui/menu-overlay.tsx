@@ -34,12 +34,11 @@ export default function MenuOverlay({ isOpen, onCloseAction, site }: Props) {
 
 	return (
 		<div
-			className="animate-in fade-in fixed inset-0 z-50 grid duration-200 md:grid-cols-[1fr_415px]"
-			style={{ background: '#FCF6EA' }}
+			className="animate-in fade-in fixed inset-0 z-50 grid duration-200 min-[821px]:grid-cols-[1fr_415px] bg-background"
 			role="dialog"
 			aria-modal="true"
 		>
-			<div className="relative hidden overflow-hidden md:block">
+			<div className="relative hidden overflow-hidden min-[821px]:block">
 				{site?.menuPhoto?.asset && (
 					<Image
 						src={urlFor(site.menuPhoto.asset).url()}
@@ -52,12 +51,7 @@ export default function MenuOverlay({ isOpen, onCloseAction, site }: Props) {
 			</div>
 
 			<aside
-				className="flex flex-col overflow-y-auto"
-				style={{
-					background: '#2F5D50',
-					color: '#FCF6EA',
-					padding: '48px 40px 40px',
-				}}
+				className="flex flex-col overflow-y-auto bg-primary text-primary-foreground pt-[48px] px-[40px] pb-[40px]"
 			>
 				<div className="mb-10 flex items-center justify-between gap-6 md:justify-end">
 					{site?.navCtaLink && (
@@ -71,7 +65,7 @@ export default function MenuOverlay({ isOpen, onCloseAction, site }: Props) {
 						type="button"
 						aria-label="Close menu"
 						onClick={onCloseAction}
-						className="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center"
+						className="inline-flex h-11 w-11 flex-shrink-0 items-center justify-center"
 					>
 						<svg viewBox="0 0 25 25" width="25" height="25" fill="none">
 							<line
@@ -101,7 +95,7 @@ export default function MenuOverlay({ isOpen, onCloseAction, site }: Props) {
 						<a
 							key={item.url ?? item.label}
 							href={item.url ?? '#'}
-							className="font-['Playfair_Display'] text-[30px] leading-[40px] font-normal tracking-[0.1em] text-[#FCF6EA] italic transition-opacity hover:opacity-75"
+							className="font-heading text-[30px] leading-[40px] font-normal tracking-[0.1em] text-primary-foreground italic transition-opacity hover:opacity-75"
 						>
 							{item.label}
 						</a>
