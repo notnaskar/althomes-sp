@@ -42,7 +42,7 @@ export default function PartnerForm() {
 	const label =
 		'block font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground uppercase'
 	const input =
-		'w-full border-0 border-b border-muted bg-transparent pb-1 font-heading text-[15px] leading-[23px] tracking-[0.1em] text-foreground placeholder:text-muted/50 focus:outline-none focus:border-foreground transition-colors'
+		'w-full border-0 border-b border-muted bg-transparent pb-1 font-heading text-[15px] leading-[23px] tracking-[0.1em] text-foreground placeholder:text-muted/50 focus:outline-none focus:border-foreground focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-colors'
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -131,7 +131,7 @@ export default function PartnerForm() {
 				<button
 					type="submit"
 					disabled={isSubmitting}
-					className="mt-[25px] h-[26px] min-w-[95px] rounded-[5px] bg-accent px-4 font-sans text-[12px] font-semibold tracking-[0.3em] text-accent-foreground disabled:opacity-50"
+					className="mt-[25px] h-[26px] min-w-[95px] rounded-[5px] bg-accent px-4 font-sans text-[12px] font-semibold tracking-[0.3em] text-accent-foreground disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
 				>
 					{isSubmitting ? 'Sending…' : 'SUBMIT'}
 				</button>
