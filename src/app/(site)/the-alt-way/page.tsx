@@ -39,9 +39,9 @@ export default async function AltWayPage() {
 
 			{/* Mission split */}
 			{(page.missionImage || page.missionText) && (
-				<section className="container grid items-center gap-12 py-20 md:grid-cols-2">
+				<section className="px-[90px] max-[820px]:px-[18px] grid items-center gap-12 py-20 md:grid-cols-2">
 					{page.missionImage && (
-						<div className="overflow-hidden rounded-2xl">
+						<div className="overflow-hidden rounded-[5px]">
 							<Img
 								image={page.missionImage}
 								width={700}
@@ -61,7 +61,7 @@ export default async function AltWayPage() {
 			{/* Value props 2×2 grid */}
 			{page.valueProps && page.valueProps.length > 0 && (
 				<section className="bg-background py-20">
-					<div className="container">
+					<div className="px-[90px] max-[820px]:px-[18px]">
 						{page.valuePropHeadline && (
 							<h2 className="mb-12 text-center font-heading italic text-[30px] tracking-[0.3em]">
 								{page.valuePropHeadline}
@@ -85,7 +85,7 @@ export default async function AltWayPage() {
 
 			{/* Editorial images */}
 			{page.editorialImages && page.editorialImages.length > 0 && (
-				<section className="container overflow-x-auto py-16">
+				<section className="px-[90px] max-[820px]:px-[18px] overflow-x-auto py-16">
 					<div className="flex gap-4">
 						{page.editorialImages.map((img, i) => (
 							<div key={i} className="flex-shrink-0 overflow-hidden rounded-xl">
@@ -103,7 +103,7 @@ export default async function AltWayPage() {
 
 			{/* Promise CTA */}
 			{(page.promiseText || page.promiseCTALabel) && (
-				<section className="container py-20 text-center">
+				<section className="px-[90px] max-[820px]:px-[18px] py-20 text-center">
 					{page.promiseText && (
 						<p className="mx-auto max-w-2xl font-heading italic text-[30px] tracking-[0.3em]">
 							{page.promiseText}
@@ -123,7 +123,7 @@ export default async function AltWayPage() {
 			{/* Stats bar */}
 			{page.stats && page.stats.length > 0 && (
 				<section className="bg-primary py-16 text-primary-foreground">
-					<div className="container">
+					<div className="px-[90px] max-[820px]:px-[18px]">
 						{page.statsHeadline && (
 							<h2 className="mb-12 text-center text-2xl font-semibold text-primary-foreground/80">
 								{page.statsHeadline}
@@ -154,7 +154,7 @@ export default async function AltWayPage() {
 
 			{/* Reviews carousel */}
 			{cappedReviews.length > 0 && (
-				<section className="container py-20">
+				<section className="px-[90px] max-[820px]:px-[18px] py-20">
 					<h2 className="mb-12 text-center font-heading italic text-[30px] tracking-[0.3em]">
 						What Our Guests Say
 					</h2>
@@ -163,7 +163,7 @@ export default async function AltWayPage() {
 							{cappedReviews.map((review, i) => (
 								<div
 									key={i}
-									className="w-80 flex-shrink-0 space-y-4 rounded-2xl border p-6"
+									className="w-80 flex-shrink-0 space-y-4 rounded-[5px] border p-6"
 								>
 									{review.rating != null && (
 										<div className="flex gap-1">
