@@ -299,6 +299,14 @@ export default defineType({
 			type: 'blockContent',
 			group: 'specs',
 		}),
+		defineField({
+			name: 'amenitiesSectionImage',
+			title: 'Amenities Section Image',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
+			group: 'specs',
+		}),
 
 		// Location
 		defineField({
