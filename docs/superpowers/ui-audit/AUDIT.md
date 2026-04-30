@@ -1734,3 +1734,347 @@ CMS-DEP: no
 <!-- A3 complete: 82 findings across 16 files -->
 
 ## A4 — Blog
+
+---
+FILE: src/app/(site)/blog/page.tsx
+LINE: 11
+ISSUE: `section` utility class used as the page wrapper. `@utility section` in `app.css` is defined as `mx-auto max-w-7xl px-4 py-12 md:px-8` — this uses `md:` (768px) breakpoint and `px-4` / `px-8` (not `px-[90px]` / `px-[18px]`). This page does not apply the design-token page padding at all.
+CATEGORY: spacing-inconsistency
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/blog/page.tsx
+LINE: 12
+ISSUE: `<h1>` uses `text-4xl font-bold` — not `font-heading italic` and not the documented type scale. No `tracking-[0.3em]` on the heading level either.
+CATEGORY: typography-consistency
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/blog/page.tsx
+LINE: 14
+ISSUE: Blog card grid uses `md:grid-cols-2 lg:grid-cols-3` — both `md:` (768px) and `lg:` (1024px) breakpoints are forbidden. Only `max-[820px]:` is the permitted breakpoint.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/blog/page.tsx
+LINE: 19
+ISSUE: Card `<Link>` uses `border-gray-200 bg-white` — `bg-white` (`#FFFFFF`) is not the background token (`bg-background` = `#FCF6EA`). `border-gray-200` has no design token equivalent.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/blog/page.tsx
+LINE: 32
+ISSUE: Card post title `<h2>` uses `font-bold` instead of `font-heading italic`. Also `group-hover:text-yellow-600` — should be `group-hover:text-accent` to stay within the token system.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/blog/page.tsx
+LINE: 36
+ISSUE: Post date `<p>` uses `text-sm text-gray-500` — `text-gray-500` should be `text-muted`. Also lacks `tracking-[0.1em]` per design spec for date/label text.
+CATEGORY: token-violation
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/blog/page.tsx
+LINE: 23-28
+ISSUE: `<Img>` has no `sizes` prop and no `quality` prop. In a 3-column grid the image renders at ~33vw, but `width={600}` with no `sizes` means Next.js can't choose the correct source size. Should add `sizes="(max-width: 820px) 100vw, 33vw"` and `quality={85}` for post preview images.
+CATEGORY: image-quality-and-performance
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/blog/page.tsx
+LINE: 1-56
+ISSUE: This entire page is a standalone reimplementation that bypasses the `BlogIndex` module (`src/ui/modules/blog/blog-index/index.tsx`) — it fetches posts directly with `getAllPosts()`, renders a plain grid with zero design tokens, and duplicates logic already handled by the module system. It should be deleted in favour of the CMS-driven module approach. Dead parallel code path.
+CATEGORY: file-hygiene
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/blog/blog-index/index.tsx
+LINE: 49
+ISSUE: `BLOG_INDEX_QUERY` uses a bare `groq` tag instead of `defineQuery()`. Per the project non-negotiable: "Every GROQ query must use `defineQuery()`. Plain `groq` tag breaks TypeGen silently." TypeGen cannot see this query.
+CATEGORY: file-hygiene
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/blog/blog-index/index.tsx
+LINE: 20
+ISSUE: `section` utility applied as outer wrapper. The `@utility section` definition uses `md:px-8` (768px breakpoint, non-token padding) instead of `px-[90px] max-[820px]:px-[18px]`. All blog index content inherits non-standard horizontal padding.
+CATEGORY: spacing-inconsistency
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/blog/blog-index/paginated-posts.tsx
+LINE: 50
+ISSUE: `className="md:order-first"` on `PostPreviewLarge` uses the forbidden `md:` (768px) breakpoint. Should be `max-[820px]:order-first` logic or restructured.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/blog/blog-index/paginated-posts.tsx
+LINE: 51
+ISSUE: `<hr>` uses `max-md:full-bleed` — forbidden `max-md:` (768px) breakpoint. Should be `max-[820px]:full-bleed`.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/blog/blog-index/paginated-posts.tsx
+LINE: 54
+ISSUE: Post grid uses `sm:grid-cols-[repeat(auto-fill,minmax(var(--container-xs),1fr))]` — `sm:` (640px) is a forbidden breakpoint. Only `max-[820px]:` is allowed. This grid snaps to multi-column at 640px instead of the designed 820px breakpoint.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/blog/blog-index/paginated-posts.tsx
+LINE: 9
+ISSUE: Component is an anonymous default export (`export default function (`). Should be named `PaginatedPosts` for React DevTools, error stack traces, and fast refresh clarity.
+CATEGORY: file-hygiene
+SEVERITY: low
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/blog/blog-index/paginated-posts.tsx
+LINE: 23
+ISSUE: `(post as any).categories?.some(...)` — repeated `as any` casts indicate that the GROQ query result type does not include `categories`. This is a consequence of using a bare `groq` tag (instead of `defineQuery()`) in `index.tsx`, which breaks TypeGen. The type-safety gap is a downstream symptom of the TypeGen violation above.
+CATEGORY: file-hygiene
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/blog/blog-index/skeleton.tsx
+LINE: 5
+ISSUE: Skeleton's post-preview-large uses `md:order-first md:grid-cols-2` — both are forbidden `md:` (768px) breakpoints. Should be `max-[820px]:` equivalents to match the actual component's breakpoint.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/blog/blog-index/skeleton.tsx
+LINE: 27
+ISSUE: Skeleton post grid uses `sm:grid-cols-[repeat(auto-fill,minmax(var(--container-sm),1fr))]` — `sm:` (640px) forbidden breakpoint, and uses `--container-sm` while the live grid uses `--container-xs`. The skeleton and live grid use different responsive strategies and different container variables, meaning skeleton layout does not match the content it replaces.
+CATEGORY: responsiveness
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/blog/blog-index/sort-by.tsx
+LINE: 5
+ISSUE: Anonymous default export. Should be named `SortBy` for dev tools clarity.
+CATEGORY: file-hygiene
+SEVERITY: low
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/blog/blog-index/sort-by.tsx
+LINE: 3
+ISSUE: `sort-by.tsx` imports `useBlogIndexStore` from `./store` but `paginated-posts.tsx` reads `sortBy` directly from `useQueryState('sortBy')` rather than `useBlogIndexStore()`. The sort state is managed via two different access patterns (store vs direct nuqs) in sibling components — this creates inconsistency and is fragile if the store shape changes.
+CATEGORY: file-hygiene
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/blog/blog-post-content.tsx
+LINE: 59
+ISSUE: Blog post body section uses `max-md:flex-col md:items-start` — both `max-md:` and `md:` are forbidden (768px) breakpoints. Should be `max-[820px]:flex-col` and drop `md:items-start` or replace with `min-[821px]:items-start`.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/blog/blog-post-content.tsx
+LINE: 32-41
+ISSUE: Hero header `<Img>` uses `loading="eager"` instead of `priority`. For above-the-fold post hero images, Next.js `priority` is the correct pattern — it adds `<link rel="preload">` in `<head>` and sets `fetchpriority="high"`, which `loading="eager"` alone does not do.
+CATEGORY: image-quality-and-performance
+SEVERITY: high
+CMS-DEP: yes — post.metadata.image from Sanity blog.post
+---
+
+---
+FILE: src/ui/modules/blog/blog-post-content.tsx
+LINE: 35
+ISSUE: Hero `<Img>` uses `width={1000}` with no `sizes` prop and no explicit `quality` prop. Post hero renders full-width (`inset-0 size-full`). Should have `sizes="100vw"` and `quality={85}` minimum for a large hero image.
+CATEGORY: image-quality-and-performance
+SEVERITY: high
+CMS-DEP: yes — post.metadata.image from Sanity blog.post
+---
+
+---
+FILE: src/ui/modules/blog/blog-post-content.module.css
+LINE: 3
+ISSUE: `@media (width >=48rem)` — 48rem = 768px. This CSS module breakpoint does not match the project's single `max-[820px]:` / `820px` breakpoint. Content grid breaks to multi-column at 768px, one full breakpoint earlier than the design system specifies (820px). Should be `@media (width >= 820px)`.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/blog/blog-post-content.module.css
+LINE: 1-15
+ISSUE: The CSS module is partially justified (grid-template-columns with named lines cannot be expressed cleanly in Tailwind), but the drop-cap rule on line 11-14 (`p:first-of-type::first-letter`) — using `var(--text-7xl)` and `var(--font-serif)` — applies a decorative drop cap that is not documented in `UI_GUIDELINES.md` as a design spec element. `var(--font-serif)` may not map to the `font-heading` (Playfair Display) token. Needs design confirmation.
+CATEGORY: file-hygiene
+SEVERITY: low
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/blog/blog-post-list.tsx
+LINE: 20
+ISSUE: `section` utility used as outer wrapper — inherits the `md:px-8` non-token padding from `@utility section` definition, same as the blog index. Blog post list widget will not have `px-[90px] max-[820px]:px-[18px]` horizontal padding.
+CATEGORY: spacing-inconsistency
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/blog/blog-post-list.tsx
+LINE: 28
+ISSUE: Carousel `<ul>` uses `max-md:full-bleed max-md:px-4 md:mask-r-from-[calc(100%-2rem)] md:pr-4` — `max-md:` and `md:` breakpoints (768px) are both forbidden. Should use `max-[820px]:full-bleed max-[820px]:px-4` etc.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/blog/blog-post-list.tsx
+LINE: 45
+ISSUE: `BLOG_POST_LIST_QUERY` uses a bare `groq` tag instead of `defineQuery()`. TypeGen cannot see this query — types for posts will be `any`, breaking type safety downstream.
+CATEGORY: file-hygiene
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/blog/blog-post-list.tsx
+LINE: 31
+ISSUE: `post as unknown as BlogPost` cast is required because the bare `groq` query (not `defineQuery()`) doesn't produce typed results. This is a symptom of the TypeGen violation above.
+CATEGORY: file-hygiene
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/blog/filter-list.tsx
+LINE: 1-9
+ISSUE: `FilterList` is a server component that only ever renders `<Filter>All</Filter>` with no categories fetched from the CMS. The component appears incomplete — it should fetch all blog categories from Sanity and render a filter button per category (similar to how the `useBlogIndexStore` and `useQueryState('category')` in `paginated-posts.tsx` already expect a per-category filter). Currently all category filtering is dead from the UI side.
+CATEGORY: file-hygiene
+SEVERITY: high
+CMS-DEP: yes — should fetch blog categories from Sanity
+---
+
+---
+FILE: src/ui/modules/blog/filter.tsx
+LINE: 4
+ISSUE: `filter.tsx` imports `useBlogIndexStore` from `./blog-index/store` (a client store), but `filter-list.tsx` (which renders `<Filter>`) is declared as a server component (`async function`). This architecture is inconsistent — `Filter` is `'use client'` but its parent `FilterList` is a server async component. The mismatch works only because Next.js allows server→client composition, but it means `FilterList` cannot pass state down to `Filter` without a new server round-trip. No actual CMS categories are fetched and passed through.
+CATEGORY: file-hygiene
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/blog/post-preview-large.tsx
+LINE: 26
+ISSUE: `article` grid uses `md:grid-cols-2` — forbidden `md:` (768px) breakpoint. Should be `max-[820px]:grid-cols-1` (single column on mobile, two columns above) using the correct breakpoint pattern.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/blog/post-preview-large.tsx
+LINE: 28
+ISSUE: `max-md:full-bleed` on the `<figure>` — forbidden `max-md:` (768px) breakpoint. Should be `max-[820px]:full-bleed`.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/blog/post-preview-large.tsx
+LINE: 29-33
+ISSUE: `<Img>` has no `sizes` prop. At 2-column layout the image renders at ~50vw. Should add `sizes="(max-width: 820px) 100vw, 50vw"`. Also no explicit `quality` prop — large preview images should use `quality={85}`.
+CATEGORY: image-quality-and-performance
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/blog/post-preview-large.tsx
+LINE: 49
+ISSUE: Post title link uses `h1` utility class. The large preview post title is a link within a list section — using `h1` styling on a card title creates a page with potentially multiple `h1`-styled elements (plus the actual `<h1>` in the page header), breaking document heading hierarchy.
+CATEGORY: typography-consistency
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/blog/post-preview.tsx
+LINE: 26
+ISSUE: `<Img>` has no `sizes` prop. In the auto-fill grid, cards can render at a range of widths (up to `var(--container-xs)`). Should add `sizes="(max-width: 820px) 100vw, 360px"` or a similar responsive hint. No `quality` prop — thumbnail images should use `quality={75}`.
+CATEGORY: image-quality-and-performance
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/blog/post-preview.tsx
+LINE: 50-52
+ISSUE: `post.metadata?.description` rendering is commented out with no explanation. If the description is intentionally suppressed it should be removed, not left as dead commented code.
+CATEGORY: file-hygiene
+SEVERITY: low
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/blog/byline.tsx
+LINE: 16
+ISSUE: Author avatar `<Img>` uses `width={48}` with no `sizes` prop. Rendered as a `size-lh` circle (roughly 1lh = ~24px at base font). `width={48}` is close but `sizes="48px"` should be explicit to prevent unnecessary larger variants.
+CATEGORY: image-quality-and-performance
+SEVERITY: low
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/blog/date.tsx
+LINE: 8
+ISSUE: `<time>` renders with no typography class. Date text inherits whatever font/size is applied by the parent — no `tracking-[0.1em]` or `text-muted` is applied at the component level, so callers must remember to pass a `className`. `post-preview.tsx` passes `className="text-foreground/50"` correctly, but `post-preview-large.tsx` and `blog-post-content.tsx` pass no className, leaving date text unstyled.
+CATEGORY: typography-consistency
+SEVERITY: medium
+CMS-DEP: no
+---
+
+<!-- A4 complete: 43 findings across 16 files -->
