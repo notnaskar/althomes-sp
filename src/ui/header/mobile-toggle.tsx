@@ -2,7 +2,7 @@ import { VscChromeClose, VscMenu } from 'react-icons/vsc'
 
 export default function () {
 	return (
-		<label className="text-xl md:hidden">
+		<label className="text-xl min-[821px]:hidden">
 			<input id="header-open" type="checkbox" hidden />
 
 			<VscMenu className="header-open:hidden" title="Open" />
