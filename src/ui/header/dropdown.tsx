@@ -22,7 +22,7 @@ export default function ({
 		>
 			<summary
 				className={cn(
-					'h-full group-open/dropdown:max-md:font-bold',
+					'h-full group-open/dropdown:max-[820px]:font-bold',
 					summaryClassName,
 				)}
 				style={{ anchorName }}
