@@ -22,7 +22,7 @@ export default function OurHomesHero({ heroHeadline, heroBackground }: Props) {
 					aria-hidden="true"
 				>
 					<Image
-						src={urlFor(heroBackground.asset).url()}
+						src={urlFor(heroBackground.asset).width(1440).quality(85).url()}
 						alt=""
 						fill
 						sizes="100vw"
