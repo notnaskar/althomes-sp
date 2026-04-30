@@ -27,7 +27,7 @@ export default function AvailabilityForm({ onResult }: Props) {
 	}
 
 	const inputClass =
-		'w-full rounded-lg border px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black bg-background'
+		'w-full rounded-lg border px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary bg-background'
 	const labelClass =
 		'block text-xs font-semibold uppercase tracking-[0.1em] mb-1 text-muted'
 
