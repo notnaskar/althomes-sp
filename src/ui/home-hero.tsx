@@ -53,7 +53,7 @@ export default function HomeHero({ page, site }: Props) {
 
 			{/* Hero headline */}
 			<div className={css.headline}>
-				<h1 className={css.headlineH1}>
+				<h1 className={`${css.headlineH1} font-heading`}>
 					{page.heroHeadline || 'Travel Beyond, Discover Within'}
 				</h1>
 			</div>
