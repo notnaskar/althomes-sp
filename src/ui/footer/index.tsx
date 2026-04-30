@@ -30,14 +30,7 @@ export default async function Footer() {
 									<li key={p._id}>
 										<a
 											href={`/our-homes/${p.slug}`}
-											className="transition-opacity hover:opacity-75"
-											style={{
-												fontSize: 11,
-												letterSpacing: '0.1em',
-												lineHeight: 1.4,
-												color: '#FCF6EA',
-												textDecoration: 'none',
-											}}
+											className="text-[11px] tracking-[0.1em] leading-[1.4] no-underline transition-opacity hover:opacity-75"
 										>
 											{p.title?.toUpperCase()}
 										</a>
@@ -71,8 +64,7 @@ export default async function Footer() {
 				{/* Connect */}
 				<div className="flex flex-col items-center gap-3">
 					<h4
-						className="font-bold"
-						style={{ fontSize: 12, letterSpacing: '0.1em' }}
+						className="font-bold text-[12px] tracking-[0.1em]"
 					>
 						CONNECT
 					</h4>

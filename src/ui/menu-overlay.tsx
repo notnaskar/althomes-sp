@@ -73,7 +73,7 @@ export default function MenuOverlay({ isOpen, onCloseAction, site }: Props) {
 								y1="3"
 								x2="22"
 								y2="22"
-								stroke="#FCF6EA"
+								stroke="currentColor"
 								strokeWidth="2"
 								strokeLinecap="round"
 							/>
@@ -82,7 +82,7 @@ export default function MenuOverlay({ isOpen, onCloseAction, site }: Props) {
 								y1="3"
 								x2="3"
 								y2="22"
-								stroke="#FCF6EA"
+								stroke="currentColor"
 								strokeWidth="2"
 								strokeLinecap="round"
 							/>
