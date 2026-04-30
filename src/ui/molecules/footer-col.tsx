@@ -16,14 +16,7 @@ export default function FooterCol({ heading, links }: FooterColProps) {
 					<li key={link.url}>
 						<Link
 							href={link.url}
-							className="transition-opacity hover:opacity-75"
-							style={{
-								fontSize: 11,
-								letterSpacing: '0.1em',
-								lineHeight: 1.4,
-								color: '#FCF6EA',
-								textDecoration: 'none',
-							}}
+							className="text-[11px] tracking-[0.1em] leading-[1.4] no-underline transition-opacity hover:opacity-75"
 						>
 							{link.label}
 						</Link>
