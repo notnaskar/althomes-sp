@@ -31,7 +31,7 @@ export default function PropertySearch({ properties }: Props) {
 			{/* Property grid */}
 			<section className="container py-10">
 				{availableIds !== null && displayed.length === 0 ? (
-					<p className="py-12 text-center text-gray-500">
+					<p className="py-12 text-center text-muted">
 						No properties available for the selected dates. Try different dates.
 					</p>
 				) : (
@@ -55,7 +55,7 @@ export default function PropertySearch({ properties }: Props) {
 								<div className="space-y-4">
 									<h2 className="text-3xl font-bold">{property.title}</h2>
 									{property.shortDescription && (
-										<p className="text-lg text-gray-600">
+										<p className="text-lg text-foreground">
 											{property.shortDescription}
 										</p>
 									)}
@@ -68,7 +68,7 @@ export default function PropertySearch({ properties }: Props) {
 										)}
 									</div>
 									<div className="pt-4">
-										<span className="inline-block rounded-full bg-black px-6 py-3 font-bold text-white transition group-hover:bg-yellow-600">
+										<span className="inline-block rounded-[5px] bg-accent px-6 py-3 font-bold text-accent-foreground transition group-hover:bg-accent/90">
 											Explore Property
 										</span>
 									</div>
