@@ -67,7 +67,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 					)}
 					{property.tagline && (
 						<div className="absolute inset-0 flex items-center justify-center">
-							<p className="font-sans text-[12px] uppercase tracking-[0.1em] text-white">
+							<p className="font-sans text-[12px] uppercase tracking-[0.1em] text-primary-foreground">
 								{property.tagline}
 							</p>
 						</div>
@@ -404,7 +404,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 					<section className="bg-primary py-16 text-primary-foreground">
 						<div className="container">
 							{property.causeHeadline && (
-								<h2 className="mb-6 text-3xl font-bold">
+								<h2 className="mb-6 font-heading italic text-[30px] tracking-[0.3em] text-primary-foreground">
 									{property.causeHeadline}
 								</h2>
 							)}

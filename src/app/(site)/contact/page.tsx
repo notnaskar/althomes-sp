@@ -44,7 +44,7 @@ export default async function ContactPage() {
 				{/* Left: contact details */}
 				<div className="space-y-6">
 					{page.sectionTitle && (
-						<h2 className="text-3xl font-bold">{page.sectionTitle}</h2>
+						<h2 className="font-heading italic text-[30px] tracking-[0.3em]">{page.sectionTitle}</h2>
 					)}
 					{page.phone && (
 						<div>
@@ -90,7 +90,7 @@ export default async function ContactPage() {
 						site?.linkedinUrl ||
 						site?.youtubeUrl) && (
 						<div>
-							<span className="mb-2 block text-sm font-semibold tracking-wide text-gray-500 uppercase">
+							<span className="mb-2 block text-sm font-semibold tracking-wide text-muted uppercase">
 								Follow us
 							</span>
 							<div className="flex gap-4">

@@ -105,7 +105,7 @@ export default async function AltWayPage() {
 			{(page.promiseText || page.promiseCTALabel) && (
 				<section className="container py-20 text-center">
 					{page.promiseText && (
-						<p className="mx-auto max-w-2xl text-2xl leading-relaxed font-heading italic md:text-3xl">
+						<p className="mx-auto max-w-2xl font-heading italic text-[30px] tracking-[0.3em]">
 							{page.promiseText}
 						</p>
 					)}
@@ -122,10 +122,10 @@ export default async function AltWayPage() {
 
 			{/* Stats bar */}
 			{page.stats && page.stats.length > 0 && (
-				<section className="bg-primary py-16 text-white">
+				<section className="bg-primary py-16 text-primary-foreground">
 					<div className="container">
 						{page.statsHeadline && (
-							<h2 className="mb-12 text-center text-2xl font-semibold text-white/80">
+							<h2 className="mb-12 text-center text-2xl font-semibold text-primary-foreground/80">
 								{page.statsHeadline}
 							</h2>
 						)}
@@ -133,17 +133,17 @@ export default async function AltWayPage() {
 							{page.stats.map((stat) => (
 								<div key={stat._key} className="text-center">
 									{stat.value && (
-										<p className="text-5xl font-bold text-white">
+										<p className="text-5xl font-bold text-primary-foreground">
 											{stat.value}
 										</p>
 									)}
 									{stat.label && (
-										<p className="mt-2 text-sm font-semibold tracking-wide text-white/80 uppercase">
+										<p className="mt-2 text-sm font-semibold tracking-wide text-primary-foreground/80 uppercase">
 											{stat.label}
 										</p>
 									)}
 									{stat.subtext && (
-										<p className="mt-1 text-xs text-white/50">{stat.subtext}</p>
+										<p className="mt-1 text-xs text-primary-foreground/50">{stat.subtext}</p>
 									)}
 								</div>
 							))}
