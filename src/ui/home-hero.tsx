@@ -16,7 +16,7 @@ export default function HomeHero({ page, site }: Props) {
 		: null
 
 	const imageUrl = page.heroImage?.asset
-		? urlFor(page.heroImage.asset).width(900).height(900).url()
+		? urlFor(page.heroImage.asset).width(900).url()
 		: null
 
 	return (
@@ -34,10 +34,11 @@ export default function HomeHero({ page, site }: Props) {
 						alt={page.heroImage?.alt ?? ''}
 						fill
 						priority
-						sizes="856px"
+						sizes="(max-width: 820px) 0px, 856px"
 						className="object-cover"
 					/>
 				</div>
+				
 			)}
 
 			{/* Decorative elements */}
