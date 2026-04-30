@@ -75,24 +75,24 @@ export default async function PropertyDetailPage({ params }: Props) {
 				</section>
 
 				{/* 2. Booking bar */}
-				<div className="mx-[96px] flex items-center justify-center gap-[40px] bg-white px-[48px] py-[12px]">
+				<div className="mx-[96px] flex items-center justify-center gap-[40px] bg-background px-[48px] py-[12px]">
 					<div className="flex flex-col gap-[5px]">
 						<p className="font-sans text-[15px] tracking-[0.1em] text-foreground">
 							Check In &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Check Out
 						</p>
-						<div className="h-px w-[289px] bg-[#5F5D5D]" />
+						<div className="h-px w-[289px] bg-muted" />
 					</div>
 					<div className="flex flex-col gap-[8px]">
 						<p className="font-sans text-[15px] tracking-[0.1em] text-foreground">Guests</p>
-						<div className="h-px w-[289px] bg-[#5F5D5D]" />
+						<div className="h-px w-[289px] bg-muted" />
 					</div>
 					<div className="flex items-center gap-[32px]">
 						<div className="text-right">
-							<p className="font-sans text-[9px] leading-[23px] tracking-[0.1em] text-black">
+							<p className="font-sans text-[9px] leading-[23px] tracking-[0.1em] text-foreground">
 								TAXES INCLUDED
 							</p>
 							{property.priceFrom != null && (
-								<p className="font-sans text-[15px] font-semibold leading-[16px] tracking-[0.1em] text-black">
+								<p className="font-sans text-[15px] font-semibold leading-[16px] tracking-[0.1em] text-foreground">
 									INR {property.priceFrom.toLocaleString()}
 								</p>
 							)}
@@ -401,7 +401,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 				{(property.causeHeadline ||
 					property.causeBody ||
 					(property.causeImages && property.causeImages.length > 0)) && (
-					<section className="bg-gray-900 py-16 text-white">
+					<section className="bg-primary py-16 text-primary-foreground">
 						<div className="container">
 							{property.causeHeadline && (
 								<h2 className="mb-6 text-3xl font-bold">
@@ -409,7 +409,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 								</h2>
 							)}
 							{property.causeBody && (
-								<div className="prose prose-invert mb-10 max-w-2xl">
+								<div className="mb-10 max-w-2xl text-primary-foreground text-[15px] leading-[23px] tracking-[0.1em]">
 									<PortableText value={property.causeBody} />
 								</div>
 							)}
@@ -433,26 +433,26 @@ export default async function PropertyDetailPage({ params }: Props) {
 
 				{/* 8. Reviews */}
 				{cappedReviews.length > 0 && (
-					<section className="container py-16">
-						<h2 className="mb-10 text-3xl font-bold">What Our Guests Say</h2>
+					<section className="px-[90px] max-[820px]:px-[18px] py-16">
+						<h2 className="mb-10 font-heading italic text-[30px] tracking-[0.3em]">What Our Guests Say</h2>
 						<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 							{cappedReviews.map((review, i) => (
 								<div key={i} className="space-y-3 rounded-2xl border p-6">
 									{review.rating != null && (
 										<div className="flex gap-1">
 											{Array.from({ length: review.rating }).map((_, j) => (
-												<span key={j} className="text-yellow-400">
+												<span key={j} className="text-accent">
 													★
 												</span>
 											))}
 										</div>
 									)}
 									{review.body && (
-										<p className="leading-relaxed text-gray-700 italic">
+										<p className="leading-relaxed text-foreground italic">
 											&ldquo;{review.body}&rdquo;
 										</p>
 									)}
-									<div className="text-sm text-gray-500">
+									<div className="text-sm text-muted">
 										{review.guestName && (
 											<p className="font-semibold">{review.guestName}</p>
 										)}
@@ -466,15 +466,15 @@ export default async function PropertyDetailPage({ params }: Props) {
 				)}
 
 				{/* 9. Bottom CTA */}
-				<section className="bg-black py-20 text-center text-white">
+				<section className="bg-primary py-20 text-center">
 					{property.ctaHeadline && (
-						<h2 className="mb-8 text-3xl font-bold md:text-4xl">
+						<h2 className="mb-8 font-heading italic text-[30px] tracking-[0.3em] text-primary-foreground">
 							{property.ctaHeadline}
 						</h2>
 					)}
 					<a
 						href="#booking"
-						className="inline-block rounded-full bg-white px-10 py-4 font-bold text-black transition hover:bg-gray-100"
+						className="inline-block rounded-[5px] bg-accent px-10 py-4 font-bold text-accent-foreground tracking-[0.3em] uppercase transition hover:bg-accent/90"
 					>
 						FIND AVAILABILITY
 					</a>
