@@ -38,7 +38,6 @@ export default function HomeHero({ page, site }: Props) {
 						className="object-cover"
 					/>
 				</div>
-				
 			)}
 
 			{/* Decorative elements */}
