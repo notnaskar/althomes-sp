@@ -29,6 +29,7 @@ export default function ({
 					image={image}
 					width={600}
 					alt={image?.alt ?? ''}
+					sizes="(max-width: 820px) 100vw, 50vw"
 				/>
 			</figure>
 
