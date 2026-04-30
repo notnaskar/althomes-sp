@@ -45,15 +45,13 @@ export default function ExperienceCard({
 		>
 			{/* Outer beige shell */}
 			<div
-				className="rounded-[5px] p-[16px] pb-[20px]"
-				style={{ backgroundColor: 'rgb(227,213,193)' }}
+				className="rounded-[5px] p-[16px] pb-[20px] bg-[var(--color-card-shell)]"
 			>
 				{/* Image area — fixed aspect ratio matches Figma 327×340 */}
 				<div
-					className="relative w-full overflow-hidden rounded-[5px]"
+					className="relative w-full overflow-hidden rounded-[5px] bg-muted"
 					style={{
 						aspectRatio: '327 / 340',
-						backgroundColor: 'rgb(217,217,217)',
 					}}
 				>
 					{image?.asset ? (
