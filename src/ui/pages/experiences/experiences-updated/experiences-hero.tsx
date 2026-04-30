@@ -24,7 +24,7 @@ export default function ExperiencesHero({
 }: ExperiencesHeroProps) {
 	const headlineLines = (headline ?? '').split('\n')
 	const bgUrl = heroBackground?.asset
-		? urlFor(heroBackground.asset).url()
+		? urlFor(heroBackground.asset).width(1440).quality(85).url()
 		: null
 
 	return (
