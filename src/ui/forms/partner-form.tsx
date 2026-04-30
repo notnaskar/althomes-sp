@@ -55,7 +55,7 @@ export default function PartnerForm() {
 				aria-hidden="true"
 			/>
 
-			<div className="grid grid-cols-2 gap-x-[93px] gap-y-[48px]">
+			<div className="grid grid-cols-2 max-[820px]:grid-cols-1 gap-x-[93px] gap-y-[48px]">
 				<div>
 					<label htmlFor="pf-name" className={label}>NAME*</label>
 					<input id="pf-name" type="text" placeholder="First Name     Last Name" {...register('name')} className={input} />
