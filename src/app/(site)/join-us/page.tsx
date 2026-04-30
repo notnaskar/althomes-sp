@@ -33,7 +33,7 @@ export default async function JoinUsPage() {
 		<main className="bg-background">
 
 			{/* Hero ── Frame 59 ─────────────────────────────────── */}
-			<section className="relative h-[470px] overflow-hidden bg-background">
+			<section className="relative h-[470px] max-[820px]:h-auto max-[820px]:py-[60px] overflow-hidden bg-background">
 				{coverUrl && (
 					<Image
 						src={coverUrl}
@@ -51,7 +51,7 @@ export default async function JoinUsPage() {
 					</div>
 				)}
 
-				<div className="absolute inset-0 flex items-start gap-[90px] px-[90px] max-[820px]:px-[18px] pt-[30px]">
+				<div className="absolute inset-0 flex max-[820px]:flex-col items-start gap-[90px] max-[820px]:gap-[24px] px-[90px] max-[820px]:px-[18px] pt-[30px]">
 					<div className="w-[292px] shrink-0">
 						<h1 className="font-heading italic text-[72px] leading-[70px] tracking-[0.1em] text-foreground">
 							{page.heroHeadline || 'Partner With Us'}
@@ -67,8 +67,8 @@ export default async function JoinUsPage() {
 
 			{/* Content ── Frame 60 ──────────────────────────────── */}
 			<section className="relative overflow-hidden bg-background px-[90px] max-[820px]:px-[18px] py-[72px]">
-				<div className="flex items-start gap-12">
-					<div className="w-[384px] shrink-0 space-y-5">
+				<div className="flex max-[820px]:flex-col items-start gap-12">
+					<div className="w-[384px] max-[820px]:w-full shrink-0 space-y-5">
 						{page.bodyParagraph && (
 							<p className="font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground">
 								{page.bodyParagraph}
@@ -90,7 +90,7 @@ export default async function JoinUsPage() {
 					</div>
 
 					{propertyUrl && (
-						<div className="relative -mt-6 h-[480px] w-[624px] shrink-0 overflow-hidden rounded-[5px]">
+						<div className="relative -mt-6 h-[480px] w-[624px] max-[820px]:w-full shrink-0 overflow-hidden rounded-[5px]">
 							<Image
 								src={propertyUrl}
 								alt={page.propertyImage?.alt ?? ''}
