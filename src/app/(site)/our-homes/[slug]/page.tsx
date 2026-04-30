@@ -75,7 +75,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 				</section>
 
 				{/* 2. Booking bar */}
-				<div className="mx-[90px] max-[820px]:mx-[18px] flex items-center justify-center gap-[40px] bg-background px-[48px] py-[12px]">
+				<div className="mx-[90px] max-[820px]:mx-[18px] flex max-[820px]:flex-col items-center justify-center gap-[40px] bg-background px-[48px] py-[12px]">
 					<div className="flex flex-col gap-[5px]">
 						<p className="font-sans text-[15px] tracking-[0.1em] text-foreground">
 							Check In &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Check Out
@@ -414,7 +414,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 								</div>
 							)}
 							{property.causeImages && property.causeImages.length > 0 && (
-								<div className="grid gap-6 md:grid-cols-2">
+								<div className="grid gap-6 max-[820px]:grid-cols-1 min-[821px]:grid-cols-2">
 									{property.causeImages.slice(0, 2).map((img, i) => (
 										<div key={i} className="overflow-hidden rounded-2xl">
 											<Img
@@ -435,7 +435,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 				{cappedReviews.length > 0 && (
 					<section className="px-[90px] max-[820px]:px-[18px] py-16">
 						<h2 className="mb-10 font-heading italic text-[30px] tracking-[0.3em]">What Our Guests Say</h2>
-						<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+						<div className="grid gap-6 grid-cols-3 max-[820px]:grid-cols-1">
 							{cappedReviews.map((review, i) => (
 								<div key={i} className="space-y-3 rounded-2xl border p-6">
 									{review.rating != null && (
