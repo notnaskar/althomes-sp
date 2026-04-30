@@ -55,7 +55,7 @@ export default function ExperiencesHero({
 			<div className="relative grid grid-cols-2 gap-x-[80px] max-[820px]:grid-cols-1 max-[820px]:text-center">
 				{/* LEFT — display headline + supporting tagline */}
 				<div className="flex flex-col justify-between gap-[80px] max-[820px]:gap-[24px]">
-					<h1 className="text-foreground font-['Playfair_Display'] text-[72px] leading-[70px] font-normal tracking-[0.1em] italic max-[820px]:text-[60px] max-[820px]:leading-[52px] max-[820px]:tracking-[0.09em]">
+					<h1 className="text-foreground font-heading text-[72px] leading-[70px] font-normal tracking-[0.1em] italic max-[820px]:text-[60px] max-[820px]:leading-[52px] max-[820px]:tracking-[0.09em]">
 						{headlineLines.map((line, i) => (
 							<span key={i}>
 								{line}
@@ -64,14 +64,14 @@ export default function ExperiencesHero({
 						))}
 					</h1>
 
-					<p className="text-foreground max-w-[432px] font-['Playfair_Display'] text-[30px] leading-[40px] tracking-[0.1em] italic max-[820px]:max-w-none max-[820px]:text-[19px] max-[820px]:leading-[29px]">
+					<p className="text-foreground max-w-[432px] font-heading text-[30px] leading-[40px] tracking-[0.1em] italic max-[820px]:max-w-none max-[820px]:text-[19px] max-[820px]:leading-[29px]">
 						{supportingTagline}
 					</p>
 				</div>
 
 				{/* RIGHT — leading tagline + decorative circle motif */}
 				<div className="relative flex flex-col justify-start pt-[8px] max-[820px]:mt-[28px] max-[820px]:pt-0">
-					<p className="text-foreground font-['Playfair_Display'] text-[30px] leading-[40px] tracking-[0.1em] italic max-[820px]:text-[19px] max-[820px]:leading-[29px]">
+					<p className="text-foreground font-heading text-[30px] leading-[40px] tracking-[0.1em] italic max-[820px]:text-[19px] max-[820px]:leading-[29px]">
 						{(leadingTagline ?? '').split('\n').map((line, i, arr) => (
 							<span key={i}>
 								{line}
@@ -87,8 +87,7 @@ export default function ExperiencesHero({
 					>
 						{/* Red-orange filled circle */}
 						<div
-							className="absolute inset-0 rounded-full"
-							style={{ backgroundColor: 'rgb(203,69,43)' }}
+							className="absolute inset-0 rounded-full bg-[var(--color-terracotta)]"
 						/>
 						{/* Cream diamond cut-out — rotated square */}
 						<div
@@ -105,7 +104,7 @@ export default function ExperiencesHero({
 						<svg
 							viewBox="0 0 60 60"
 							fill="none"
-							className="absolute inset-0 h-full w-full"
+							className="absolute inset-0 h-full w-full text-primary-foreground"
 							aria-hidden="true"
 						>
 							<line
@@ -113,13 +112,13 @@ export default function ExperiencesHero({
 								y1="30"
 								x2="44"
 								y2="30"
-								stroke="white"
+								stroke="currentColor"
 								strokeWidth="2"
 								strokeLinecap="round"
 							/>
 							<polyline
 								points="36,22 44,30 36,38"
-								stroke="white"
+								stroke="currentColor"
 								strokeWidth="2"
 								strokeLinecap="round"
 								strokeLinejoin="round"
