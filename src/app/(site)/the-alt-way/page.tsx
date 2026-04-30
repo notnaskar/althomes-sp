@@ -39,7 +39,7 @@ export default async function AltWayPage() {
 
 			{/* Mission split */}
 			{(page.missionImage || page.missionText) && (
-				<section className="px-[90px] max-[820px]:px-[18px] grid items-center gap-12 py-20 md:grid-cols-2">
+				<section className="px-[90px] max-[820px]:px-[18px] grid items-center gap-12 py-20 max-[820px]:grid-cols-1 min-[821px]:grid-cols-2">
 					{page.missionImage && (
 						<div className="overflow-hidden rounded-[5px]">
 							<Img
@@ -67,7 +67,7 @@ export default async function AltWayPage() {
 								{page.valuePropHeadline}
 							</h2>
 						)}
-						<div className="grid gap-8 md:grid-cols-2">
+						<div className="grid gap-8 max-[820px]:grid-cols-1 min-[821px]:grid-cols-2">
 							{page.valueProps.map((vp) => (
 								<div key={vp._key} className="rounded-[5px] border bg-background p-8">
 									{vp.title && (
@@ -129,7 +129,7 @@ export default async function AltWayPage() {
 								{page.statsHeadline}
 							</h2>
 						)}
-						<div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+						<div className="grid grid-cols-2 gap-8 min-[821px]:grid-cols-4">
 							{page.stats.map((stat) => (
 								<div key={stat._key} className="text-center">
 									{stat.value && (
