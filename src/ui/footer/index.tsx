@@ -6,13 +6,12 @@ export default async function Footer() {
 	const [site, properties] = await Promise.all([getSite(), getAllProperties()])
 
 	return (
-		<footer style={{ background: '#2F5D50', color: '#FCF6EA' }}>
+		<footer className="bg-primary text-primary-foreground">
 			<div
-				className="flex flex-wrap gap-16 max-[820px]:flex-col max-[820px]:items-center max-[820px]:gap-7 max-[820px]:text-center"
-				style={{ padding: '37px 90px 30px' }}
+				className="flex flex-wrap gap-16 pt-[37px] pb-[30px] px-[90px] max-[820px]:flex-col max-[820px]:items-center max-[820px]:gap-7 max-[820px]:text-center max-[820px]:pt-[30px] max-[820px]:px-[24px]"
 			>
 				{/* Brand */}
-				<div className="self-start font-['Playfair_Display'] text-[49px] leading-none tracking-[0.1em] text-white italic max-[820px]:self-auto">
+				<div className="self-start font-heading text-[49px] leading-none tracking-[0.1em] text-primary-foreground italic max-[820px]:self-auto">
 					{site?.footerBrandName ?? site?.title ?? 'AltHomes'}
 				</div>
 
@@ -22,8 +21,7 @@ export default async function Footer() {
 					{properties && properties.length > 0 && (
 						<div>
 							<h4
-								className="mb-3 font-bold"
-								style={{ fontSize: 12, letterSpacing: '0.1em' }}
+								className="mb-3 font-bold text-[12px] tracking-[0.1em]"
 							>
 								OUR HOMES
 							</h4>
