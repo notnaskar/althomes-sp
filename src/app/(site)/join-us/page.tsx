@@ -115,7 +115,7 @@ export default async function JoinUsPage() {
 						<Image src={formDecorUrl} alt="" fill className="object-cover" sizes="847px" />
 					</div>
 				)}
-				<div className="relative mx-[192px] bg-white px-[51px] pb-[48px] pt-[37px]">
+				<div className="relative mx-[192px] bg-background px-[51px] pb-[48px] pt-[37px]">
 					<h2 className="mb-[75px] text-center font-heading text-[30px] leading-[40px] tracking-[0.1em] text-foreground">
 						{page.formHeadline || 'TELL US MORE ABOUT YOUR HOME'}
 					</h2>
