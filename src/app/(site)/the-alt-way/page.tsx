@@ -13,7 +13,7 @@ export default async function AltWayPage() {
 	return (
 		<main className="flex-1">
 			{/* Hero */}
-			<section className="relative w-full overflow-hidden bg-gray-900">
+			<section className="relative w-full overflow-hidden bg-primary">
 				{page.heroBackground && (
 					<Img
 						image={page.heroBackground}
@@ -25,12 +25,12 @@ export default async function AltWayPage() {
 				)}
 				<div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
 					{page.heroHeadline && (
-						<h1 className="text-5xl leading-tight font-bold text-white md:text-7xl">
+						<h1 className="text-[48px] leading-tight font-heading italic text-primary-foreground">
 							{page.heroHeadline}
 						</h1>
 					)}
 					{page.heroHeadlineLine2 && (
-						<p className="mt-2 text-5xl leading-tight font-bold text-white md:text-7xl">
+						<p className="mt-2 text-[48px] leading-tight font-heading italic text-primary-foreground">
 							{page.heroHeadlineLine2}
 						</p>
 					)}
@@ -51,7 +51,7 @@ export default async function AltWayPage() {
 						</div>
 					)}
 					{page.missionText && (
-						<p className="text-xl leading-relaxed text-gray-700 md:text-2xl">
+						<p className="text-xl leading-relaxed text-foreground md:text-2xl">
 							{page.missionText}
 						</p>
 					)}
@@ -60,21 +60,21 @@ export default async function AltWayPage() {
 
 			{/* Value props 2×2 grid */}
 			{page.valueProps && page.valueProps.length > 0 && (
-				<section className="bg-gray-50 py-20">
+				<section className="bg-background py-20">
 					<div className="container">
 						{page.valuePropHeadline && (
-							<h2 className="mb-12 text-center text-3xl font-bold md:text-4xl">
+							<h2 className="mb-12 text-center font-heading italic text-[30px] tracking-[0.3em]">
 								{page.valuePropHeadline}
 							</h2>
 						)}
 						<div className="grid gap-8 md:grid-cols-2">
 							{page.valueProps.map((vp) => (
-								<div key={vp._key} className="rounded-2xl border bg-white p-8">
+								<div key={vp._key} className="rounded-[5px] border bg-background p-8">
 									{vp.title && (
 										<h3 className="mb-3 text-xl font-bold">{vp.title}</h3>
 									)}
 									{vp.body && (
-										<p className="leading-relaxed text-gray-600">{vp.body}</p>
+										<p className="leading-relaxed text-foreground">{vp.body}</p>
 									)}
 								</div>
 							))}
@@ -105,14 +105,14 @@ export default async function AltWayPage() {
 			{(page.promiseText || page.promiseCTALabel) && (
 				<section className="container py-20 text-center">
 					{page.promiseText && (
-						<p className="mx-auto max-w-2xl text-2xl leading-relaxed font-semibold md:text-3xl">
+						<p className="mx-auto max-w-2xl text-2xl leading-relaxed font-heading italic md:text-3xl">
 							{page.promiseText}
 						</p>
 					)}
 					{page.promiseCTALabel && (
 						<Link
 							href="/our-homes"
-							className="mt-8 inline-block rounded-full bg-black px-10 py-4 font-bold text-white transition hover:bg-gray-800"
+							className="mt-8 inline-block rounded-[5px] bg-accent px-10 py-4 font-bold text-accent-foreground tracking-[0.3em] uppercase transition hover:bg-accent/90"
 						>
 							{page.promiseCTALabel}
 						</Link>
@@ -122,7 +122,7 @@ export default async function AltWayPage() {
 
 			{/* Stats bar */}
 			{page.stats && page.stats.length > 0 && (
-				<section className="bg-black py-16 text-white">
+				<section className="bg-primary py-16 text-white">
 					<div className="container">
 						{page.statsHeadline && (
 							<h2 className="mb-12 text-center text-2xl font-semibold text-white/80">
@@ -155,7 +155,7 @@ export default async function AltWayPage() {
 			{/* Reviews carousel */}
 			{cappedReviews.length > 0 && (
 				<section className="container py-20">
-					<h2 className="mb-12 text-center text-3xl font-bold">
+					<h2 className="mb-12 text-center font-heading italic text-[30px] tracking-[0.3em]">
 						What Our Guests Say
 					</h2>
 					<div className="overflow-x-auto">
@@ -168,18 +168,18 @@ export default async function AltWayPage() {
 									{review.rating != null && (
 										<div className="flex gap-1">
 											{Array.from({ length: review.rating }).map((_, j) => (
-												<span key={j} className="text-lg text-yellow-400">
+												<span key={j} className="text-lg text-accent">
 													★
 												</span>
 											))}
 										</div>
 									)}
 									{review.body && (
-										<p className="leading-relaxed text-gray-700 italic">
+										<p className="leading-relaxed text-foreground italic">
 											&ldquo;{review.body}&rdquo;
 										</p>
 									)}
-									<div className="text-sm text-gray-500">
+									<div className="text-sm text-muted">
 										{review.guestName && (
 											<p className="font-semibold">{review.guestName}</p>
 										)}
@@ -195,16 +195,16 @@ export default async function AltWayPage() {
 
 			{/* Bottom CTA */}
 			{(page.bottomCTAHeadline || page.bottomCTALabel) && (
-				<section className="bg-gray-50 py-20 text-center">
+				<section className="bg-background py-20 text-center">
 					{page.bottomCTAHeadline && (
-						<h2 className="mb-8 text-3xl font-bold md:text-4xl">
+						<h2 className="mb-8 font-heading italic text-[30px] tracking-[0.3em]">
 							{page.bottomCTAHeadline}
 						</h2>
 					)}
 					{page.bottomCTALabel && (
 						<Link
 							href="/experiences"
-							className="inline-block rounded-full bg-black px-10 py-4 font-bold text-white transition hover:bg-gray-800"
+							className="inline-block rounded-[5px] bg-accent px-10 py-4 font-bold text-accent-foreground tracking-[0.3em] uppercase transition hover:bg-accent/90"
 						>
 							{page.bottomCTALabel}
 						</Link>
