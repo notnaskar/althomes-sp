@@ -26,11 +26,11 @@ export default async function PropertyDetailPage({ params }: Props) {
 		property.reviews?.slice(0, property.reviewsMaxShown ?? 20) ?? []
 
 	const heroUrl = property.heroImage?.asset
-		? urlFor(property.heroImage.asset).width(1440).url()
+		? urlFor(property.heroImage.asset).width(1440).quality(85).url()
 		: null
 
 	const amenitiesImageUrl = property.amenitiesSectionImage?.asset
-		? urlFor(property.amenitiesSectionImage.asset).width(800).url()
+		? urlFor(property.amenitiesSectionImage.asset).width(800).quality(80).url()
 		: null
 
 	const schemaJson = site
@@ -62,7 +62,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 							fill
 							priority
 							className="object-cover"
-							sizes="1440px"
+							sizes="100vw"
 						/>
 					)}
 					{property.tagline && (
