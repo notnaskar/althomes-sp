@@ -66,7 +66,7 @@ export default function ExperienceCard({
 
 				{/* Title + description */}
 				<div className="mt-[16px] px-[4px] text-center">
-					<p className="text-foreground font-sans text-[15px] leading-[23px] font-bold tracking-[0.1em]">
+					<p className="text-foreground font-heading italic text-[15px] leading-[23px] tracking-[0.1em]">
 						{title}
 					</p>
 					{description && (
