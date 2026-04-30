@@ -503,6 +503,368 @@ CMS-DEP: yes — heroImage from Sanity `homePage`
 
 ## A2 — Property Pages
 
+---
+FILE: src/app/(site)/our-homes/[slug]/page.tsx
+LINE: 78
+ISSUE: Booking bar wrapper uses `bg-white` instead of `bg-background` (cream `#FCF6EA`). `#FFFFFF` is not the background token.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/our-homes/[slug]/page.tsx
+LINE: 78
+ISSUE: Booking bar has `mx-[96px]` horizontal margin — not a documented spacing token. It also has no `max-[820px]:` responsive variant, so on mobile the bar is clipped/overflows with fixed internal widths (`w-[289px]`, `w-[208px]`).
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/our-homes/[slug]/page.tsx
+LINE: 83
+ISSUE: `bg-[#5F5D5D]` hardcoded hex on the booking bar divider lines. Should be a token class (e.g. `bg-muted` or a semantic border token).
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/our-homes/[slug]/page.tsx
+LINE: 91
+ISSUE: `text-black` on "TAXES INCLUDED" label. Should be `text-foreground`.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/our-homes/[slug]/page.tsx
+LINE: 95
+ISSUE: `text-black` on the price display (`INR {property.priceFrom}`). Should be `text-foreground`.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/our-homes/[slug]/page.tsx
+LINE: 112
+ISSUE: Intro section uses `pl-[191px] pr-[188px]` — asymmetric, non-standard padding that does not match the `px-[90px]` desktop token. No `max-[820px]:` responsive override, so these wide paddings persist at all viewport sizes.
+CATEGORY: spacing-inconsistency
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/our-homes/[slug]/page.tsx
+LINE: 59-65
+ISSUE: Hero `<Image>` uses `sizes="1440px"` — a fixed pixel hint. Should use `sizes="100vw"` for a full-bleed fill image. At non-1440px viewports Next.js will still download the 1440px-wide image variant unnecessarily.
+CATEGORY: image-quality-and-performance
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/our-homes/[slug]/page.tsx
+LINE: 28-30
+ISSUE: `urlFor(property.heroImage.asset).width(1440).url()` — no `quality()` call. Defaults to Sanity's internal quality (typically 75). Above-the-fold hero images should specify `quality(85)` or higher for a luxury property site.
+CATEGORY: image-quality-and-performance
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/our-homes/[slug]/page.tsx
+LINE: 32-34
+ISSUE: `urlFor(property.amenitiesSectionImage.asset).width(800).url()` — no `quality()` call. Amenities section image quality not controlled.
+CATEGORY: image-quality-and-performance
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/our-homes/[slug]/page.tsx
+LINE: 404
+ISSUE: Causes section uses `bg-gray-900` and `text-white`. Neither is a design token. Should use `bg-primary text-primary-foreground` or another token-based dark background.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/our-homes/[slug]/page.tsx
+LINE: 412
+ISSUE: `prose prose-invert` Tailwind Typography plugin classes used in Causes section. Not part of the design token system — prose overrides body text styles with generic defaults that conflict with the custom type scale.
+CATEGORY: token-violation
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/our-homes/[slug]/page.tsx
+LINE: 417
+ISSUE: `md:grid-cols-2` on the Causes image grid. Violates the single `max-[820px]:` breakpoint rule. Should be `grid-cols-1 max-[820px]:grid-cols-1` with `min-[821px]:grid-cols-2` or restructured as flex.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/our-homes/[slug]/page.tsx
+LINE: 436-437
+ISSUE: Reviews section uses `container` utility class (not defined in this design system) and `py-16`. Heading uses `text-3xl font-bold` — not using `font-heading`, `italic`, or the documented type scale (`text-[30px]`, `tracking-[0.3em]`).
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/our-homes/[slug]/page.tsx
+LINE: 438
+ISSUE: `md:grid-cols-2 lg:grid-cols-3` on the reviews grid — both `md:` and `lg:` breakpoints violate the single `max-[820px]:` rule.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/our-homes/[slug]/page.tsx
+LINE: 444
+ISSUE: `text-yellow-400` for star ratings. Should use `text-accent` (`#F2C94C`) to stay within the token system.
+CATEGORY: token-violation
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/our-homes/[slug]/page.tsx
+LINE: 451
+ISSUE: `text-gray-700` on review body text. Should be `text-foreground`.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/our-homes/[slug]/page.tsx
+LINE: 455
+ISSUE: `text-gray-500` on review meta text (guest name, location, date). Should be `text-muted`.
+CATEGORY: token-violation
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/our-homes/[slug]/page.tsx
+LINE: 469
+ISSUE: Bottom CTA section uses `bg-black` (not a token) and `text-white`. Should use `bg-primary text-primary-foreground` or another token-pair for the dark CTA background.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/our-homes/[slug]/page.tsx
+LINE: 471
+ISSUE: Bottom CTA heading uses `text-3xl font-bold md:text-4xl`. Token violations: wrong type scale, `font-bold` instead of `font-heading italic`, and `md:` breakpoint (768px) instead of `max-[820px]:`.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/our-homes/[slug]/page.tsx
+LINE: 475-480
+ISSUE: "FIND AVAILABILITY" button: `bg-white` (not `bg-accent`), `text-black` (not `text-accent-foreground`), `hover:bg-gray-100` (not a token). `rounded-full` diverges from the `rounded-[5px]` button shape used everywhere else on the site.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/our-homes/[slug]/page.tsx
+LINE: 404-432
+ISSUE: Causes and Reviews sections (7, 8) are entirely unstyled placeholder sections with no design system tokens applied — they use Tailwind defaults (`container`, `prose`, `text-3xl`, `grid`, `md:`, `lg:`, `rounded-2xl`, `text-gray-*`, `text-yellow-*`, `bg-gray-900`, `bg-black`). These sections need full design system alignment before ship.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/our-homes/property-gallery-section.tsx
+LINE: 25
+ISSUE: Gallery section has a fixed `h-[625px]` with no `max-[820px]:` variant. On mobile the gallery will render at 625px tall with all absolutely-positioned children at desktop coordinates — completely broken layout at ≤820px. No mobile layout defined at all.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/our-homes/property-gallery-section.tsx
+LINE: 27
+ISSUE: Main gallery image container is `w-[720px]` fixed — at viewports narrower than 720px it will overflow the screen. No `max-[820px]:` width override.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/our-homes/property-gallery-section.tsx
+LINE: 27-35
+ISSUE: Main gallery `<Img>` (which uses Next.js `<Image>`) has no `sizes` prop specified. `Img` component likely defaults to `sizes="100vw"` or a large default — at 720px rendered width the browser may download unnecessarily large image variants.
+CATEGORY: image-quality-and-performance
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/our-homes/property-gallery-section.tsx
+LINE: 56
+ISSUE: Pull quote uses `font-heading` without `italic`. All `font-heading` usage on the site uses `italic` — this is the only instance without it, creating visual inconsistency in the typographic system.
+CATEGORY: typography-consistency
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/our-homes/property-experiences-section.tsx
+LINE: 44
+ISSUE: Mobile horizontal padding is `max-[820px]:px-[24px]` — should be `max-[820px]:px-[18px]` per the design token spec. 24px vs 18px is an inconsistency with every other section's mobile padding.
+CATEGORY: spacing-inconsistency
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/our-homes/property-experiences-section.tsx
+LINE: 48-53
+ISSUE: Background `<Image>` has no `priority` prop and no `quality` prop. A full-bleed section background image (1600px wide) without quality control defaults to Sanity's 75% quality. Should have `quality={85}` at minimum.
+CATEGORY: image-quality-and-performance
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/our-homes/our-homes-hero.tsx
+LINE: 49
+ISSUE: Three divider `<div>` elements use `bg-[#5F5D5D]` hardcoded hex. Should use a token class such as `bg-muted` or a border token.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/our-homes/our-homes-hero.tsx
+LINE: 24-31
+ISSUE: Hero background `<Image>` uses `urlFor(heroBackground.asset).url()` with no `.width()` or `.quality()` calls — fetches the full-resolution Sanity original. Should set `.width(1440).quality(85)` minimum.
+CATEGORY: image-quality-and-performance
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/our-homes/our-homes-cta.tsx
+LINE: 27
+ISSUE: CTA background `<Image>` uses `urlFor(ctaBackground.asset).url()` with no `.width()` or `.quality()` call — fetches full-resolution original. Should set `.width(1440).quality(85)`.
+CATEGORY: image-quality-and-performance
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/our-homes/property-showcase.tsx
+LINE: 85
+ISSUE: Hero image uses `urlFor(heroImage.asset).url()` with no `.width()` or `.quality()`. For a property listing hero that renders at `~55vw` (768fr column), this fetches the full-resolution Sanity original on every page load.
+CATEGORY: image-quality-and-performance
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/our-homes/property-showcase.tsx
+LINE: 133
+ISSUE: Secondary showcase image uses `urlFor(showcaseSecondaryImage.asset).url()` with no `.width()` or `.quality()`. Renders at `max-w-[625px]` — should specify `.width(625).quality(85)`.
+CATEGORY: image-quality-and-performance
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/our-homes/property-showcase.tsx
+LINE: 72
+ISSUE: Decor image uses `urlFor(showcaseDecorImage.asset).url()` with no `.width()` — fetches full resolution for what is a small decorative overlay element (width driven by CMS `showcaseDecorWidth`). Should constrain with `.width(300)` or similar.
+CATEGORY: image-quality-and-performance
+SEVERITY: low
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/our-homes/property-search.tsx
+LINE: 43
+ISSUE: Property grid link uses `md:grid-cols-2` breakpoint — violates the single `max-[820px]:` rule. Should be `grid-cols-1 max-[820px]:grid-cols-1` (or flex column) on mobile, two columns otherwise.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/our-homes/property-search.tsx
+LINE: 56
+ISSUE: Property title uses `text-3xl font-bold` — not using `font-heading italic` or the documented type scale. Tracking is absent.
+CATEGORY: typography-consistency
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/our-homes/property-search.tsx
+LINE: 58
+ISSUE: `text-gray-600` on short description. Should be `text-foreground` or `text-muted`.
+CATEGORY: token-violation
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/our-homes/property-search.tsx
+LINE: 34
+ISSUE: `text-gray-500` on "no properties available" empty state message. Should be `text-muted`.
+CATEGORY: token-violation
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/our-homes/property-search.tsx
+LINE: 71
+ISSUE: CTA button uses `bg-black text-white hover:bg-yellow-600` and `rounded-full`. Token violations: `bg-black` (not `bg-accent`), `text-white` (not `text-accent-foreground`), `hover:bg-yellow-600` (not a token), `rounded-full` (should be `rounded-[5px]`). This is the property card CTA — a critical conversion element.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/our-homes/property-search.tsx
+LINE: 27
+ISSUE: Uses `container` utility class for section wrapper. `container` is not a defined design system primitive in this project — sections should use explicit `px-[90px] max-[820px]:px-[18px]` padding pattern.
+CATEGORY: spacing-inconsistency
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/our-homes/property-showcase.module.css
+LINE: 1-16
+ISSUE: CSS module is valid and justified — it stores JS-driven CSS custom properties (`--deco-top`, `--deco-right`, `--deco-width`, `--deco-height`, `--deco-rotation`) that cannot be expressed in Tailwind without `style` prop + arbitrary values. The `@media (max-width: 820px)` breakpoint correctly matches the single-breakpoint rule. No hygiene issues.
+CATEGORY: file-hygiene
+SEVERITY: low
+CMS-DEP: no
+---
+
+<!-- A2 complete: 42 findings across 8 files -->
+
 ## A3 — Content Pages
 
 ## A4 — Blog
