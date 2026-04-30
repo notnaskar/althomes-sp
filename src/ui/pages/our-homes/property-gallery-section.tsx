@@ -22,9 +22,9 @@ export default function PropertyGallerySection({ gallery, quote, decorImage }: P
 	const secondaryImg = gallery[(index + 1) % total]
 
 	return (
-		<section className="flex h-[625px] items-end gap-[42px] overflow-hidden bg-background">
+		<section className="flex h-[625px] max-[820px]:h-auto max-[820px]:flex-col items-end gap-[42px] overflow-hidden bg-background">
 			{/* Left: main gallery image */}
-			<div className="h-[577px] w-[720px] shrink-0 overflow-hidden rounded-[5px]">
+			<div className="h-[577px] w-[720px] max-[820px]:w-full shrink-0 overflow-hidden rounded-[5px]">
 				{mainImg && (
 					<Img
 						image={mainImg}
