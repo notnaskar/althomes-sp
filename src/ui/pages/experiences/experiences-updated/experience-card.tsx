@@ -40,7 +40,7 @@ export default function ExperienceCard({
 				'group block w-full transition-transform duration-300',
 				'motion-safe:' + tiltClass,
 				'hover:scale-[1.02] hover:rotate-0',
-				'focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-4',
+				'focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
 			].join(' ')}
 		>
 			{/* Outer beige shell */}
