@@ -75,7 +75,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 				</section>
 
 				{/* 2. Booking bar */}
-				<div className="mx-[96px] flex items-center justify-center gap-[40px] bg-background px-[48px] py-[12px]">
+				<div className="mx-[90px] max-[820px]:mx-[18px] flex items-center justify-center gap-[40px] bg-background px-[48px] py-[12px]">
 					<div className="flex flex-col gap-[5px]">
 						<p className="font-sans text-[15px] tracking-[0.1em] text-foreground">
 							Check In &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Check Out
@@ -109,7 +109,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 				{/* 3. Intro — subtitle + specs strip */}
 				<section
 					id="booking"
-					className="bg-background py-[48px] pl-[191px] pr-[188px]"
+					className="bg-background py-[48px] px-[90px] max-[820px]:px-[18px]"
 				>
 					<div className="flex gap-[26px]">
 						{/* Left: subtitle (Playfair 30px) */}
@@ -402,7 +402,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 					property.causeBody ||
 					(property.causeImages && property.causeImages.length > 0)) && (
 					<section className="bg-primary py-16 text-primary-foreground">
-						<div className="container">
+						<div className="px-[90px] max-[820px]:px-[18px]">
 							{property.causeHeadline && (
 								<h2 className="mb-6 font-heading italic text-[30px] tracking-[0.3em] text-primary-foreground">
 									{property.causeHeadline}
