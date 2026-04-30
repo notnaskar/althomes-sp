@@ -24,12 +24,12 @@ export default function PropertySearch({ properties }: Props) {
 	return (
 		<>
 			{/* Availability form */}
-			<section className="container py-10">
+			<section className="px-[90px] max-[820px]:px-[18px] py-10">
 				<AvailabilityForm onResult={setAvailableIds} />
 			</section>
 
 			{/* Property grid */}
-			<section className="container py-10">
+			<section className="px-[90px] max-[820px]:px-[18px] py-10">
 				{availableIds !== null && displayed.length === 0 ? (
 					<p className="py-12 text-center text-muted">
 						No properties available for the selected dates. Try different dates.
