@@ -41,7 +41,7 @@ export default function PropertyExperiencesSection({
   return (
     <section
       data-section="experiences"
-      className={`relative overflow-hidden px-[90px] py-[80px] max-[820px]:px-[24px] max-[820px]:py-[48px]${!hasBg ? ' bg-background' : ''}`}
+      className={`relative overflow-hidden px-[90px] py-[80px] max-[820px]:px-[18px] max-[820px]:py-[48px]${!hasBg ? ' bg-background' : ''}`}
     >
       {bgUrl && (
         <Image
