@@ -59,7 +59,7 @@ export default function ContactForm() {
 					id="cf-name"
 					type="text"
 					{...register('name')}
-					className="w-full rounded-lg border px-4 py-3 text-sm focus:ring-2 focus:ring-black focus:outline-none"
+					className="w-full border-0 border-b border-muted bg-transparent rounded-none px-0 py-3 text-sm focus:ring-0 focus:border-primary focus:outline-none"
 				/>
 				{errors.name && (
 					<p className="mt-1 text-xs text-red-600">{errors.name.message}</p>
@@ -74,7 +74,7 @@ export default function ContactForm() {
 					id="cf-email"
 					type="email"
 					{...register('email')}
-					className="w-full rounded-lg border px-4 py-3 text-sm focus:ring-2 focus:ring-black focus:outline-none"
+					className="w-full border-0 border-b border-muted bg-transparent rounded-none px-0 py-3 text-sm focus:ring-0 focus:border-primary focus:outline-none"
 				/>
 				{errors.email && (
 					<p className="mt-1 text-xs text-red-600">{errors.email.message}</p>
@@ -89,7 +89,7 @@ export default function ContactForm() {
 					id="cf-phone"
 					type="tel"
 					{...register('phone')}
-					className="w-full rounded-lg border px-4 py-3 text-sm focus:ring-2 focus:ring-black focus:outline-none"
+					className="w-full border-0 border-b border-muted bg-transparent rounded-none px-0 py-3 text-sm focus:ring-0 focus:border-primary focus:outline-none"
 				/>
 				{errors.phone && (
 					<p className="mt-1 text-xs text-red-600">{errors.phone.message}</p>
@@ -107,7 +107,7 @@ export default function ContactForm() {
 					id="cf-message"
 					rows={5}
 					{...register('message')}
-					className="w-full resize-none rounded-lg border px-4 py-3 text-sm focus:ring-2 focus:ring-black focus:outline-none"
+					className="w-full resize-none border-0 border-b border-muted bg-transparent rounded-none px-0 py-3 text-sm focus:ring-0 focus:border-primary focus:outline-none"
 				/>
 				{errors.message && (
 					<p className="mt-1 text-xs text-red-600">{errors.message.message}</p>
