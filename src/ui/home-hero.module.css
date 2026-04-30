@@ -41,7 +41,7 @@
 .flowers {
 	position: absolute;
 	left: 294px;
-	top: 924px;
+	top: 700px;
 	width: 199px;
 	height: 289px;
 	z-index: 5;
@@ -50,7 +50,7 @@
 
 .stripes {
 	position: absolute;
-	left: 1189px;
+	left: min(1189px, calc(100vw - 150px));
 	top: 854px;
 	width: 146px;
 	height: 60px;
@@ -186,7 +186,7 @@
 
 @media (max-width: 820px) {
 	.hero {
-		height: 870px;
+		min-height: 870px;
 	}
 
 	.bgCircle {
@@ -195,10 +195,6 @@
 		width: 600px;
 		height: 600px;
 		transform: none;
-	}
-
-	.heroImg {
-		display: none;
 	}
 
 	.headline {
