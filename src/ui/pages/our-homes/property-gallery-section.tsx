@@ -30,6 +30,7 @@ export default function PropertyGallerySection({ gallery, quote, decorImage }: P
 						image={mainImg}
 						width={720}
 						alt={mainImg.alt ?? ''}
+						sizes="(max-width: 820px) 100vw, 720px"
 						className="h-full w-full object-cover transition-opacity duration-300"
 					/>
 				)}
