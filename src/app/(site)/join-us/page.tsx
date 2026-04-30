@@ -51,7 +51,7 @@ export default async function JoinUsPage() {
 					</div>
 				)}
 
-				<div className="absolute inset-0 flex items-start gap-[90px] pl-[194px] pr-[90px] pt-[30px]">
+				<div className="absolute inset-0 flex items-start gap-[90px] px-[90px] max-[820px]:px-[18px] pt-[30px]">
 					<div className="w-[292px] shrink-0">
 						<h1 className="font-heading italic text-[72px] leading-[70px] tracking-[0.1em] text-foreground">
 							{page.heroHeadline || 'Partner With Us'}
@@ -66,7 +66,7 @@ export default async function JoinUsPage() {
 			</section>
 
 			{/* Content ── Frame 60 ──────────────────────────────── */}
-			<section className="relative overflow-hidden bg-background px-[90px] py-[72px]">
+			<section className="relative overflow-hidden bg-background px-[90px] max-[820px]:px-[18px] py-[72px]">
 				<div className="flex items-start gap-12">
 					<div className="w-[384px] shrink-0 space-y-5">
 						{page.bodyParagraph && (
