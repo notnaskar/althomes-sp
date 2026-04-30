@@ -40,7 +40,7 @@ export default function PropertySearch({ properties }: Props) {
 							<Link
 								key={property._id}
 								href={`/our-homes/${property.slug}`}
-								className="group grid grid-cols-1 items-center gap-8 md:grid-cols-2"
+								className="group grid grid-cols-1 items-center gap-8 min-[821px]:grid-cols-2"
 							>
 								<div className="aspect-[4/3] overflow-hidden rounded-2xl">
 									{property.cardThumbnail && (
