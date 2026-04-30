@@ -59,6 +59,7 @@ export default function ExperienceCard({
 							image={image}
 							width={700}
 							alt={image.alt ?? title}
+							sizes="(max-width: 820px) 100vw, 360px"
 							className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
 						/>
 					) : null}
