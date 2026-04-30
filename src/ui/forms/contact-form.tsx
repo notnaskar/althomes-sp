@@ -119,7 +119,7 @@ export default function ContactForm() {
 					id="cf-consent"
 					type="checkbox"
 					{...register('privacyConsent')}
-					className="mt-1 h-4 w-4 rounded border-muted focus:ring-black"
+					className="mt-1 h-4 w-4 rounded border-muted focus:ring-2 focus:ring-primary focus:ring-offset-0"
 				/>
 				<label htmlFor="cf-consent" className="text-sm text-foreground">
 					I agree to the{' '}
