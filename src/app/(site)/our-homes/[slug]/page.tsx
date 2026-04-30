@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import { PortableText } from 'next-sanity'
+import type { PortableTextBlock } from 'next-sanity'
 import { notFound } from 'next/navigation'
 import { buildLodgingSchema } from '@/lib/schema-org'
 import { getProperty, getSite } from '@/sanity/lib/data'
@@ -8,6 +9,7 @@ import { urlFor } from '@/sanity/lib/image'
 import Img from '@/ui/img'
 import PropertyGallerySection from '@/ui/pages/our-homes/property-gallery-section'
 import PropertyExperiencesSection from '@/ui/pages/our-homes/property-experiences-section'
+import PropertyAmenitiesSection from '@/ui/pages/our-homes/property-amenities-section'
 import ReactIcon from '@/ui/atoms/react-icon'
 
 type Props = {
@@ -26,6 +28,10 @@ export default async function PropertyDetailPage({ params }: Props) {
 
 	const heroUrl = property.heroImage?.asset
 		? urlFor(property.heroImage.asset).width(1440).url()
+		: null
+
+	const amenitiesImageUrl = property.amenitiesSectionImage?.asset
+		? urlFor(property.amenitiesSectionImage.asset).width(800).url()
 		: null
 
 	const schemaJson = site
@@ -384,42 +390,12 @@ export default async function PropertyDetailPage({ params }: Props) {
 				{((property.amenities && property.amenities.length > 0) ||
 					property.houseRulesTeaser ||
 					property.houseRules) && (
-					<section className="container py-16">
-						<h2 className="mb-10 text-3xl font-bold">
-							FOR US, IT&rsquo;S COMFORT FIRST
-						</h2>
-						{property.amenities && property.amenities.length > 0 && (
-							<div className="mb-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-								{property.amenities.map((amenity, i) => (
-									<div
-										key={i}
-										className="flex items-center gap-3 rounded-xl border p-4"
-									>
-										{amenity.icon && (
-											<span className="text-foreground">
-												<ReactIcon name={amenity.icon} size={24} />
-											</span>
-										)}
-										{amenity.name && (
-											<span className="font-medium">{amenity.name}</span>
-										)}
-									</div>
-								))}
-							</div>
-						)}
-						{(property.houseRulesTeaser || property.houseRules) && (
-							<details className="overflow-hidden rounded-xl border">
-								<summary className="cursor-pointer px-6 py-4 text-lg font-bold transition hover:bg-gray-50">
-									{property.houseRulesTeaser ?? 'House Rules'}
-								</summary>
-								{property.houseRules && (
-									<div className="prose max-w-none border-t px-6 py-4">
-										<PortableText value={property.houseRules} />
-									</div>
-								)}
-							</details>
-						)}
-					</section>
+					<PropertyAmenitiesSection
+						imageUrl={amenitiesImageUrl}
+						amenities={property.amenities ?? []}
+						houseRulesTeaser={property.houseRulesTeaser}
+						houseRules={property.houseRules as PortableTextBlock[] | null | undefined}
+					/>
 				)}
 
 				{/* 7. Causes */}
