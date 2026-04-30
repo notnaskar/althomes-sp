@@ -15,7 +15,7 @@ export default async function LegalPage({
 	return (
 		<main className="flex-1">
 			<section className="container py-20">
-				<h1 className="mb-8 text-4xl font-bold">
+				<h1 className="mb-8 font-heading italic text-[36px] tracking-[0.2em]">
 					{page.displayTitle || page.seoTitle}
 				</h1>
 				<div className="prose max-w-none">
