@@ -69,7 +69,7 @@ export default function PropertyShowcase({
 					aria-hidden="true"
 				>
 					<Image
-						src={urlFor(showcaseDecorImage.asset).url()}
+						src={urlFor(showcaseDecorImage.asset).width(300).url()}
 						alt=""
 						fill
 						sizes="200px"
@@ -82,7 +82,7 @@ export default function PropertyShowcase({
 			<div className="relative min-h-[912px] max-[820px]:min-h-[478px]">
 				{heroImage?.asset ? (
 					<Image
-						src={urlFor(heroImage.asset).url()}
+						src={urlFor(heroImage.asset).width(1200).quality(85).url()}
 						alt={heroImage.alt ?? title}
 						fill
 						sizes="(max-width: 820px) 100vw, 55vw"
@@ -129,7 +129,7 @@ export default function PropertyShowcase({
 				{showcaseSecondaryImage?.asset && (
 					<div className="relative h-[337px] w-full max-w-[625px] flex-shrink-0 overflow-hidden rounded-[5px_10px_10px_5px] max-[820px]:h-[200px]">
 						<Image
-							src={urlFor(showcaseSecondaryImage.asset).url()}
+							src={urlFor(showcaseSecondaryImage.asset).width(625).quality(85).url()}
 							alt={showcaseSecondaryImage.alt ?? ''}
 							fill
 							sizes="(max-width: 820px) 100vw, 45vw"
