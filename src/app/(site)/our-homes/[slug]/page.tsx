@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import { PortableText } from 'next-sanity'
-import type { PortableTextBlock } from 'next-sanity'
 import { notFound } from 'next/navigation'
 import { buildLodgingSchema } from '@/lib/schema-org'
 import { getProperty, getSite } from '@/sanity/lib/data'
@@ -394,7 +393,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 						imageUrl={amenitiesImageUrl}
 						amenities={property.amenities ?? []}
 						houseRulesTeaser={property.houseRulesTeaser}
-						houseRules={property.houseRules as PortableTextBlock[] | null | undefined}
+						houseRules={property.houseRules}
 					/>
 				)}
 

@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import { PortableText } from 'next-sanity'
-import type { PortableTextBlock } from 'next-sanity'
+import type { BlockContent } from '@/sanity/types'
 import ReactIcon from '@/ui/atoms/react-icon'
 import { splitAmenityColumns } from './amenity-columns'
 
@@ -13,7 +13,7 @@ type Props = {
   imageUrl: string | null
   amenities: Amenity[]
   houseRulesTeaser: string | null | undefined
-  houseRules: PortableTextBlock[] | null | undefined
+  houseRules: BlockContent | null | undefined
 }
 
 export default function PropertyAmenitiesSection({
