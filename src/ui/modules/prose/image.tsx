@@ -11,6 +11,7 @@ export default function ({
 				image={image}
 				width={900}
 				alt={image.alt ?? ''}
+				sizes="(max-width: 820px) 100vw, 768px"
 			/>
 
 			{figcaption && (
