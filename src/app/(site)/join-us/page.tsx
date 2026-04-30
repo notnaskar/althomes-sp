@@ -10,7 +10,7 @@ export default async function JoinUsPage() {
 	if (!page) notFound()
 
 	const coverUrl = page.heroImage?.asset
-		? urlFor(page.heroImage.asset).width(1440).url()
+		? urlFor(page.heroImage.asset).width(1440).quality(85).url()
 		: null
 
 	const propertyUrl = page.propertyImage?.asset
@@ -41,7 +41,7 @@ export default async function JoinUsPage() {
 						fill
 						priority
 						className="object-cover"
-						sizes="1440px"
+						sizes="100vw"
 					/>
 				)}
 
