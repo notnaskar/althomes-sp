@@ -867,4 +867,870 @@ CMS-DEP: no
 
 ## A3 — Content Pages
 
+---
+FILE: src/ui/pages/experiences/experience-grid.tsx
+LINE: 1
+ISSUE: This file is the OLD top-level experience grid. `src/app/(site)/experiences/page.tsx` imports exclusively from `experiences-updated/experience-grid.tsx`. The top-level `experience-grid.tsx` is dead code — never rendered, never imported. Should be deleted to avoid confusion.
+CATEGORY: file-hygiene
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/experiences/experience-grid.tsx
+LINE: 38-55
+ISSUE: Filter chip buttons use `bg-black text-white` (active state) and `bg-white text-black` (inactive state) — all four are token violations. Active should be `bg-primary text-primary-foreground`; inactive should use `bg-background text-foreground` with `border-foreground` hover.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/experiences/experience-grid.tsx
+LINE: 72
+ISSUE: Card grid uses `sm:grid-cols-2 lg:grid-cols-3` — both `sm:` (640px) and `lg:` (1024px) breakpoints violate the single `max-[820px]:` rule. Should be `grid-cols-1 max-[820px]:grid-cols-1` single-column on mobile, and 3-column on desktop without forbidden breakpoints.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/experiences/experience-grid.tsx
+LINE: 68
+ISSUE: Empty-state message uses `text-gray-500` — should be `text-muted`.
+CATEGORY: token-violation
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/experiences/experience-grid.tsx
+LINE: 77
+ISSUE: Card `<Link>` uses `border-gray-200` and `hover:shadow-md`. No design token for either. Border should use `border-muted` or equivalent token; shadow has no documented token equivalent on this project.
+CATEGORY: token-violation
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/experiences/experience-grid.tsx
+LINE: 81-86
+ISSUE: Card `<Img>` has no `sizes` prop. At 3-column grid layout the image renders at ~33vw but the component calls `width={600}` with no `sizes`, so Next.js image optimisation cannot choose the right source size. Should add `sizes="(max-width: 820px) 100vw, 33vw"`.
+CATEGORY: image-quality-and-performance
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/experiences/experience-grid.tsx
+LINE: 91
+ISSUE: Card title uses `font-bold` — not `font-heading italic`. Experience card headings should use `font-heading italic` per the typography system.
+CATEGORY: typography-consistency
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/experiences/experience-grid.tsx
+LINE: 96
+ISSUE: Card description uses `text-gray-600` — should be `text-foreground` or `text-muted`.
+CATEGORY: token-violation
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/experiences/experiences-updated/experience-card.tsx
+LINE: 48-49
+ISSUE: Outer card shell uses `style={{ backgroundColor: 'rgb(227,213,193)' }}` — a hardcoded RGB value for the beige card background. This bypasses the token system entirely. Should be mapped to a CSS custom property or a Tailwind arbitrary class using a defined token (e.g., `bg-[var(--color-card-shell)]`).
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/experiences/experiences-updated/experience-card.tsx
+LINE: 55-57
+ISSUE: Image placeholder background uses `style={{ backgroundColor: 'rgb(217,217,217)' }}` — hardcoded grey. Should use a token class (e.g., `bg-muted` or a skeleton token).
+CATEGORY: token-violation
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/experiences/experiences-updated/experience-card.tsx
+LINE: 59-66
+ISSUE: Card `<Img>` has no `sizes` prop. Card renders at roughly 327px wide in the Figma spec, but inside a 3-column grid the actual rendered size varies. Should add `sizes="(max-width: 820px) 100vw, 360px"` to let Next.js pick the correct variant.
+CATEGORY: image-quality-and-performance
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/experiences/experiences-updated/experience-card.tsx
+LINE: 43
+ISSUE: Focus ring uses `focus-visible:outline-primary` — `outline-primary` is not a standard Tailwind utility; this will silently produce no outline. Should be `focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-4` using `ring` utilities, e.g., `focus-visible:ring-2 focus-visible:ring-primary`.
+CATEGORY: interactive-states
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/experiences/experiences-updated/experiences-hero.tsx
+LINE: 27-28
+ISSUE: `urlFor(heroBackground.asset).url()` — no `.width()` or `.quality()` call. Fetches full-resolution Sanity original for a full-bleed hero background. Should use `.width(1440).quality(85)` at minimum.
+CATEGORY: image-quality-and-performance
+SEVERITY: high
+CMS-DEP: yes — heroBackground from Sanity `experiencesPage`
+---
+
+---
+FILE: src/ui/pages/experiences/experiences-updated/experiences-hero.tsx
+LINE: 58
+ISSUE: `font-['Playfair_Display']` on the `<h1>` headline — explicit token violation. Must use `font-heading` instead.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/experiences/experiences-updated/experiences-hero.tsx
+LINE: 67
+ISSUE: `font-['Playfair_Display']` on the supporting tagline `<p>` — same explicit token violation.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/experiences/experiences-updated/experiences-hero.tsx
+LINE: 74
+ISSUE: `font-['Playfair_Display']` on the leading tagline `<p>` — third instance of the same explicit token violation in the same file.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/experiences/experiences-updated/experiences-hero.tsx
+LINE: 90-92
+ISSUE: Decorative circle uses `style={{ backgroundColor: 'rgb(203,69,43)' }}` — a brand red-orange value with no design token. If this colour is intentional and recurring it needs a CSS custom property; if one-off it should at least be an arbitrary Tailwind value `bg-[rgb(203,69,43)]` to remain visible in the design system audit trail.
+CATEGORY: token-violation
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/experiences/experiences-updated/experiences-hero.tsx
+LINE: 116-128
+ISSUE: SVG arrow inside the decorative circle uses hardcoded `stroke="white"`. On the red-orange background white is technically valid, but the project token equivalent for white-on-dark is `text-primary-foreground` (`#FCF6EA`). Minor but inconsistent.
+CATEGORY: token-violation
+SEVERITY: low
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/experiences/experiences-updated/experience-grid.tsx
+LINE: 136
+ISSUE: Filter chevron SVG uses `stroke="rgb(58,58,58)"` — hardcoded RGB for the foreground colour. Should use `currentColor` and apply `text-foreground` on the parent to inherit.
+CATEGORY: token-violation
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/experiences/experiences-updated/experience-grid.tsx
+LINE: 147
+ISSUE: Filter dropdown panel uses `bg-white` — should be `bg-background` (cream `#FCF6EA`). White is not the background token.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/pages/experiences/experiences-updated/experience-grid.tsx
+LINE: 191
+ISSUE: Card grid is `grid-cols-3` fixed — no intermediate fluid step between 820px and 1440px. At viewport widths just above 820px (e.g. 900px) three columns of `(900px - 180px padding - 64px gaps) / 3 ≈ 219px` may be too narrow for the card proportions. Consider `grid-cols-[repeat(3,minmax(0,1fr))]` or a min content width guard.
+CATEGORY: responsiveness
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/experiences/page.tsx
+LINE: 1-49
+ISSUE: Page is clean — uses only `experiences-updated` components, correct token imports, no violations. No findings.
+CATEGORY: file-hygiene
+SEVERITY: low
+CMS-DEP: yes — page, properties, experiences from Sanity
+---
+
+---
+FILE: src/app/(site)/the-alt-way/page.tsx
+LINE: 16
+ISSUE: Hero section uses `bg-gray-900` — not a design token. Should use `bg-primary` or another token-based dark background.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/the-alt-way/page.tsx
+LINE: 28-33
+ISSUE: Hero `<h1>` and `<p>` use `text-white font-bold text-5xl md:text-7xl`. Token violations: `text-white` (on dark bg, acceptable, but `text-primary-foreground` is the correct token); `font-bold` instead of `font-heading italic`; `md:` breakpoint (768px) violates single-breakpoint rule; `text-5xl/text-7xl` not from the documented type scale.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/the-alt-way/page.tsx
+LINE: 28
+ISSUE: `md:text-7xl` breakpoint violation — `md:` (768px) used instead of `max-[820px]:`.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/the-alt-way/page.tsx
+LINE: 42
+ISSUE: Mission split section uses `container` utility class and `md:grid-cols-2` breakpoint — both violate project rules. `container` is undefined in the design system; `md:` (768px) must be `max-[820px]:`.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/the-alt-way/page.tsx
+LINE: 54
+ISSUE: Mission text uses `text-gray-700 md:text-2xl`. `text-gray-700` should be `text-foreground`. `md:` breakpoint violation.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/the-alt-way/page.tsx
+LINE: 63
+ISSUE: Value props section uses `bg-gray-50` — not a token. Should be `bg-background` or another token.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/the-alt-way/page.tsx
+LINE: 66
+ISSUE: Value prop headline uses `text-3xl font-bold md:text-4xl`. Token violations: `font-bold` not `font-heading`, wrong type scale, `md:` breakpoint.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/the-alt-way/page.tsx
+LINE: 70
+ISSUE: `md:grid-cols-2` on value props grid — breakpoint violation.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/the-alt-way/page.tsx
+LINE: 72
+ISSUE: Value prop card uses `bg-white rounded-2xl border` — `bg-white` not a token (should be `bg-background`); `rounded-2xl` inconsistent with `rounded-[5px]` used everywhere else.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/the-alt-way/page.tsx
+LINE: 77
+ISSUE: `text-gray-600` on value prop body text — should be `text-foreground` or `text-muted`.
+CATEGORY: token-violation
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/the-alt-way/page.tsx
+LINE: 108
+ISSUE: Promise text uses `font-semibold md:text-3xl` — `md:` breakpoint violation; `font-semibold` is not `font-heading italic`.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/the-alt-way/page.tsx
+LINE: 115
+ISSUE: Promise CTA button uses `bg-black text-white rounded-full hover:bg-gray-800`. Token violations: `bg-black` (not `bg-accent`), `text-white` (not `text-accent-foreground`), `rounded-full` (not `rounded-[5px]`), `hover:bg-gray-800` (not a token). Critical CTA element.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/the-alt-way/page.tsx
+LINE: 125
+ISSUE: Stats bar uses `bg-black` — not a token. Should be `bg-primary` or another dark token.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/the-alt-way/page.tsx
+LINE: 132
+ISSUE: Stats grid uses `grid-cols-2 md:grid-cols-4` — `md:` (768px) breakpoint violation.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/the-alt-way/page.tsx
+LINE: 158
+ISSUE: Reviews section heading uses `text-3xl font-bold` — not `font-heading italic`, wrong type scale.
+CATEGORY: typography-consistency
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/the-alt-way/page.tsx
+LINE: 171
+ISSUE: Star ratings use `text-yellow-400` — should be `text-accent` (`#F2C94C`) to stay within the token system.
+CATEGORY: token-violation
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/the-alt-way/page.tsx
+LINE: 178
+ISSUE: Review body text uses `text-gray-700` — should be `text-foreground`.
+CATEGORY: token-violation
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/the-alt-way/page.tsx
+LINE: 182
+ISSUE: Review meta text uses `text-gray-500` — should be `text-muted`.
+CATEGORY: token-violation
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/the-alt-way/page.tsx
+LINE: 198
+ISSUE: Bottom CTA section uses `bg-gray-50` — not a token. Should be `bg-background` or `bg-primary`.
+CATEGORY: token-violation
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/the-alt-way/page.tsx
+LINE: 200
+ISSUE: Bottom CTA heading uses `text-3xl font-bold md:text-4xl` — `md:` breakpoint violation; `font-bold` not `font-heading italic`; wrong type scale.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/the-alt-way/page.tsx
+LINE: 207
+ISSUE: Bottom CTA button uses `bg-black text-white rounded-full hover:bg-gray-800` — same token violations as the Promise CTA above (line 115). All CTA buttons on this page use the wrong token set.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/the-alt-way/page.tsx
+LINE: 17-22
+ISSUE: Hero `<Img>` has no `quality` prop. Full-bleed 1440px-wide hero background image quality not controlled. Should specify `quality={85}`. Also, `loading="eager"` is used instead of `priority` — for above-the-fold images `priority` is the correct Next.js pattern (it also adds a `<link rel="preload">`).
+CATEGORY: image-quality-and-performance
+SEVERITY: medium
+CMS-DEP: yes — heroBackground from Sanity `altWayPage`
+---
+
+---
+FILE: src/app/(site)/the-alt-way/page.tsx
+LINE: 41-58
+ISSUE: This entire page is an unstyled placeholder — every section uses Tailwind defaults (`container`, `bg-gray-*`, `md:`, `lg:`, `text-gray-*`, `font-bold`, `rounded-2xl`, `bg-black`, `bg-white`). None of the design tokens are applied. The page needs a full design pass before ship.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/contact/page.tsx
+LINE: 14
+ISSUE: Hero section uses `bg-gray-900` — not a design token. Should be `bg-primary` or token-based dark fallback.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/contact/page.tsx
+LINE: 24
+ISSUE: Hero `<h1>` uses `text-white font-bold text-4xl md:text-5xl`. Token violations: `text-white` (should be `text-primary-foreground` on dark bg); `font-bold` not `font-heading italic`; `md:` breakpoint (768px); non-standard type scale.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/contact/page.tsx
+LINE: 24
+ISSUE: `md:text-5xl` — `md:` (768px) breakpoint violation.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/contact/page.tsx
+LINE: 34
+ISSUE: Fallback hero section (no image path) uses `container` and `text-4xl font-bold md:text-5xl`. `container` is not a design system primitive; `md:` breakpoint violation; `font-bold` not `font-heading`.
+CATEGORY: token-violation
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/contact/page.tsx
+LINE: 42
+ISSUE: Two-column body uses `container md:grid-cols-2`. `container` not a design system primitive; `md:` (768px) breakpoint violation.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/contact/page.tsx
+LINE: 50-52
+ISSUE: Contact detail labels (Phone, Email, Office, Follow us) use `text-gray-500 uppercase tracking-wide` — `text-gray-500` should be `text-muted`; tracking should use `tracking-[0.1em]` to match design token.
+CATEGORY: token-violation
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/contact/page.tsx
+LINE: 55
+ISSUE: Phone/email/social links use `hover:text-yellow-600` — should use `hover:text-accent` to stay within the token system.
+CATEGORY: token-violation
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/contact/page.tsx
+LINE: 83
+ISSUE: Office address `<p>` uses `text-gray-600` — should be `text-foreground`.
+CATEGORY: token-violation
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/contact/page.tsx
+LINE: 42
+ISSUE: Contact page has no `px-[90px] max-[820px]:px-[18px]` page padding — uses `container` instead. The horizontal padding is completely uncontrolled relative to the design token spec.
+CATEGORY: spacing-inconsistency
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/forms/contact-form.tsx
+LINE: 34-39
+ISSUE: Success state uses `bg-green-50 border-green-200 text-green-800` — none are design tokens. Should use `bg-background border-primary text-primary` or a dedicated success token pair.
+CATEGORY: token-violation
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/forms/contact-form.tsx
+LINE: 55
+ISSUE: Form labels use bare `font-semibold text-sm` with no explicit `text-foreground`. Without a token, the label colour inherits from parent context which could be unpredictable. Should add `text-foreground` and `tracking-[0.1em]` per design spec.
+CATEGORY: token-violation
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/forms/contact-form.tsx
+LINE: 62
+ISSUE: Input focus ring uses `focus:ring-black` — should use `focus:ring-primary` to stay within the token system. Same on all inputs and textarea in this file (lines 62, 77, 92, 110).
+CATEGORY: interactive-states
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/forms/contact-form.tsx
+LINE: 62
+ISSUE: Input uses `rounded-lg` — inconsistent with `rounded-[5px]` used in the partner form and throughout the design system.
+CATEGORY: spacing-inconsistency
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/forms/contact-form.tsx
+LINE: 122
+ISSUE: Checkbox uses `border-gray-300 focus:ring-black` — `border-gray-300` should be a token; `focus:ring-black` should be `focus:ring-primary`.
+CATEGORY: token-violation
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/forms/contact-form.tsx
+LINE: 124
+ISSUE: Consent label uses `text-gray-700` — should be `text-foreground`.
+CATEGORY: token-violation
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/forms/contact-form.tsx
+LINE: 126
+ISSUE: Privacy Policy link uses `hover:text-black` — should be `hover:text-foreground` or `hover:text-primary`.
+CATEGORY: token-violation
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/forms/contact-form.tsx
+LINE: 141
+ISSUE: Submit button uses `bg-black text-white rounded-full hover:bg-gray-800` — token violations: `bg-black` (not `bg-accent`), `text-white` (not `text-accent-foreground`), `rounded-full` (not `rounded-[5px]`), `hover:bg-gray-800` (not a token). The submit CTA is the most critical interactive element and it uses zero design tokens.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/forms/contact-form.tsx
+LINE: 43-144
+ISSUE: The contact form input style (`rounded-lg`, `border`, `px-4 py-3`) is visually inconsistent with the partner form's underline style (`border-0 border-b border-[#5F5D5D] bg-transparent`). The two forms on the same site have completely different visual languages — one boxed, one underline. This inconsistency should be resolved in favour of a single form token pattern.
+CATEGORY: spacing-inconsistency
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/forms/availability-form.tsx
+LINE: 29-30
+ISSUE: `inputClass` uses `bg-white` and `focus:ring-black`. `bg-white` (not `bg-background`); `focus:ring-black` should be `focus:ring-primary`. Consistent violations across all form files.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/forms/availability-form.tsx
+LINE: 31-32
+ISSUE: `labelClass` uses `text-gray-600` — should be `text-muted` or `text-foreground`. Also uses `tracking-wide` instead of `tracking-[0.1em]`.
+CATEGORY: token-violation
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/forms/availability-form.tsx
+LINE: 88
+ISSUE: Submit button uses `bg-black text-white rounded-full hover:bg-gray-800` — same token violations as contact form submit: `bg-black` → `bg-accent`, `text-white` → `text-accent-foreground`, `rounded-full` → `rounded-[5px]`, `hover:bg-gray-800` → token hover.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/forms/partner-form.tsx
+LINE: 45
+ISSUE: `input` class string uses `border-[#5F5D5D]` and `placeholder:text-[#5F5D5D]/50` — both are hardcoded hex values. `#5F5D5D` has no documented design token alias. Should be mapped to a named token (e.g., `border-muted`, `placeholder:text-muted/50`).
+CATEGORY: token-violation
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/forms/partner-form.tsx
+LINE: 113
+ISSUE: Custom checkbox uses `border border-[#5F5D5D]` — same hardcoded hex as input underlines.
+CATEGORY: token-violation
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/forms/partner-form.tsx
+LINE: 58
+ISSUE: Partner form grid is `grid-cols-2 gap-x-[93px]` with no `max-[820px]:` override. On mobile (≤820px) two columns with `93px` gap will cause inputs to be extremely narrow (e.g. at 390px viewport: `(390px - 36px padding - 93px gap) / 2 ≈ 130px`). Must add `max-[820px]:grid-cols-1` to stack inputs on mobile.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/forms/partner-form.tsx
+LINE: 104
+ISSUE: Partner form consent/submit area uses `flex-col items-center` centering — visually inconsistent with the left-aligned label-input pairs above it. On mobile this looks detached from the form body.
+CATEGORY: layout
+SEVERITY: low
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/join-us/page.tsx
+LINE: 43
+ISSUE: Hero cover image `urlFor(...).width(1440).url()` — no `.quality()` call. Above-the-fold hero image quality not controlled. Should add `.quality(85)`.
+CATEGORY: image-quality-and-performance
+SEVERITY: medium
+CMS-DEP: yes — heroImage from Sanity `joinUsPage`
+---
+
+---
+FILE: src/app/(site)/join-us/page.tsx
+LINE: 43
+ISSUE: Hero `<Image>` uses `sizes="1440px"` fixed pixel hint — should use `sizes="100vw"` for a full-bleed fill image.
+CATEGORY: image-quality-and-performance
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/join-us/page.tsx
+LINE: 53
+ISSUE: Hero section has `pl-[194px] pr-[90px]` — asymmetric and non-standard padding. Left padding is 194px, right is 90px (the token value). Should use `px-[90px]` (symmetric) or document the asymmetry as intentional Figma spec.
+CATEGORY: spacing-inconsistency
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/join-us/page.tsx
+LINE: 35
+ISSUE: Hero section is `h-[470px]` fixed — no `max-[820px]:` variant. On mobile the text layout (`pl-[194px]`) will overflow. The fixed height with deeply inset left content will be broken below 820px.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/join-us/page.tsx
+LINE: 53
+ISSUE: Hero content uses `gap-[90px] pl-[194px]` with no `max-[820px]:` overrides. At ≤820px this creates a 194px left indent on a ~390px screen leaving only ~106px for the headline — too narrow for a `text-[72px]` heading.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/join-us/page.tsx
+LINE: 68
+ISSUE: Content section `px-[90px]` is correct for desktop but has no `max-[820px]:px-[18px]` mobile override. All fixed inner content widths (`w-[384px]`, `w-[624px]`) will overflow on mobile.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/join-us/page.tsx
+LINE: 69
+ISSUE: Content section uses `flex items-start gap-12` with `w-[384px]` and `w-[624px]` fixed-width children. Total content width = 384 + 48 (gap) + 624 = 1056px — at any viewport below 1236px (1056 + 180px padding) this overflows. No `max-[820px]:flex-col` or responsive widths provided.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/join-us/page.tsx
+LINE: 117
+ISSUE: Form wrapper uses `mx-[192px] bg-white px-[51px]`. `bg-white` should be `bg-background` (cream `#FCF6EA`); the `mx-[192px]` margin has no `max-[820px]:` responsive override, so on mobile the form would have a 192px margin on each side of a ~390px screen, collapsing the form to ~6px wide — completely broken.
+CATEGORY: token-violation
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/join-us/page.tsx
+LINE: 117
+ISSUE: `mx-[192px]` has no `max-[820px]:` mobile override — form is completely broken on mobile viewports.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/[slug]/page.tsx
+LINE: 17
+ISSUE: Legal page uses `container py-20` wrapper. `container` is not a design system primitive — should use `px-[90px] max-[820px]:px-[18px]` padding.
+CATEGORY: spacing-inconsistency
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/[slug]/page.tsx
+LINE: 18
+ISSUE: `<h1>` uses `text-4xl font-bold` — not `font-heading italic`; wrong type scale.
+CATEGORY: typography-consistency
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/app/(site)/[slug]/page.tsx
+LINE: 21
+ISSUE: `prose max-w-none` classes use the Tailwind Typography plugin. This is the legal/privacy pages so prose styling may be intentional, but it overrides the design system's type scale. If prose plugin is used site-wide it should be customised to match the design tokens (font-heading, correct colours, tracking).
+CATEGORY: token-violation
+SEVERITY: low
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/hero.split.tsx
+LINE: 9
+ISSUE: Anonymous default export — should be a named function `HeroSplit` for dev tools and error trace clarity.
+CATEGORY: file-hygiene
+SEVERITY: low
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/hero.split.tsx
+LINE: 18
+ISSUE: `md:grid-cols-2` breakpoint — uses `md:` (768px) instead of the required `max-[820px]:` single breakpoint.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/hero.split.tsx
+LINE: 22-25
+ISSUE: `image.onRight && 'md:order-last'` and `image.afterContent && 'max-md:order-last'` both use forbidden `md:` / `max-md:` breakpoints.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/hero.split.tsx
+LINE: 38
+ISSUE: `CTAList` receives `className="max-md:*:w-full"` — `max-md:` (768px) breakpoint violation.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/hero.split.tsx
+LINE: 28
+ISSUE: `<Img>` has no `sizes` prop. The image renders at up to 50vw (half the 2-column grid) on desktop. Should specify `sizes="(max-width: 820px) 100vw, 50vw"`.
+CATEGORY: image-quality-and-performance
+SEVERITY: medium
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/prose/index.tsx
+LINE: 11
+ISSUE: Anonymous default export — should be named `ProseModule` for dev tools clarity.
+CATEGORY: file-hygiene
+SEVERITY: low
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/prose/index.tsx
+LINE: 22-23
+ISSUE: `toc && 'flex gap-4 max-md:flex-col md:items-start'` — `max-md:` and `md:` breakpoints (768px) violate the single `max-[820px]:` rule. Should be `max-[820px]:flex-col min-[821px]:items-start` or restructured.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/prose/index.tsx
+LINE: 29-32
+ISSUE: `TableOfContents` receives `className` with `md:sticky-below-header`, `md:w-[20ch]`, and `toc === 'right' && 'md:order-last'` — all use `md:` (768px) breakpoint in violation of the single breakpoint rule.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/prose/anchored-heading.tsx
+LINE: 4
+ISSUE: Anonymous default export — should be named `AnchoredHeading`.
+CATEGORY: file-hygiene
+SEVERITY: low
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/prose/code.tsx
+LINE: 9
+ISSUE: Anonymous default export — should be named `CodeBlock` or `ProseCode`.
+CATEGORY: file-hygiene
+SEVERITY: low
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/prose/code.tsx
+LINE: 57
+ISSUE: `ClickToCopy` receives `!theme.includes('light') && 'text-white'` — conditional `text-white` applied generically based on theme string. Should use `text-primary-foreground` for dark themes rather than `text-white`.
+CATEGORY: token-violation
+SEVERITY: low
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/prose/image.tsx
+LINE: 4
+ISSUE: Anonymous default export — should be named `ProseImage`.
+CATEGORY: file-hygiene
+SEVERITY: low
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/prose/image.tsx
+LINE: 8
+ISSUE: `max-md:full-bleed` and `md:col-[bleed]!` — both use `md:`/`max-md:` (768px) breakpoints in violation of the single `max-[820px]:` rule.
+CATEGORY: responsiveness
+SEVERITY: high
+CMS-DEP: no
+---
+
+---
+FILE: src/ui/modules/prose/image.tsx
+LINE: 9
+ISSUE: `<Img>` uses `width={900}` with no explicit `sizes` prop. For a prose image rendered inside a `max-w-3xl` container (~768px), `sizes="(max-width: 820px) 100vw, 768px"` would be correct.
+CATEGORY: image-quality-and-performance
+SEVERITY: medium
+CMS-DEP: no
+---
+
+<!-- A3 complete: 82 findings across 16 files -->
+
 ## A4 — Blog
