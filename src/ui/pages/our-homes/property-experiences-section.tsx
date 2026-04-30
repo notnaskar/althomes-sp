@@ -36,7 +36,7 @@ export default function PropertyExperiencesSection({
   propertyTitle,
 }: PropertyExperiencesSectionProps) {
   const hasBg = bgImage?.asset != null
-  const bgUrl = hasBg ? urlFor(bgImage!).width(1600).url() : null
+  const bgUrl = hasBg ? urlFor(bgImage!).width(1600).quality(85).url() : null
 
   return (
     <section
@@ -48,6 +48,8 @@ export default function PropertyExperiencesSection({
           src={bgUrl}
           alt={bgImage?.alt ?? ''}
           fill
+          priority
+          quality={85}
           className="object-cover"
           sizes="100vw"
         />
