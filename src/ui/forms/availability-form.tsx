@@ -27,9 +27,9 @@ export default function AvailabilityForm({ onResult }: Props) {
 	}
 
 	const inputClass =
-		'w-full rounded-lg border px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black bg-white'
+		'w-full rounded-lg border px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black bg-background'
 	const labelClass =
-		'block text-xs font-semibold uppercase tracking-wide mb-1 text-gray-600'
+		'block text-xs font-semibold uppercase tracking-[0.1em] mb-1 text-muted'
 
 	return (
 		<form
@@ -86,7 +86,7 @@ export default function AvailabilityForm({ onResult }: Props) {
 			<button
 				type="submit"
 				disabled={isSubmitting}
-				className="rounded-full bg-black px-8 py-3 text-sm font-bold whitespace-nowrap text-white transition hover:bg-gray-800 disabled:opacity-50"
+				className="rounded-[5px] bg-accent px-8 py-3 text-sm font-bold whitespace-nowrap text-accent-foreground tracking-[0.3em] uppercase transition hover:bg-accent/90 disabled:opacity-50"
 			>
 				{isSubmitting ? 'Searching…' : 'CHECK AVAILABILITY'}
 			</button>

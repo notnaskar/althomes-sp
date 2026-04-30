@@ -42,7 +42,7 @@ export default function PartnerForm() {
 	const label =
 		'block font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground uppercase'
 	const input =
-		'w-full border-0 border-b border-[#5F5D5D] bg-transparent pb-1 font-heading text-[15px] leading-[23px] tracking-[0.1em] text-foreground placeholder:text-[#5F5D5D]/50 focus:outline-none focus:border-foreground transition-colors'
+		'w-full border-0 border-b border-muted bg-transparent pb-1 font-heading text-[15px] leading-[23px] tracking-[0.1em] text-foreground placeholder:text-muted/50 focus:outline-none focus:border-foreground transition-colors'
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -110,7 +110,7 @@ export default function PartnerForm() {
 							{...register('privacyConsent')}
 							className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
 						/>
-						<span className="pointer-events-none block h-full w-full border border-[#5F5D5D] bg-background" />
+						<span className="pointer-events-none block h-full w-full border border-muted bg-background" />
 					</div>
 					<label
 						htmlFor="pf-consent"

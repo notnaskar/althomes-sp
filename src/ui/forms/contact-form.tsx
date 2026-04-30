@@ -31,8 +31,8 @@ export default function ContactForm() {
 
 	if (success) {
 		return (
-			<div className="rounded-xl border border-green-200 bg-green-50 p-8 text-center">
-				<p className="text-lg font-semibold text-green-800">
+			<div className="rounded-xl border border-primary bg-background p-8 text-center">
+				<p className="text-lg font-semibold text-primary">
 					Thanks for reaching out! We&rsquo;ll be in touch soon.
 				</p>
 			</div>
@@ -52,7 +52,7 @@ export default function ContactForm() {
 			/>
 
 			<div>
-				<label htmlFor="cf-name" className="mb-1 block text-sm font-semibold">
+				<label htmlFor="cf-name" className="mb-1 block text-sm font-semibold text-foreground tracking-[0.1em]">
 					NAME
 				</label>
 				<input
@@ -67,7 +67,7 @@ export default function ContactForm() {
 			</div>
 
 			<div>
-				<label htmlFor="cf-email" className="mb-1 block text-sm font-semibold">
+				<label htmlFor="cf-email" className="mb-1 block text-sm font-semibold text-foreground tracking-[0.1em]">
 					EMAIL
 				</label>
 				<input
@@ -82,7 +82,7 @@ export default function ContactForm() {
 			</div>
 
 			<div>
-				<label htmlFor="cf-phone" className="mb-1 block text-sm font-semibold">
+				<label htmlFor="cf-phone" className="mb-1 block text-sm font-semibold text-foreground tracking-[0.1em]">
 					PHONE
 				</label>
 				<input
@@ -99,7 +99,7 @@ export default function ContactForm() {
 			<div>
 				<label
 					htmlFor="cf-message"
-					className="mb-1 block text-sm font-semibold"
+					className="mb-1 block text-sm font-semibold text-foreground tracking-[0.1em]"
 				>
 					MESSAGE
 				</label>
@@ -119,11 +119,11 @@ export default function ContactForm() {
 					id="cf-consent"
 					type="checkbox"
 					{...register('privacyConsent')}
-					className="mt-1 h-4 w-4 rounded border-gray-300 focus:ring-black"
+					className="mt-1 h-4 w-4 rounded border-muted focus:ring-black"
 				/>
-				<label htmlFor="cf-consent" className="text-sm text-gray-700">
+				<label htmlFor="cf-consent" className="text-sm text-foreground">
 					I agree to the{' '}
-					<Link href="/privacy-policy" className="underline hover:text-black">
+					<Link href="/privacy-policy" className="underline hover:text-primary">
 						Privacy Policy
 					</Link>
 				</label>
@@ -137,7 +137,7 @@ export default function ContactForm() {
 			<button
 				type="submit"
 				disabled={isSubmitting}
-				className="w-full rounded-full bg-black py-4 text-sm font-bold text-white transition hover:bg-gray-800 disabled:opacity-50"
+				className="w-full rounded-[5px] bg-accent py-4 text-sm font-bold text-accent-foreground tracking-[0.3em] uppercase transition hover:bg-accent/90 disabled:opacity-50"
 			>
 				{isSubmitting ? 'Sending…' : 'SEND MESSAGE'}
 			</button>
