@@ -4,7 +4,7 @@ import HoverDetails from '@/ui/hover-details'
 import SanityLink, { type SanityLinkType } from '@/ui/sanity-link'
 import MobileOnlyDetails from './mobile-only-details'
 
-export default function ({
+export default function MegamenuNav({
 	link,
 	items,
 	summaryClassName,

@@ -12,7 +12,7 @@ const topLevelClassName = cn(
 	'grid min-[821px]:place-content-center min-[821px]:text-center min-[821px]:text-balance leading-tight py-[.5ch] min-[821px]:py-ch',
 )
 
-export default function () {
+export default function Navigation() {
 	return (
 		<nav className="max-[820px]:header-not-open:hidden max-[820px]:anim-fade-to-b gap-x-lh flex items-stretch [grid-area:navigation] max-[820px]:my-4 max-[820px]:flex-col">
 			{NAV_ITEMS.map(({ href, label }) => (

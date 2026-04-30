@@ -6,7 +6,7 @@ import Img from '@/ui/img'
 import Overline from '@/ui/overline'
 import { moduleAttributes } from '.'
 
-export default function ({
+export default function HeroSplit({
 	overline,
 	content = [],
 	ctas,

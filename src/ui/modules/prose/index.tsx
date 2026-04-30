@@ -8,7 +8,7 @@ import AnchoredHeading from './anchored-heading'
 import Code from './code'
 import Image from './image'
 
-export default function ({
+export default function ProseModule({
 	content,
 	tableOfContents,
 	headings,

@@ -1,7 +1,7 @@
 import { PortableText, type PortableTextTypeComponentProps } from 'next-sanity'
 import Img from '@/ui/img'
 
-export default function ({
+export default function ProseImage({
 	value: { figcaption, ...image },
 }: PortableTextTypeComponentProps<any>) {
 	return (
