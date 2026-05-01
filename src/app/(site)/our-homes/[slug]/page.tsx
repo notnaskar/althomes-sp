@@ -9,6 +9,7 @@ import Img from '@/ui/img'
 import PropertyGallerySection from '@/ui/pages/our-homes/property-gallery-section'
 import PropertyExperiencesSection from '@/ui/pages/our-homes/property-experiences-section'
 import PropertyAmenitiesSection from '@/ui/pages/our-homes/property-amenities-section'
+import PropertyFaqSection from '@/ui/pages/our-homes/property-faq-section'
 import ReactIcon from '@/ui/atoms/react-icon'
 import ReviewsSection from '@/ui/molecules/reviews-section'
 
@@ -396,6 +397,11 @@ export default async function PropertyDetailPage({ params }: Props) {
 						houseRulesTeaser={property.houseRulesTeaser}
 						houseRules={property.houseRules}
 					/>
+				)}
+
+				{/* 6b. FAQs */}
+				{property.faqs && property.faqs.length > 0 && (
+					<PropertyFaqSection faqs={property.faqs} />
 				)}
 
 				{/* 7. Causes */}
