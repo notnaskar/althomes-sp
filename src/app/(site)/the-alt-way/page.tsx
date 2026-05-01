@@ -156,7 +156,7 @@ export default async function AltWayPage() {
 
 			{/* Reviews */}
 			{cappedReviews.length > 0 && (
-				<ReviewsSection reviews={cappedReviews as Parameters<typeof ReviewsSection>[0]['reviews']} />
+				<ReviewsSection reviews={cappedReviews} />
 			)}
 
 			{/* Bottom CTA */}

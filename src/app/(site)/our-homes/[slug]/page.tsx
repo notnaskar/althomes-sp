@@ -24,8 +24,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 
 	const cappedExperiences =
 		property.experiences?.slice(0, property.experiencesMaxShown ?? 6) ?? []
-	const cappedReviews =
-		property.reviews?.slice(0, property.reviewsMaxShown ?? 20) ?? []
+	const cappedReviews = property.reviews ?? []
 
 	const heroUrl = property.heroImage?.asset
 		? urlFor(property.heroImage.asset).width(1440).quality(85).url()
@@ -452,7 +451,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 
 				{/* 8. Reviews */}
 				{cappedReviews.length > 0 && (
-					<ReviewsSection reviews={cappedReviews as Parameters<typeof ReviewsSection>[0]['reviews']} />
+					<ReviewsSection reviews={cappedReviews} />
 				)}
 
 				{/* 9. Bottom CTA */}

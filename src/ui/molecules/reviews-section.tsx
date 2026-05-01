@@ -1,20 +1,10 @@
 'use client'
 
 import { useState } from 'react'
+import type { PROPERTY_QUERY_RESULT } from '@/sanity/types'
 import Img from '@/ui/img'
 
-type Review = {
-	guestName: string | null
-	rating: number | null
-	body: string | null
-	guestLocation: string | null
-	stayDate: string | null
-	guestPhoto: {
-		asset?: Record<string, unknown> | null
-		alt?: string | null
-	} | null
-	propertyTitle: string | null
-}
+type Review = NonNullable<NonNullable<PROPERTY_QUERY_RESULT>['reviews']>[number]
 
 export default function ReviewsSection({ reviews }: { reviews: Review[] }) {
 	const [active, setActive] = useState(0)
