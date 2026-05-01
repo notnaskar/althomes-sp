@@ -3,12 +3,13 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getAltWayPage, getSite } from '@/sanity/lib/data'
 import Img from '@/ui/img'
+import ReviewsSection from '@/ui/molecules/reviews-section'
 
 export default async function AltWayPage() {
 	const page = await getAltWayPage()
 	if (!page) notFound()
 
-	const cappedReviews = page.reviews?.slice(0, page.reviewsMaxShown ?? 20) ?? []
+	const cappedReviews = page.reviews ?? []
 
 	return (
 		<main className="flex-1">
@@ -153,45 +154,9 @@ export default async function AltWayPage() {
 				</section>
 			)}
 
-			{/* Reviews carousel */}
+			{/* Reviews */}
 			{cappedReviews.length > 0 && (
-				<section className="px-[90px] max-[820px]:px-[18px] py-20">
-					<h2 className="mb-12 text-center font-heading italic text-[30px] tracking-[0.3em]">
-						What Our Guests Say
-					</h2>
-					<div className="overflow-x-auto">
-						<div className="flex gap-6 pb-4">
-							{cappedReviews.map((review, i) => (
-								<div
-									key={i}
-									className="w-80 flex-shrink-0 space-y-4 rounded-[5px] border p-6"
-								>
-									{review.rating != null && (
-										<div className="flex gap-1">
-											{Array.from({ length: review.rating }).map((_, j) => (
-												<span key={j} className="text-lg text-accent">
-													★
-												</span>
-											))}
-										</div>
-									)}
-									{review.body && (
-										<p className="leading-relaxed text-foreground italic">
-											&ldquo;{review.body}&rdquo;
-										</p>
-									)}
-									<div className="text-sm text-muted">
-										{review.guestName && (
-											<p className="font-semibold">{review.guestName}</p>
-										)}
-										{review.guestLocation && <p>{review.guestLocation}</p>}
-										{review.stayDate && <p>{review.stayDate}</p>}
-									</div>
-								</div>
-							))}
-						</div>
-					</div>
-				</section>
+				<ReviewsSection reviews={cappedReviews as Parameters<typeof ReviewsSection>[0]['reviews']} />
 			)}
 
 			{/* Bottom CTA */}

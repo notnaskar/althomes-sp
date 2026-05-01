@@ -10,6 +10,7 @@ import PropertyGallerySection from '@/ui/pages/our-homes/property-gallery-sectio
 import PropertyExperiencesSection from '@/ui/pages/our-homes/property-experiences-section'
 import PropertyAmenitiesSection from '@/ui/pages/our-homes/property-amenities-section'
 import ReactIcon from '@/ui/atoms/react-icon'
+import ReviewsSection from '@/ui/molecules/reviews-section'
 
 type Props = {
 	params: Promise<{ slug: string }>
@@ -445,36 +446,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 
 				{/* 8. Reviews */}
 				{cappedReviews.length > 0 && (
-					<section className="px-[90px] max-[820px]:px-[18px] py-16">
-						<h2 className="mb-10 font-heading italic text-[30px] tracking-[0.3em]">What Our Guests Say</h2>
-						<div className="grid gap-6 grid-cols-3 max-[820px]:grid-cols-1">
-							{cappedReviews.map((review, i) => (
-								<div key={i} className="space-y-3 rounded-2xl border p-6">
-									{review.rating != null && (
-										<div className="flex gap-1">
-											{Array.from({ length: review.rating }).map((_, j) => (
-												<span key={j} className="text-accent">
-													★
-												</span>
-											))}
-										</div>
-									)}
-									{review.body && (
-										<p className="leading-relaxed text-foreground italic">
-											&ldquo;{review.body}&rdquo;
-										</p>
-									)}
-									<div className="text-sm text-muted">
-										{review.guestName && (
-											<p className="font-semibold">{review.guestName}</p>
-										)}
-										{review.guestLocation && <p>{review.guestLocation}</p>}
-										{review.stayDate && <p>{review.stayDate}</p>}
-									</div>
-								</div>
-							))}
-						</div>
-					</section>
+					<ReviewsSection reviews={cappedReviews as Parameters<typeof ReviewsSection>[0]['reviews']} />
 				)}
 
 				{/* 9. Bottom CTA */}
