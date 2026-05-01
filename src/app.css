@@ -4,6 +4,7 @@
 	--font-sans: var(--font-poppins, 'Poppins', system-ui, sans-serif);
 	--font-heading: var(--font-playfair-display, 'Playfair Display', serif);
 	--font-mono: 'JetBrains Mono', monospace;
+	--font-stories: var(--font-a-day-without-sun, 'a-day-without-sun', sans-serif);
 
 	--color-background: #FCF6EA;
 	--color-foreground: #3A3A3A;

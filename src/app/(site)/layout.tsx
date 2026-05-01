@@ -11,6 +11,7 @@ import {
 	Poppins,
 	Space_Mono,
 } from 'next/font/google'
+import localFont from 'next/font/local'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { preconnect } from 'react-dom'
 import { getSite } from '@/sanity/lib/data'
@@ -81,6 +82,14 @@ const poppins = Poppins({
 	display: 'swap',
 })
 
+const aDayWithoutSun = localFont({
+	src: '../fonts/a-day-without-sun.otf',
+	variable: '--font-a-day-without-sun',
+	weight: '400',
+	style: 'normal',
+	display: 'swap',
+})
+
 const ALL_FONT_CLASSES = [
 	geist.variable,
 	inter.variable,
@@ -93,6 +102,7 @@ const ALL_FONT_CLASSES = [
 	jetbrainsMono.variable,
 	spaceMono.variable,
 	poppins.variable,
+	aDayWithoutSun.variable,
 ].join(' ')
 
 const FONT_VAR_MAP: Record<string, string> = {
