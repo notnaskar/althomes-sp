@@ -13,6 +13,7 @@ export default defineType({
 		{ name: 'location', title: 'Location' },
 		{ name: 'highlights', title: 'Highlights' },
 		{ name: 'experiences', title: 'Experiences' },
+		{ name: 'faqs', title: 'FAQs' },
 		{ name: 'causes', title: 'Causes' },
 		{ name: 'reviews', title: 'Reviews' },
 		{ name: 'seo', title: 'SEO' },
@@ -427,6 +428,36 @@ export default defineType({
 			fields: [
 				defineField({ name: 'label', title: 'Label', type: 'string' }),
 				defineField({ name: 'url', title: 'URL', type: 'url' }),
+			],
+		}),
+
+		// FAQs
+		defineField({
+			name: 'faqs',
+			title: 'FAQs',
+			type: 'array',
+			group: 'faqs',
+			of: [
+				{
+					name: 'faq',
+					type: 'object',
+					fields: [
+						defineField({
+							name: 'question',
+							title: 'Question',
+							type: 'string',
+							validation: (Rule) => Rule.required(),
+						}),
+						defineField({
+							name: 'answer',
+							title: 'Answer',
+							type: 'blockContent',
+						}),
+					],
+					preview: {
+						select: { title: 'question' },
+					},
+				},
 			],
 		}),
 
