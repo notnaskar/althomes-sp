@@ -400,33 +400,45 @@ export default async function PropertyDetailPage({ params }: Props) {
 				{/* 7. Causes */}
 				{(property.causeHeadline ||
 					property.causeBody ||
-					(property.causeImages && property.causeImages.length > 0)) && (
-					<section className="bg-primary py-16 text-primary-foreground">
-						<div className="px-[90px] max-[820px]:px-[18px]">
-							{property.causeHeadline && (
-								<h2 className="mb-6 font-heading italic text-[30px] tracking-[0.3em] text-primary-foreground">
-									{property.causeHeadline}
-								</h2>
-							)}
-							{property.causeBody && (
-								<div className="mb-10 max-w-2xl text-primary-foreground text-[15px] leading-[23px] tracking-[0.1em]">
-									<PortableText value={property.causeBody} />
-								</div>
-							)}
-							{property.causeImages && property.causeImages.length > 0 && (
-								<div className="grid gap-6 max-[820px]:grid-cols-1 min-[821px]:grid-cols-2">
-									{property.causeImages.slice(0, 2).map((img, i) => (
-										<div key={i} className="overflow-hidden rounded-2xl">
-											<Img
-												image={img}
-												width={700}
-												alt={img.alt ?? ''}
-												className="h-64 w-full object-cover"
-											/>
-										</div>
-									))}
-								</div>
-							)}
+					(property.causeImages && property.causeImages.length >= 1)) && (
+					<section className="bg-primary text-primary-foreground min-h-[50vh]">
+						<div className="grid min-[821px]:grid-cols-[55fr_45fr] max-[820px]:grid-cols-1 min-h-[50vh]">
+							{/* Left: images */}
+							<div className="relative overflow-hidden min-h-[40vh]">
+								{property.causeImages?.[0] && (
+									<Img
+										image={property.causeImages[0]}
+										width={900}
+										height={600}
+										alt={property.causeImages[0].alt ?? ''}
+										className="absolute inset-0 h-full w-full object-cover"
+									/>
+								)}
+								{property.causeImages?.[1] && (
+									<div className="absolute bottom-4 right-4 w-[20%] overflow-hidden rounded-xl">
+										<Img
+											image={property.causeImages[1]}
+											width={200}
+											height={280}
+											alt={property.causeImages[1].alt ?? ''}
+											className="w-full h-full object-cover"
+										/>
+									</div>
+								)}
+							</div>
+							{/* Right: text */}
+							<div className="flex flex-col justify-center px-[60px] py-[48px] max-[820px]:px-[18px] max-[820px]:py-[32px]">
+								{property.causeHeadline && (
+									<h2 className="mb-6 font-heading italic text-[30px] tracking-[0.3em] text-primary-foreground">
+										{property.causeHeadline}
+									</h2>
+								)}
+								{property.causeBody && (
+									<div className="text-primary-foreground text-[15px] leading-[23px] tracking-[0.1em]">
+										<PortableText value={property.causeBody} />
+									</div>
+								)}
+							</div>
 						</div>
 					</section>
 				)}
