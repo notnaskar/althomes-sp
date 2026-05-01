@@ -838,6 +838,14 @@ export type Review = {
 	body?: string
 	published?: boolean
 	featured?: boolean
+	guestPhoto?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
 }
 
 export type Redirect = {
@@ -1015,6 +1023,12 @@ export type Property = {
 		label?: string
 		url?: string
 	}
+	faqs?: Array<{
+		question?: string
+		answer?: BlockContent
+		_type: 'faq'
+		_key: string
+	}>
 	causeHeadline?: string
 	causeBody?: BlockContent
 	causeImages?: Array<{
@@ -1354,6 +1368,13 @@ export type Amenity = {
 	icon?: string
 }
 
+export type ReviewReference = {
+	_ref: string
+	_type: 'reference'
+	_weak?: boolean
+	[internalGroqTypeReferenceTo]?: 'review'
+}
+
 export type AltWayPage = {
 	_id: string
 	_type: 'altWayPage'
@@ -1405,7 +1426,11 @@ export type AltWayPage = {
 	}>
 	bottomCTAHeadline?: string
 	bottomCTALabel?: string
-	reviewsMaxShown?: number
+	reviews?: Array<
+		{
+			_key: string
+		} & ReviewReference
+	>
 	seo?: Seo
 }
 
@@ -1696,6 +1721,7 @@ export type AllSanitySchemaTypes =
 	| BlogPost
 	| Code
 	| Amenity
+	| ReviewReference
 	| AltWayPage
 	| SanityAssistInstructionTask
 	| SanityAssistTaskStatus
@@ -2175,7 +2201,7 @@ export type OUR_HOMES_PAGE_QUERY_RESULT = {
 
 // Source: src/sanity/lib/queries.ts
 // Variable: ALT_WAY_PAGE_QUERY
-// Query: *[_type == 'altWayPage' && _id == 'altWayPage'][0]{	...,	heroBackground { asset->, alt },	missionImage { asset->, alt },	editorialImages[]{ asset->, alt },	"reviews": *[_type=='review' && featured==true && published==true] | order(stayDate desc) [0..20]{		guestName, rating, body, guestLocation, stayDate	}}
+// Query: *[_type == 'altWayPage' && _id == 'altWayPage'][0]{	...,	heroBackground { asset->, alt },	missionImage { asset->, alt },	editorialImages[]{ asset->, alt },	reviews[]->{		guestName, rating, body, guestLocation, stayDate,		guestPhoto { asset->, alt },		"propertyTitle": property->title	}}
 export type ALT_WAY_PAGE_QUERY_RESULT = {
 	_id: 'altWayPage'
 	_type: 'altWayPage'
@@ -2277,15 +2303,40 @@ export type ALT_WAY_PAGE_QUERY_RESULT = {
 	}>
 	bottomCTAHeadline?: string
 	bottomCTALabel?: string
-	reviewsMaxShown?: number
-	seo?: Seo
 	reviews: Array<{
 		guestName: string | null
 		rating: number | null
 		body: string | null
 		guestLocation: string | null
 		stayDate: string | null
-	}>
+		guestPhoto: {
+			asset: {
+				_id: string
+				_type: 'sanity.imageAsset'
+				_createdAt: string
+				_updatedAt: string
+				_rev: string
+				originalFilename?: string
+				label?: string
+				title?: string
+				description?: string
+				altText?: string
+				sha1hash?: string
+				extension?: string
+				mimeType?: string
+				size?: number
+				assetId?: string
+				uploadId?: string
+				path?: string
+				url?: string
+				metadata?: SanityImageMetadata
+				source?: SanityAssetSourceData
+			} | null
+			alt: string | null
+		} | null
+		propertyTitle: string | null
+	}> | null
+	seo?: Seo
 } | null
 
 // Source: src/sanity/lib/queries.ts
@@ -2770,7 +2821,7 @@ export type ALL_PROPERTIES_QUERY_RESULT = Array<{
 
 // Source: src/sanity/lib/queries.ts
 // Variable: PROPERTY_QUERY
-// Query: *[_type == 'property' && slug.current == $slug][0]{	...,	heroImage { asset->, alt },	gallery[]{ asset->, alt },	cardThumbnail { asset->, alt },	amenities[]->{ name, icon },	amenitiesSectionImage { asset->, alt },	experiences[]->{		title,		"slug": slug.current,		description,		image { asset->, alt }	},	experiencesBgImage { asset->, alt, hotspot, crop },	highlights[]{ title, body, image { asset->, alt }, secondaryImage { asset->, alt }, decorImage { asset-> } },	causeImages[]{ asset->, alt },	location,	"reviews": *[_type=='review' && references(^._id) && published==true] | order(stayDate desc) [0..20]{		guestName, rating, body, guestLocation, stayDate	}}
+// Query: *[_type == 'property' && slug.current == $slug][0]{	...,	heroImage { asset->, alt },	gallery[]{ asset->, alt },	cardThumbnail { asset->, alt },	amenities[]->{ name, icon },	amenitiesSectionImage { asset->, alt },	experiences[]->{		title,		"slug": slug.current,		description,		image { asset->, alt }	},	experiencesBgImage { asset->, alt, hotspot, crop },	highlights[]{ title, body, image { asset->, alt }, secondaryImage { asset->, alt }, decorImage { asset-> } },	causeImages[]{ asset->, alt },	faqs[]{ question, answer },	location,	"reviews": *[_type=='review' && references(^._id) && published==true] | order(stayDate desc) [0..20]{		guestName, rating, body, guestLocation, stayDate,		guestPhoto { asset->, alt },		"propertyTitle": property->title	}}
 export type PROPERTY_QUERY_RESULT = {
 	_id: string
 	_type: 'property'
@@ -3082,6 +3133,10 @@ export type PROPERTY_QUERY_RESULT = {
 		label?: string
 		url?: string
 	}
+	faqs: Array<{
+		question: string | null
+		answer: BlockContent | null
+	}> | null
 	causeHeadline?: string
 	causeBody?: BlockContent
 	causeImages: Array<{
@@ -3118,6 +3173,32 @@ export type PROPERTY_QUERY_RESULT = {
 		body: string | null
 		guestLocation: string | null
 		stayDate: string | null
+		guestPhoto: {
+			asset: {
+				_id: string
+				_type: 'sanity.imageAsset'
+				_createdAt: string
+				_updatedAt: string
+				_rev: string
+				originalFilename?: string
+				label?: string
+				title?: string
+				description?: string
+				altText?: string
+				sha1hash?: string
+				extension?: string
+				mimeType?: string
+				size?: number
+				assetId?: string
+				uploadId?: string
+				path?: string
+				url?: string
+				metadata?: SanityImageMetadata
+				source?: SanityAssetSourceData
+			} | null
+			alt: string | null
+		} | null
+		propertyTitle: string | null
 	}>
 } | null
 
@@ -3554,14 +3635,14 @@ declare module '@sanity/client' {
 		"*[_type == 'site' && _id == 'site'][0]": SITE_QUERY_RESULT
 		"*[_type == 'homePage' && _id == 'homePage'][0]{\n\t...,\n\theroImage { asset->, alt },\n\tnavLabels[]{\n\t\t...,\n\t\ttarget->{ _type, \"slug\": slug.current }\n\t}\n}": HOME_PAGE_QUERY_RESULT
 		"*[_type == 'ourHomesPage' && _id == 'ourHomesPage'][0]{\n\theroHeadline,\n\theroImage { asset->, alt },\n\tctaQuestion,\n\texperiencesCtaLabel,\n\tctaBackground { asset->, alt },\n\tseo\n}": OUR_HOMES_PAGE_QUERY_RESULT
-		"*[_type == 'altWayPage' && _id == 'altWayPage'][0]{\n\t...,\n\theroBackground { asset->, alt },\n\tmissionImage { asset->, alt },\n\teditorialImages[]{ asset->, alt },\n\t\"reviews\": *[_type=='review' && featured==true && published==true] | order(stayDate desc) [0..20]{\n\t\tguestName, rating, body, guestLocation, stayDate\n\t}\n}": ALT_WAY_PAGE_QUERY_RESULT
+		"*[_type == 'altWayPage' && _id == 'altWayPage'][0]{\n\t...,\n\theroBackground { asset->, alt },\n\tmissionImage { asset->, alt },\n\teditorialImages[]{ asset->, alt },\n\treviews[]->{\n\t\tguestName, rating, body, guestLocation, stayDate,\n\t\tguestPhoto { asset->, alt },\n\t\t\"propertyTitle\": property->title\n\t}\n}": ALT_WAY_PAGE_QUERY_RESULT
 		"*[_type == 'experiencesPage' && _id == 'experiencesPage'][0]{\n\t...,\n\theroBackground { asset->, alt },\n\theroFlower { asset->, alt },\n\tdecorBasket { asset->, alt },\n\tdecorStars { asset->, alt },\n\tdecorDaisy { asset->, alt }\n}": EXPERIENCES_PAGE_QUERY_RESULT
 		"*[_type == 'joinUsPage' && _id == 'joinUsPage'][0]{\n\t...,\n\theroImage { asset->, alt },\n\tpropertyImage { asset->, alt },\n\theroDecorFlower { asset-> },\n\tcontentDecorImage { asset-> },\n\tformDecorBg { asset-> }\n}": JOIN_US_PAGE_QUERY_RESULT
 		"*[_type == 'contactPage' && _id == 'contactPage'][0]{\n\t...,\n\theroImage { asset->, alt }\n}": CONTACT_PAGE_QUERY_RESULT
 		"*[_type == 'legalPage' && slug.current == $slug][0]": LEGAL_PAGE_QUERY_RESULT
 		"*[_type == 'legalPage' && defined(slug.current)].slug.current": ALL_LEGAL_PAGES_QUERY_RESULT
 		"*[_type == 'property' && status != 'hidden'] | order(displayOrder asc){\n\t_id,\n\ttitle,\n\t\"slug\": slug.current,\n\ttagline,\n\tshortDescription,\n\tcardThumbnail { asset->, alt },\n\theroImage { asset->, alt },\n\tshowcaseSecondaryImage { asset->, alt },\n\tshowcaseDecorImage { asset->, alt },\n\tshowcaseDecorTop,\n\tshowcaseDecorRight,\n\tshowcaseDecorWidth,\n\tshowcaseDecorHeight,\n\tshowcaseDecorRotation,\n\tpullQuote,\n\tlocationHeadline,\n\tcardAmenities,\n\tpropertyType,\n\tpriceFrom,\n\tmaxGuests,\n\tbedrooms,\n\tbathrooms,\n\tstatus,\n\tdisplayOrder,\n\trentalwisePropertyId\n}": ALL_PROPERTIES_QUERY_RESULT
-		'*[_type == \'property\' && slug.current == $slug][0]{\n\t...,\n\theroImage { asset->, alt },\n\tgallery[]{ asset->, alt },\n\tcardThumbnail { asset->, alt },\n\tamenities[]->{ name, icon },\n\tamenitiesSectionImage { asset->, alt },\n\texperiences[]->{\n\t\ttitle,\n\t\t"slug": slug.current,\n\t\tdescription,\n\t\timage { asset->, alt }\n\t},\n\texperiencesBgImage { asset->, alt, hotspot, crop },\n\thighlights[]{ title, body, image { asset->, alt }, secondaryImage { asset->, alt }, decorImage { asset-> } },\n\tcauseImages[]{ asset->, alt },\n\tlocation,\n\t"reviews": *[_type==\'review\' && references(^._id) && published==true] | order(stayDate desc) [0..20]{\n\t\tguestName, rating, body, guestLocation, stayDate\n\t}\n}': PROPERTY_QUERY_RESULT
+		'*[_type == \'property\' && slug.current == $slug][0]{\n\t...,\n\theroImage { asset->, alt },\n\tgallery[]{ asset->, alt },\n\tcardThumbnail { asset->, alt },\n\tamenities[]->{ name, icon },\n\tamenitiesSectionImage { asset->, alt },\n\texperiences[]->{\n\t\ttitle,\n\t\t"slug": slug.current,\n\t\tdescription,\n\t\timage { asset->, alt }\n\t},\n\texperiencesBgImage { asset->, alt, hotspot, crop },\n\thighlights[]{ title, body, image { asset->, alt }, secondaryImage { asset->, alt }, decorImage { asset-> } },\n\tcauseImages[]{ asset->, alt },\n\tfaqs[]{ question, answer },\n\tlocation,\n\t"reviews": *[_type==\'review\' && references(^._id) && published==true] | order(stayDate desc) [0..20]{\n\t\tguestName, rating, body, guestLocation, stayDate,\n\t\tguestPhoto { asset->, alt },\n\t\t"propertyTitle": property->title\n\t}\n}': PROPERTY_QUERY_RESULT
 		"*[_type == 'property' && defined(slug.current)].slug.current": ALL_PROPERTY_SLUGS_QUERY_RESULT
 		"*[_type == 'blog.post'] | order(publishDate desc)": ALL_POSTS_QUERY_RESULT
 		"*[_type == 'blog.post' && metadata.slug.current == $slug][0]": POST_BY_SLUG_QUERY_RESULT
