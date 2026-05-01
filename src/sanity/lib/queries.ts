@@ -28,8 +28,10 @@ export const ALT_WAY_PAGE_QUERY =
 	heroBackground { asset->, alt },
 	missionImage { asset->, alt },
 	editorialImages[]{ asset->, alt },
-	"reviews": *[_type=='review' && featured==true && published==true] | order(stayDate desc) [0..20]{
-		guestName, rating, body, guestLocation, stayDate
+	reviews[]->{
+		guestName, rating, body, guestLocation, stayDate,
+		guestPhoto { asset->, alt },
+		"propertyTitle": property->title
 	}
 }`)
 
@@ -112,9 +114,12 @@ export const PROPERTY_QUERY =
 	experiencesBgImage { asset->, alt, hotspot, crop },
 	highlights[]{ title, body, image { asset->, alt }, secondaryImage { asset->, alt }, decorImage { asset-> } },
 	causeImages[]{ asset->, alt },
+	faqs[]{ question, answer },
 	location,
 	"reviews": *[_type=='review' && references(^._id) && published==true] | order(stayDate desc) [0..20]{
-		guestName, rating, body, guestLocation, stayDate
+		guestName, rating, body, guestLocation, stayDate,
+		guestPhoto { asset->, alt },
+		"propertyTitle": property->title
 	}
 }`)
 
