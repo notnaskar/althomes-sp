@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import { createPortal } from 'react-dom'
 import { useEffect } from 'react'
 import { urlFor } from '@/sanity/lib/image'
 import type { SITE_QUERY_RESULT } from '@/sanity/types'
@@ -32,9 +33,9 @@ export default function MenuOverlay({ isOpen, onCloseAction, site }: Props) {
 
 	if (!isOpen) return null
 
-	return (
+	return createPortal(
 		<div
-			className="animate-in fade-in fixed inset-0 z-50 grid duration-200 min-[821px]:grid-cols-[1fr_415px] bg-background"
+			className="animate-in fade-in fixed inset-0 z-[100] grid duration-200 min-[821px]:grid-cols-[1fr_415px] bg-background"
 			role="dialog"
 			aria-modal="true"
 		>
@@ -95,7 +96,7 @@ export default function MenuOverlay({ isOpen, onCloseAction, site }: Props) {
 						<a
 							key={item.url ?? item.label}
 							href={item.url ?? '#'}
-							className="font-heading text-[30px] leading-[40px] font-normal tracking-[0.1em] text-primary-foreground italic transition-opacity hover:opacity-75"
+							className="font-heading text-[30px] leading-[40px] font-normal tracking-[0.1em] text-primary-foreground transition-opacity hover:opacity-75"
 						>
 							{item.label}
 						</a>
@@ -108,7 +109,7 @@ export default function MenuOverlay({ isOpen, onCloseAction, site }: Props) {
 						facebook={site?.facebookUrl}
 						linkedin={site?.linkedinUrl}
 						youtube={site?.youtubeUrl}
-						size={26}
+						size={24}
 					/>
 
 					<div className="flex flex-col items-end gap-[4px] text-[15px] leading-[23px] tracking-[0.1em]">
@@ -117,8 +118,8 @@ export default function MenuOverlay({ isOpen, onCloseAction, site }: Props) {
 								<svg
 									viewBox="0 0 24 24"
 									fill="currentColor"
-									width={14}
-									height={14}
+									width={24}
+									height={24}
 								>
 									<path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
 								</svg>
@@ -130,8 +131,8 @@ export default function MenuOverlay({ isOpen, onCloseAction, site }: Props) {
 								<svg
 									viewBox="0 0 24 24"
 									fill="currentColor"
-									width={14}
-									height={14}
+									width={24}
+									height={24}
 								>
 									<path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
 								</svg>
@@ -141,6 +142,7 @@ export default function MenuOverlay({ isOpen, onCloseAction, site }: Props) {
 					</div>
 				</div>
 			</aside>
-		</div>
+		</div>,
+		document.body,
 	)
 }

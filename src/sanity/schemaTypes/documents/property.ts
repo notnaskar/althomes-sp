@@ -197,8 +197,20 @@ export default defineType({
 				},
 			],
 			description:
-				'Full-bleed left photo on the Our Homes listing page. Also used as the hero on the property detail page.',
+				'Full-bleed left photo on the Our Homes listing page.',
 			group: 'listingCard',
+		}),
+		defineField({
+			name: 'detailCoverImage',
+			title: 'Detail Page Cover Image',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [
+				defineField({ name: 'alt', type: 'string', title: 'Alt text' }),
+			],
+			description:
+				'Full-bleed hero shown on the property detail page. Falls back to Main Listing Photo if not set.',
+			group: 'intro',
 		}),
 		defineField({
 			name: 'pullQuote',

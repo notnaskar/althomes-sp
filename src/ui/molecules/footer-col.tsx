@@ -8,7 +8,7 @@ interface FooterColProps {
 export default function FooterCol({ heading, links }: FooterColProps) {
 	return (
 		<div>
-			<h4 className="mb-[14px] text-[12px] font-bold tracking-[0.1em]">
+			<h4 className="mb-[14px] font-sans text-[12px] font-bold tracking-[0.1em]">
 				{heading}
 			</h4>
 			<ul className="m-0 flex list-none flex-col gap-[6px] p-0">
@@ -16,7 +16,7 @@ export default function FooterCol({ heading, links }: FooterColProps) {
 					<li key={link.url}>
 						<Link
 							href={link.url}
-							className="text-[11px] tracking-[0.1em] leading-[1.4] no-underline transition-opacity hover:opacity-75"
+							className="text-white text-[11px] tracking-[0.1em] leading-[1.4] no-underline transition-opacity hover:opacity-75"
 						>
 							{link.label}
 						</Link>

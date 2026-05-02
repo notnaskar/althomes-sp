@@ -110,10 +110,11 @@ export default defineType({
 			type: 'string',
 		}),
 		defineField({
-			name: 'reviewsMaxShown',
-			title: 'Max Reviews Shown',
-			type: 'number',
-			initialValue: 5,
+			name: 'reviews',
+			title: 'Featured Reviews',
+			type: 'array',
+			of: [{ type: 'reference', to: [{ type: 'review' }] }],
+			validation: (Rule) => Rule.max(5),
 		}),
 		defineField({
 			name: 'seo',

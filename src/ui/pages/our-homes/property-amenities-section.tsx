@@ -42,7 +42,7 @@ export default function PropertyAmenitiesSection({
 
       {/* Right: content */}
       <div className="w-4/5 py-[72px] pl-[64px] pr-[90px] max-[820px]:w-full max-[820px]:px-[18px] max-[820px]:py-[48px]">
-        <h2 className="mb-[48px] font-heading italic text-[30px] font-normal leading-[40px] tracking-[0.3em] text-foreground">
+        <h2 className="mb-[48px] font-heading text-[30px] font-normal leading-[40px] tracking-[0.3em] text-foreground">
           FOR US, IT&rsquo;S COMFORT FIRST
         </h2>
 
@@ -100,7 +100,7 @@ export default function PropertyAmenitiesSection({
             >
               ×
             </button>
-            <h3 id="amenities-modal-title" className="mb-[24px] font-heading italic text-[24px] leading-[32px] tracking-[0.1em] text-foreground">
+            <h3 id="amenities-modal-title" className="mb-[24px] font-heading text-[24px] leading-[32px] tracking-[0.1em] text-foreground">
               House Rules
             </h3>
             <div className="font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground [&_p]:mb-[8px] [&_p:last-child]:mb-0">

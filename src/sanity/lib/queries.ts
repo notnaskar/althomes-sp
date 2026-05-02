@@ -101,6 +101,7 @@ export const PROPERTY_QUERY =
 	defineQuery(`*[_type == 'property' && slug.current == $slug][0]{
 	...,
 	heroImage { asset->, alt },
+	detailCoverImage { asset->, alt },
 	gallery[]{ asset->, alt },
 	cardThumbnail { asset->, alt },
 	amenities[]->{ name, icon },

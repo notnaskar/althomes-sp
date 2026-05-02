@@ -101,7 +101,7 @@ export default function ExperienceGrid({
 			>
 				<HeroDecorImage asset={decorDaisy} alt="" sizes="200px" />
 			</div>
-
+			
 			{/* ── Filter bar ── */}
 			{properties.length > 0 && (
 				<div

@@ -54,7 +54,7 @@ export default function PropertyGallerySection({ gallery, quote, decorImage }: P
 
 					{/* Pull quote */}
 					{quote && (
-						<p className="absolute left-0 top-[230px] w-[478px] font-heading italic text-[30px] leading-[40px] tracking-[0.1em] text-foreground">
+						<p className="absolute left-0 top-[230px] w-[478px] font-heading text-[30px] leading-[40px] tracking-[0.1em] text-foreground">
 							{quote}
 						</p>
 					)}

@@ -11,7 +11,7 @@ export default function SocialLinks({
 	facebook,
 	linkedin,
 	youtube,
-	size = 14,
+	size = 24,
 }: SocialLinksProps) {
 	const links = [
 		{
@@ -61,7 +61,7 @@ export default function SocialLinks({
 					key={link.label}
 					href={link.href!}
 					aria-label={link.label}
-					className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center"
+					className="inline-flex min-h-[44px] min-w-[44px] items-start justify-start"
 					style={{ color: 'inherit' }}
 				>
 					{link.icon}

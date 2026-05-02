@@ -24,8 +24,8 @@ Selectively used on brand headings across pages. Must not hurt LCP / PageSpeed.
 `next/font/local` — zero external requests, Next.js handles preload + swap automatically.
 
 ### Implementation
-- **Font file:** `/public/fonts/a-day-without-sun.woff2` (woff2 preferred; add woff as fallback)
-  - ⚠️ File must be supplied by developer from Adobe Fonts license download
+- **Font file:** `/public/fonts/a-day-without-sun.otf`
+  - ⚠️ File must be dropped here by developer (from Adobe Fonts license)
 - **Load in:** `src/app/(site)/layout.tsx` via `localFont()`
 - **CSS variable:** `--font-stories`
 - **Tailwind token:** `font-stories` → `var(--font-stories)`
@@ -63,19 +63,13 @@ Add to `PROPERTY_QUERY`:
 faqs[]{ question, answer }
 ```
 
-### Studio UX: Import FAQs Document Action
-**File:** `src/sanity/actions/importFaqsAction.tsx`
-**Register in:** `sanity.config.ts` → `document.actions` for type `property`
+### Studio UX: Copy/Paste FAQs
+No custom code needed. Sanity Studio v3 provides native field-level and item-level copy/paste via the three-dot context menu:
 
-**Behaviour:**
-1. Button label: "Import FAQs" — appears in document action bar
-2. Opens a dialog with two steps:
-   - Step 1: Searchable list of all other property documents, showing title + FAQ count. Select one.
-   - Step 2: Checklist of that property's FAQ items (question as label). Two actions:
-     - "Import All" — appends all items
-     - "Import Selected" — appends only checked items
-3. Import is **additive** (appends to existing array, never replaces)
-4. Uses `client.fetch` to load source property, then `onChange` / `patch` to update current document
+- **Full array copy:** three-dot menu on the `faqs` field → "Copy value" → open target property → "Paste value" (replaces entire array)
+- **Individual FAQ copy:** three-dot menu on any FAQ array item → "Copy item" → navigate to target property → "Paste item" into its faqs array
+
+This supports both "copy all" and "copy individual" out of the box. No `importFaqsAction.tsx`, no changes to `sanity.config.ts`.
 
 ### UI Component: `src/ui/pages/our-homes/property-faq-section.tsx`
 - Server component (no interactivity at section level)
@@ -85,7 +79,7 @@ faqs[]{ question, answer }
 - Guard: renders nothing if `faqs` is empty or undefined
 
 ### Placement in Property Detail Page
-Add after the Amenities section, before the Experiences section. Guard: `{property.faqs?.length > 0 && <PropertyFaqSection faqs={property.faqs} />}`
+Add after the Amenities section, before the Causes section. Guard: `{property.faqs?.length > 0 && <PropertyFaqSection faqs={property.faqs} />}`
 
 ---
 

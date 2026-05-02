@@ -335,7 +335,7 @@ This page uses zero design tokens and `md:` breakpoints throughout. The followin
 - **`src/app/(site)/join-us/page.tsx:117`** — Form wrapper `mx-[192px]` → `mx-[90px] max-[820px]:mx-[18px]`. [HIGH]
 - **`src/ui/forms/partner-form.tsx:58`** — `grid-cols-2 gap-x-[93px]` → add `max-[820px]:grid-cols-1`. [HIGH]
 
-### 4.5 Blog
+### 4.5 Blog ❌ REJECTED — skip  
 
 - **`src/app/(site)/blog/page.tsx`** — (dead file — see Group 7) Breakpoint violations are moot. [N/A]
 - **`src/ui/modules/blog/blog-index/paginated-posts.tsx:50`** — `md:order-first` → `min-[821px]:order-first`. [HIGH]

@@ -11,7 +11,7 @@ export default async function Footer() {
 				className="flex flex-wrap gap-16 pt-[37px] pb-[30px] px-[90px] max-[820px]:flex-col max-[820px]:items-center max-[820px]:gap-7 max-[820px]:text-center max-[820px]:pt-[30px] max-[820px]:px-[24px]"
 			>
 				{/* Brand */}
-				<div className="self-start font-heading text-[49px] leading-none tracking-[0.1em] text-primary-foreground italic max-[820px]:self-auto">
+				<div className="self-start font-stories text-[49px] leading-none tracking-[0.1em] text-primary-foreground max-[820px]:self-auto">
 					{site?.footerBrandName ?? site?.title ?? 'AltHomes'}
 				</div>
 
@@ -21,7 +21,7 @@ export default async function Footer() {
 					{properties && properties.length > 0 && (
 						<div>
 							<h4
-								className="mb-3 font-bold text-[12px] tracking-[0.1em]"
+								className="mb-3 font-sans font-bold text-[12px] tracking-[0.1em]"
 							>
 								OUR HOMES
 							</h4>
@@ -30,7 +30,7 @@ export default async function Footer() {
 									<li key={p._id}>
 										<a
 											href={`/our-homes/${p.slug}`}
-											className="text-[11px] tracking-[0.1em] leading-[1.4] no-underline transition-opacity hover:opacity-75"
+											className="text-white text-[11px] tracking-[0.1em] leading-[1.4] no-underline transition-opacity hover:opacity-75"
 										>
 											{p.title?.toUpperCase()}
 										</a>
@@ -62,9 +62,9 @@ export default async function Footer() {
 				</div>
 
 				{/* Connect */}
-				<div className="flex flex-col items-center gap-3">
+				<div className="flex flex-col items-start gap-3">
 					<h4
-						className="font-bold text-[12px] tracking-[0.1em]"
+						className="font-sans font-bold text-[12px] tracking-[0.1em]"
 					>
 						CONNECT
 					</h4>

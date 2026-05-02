@@ -20,7 +20,7 @@ export default function OurHomesCta({
 	ctaBackground,
 }: Props) {
 	return (
-		<section className="relative flex min-h-[520px] flex-col items-center justify-end overflow-hidden pb-[190px] max-[820px]:min-h-[360px] max-[820px]:pb-20">
+		<section className="relative flex z-[-1] min-h-[720px] mt-[-300px] flex-col items-center justify-end overflow-hidden pb-[190px] max-[820px]:min-h-[360px] max-[820px]:pb-20">
 			{/* CONTENT: ctaBackground */}
 			{ctaBackground?.asset && (
 				<Image
@@ -28,7 +28,7 @@ export default function OurHomesCta({
 					alt={ctaBackground.alt ?? ''}
 					fill
 					sizes="100vw"
-					className="object-cover object-bottom"
+					className="object-cover object-middletop"
 					aria-hidden="true"
 				/>
 			)}
@@ -36,7 +36,7 @@ export default function OurHomesCta({
 			<div className="relative z-10 flex flex-col items-center gap-6">
 				{/* CONTENT: ctaQuestion */}
 				{ctaQuestion && (
-					<p className="font-heading text-foreground max-w-[642px] text-center text-[30px] leading-[40px] tracking-[0.1em] italic max-[820px]:px-[18px] max-[820px]:text-[22px] max-[820px]:leading-[32px]">
+					<p className="font-heading text-foreground max-w-[642px] text-center text-[30px] leading-[40px] tracking-[0.1em] max-[820px]:px-[18px] max-[820px]:text-[22px] max-[820px]:leading-[32px]">
 						{ctaQuestion}
 					</p>
 				)}

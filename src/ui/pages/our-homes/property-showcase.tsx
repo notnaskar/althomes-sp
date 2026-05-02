@@ -95,7 +95,7 @@ export default function PropertyShowcase({
 				)}
 
 				{/* Overlay */}
-				<div className="absolute inset-x-0 bottom-0 z-[2] flex flex-col items-center gap-1 bg-gradient-to-t from-black/[0.55] to-transparent px-[140px] pt-[120px] pb-[40px] max-[820px]:px-[40px] max-[820px]:pb-6">
+				<div className="absolute top-0 inset-x-0 bottom-0 z-[2] flex flex-col items-center gap-1 bg-gradient-to-t from-black/[0.55] to-transparent px-[140px] pt-[120px] pb-[40px] max-[820px]:px-[40px] max-[820px]:pb-6">
 					{/* CONTENT: tagline */}
 					{tagline && (
 						<span className="text-center text-[14px] tracking-[0.07em] text-white">
@@ -103,7 +103,7 @@ export default function PropertyShowcase({
 						</span>
 					)}
 					{/* CONTENT: title */}
-					<h2 className="font-heading text-center text-[55px] leading-[1] tracking-[0.07em] text-white italic max-[820px]:text-[36px]">
+					<h2 className="font-heading text-center text-[55px] leading-[1] tracking-[0.07em] text-white max-[820px]:text-[36px]">
 						{title}
 					</h2>
 				</div>
@@ -120,7 +120,7 @@ export default function PropertyShowcase({
 
 				{/* CONTENT: pullQuote */}
 				{pullQuote && (
-					<p className="font-heading text-foreground max-w-[432px] text-[30px] leading-[40px] tracking-[0.1em] italic max-[820px]:max-w-full max-[820px]:text-[22px] max-[820px]:leading-[32px]">
+					<p className="font-heading text-foreground max-w-[432px] text-[30px] leading-[40px] tracking-[0.1em] max-[820px]:max-w-full max-[820px]:text-[22px] max-[820px]:leading-[32px]">
 						{pullQuote}
 					</p>
 				)}

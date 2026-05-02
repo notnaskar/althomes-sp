@@ -57,7 +57,7 @@ export default function PropertyExperiencesSection({
       <div className="relative z-10">
         <h2
           className={[
-            'font-heading italic text-center tracking-[0.05em] text-[32px] leading-[1.2]',
+            'font-heading text-center tracking-[0.05em] text-[32px] leading-[1.2]',
             'max-[820px]:text-[24px]',
             hasBg ? 'text-white drop-shadow-md' : 'text-foreground',
           ].join(' ')}

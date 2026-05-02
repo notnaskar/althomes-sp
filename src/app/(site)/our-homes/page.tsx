@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { getAllProperties, getOurHomesPage, getSite } from '@/sanity/lib/data'
 import OurHomesCta from '@/ui/pages/our-homes/our-homes-cta'
 import OurHomesHero from '@/ui/pages/our-homes/our-homes-hero'
-import PropertyShowcase from '@/ui/pages/our-homes/property-showcase'
+import OurHomesClient from '@/ui/pages/our-homes/our-homes-client'
 
 export default async function OurHomesPage() {
 	const [page, properties] = await Promise.all([
@@ -19,28 +19,7 @@ export default async function OurHomesPage() {
 				heroBackground={page.heroImage ?? null}
 			/>
 
-			{(properties ?? []).map((property, index) => (
-				<div key={property._id} className={index > 0 ? 'mt-10' : undefined}>
-					<PropertyShowcase
-						title={property.title ?? ''}
-						slug={property.slug ?? ''}
-						tagline={property.tagline ?? null}
-						heroImage={property.heroImage ?? null}
-						showcaseSecondaryImage={property.showcaseSecondaryImage ?? null}
-						showcaseDecorImage={property.showcaseDecorImage ?? null}
-						showcaseDecorTop={property.showcaseDecorTop ?? null}
-						showcaseDecorRight={property.showcaseDecorRight ?? null}
-						showcaseDecorWidth={property.showcaseDecorWidth ?? null}
-						showcaseDecorHeight={property.showcaseDecorHeight ?? null}
-						showcaseDecorRotation={property.showcaseDecorRotation ?? null}
-						shortDescription={property.shortDescription ?? null}
-						pullQuote={property.pullQuote ?? null}
-						locationHeadline={property.locationHeadline ?? null}
-						cardAmenities={property.cardAmenities ?? null}
-						priceFrom={property.priceFrom ?? null}
-					/>
-				</div>
-			))}
+			<OurHomesClient properties={properties ?? []} />
 
 			<OurHomesCta
 				ctaQuestion={page.ctaQuestion ?? null}

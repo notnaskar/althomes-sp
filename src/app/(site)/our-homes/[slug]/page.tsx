@@ -26,9 +26,9 @@ export default async function PropertyDetailPage({ params }: Props) {
 		property.experiences?.slice(0, property.experiencesMaxShown ?? 6) ?? []
 	const cappedReviews = property.reviews ?? []
 
-	const heroUrl = property.heroImage?.asset
-		? urlFor(property.heroImage.asset).width(1440).quality(85).url()
-		: null
+	const coverAsset = property.detailCoverImage?.asset ?? property.heroImage?.asset
+	const coverAlt = property.detailCoverImage?.alt ?? property.heroImage?.alt ?? ''
+	const heroUrl = coverAsset ? urlFor(coverAsset).width(1440).quality(85).url() : null
 
 	const amenitiesImageUrl = property.amenitiesSectionImage?.asset
 		? urlFor(property.amenitiesSectionImage.asset).width(800).quality(80).url()
@@ -59,20 +59,25 @@ export default async function PropertyDetailPage({ params }: Props) {
 					{heroUrl && (
 						<Image
 							src={heroUrl}
-							alt={property.heroImage?.alt ?? ''}
+							alt={coverAlt}
 							fill
 							priority
 							className="object-cover"
 							sizes="100vw"
 						/>
 					)}
-					{property.tagline && (
-						<div className="absolute inset-0 flex items-center justify-center">
-							<p className="font-sans text-[12px] uppercase tracking-[0.1em] text-primary-foreground">
+					<div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/20">
+						{property.title && (
+							<h1 className="font-stories text-[56px] leading-[1.1] tracking-[0.05em] text-white text-center px-6">
+								{property.title}
+							</h1>
+						)}
+						{property.tagline && (
+							<p className="font-sans text-[12px] uppercase tracking-[0.1em] text-white">
 								{property.tagline}
 							</p>
-						</div>
-					)}
+						)}
+					</div>
 				</section>
 
 				{/* 2. Booking bar */}
@@ -258,14 +263,14 @@ export default async function PropertyDetailPage({ params }: Props) {
 								<div className="flex items-end justify-end gap-12 px-[90px]">
 									<div className="w-96 text-right">
 										{property.highlights[0].title && (
-											<span className="font-sans text-[15px] font-bold leading-[23px] tracking-[0.1em] text-foreground">
-												{property.highlights[0].title}<br />
-											</span>
+											<h3 className="font-heading text-[20px] leading-[28px] tracking-[0.2em] text-foreground mb-3">
+												{property.highlights[0].title}
+											</h3>
 										)}
 										{property.highlights[0].body && (
-											<span className="font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground">
-												<br />{property.highlights[0].body}
-											</span>
+											<p className="font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground">
+												{property.highlights[0].body}
+											</p>
 										)}
 									</div>
 									<div className="relative h-96 w-[576px] shrink-0">
@@ -288,50 +293,47 @@ export default async function PropertyDetailPage({ params }: Props) {
 								</div>
 							)}
 
-							{/* Row 2: left image pair + two text cols (fits 1440px full-width) */}
-							{(property.highlights[1] || property.highlights[2]) && (
-								<div className="flex items-center justify-start gap-8">
-									{/* Left images: highlights[1].image + highlights[2].image overlapping */}
-									<div className="relative h-80 w-[494px] shrink-0 overflow-hidden">
-										{property.highlights[1]?.image?.asset && (
-											<div className="absolute left-0 top-0 h-80 w-full overflow-hidden">
-												<Img image={property.highlights[1].image} width={494} alt={property.highlights[1].image.alt ?? ''} className="h-full w-full object-cover" />
-											</div>
-										)}
-										{property.highlights[2]?.image?.asset && (
-											<div className="absolute left-0 top-[10px] h-72 w-full overflow-hidden opacity-80">
-												<Img image={property.highlights[2].image} width={494} alt={property.highlights[2].image.alt ?? ''} className="h-full w-full object-cover" />
-											</div>
-										)}
-									</div>
-									{/* highlights[1]: What You'll Wake Up To */}
-									{property.highlights[1] && (
-										<div className="w-[336px] shrink-0">
-											{property.highlights[1].title && (
-												<span className="font-sans text-[15px] font-bold leading-[23px] tracking-[0.1em] text-foreground">
-													{property.highlights[1].title}<br />
-												</span>
-											)}
-											{property.highlights[1].body && (
-												<span className="font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground">
-													<br />{property.highlights[1].body}
-												</span>
-											)}
+							{/* Row 2: highlights[1] — image left, text right */}
+							{property.highlights[1] && (
+								<div className="flex items-center gap-12 px-[90px] max-[820px]:flex-col max-[820px]:px-[18px]">
+									{property.highlights[1].image?.asset && (
+										<div className="relative h-80 w-[494px] shrink-0 overflow-hidden rounded-[5px]">
+											<Img image={property.highlights[1].image} width={494} alt={property.highlights[1].image.alt ?? ''} className="h-full w-full object-cover" />
 										</div>
 									)}
-									{/* highlights[2]: Hosted With Heart */}
-									{property.highlights[2] && (
-										<div className="w-[336px] shrink-0">
-											{property.highlights[2].title && (
-												<span className="font-sans text-[15px] font-bold leading-[23px] tracking-[0.1em] text-foreground">
-													{property.highlights[2].title}<br />
-												</span>
-											)}
-											{property.highlights[2].body && (
-												<span className="font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground">
-													<br />{property.highlights[2].body}
-												</span>
-											)}
+									<div className="flex-1">
+										{property.highlights[1].title && (
+											<h3 className="font-heading text-[20px] leading-[28px] tracking-[0.2em] text-foreground mb-3">
+												{property.highlights[1].title}
+											</h3>
+										)}
+										{property.highlights[1].body && (
+											<p className="font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground">
+												{property.highlights[1].body}
+											</p>
+										)}
+									</div>
+								</div>
+							)}
+
+							{/* Row 3: highlights[2] — text left, image right */}
+							{property.highlights[2] && (
+								<div className="flex items-center justify-end gap-12 px-[90px] max-[820px]:flex-col-reverse max-[820px]:px-[18px]">
+									<div className="flex-1">
+										{property.highlights[2].title && (
+											<h3 className="font-heading text-[20px] leading-[28px] tracking-[0.2em] text-foreground mb-3">
+												{property.highlights[2].title}
+											</h3>
+										)}
+										{property.highlights[2].body && (
+											<p className="font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground">
+												{property.highlights[2].body}
+											</p>
+										)}
+									</div>
+									{property.highlights[2].image?.asset && (
+										<div className="relative h-80 w-[494px] shrink-0 overflow-hidden rounded-[5px]">
+											<Img image={property.highlights[2].image} width={494} alt={property.highlights[2].image.alt ?? ''} className="h-full w-full object-cover" />
 										</div>
 									)}
 								</div>
@@ -343,14 +345,14 @@ export default async function PropertyDetailPage({ params }: Props) {
 									<div className="flex w-96 shrink-0 flex-col gap-12">
 										<div>
 											{property.highlights[3].title && (
-												<span className="font-sans text-[15px] font-bold leading-[23px] tracking-[0.1em] text-foreground">
-													{property.highlights[3].title}<br />
-												</span>
+												<h3 className="font-heading text-[20px] leading-[28px] tracking-[0.2em] text-foreground mb-3">
+													{property.highlights[3].title}
+												</h3>
 											)}
 											{property.highlights[3].body && (
-												<span className="font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground">
-													<br />{property.highlights[3].body}
-												</span>
+												<p className="font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground">
+													{property.highlights[3].body}
+												</p>
 											)}
 										</div>
 										{property.menuCta?.url && (
@@ -435,7 +437,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 							{/* Right: text */}
 							<div className="flex flex-col justify-center px-[60px] py-[48px] max-[820px]:px-[18px] max-[820px]:py-[32px]">
 								{property.causeHeadline && (
-									<h2 className="mb-6 font-heading italic text-[30px] tracking-[0.3em] text-primary-foreground">
+									<h2 className="mb-6 font-heading text-[30px] tracking-[0.3em] text-primary-foreground">
 										{property.causeHeadline}
 									</h2>
 								)}
@@ -457,7 +459,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 				{/* 9. Bottom CTA */}
 				<section className="bg-primary py-20 text-center">
 					{property.ctaHeadline && (
-						<h2 className="mb-8 font-heading italic text-[30px] tracking-[0.3em] text-primary-foreground">
+						<h2 className="mb-8 font-heading text-[30px] tracking-[0.3em] text-primary-foreground">
 							{property.ctaHeadline}
 						</h2>
 					)}

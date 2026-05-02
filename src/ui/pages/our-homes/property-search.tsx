@@ -53,7 +53,7 @@ export default function PropertySearch({ properties }: Props) {
 									)}
 								</div>
 								<div className="space-y-4">
-									<h2 className="font-heading italic text-[30px] tracking-[0.3em] text-foreground">{property.title}</h2>
+									<h2 className="font-heading text-[30px] tracking-[0.3em] text-foreground">{property.title}</h2>
 									{property.shortDescription && (
 										<p className="text-lg text-foreground">
 											{property.shortDescription}

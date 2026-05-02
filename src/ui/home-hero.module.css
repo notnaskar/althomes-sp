@@ -6,42 +6,45 @@
 	background: var(--color-background, #FCF6EA);
 }
 
+.imageGroup {
+	position: relative;
+	width: 856px;
+	height: 856px;
+	margin: 178px auto 0;
+	left: 0;
+	pointer-events: none;
+}
+
+.heroImgWrap {
+	position: absolute;
+	inset: 0;
+	z-index: 2;
+}
+
 .bgCircle {
 	position: absolute;
-	left: 50%;
-	top: 178px;
-	transform: translateX(calc(-50% + 35px));
-	width: 1110px;
-	height: 1110px;
+	left: 30px;
+	top: -50px;
+	width: 80%;
+	height: 100%;
 	pointer-events: none;
 	z-index: 1;
 }
 
-.heroImg {
-	position: absolute;
-	left: 50%;
-	top: 213px;
-	transform: translateX(calc(-50% - 41px));
-	width: 856px;
-	height: 856px;
-	pointer-events: none;
-	z-index: 2;
-}
-
 .stars {
 	position: absolute;
-	left: 98px;
-	top: 248px;
-	width: 336px;
-	height: 299px;
+	left: -153px;
+	top: 35px;
+	width: 30%;
+	height: 25%;
 	z-index: 5;
 	pointer-events: none;
 }
 
 .flowers {
 	position: absolute;
-	left: 294px;
-	top: 700px;
+	left: 43px;
+	top: 487px;
 	width: 199px;
 	height: 289px;
 	z-index: 5;
@@ -50,10 +53,10 @@
 
 .stripes {
 	position: absolute;
-	left: min(1189px, calc(100vw - 150px));
-	top: 854px;
-	width: 146px;
-	height: 60px;
+	left: 750px;
+	top: 450px;
+	width: 15%;
+	height: 25%;
 	z-index: 5;
 	pointer-events: none;
 	transform: rotate(-17.2deg);
@@ -78,7 +81,6 @@
 	font-weight: 400;
 	text-align: center;
 	white-space: nowrap;
-	font-style: italic;
 }
 
 .badges {
@@ -86,6 +88,7 @@
 	inset: 0;
 	pointer-events: none;
 	z-index: 6;
+	overflow: visible;
 }
 
 .badge {
@@ -120,8 +123,8 @@
 
 .actions {
 	position: absolute;
-	right: 90px;
-	top: 1218px;
+	right: 0;
+	bottom: -184px;
 	z-index: 7;
 	display: flex;
 	flex-direction: column;
@@ -176,7 +179,7 @@
 
 .pillIconWa {
 	background: rgb(76, 175, 80);
-	color: #fff;
+	color: var(--color-white);
 }
 
 .pillIcon svg {
@@ -189,12 +192,18 @@
 		min-height: 870px;
 	}
 
+	.imageGroup {
+		width: 320px;
+		height: 320px;
+		margin-top: 200px;
+		left: 0;
+	}
+
 	.bgCircle {
-		left: -100px;
-		top: 80px;
-		width: 600px;
-		height: 600px;
-		transform: none;
+		left: -19px;
+		top: -13px;
+		width: 415px;
+		height: 415px;
 	}
 
 	.headline {
@@ -209,10 +218,10 @@
 	}
 
 	.stars {
-		left: -20px;
-		top: 175px;
-		width: 130px;
-		height: 115px;
+		left: -57px;
+		top: 13px;
+		width: 126px;
+		height: 112px;
 	}
 
 	.flowers {
@@ -220,10 +229,10 @@
 	}
 
 	.stripes {
-		left: 280px;
-		top: 770px;
-		width: 80px;
-		height: 33px;
+		left: 351px;
+		top: 240px;
+		width: 55px;
+		height: 22px;
 	}
 
 	.badge {
@@ -236,9 +245,10 @@
 
 	.actions {
 		right: auto;
-		left: 0;
-		width: 100%;
-		top: 819px;
+		left: calc(160px - 50vw);
+		width: 100vw;
+		bottom: -299px;
+		top: auto;
 		flex-direction: row;
 		justify-content: space-between;
 		padding: 0 20px;

@@ -27,12 +27,12 @@ export default async function AltWayPage() {
 				)}
 				<div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
 					{page.heroHeadline && (
-						<h1 className="text-[48px] leading-tight font-heading italic text-primary-foreground">
+						<h1 className="text-[48px] leading-tight font-stories text-primary-foreground">
 							{page.heroHeadline}
 						</h1>
 					)}
 					{page.heroHeadlineLine2 && (
-						<p className="mt-2 text-[48px] leading-tight font-heading italic text-primary-foreground">
+						<p className="mt-2 text-[48px] leading-tight font-stories text-primary-foreground">
 							{page.heroHeadlineLine2}
 						</p>
 					)}
@@ -65,7 +65,7 @@ export default async function AltWayPage() {
 				<section className="bg-background py-20">
 					<div className="px-[90px] max-[820px]:px-[18px]">
 						{page.valuePropHeadline && (
-							<h2 className="mb-12 text-center font-heading italic text-[30px] tracking-[0.3em]">
+							<h2 className="mb-12 text-center font-heading text-[30px] tracking-[0.3em]">
 								{page.valuePropHeadline}
 							</h2>
 						)}
@@ -107,7 +107,7 @@ export default async function AltWayPage() {
 			{(page.promiseText || page.promiseCTALabel) && (
 				<section className="px-[90px] max-[820px]:px-[18px] py-20 text-center">
 					{page.promiseText && (
-						<p className="mx-auto max-w-2xl font-heading italic text-[30px] tracking-[0.3em]">
+						<p className="mx-auto max-w-2xl font-heading text-[30px] tracking-[0.3em]">
 							{page.promiseText}
 						</p>
 					)}
@@ -163,7 +163,7 @@ export default async function AltWayPage() {
 			{(page.bottomCTAHeadline || page.bottomCTALabel) && (
 				<section className="bg-background py-20 text-center">
 					{page.bottomCTAHeadline && (
-						<h2 className="mb-8 font-heading italic text-[30px] tracking-[0.3em]">
+						<h2 className="mb-8 font-heading text-[30px] tracking-[0.3em]">
 							{page.bottomCTAHeadline}
 						</h2>
 					)}

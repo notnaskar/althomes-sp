@@ -1,3 +1,4 @@
+
 # Property Experiences Section — Design Spec
 
 **Date:** 2026-04-30

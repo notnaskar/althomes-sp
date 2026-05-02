@@ -22,7 +22,7 @@ export default async function ContactPage() {
 					/>
 					{page.formHeadline && (
 						<div className="absolute inset-0 flex items-center justify-center">
-							<h1 className="px-6 text-center text-[48px] font-heading italic text-primary-foreground">
+							<h1 className="px-6 text-center text-[48px] font-stories text-primary-foreground">
 								{page.formHeadline}
 							</h1>
 						</div>
@@ -33,7 +33,7 @@ export default async function ContactPage() {
 			{/* Hero fallback (no image) */}
 			{!page.heroImage && page.formHeadline && (
 				<section className="px-[90px] max-[820px]:px-[18px] py-20 text-center">
-					<h1 className="text-4xl font-bold max-[820px]:text-[32px]">
+					<h1 className="font-stories text-4xl max-[820px]:text-[32px]">
 						{page.formHeadline}
 					</h1>
 				</section>
@@ -44,7 +44,7 @@ export default async function ContactPage() {
 				{/* Left: contact details */}
 				<div className="space-y-6">
 					{page.sectionTitle && (
-						<h2 className="font-heading italic text-[30px] tracking-[0.3em]">{page.sectionTitle}</h2>
+						<h2 className="font-stories text-[30px] tracking-[0.3em]">{page.sectionTitle}</h2>
 					)}
 					{page.phone && (
 						<div>

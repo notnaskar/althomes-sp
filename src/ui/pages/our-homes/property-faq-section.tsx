@@ -11,7 +11,7 @@ export default function PropertyFaqSection({ faqs }: { faqs: Faq[] }) {
 
 	return (
 		<section className="bg-background py-16 px-[90px] max-[820px]:px-[18px]">
-			<h2 className="mb-10 font-heading italic text-[30px] tracking-[0.3em] text-foreground">
+			<h2 className="mb-10 font-heading text-[30px] tracking-[0.3em] text-foreground">
 				Frequently Asked Questions
 			</h2>
 
