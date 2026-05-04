@@ -14,7 +14,7 @@ export default function ReviewsSection({ reviews }: { reviews: Review[] }) {
 	const review = reviews[active]
 
 	return (
-		<section className="flex flex-col lg:flex-row w-full min-h-[60vh] overflow-hidden">
+		<section className="px-[18px] lg:px-[10%] flex flex-col lg:flex-row gap-8 lg:gap-12 lg:min-h-[640px] w-full">
 			<div className="relative flex flex-col justify-center w-full lg:w-[40%] bg-primary px-6 py-12 lg:pl-[120px] lg:pr-8">
 				<p className="font-stories text-[30px] leading-[1.4] text-primary-foreground max-w-[453px] relative z-10">
 					Hearts full, stories shared<br />
