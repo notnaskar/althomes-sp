@@ -56,7 +56,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 			)}
 			<main className="flex-1">
 				{/* 1. Hero */}
-				<section className="relative h-[672px] overflow-hidden bg-background">
+				<section className="relative h-[480px] lg:h-screen overflow-hidden bg-background">
 					{heroUrl && (
 						<Image
 							src={heroUrl}
@@ -82,16 +82,17 @@ export default async function PropertyDetailPage({ params }: Props) {
 				</section>
 
 				{/* 2. Booking bar */}
-				<div className="mx-[90px] max-[820px]:mx-[18px] flex max-[820px]:flex-col items-center justify-center gap-[40px] bg-background px-[48px] py-[12px]">
+				<div className="mx-[18px] lg:mx-[90px] flex flex-col lg:flex-row lg:items-center lg:justify-center gap-4 lg:gap-[40px] bg-background px-[48px] py-[12px]">
+					<p className="lg:hidden text-center font-heading uppercase tracking-wider text-sm text-foreground">READY TO ESCAPE?</p>
 					<div className="flex flex-col gap-[5px]">
 						<p className="font-sans text-[15px] tracking-[0.1em] text-foreground">
 							Check In &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Check Out
 						</p>
-						<div className="h-px w-[289px] bg-muted" />
+						<div className="h-px w-full lg:w-[289px] bg-muted" />
 					</div>
 					<div className="flex flex-col gap-[8px]">
 						<p className="font-sans text-[15px] tracking-[0.1em] text-foreground">Guests</p>
-						<div className="h-px w-[289px] bg-muted" />
+						<div className="h-px w-full lg:w-[289px] bg-muted" />
 					</div>
 					<div className="flex items-center gap-[32px]">
 						<div className="text-right">
@@ -106,7 +107,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 						</div>
 						<a
 							href="#booking"
-							className="flex h-auto w-[208px] items-center justify-center rounded-[5px] bg-accent py-[5px] font-sans text-[12px] font-semibold tracking-[0.3em] text-accent-foreground"
+							className="flex h-auto w-full lg:w-[208px] items-center justify-center rounded-[5px] bg-accent py-[5px] font-sans text-[12px] font-semibold tracking-[0.3em] text-accent-foreground"
 						>
 							BOOK NOW
 						</a>
@@ -118,10 +119,10 @@ export default async function PropertyDetailPage({ params }: Props) {
 					id="booking"
 					className="bg-background py-[48px] px-[90px] max-[820px]:px-[18px]"
 				>
-					<div className="flex gap-[26px]">
+					<div className="flex flex-col lg:flex-row gap-8 lg:gap-[26px]">
 						{/* Left: subtitle (Playfair 30px) */}
 						{property.pullQuote && (
-							<div className="w-[527px] shrink-0">
+							<div className="w-full lg:w-[527px] shrink-0">
 								<p className="font-heading text-[30px] leading-[40px] tracking-[0.1em] text-foreground">
 									{property.pullQuote}
 								</p>
@@ -137,7 +138,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 							)}
 
 							{/* Specs strip */}
-							<div className="flex items-center gap-[14px]">
+							<div className="grid grid-cols-2 lg:flex lg:flex-row items-center gap-[14px]">
 								{property.propertyType && (
 									<div className="flex w-[96px] flex-col items-center gap-[3px]">
 										<div className="h-[46px] w-[46px]" />
@@ -178,28 +179,28 @@ export default async function PropertyDetailPage({ params }: Props) {
 				</section>
 
 				{/* 4. Image collage + description */}
-				<section className="flex h-[490px] items-center justify-center gap-[48px] bg-background overflow-hidden">
+				<section className="flex flex-col lg:flex-row lg:h-[490px] items-center lg:justify-center gap-8 lg:gap-[48px] bg-background overflow-hidden">
 					{/* Left: collage */}
-					<div className="relative h-[490px] w-[575px] shrink-0">
+					<div className="relative w-full lg:w-[575px] h-[360px] lg:h-full shrink-0 overflow-hidden">
 						{property.showcaseDecorImage?.asset && (
-							<div className="pointer-events-none absolute -left-[11px] top-[128px] h-[159px] w-[238px]">
+							<div className="pointer-events-none absolute -left-[11px] top-[128px] h-[159px] w-[55%] lg:w-[238px]">
 								<Img image={property.showcaseDecorImage} width={238} alt="" className="h-full w-full object-cover" />
 							</div>
 						)}
 						{property.gallery?.[0] && (
-							<div className="absolute left-[142px] top-0 h-[364px] w-[433px] overflow-hidden rounded-[5px]">
+							<div className="absolute left-[142px] top-0 h-[364px] w-[55%] lg:w-[433px] overflow-hidden rounded-[5px]">
 								<Img image={property.gallery[0]} width={433} alt={property.gallery[0].alt ?? ''} className="h-full w-full object-cover" />
 							</div>
 						)}
 						{property.gallery?.[1] && (
-							<div className="absolute left-[46px] top-[265px] h-[216px] w-[288px] overflow-hidden rounded-[5px]">
+							<div className="absolute left-[46px] top-[265px] h-[216px] w-[55%] lg:w-[288px] overflow-hidden rounded-[5px]">
 								<Img image={property.gallery[1]} width={288} alt={property.gallery[1].alt ?? ''} className="h-full w-full object-cover" />
 							</div>
 						)}
 					</div>
 
 					{/* Right: description */}
-					<div className="w-[479px] shrink-0">
+					<div className="w-full lg:w-[479px] shrink-0">
 						{property.description && (
 							<div className="font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground [&_p]:mb-4 [&_p:last-child]:mb-0">
 								<PortableText value={property.description} />
@@ -219,9 +220,9 @@ export default async function PropertyDetailPage({ params }: Props) {
 
 				{/* 3. Location — Getting Here */}
 				{(property.locationBody || property.locationCta) && (
-					<section className="flex items-center justify-center gap-[45px] bg-background py-[48px]">
+					<section className="flex flex-col lg:flex-row gap-8 lg:gap-[45px] lg:items-center lg:justify-center bg-background py-[48px]">
 						{property.locationImage?.asset && (
-							<div className="h-[310px] w-[576px] shrink-0 overflow-hidden">
+							<div className="h-[310px] w-full lg:w-[576px] shrink-0 overflow-hidden">
 								<Img
 									image={property.locationImage}
 									width={576}
@@ -230,7 +231,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 								/>
 							</div>
 						)}
-						<div className="flex w-[435px] shrink-0 flex-col gap-[44px]">
+						<div className="flex w-full lg:w-[435px] shrink-0 flex-col gap-[44px]">
 							{property.locationBody && (
 								<div className="font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground [&_strong]:font-bold [&_p]:mb-[8px] [&_p:last-child]:mb-0">
 									<PortableText value={property.locationBody} />
@@ -261,8 +262,8 @@ export default async function PropertyDetailPage({ params }: Props) {
 						<div className="flex w-full flex-col gap-6">
 							{/* Row 1: text right-aligned + image collage (highlights[0]) */}
 							{property.highlights[0] && (
-								<div className="flex items-end justify-end gap-12 px-[90px]">
-									<div className="w-96 text-right">
+								<div className="flex flex-col lg:flex-row lg:items-end lg:justify-end gap-6 lg:gap-12 px-[18px] lg:px-[90px]">
+									<div className="w-full lg:w-96 text-right">
 										{property.highlights[0].title && (
 											<h3 className="font-heading text-[20px] leading-[28px] tracking-[0.2em] text-foreground mb-3">
 												{property.highlights[0].title}
@@ -274,9 +275,9 @@ export default async function PropertyDetailPage({ params }: Props) {
 											</p>
 										)}
 									</div>
-									<div className="relative h-96 w-[576px] shrink-0">
+									<div className="relative h-96 w-full lg:w-[576px] shrink-0">
 										{property.highlights[0].image?.asset && (
-											<div className="absolute left-0 top-0 h-96 w-[576px] overflow-hidden rounded-[5px]">
+											<div className="absolute left-0 top-0 h-96 w-full lg:w-[576px] overflow-hidden rounded-[5px]">
 												<Img image={property.highlights[0].image} width={576} alt={property.highlights[0].image.alt ?? ''} className="h-full w-full object-cover" />
 											</div>
 										)}
@@ -296,9 +297,9 @@ export default async function PropertyDetailPage({ params }: Props) {
 
 							{/* Row 2: highlights[1] — image left, text right */}
 							{property.highlights[1] && (
-								<div className="flex items-center gap-12 px-[90px] max-[820px]:flex-col max-[820px]:px-[18px]">
+								<div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-12 px-[18px] lg:px-[90px]">
 									{property.highlights[1].image?.asset && (
-										<div className="relative h-80 w-[494px] shrink-0 overflow-hidden rounded-[5px]">
+										<div className="relative h-80 w-full lg:w-[494px] shrink-0 overflow-hidden rounded-[5px]">
 											<Img image={property.highlights[1].image} width={494} alt={property.highlights[1].image.alt ?? ''} className="h-full w-full object-cover" />
 										</div>
 									)}
@@ -319,7 +320,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 
 							{/* Row 3: highlights[2] — text left, image right */}
 							{property.highlights[2] && (
-								<div className="flex items-center justify-end gap-12 px-[90px] max-[820px]:flex-col-reverse max-[820px]:px-[18px]">
+								<div className="flex flex-col lg:flex-row lg:items-center lg:justify-end gap-6 lg:gap-12 px-[18px] lg:px-[90px]">
 									<div className="flex-1">
 										{property.highlights[2].title && (
 											<h3 className="font-heading text-[20px] leading-[28px] tracking-[0.2em] text-foreground mb-3">
@@ -333,7 +334,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 										)}
 									</div>
 									{property.highlights[2].image?.asset && (
-										<div className="relative h-80 w-[494px] shrink-0 overflow-hidden rounded-[5px]">
+										<div className="relative h-80 w-full lg:w-[494px] shrink-0 overflow-hidden rounded-[5px]">
 											<Img image={property.highlights[2].image} width={494} alt={property.highlights[2].image.alt ?? ''} className="h-full w-full object-cover" />
 										</div>
 									)}
@@ -342,8 +343,8 @@ export default async function PropertyDetailPage({ params }: Props) {
 
 							{/* Row 3: text + CTA left, image right (highlights[3]) */}
 							{property.highlights[3] && (
-								<div className="flex items-center justify-end gap-12 px-[90px]">
-									<div className="flex w-96 shrink-0 flex-col gap-12">
+								<div className="flex flex-col lg:flex-row lg:items-center lg:justify-end gap-6 lg:gap-12 px-[18px] lg:px-[90px]">
+									<div className="flex w-full lg:w-96 shrink-0 flex-col gap-12">
 										<div>
 											{property.highlights[3].title && (
 												<h3 className="font-heading text-[20px] leading-[28px] tracking-[0.2em] text-foreground mb-3">
@@ -367,7 +368,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 											</a>
 										)}
 									</div>
-									<div className="relative h-80 w-[788px] shrink-0 overflow-hidden rounded-tl-[5px] rounded-bl-[5px]">
+									<div className="relative h-80 w-full lg:w-[788px] shrink-0 overflow-hidden rounded-tl-[5px] rounded-bl-[5px]">
 										{property.highlights[3].image?.asset && (
 											<div className="absolute left-0 top-0 h-80 w-full overflow-hidden">
 												<Img image={property.highlights[3].image} width={788} alt={property.highlights[3].image.alt ?? ''} className="h-full w-full object-cover" />
@@ -410,7 +411,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 				{(property.causeHeadline ||
 					property.causeBody ||
 					(property.causeImages && property.causeImages.length >= 1)) && (
-					<section className="bg-background text-foreground py-16 md:py-24 px-[18px] md:px-[90px] min-h-[80vh] flex flex-col justify-center">
+					<section className="bg-background text-foreground py-16 md:py-24 px-[18px] md:px-[90px] min-h-0 lg:min-h-[80vh] flex flex-col justify-center">
 						<div className="mx-auto w-full max-w-7xl grid grid-cols-1 md:grid-cols-[45fr_50fr] gap-12 md:gap-[60px] items-start md:justify-between">
 							{/* Left: images */}
 							<div className="relative w-full">
