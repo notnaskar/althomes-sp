@@ -30,7 +30,7 @@ export default function PropertyGallerySection({ gallery, quote, decorImage }: P
 						image={mainImg}
 						width={720}
 						alt={mainImg.alt ?? ''}
-						sizes="(max-width: 820px) 100vw, 720px"
+						sizes="(max-width: 1023px) 100vw, 720px"
 						className="h-full w-full object-cover transition-opacity duration-300"
 					/>
 				)}
@@ -39,10 +39,10 @@ export default function PropertyGallerySection({ gallery, quote, decorImage }: P
 			{/* Right: Frame 71 */}
 			<div className="flex w-full lg:w-[479px] flex-col justify-end gap-[11px] overflow-hidden">
 				{/* Frame 70: absolute-positioned collage */}
-				<div className="relative h-[614px] px-[3px]">
+				<div className="relative flex flex-col gap-4 lg:block lg:h-[614px] px-[3px]">
 					{/* Botanical decor illustration */}
 					{decorImage?.asset && (
-						<div className="pointer-events-none absolute right-0 top-0 h-[405px] w-[421px]">
+						<div className="lg:absolute lg:right-0 lg:top-0 h-[240px] lg:h-[405px] w-full lg:w-[421px] order-1 lg:order-none pointer-events-none">
 							<Img
 								image={decorImage}
 								width={421}
@@ -54,14 +54,14 @@ export default function PropertyGallerySection({ gallery, quote, decorImage }: P
 
 					{/* Pull quote */}
 					{quote && (
-						<p className="absolute left-0 top-[230px] w-[478px] font-heading text-[30px] leading-[40px] tracking-[0.1em] text-foreground">
+						<p className="lg:absolute lg:left-0 lg:top-[230px] w-full lg:w-[478px] order-2 lg:order-none font-heading text-[30px] leading-[40px] tracking-[0.1em] text-foreground">
 							{quote}
 						</p>
 					)}
 
 					{/* Secondary gallery photo */}
 					{secondaryImg && (
-						<div className="relative mt-auto h-[280px] lg:h-[361px] w-full lg:w-[479px] overflow-hidden rounded-[5px]">
+						<div className="relative lg:absolute lg:left-0 lg:bottom-0 h-[240px] lg:h-[361px] w-full lg:w-[479px] order-3 lg:order-none overflow-hidden rounded-[5px]">
 							<Img
 								image={secondaryImg}
 								width={479}
