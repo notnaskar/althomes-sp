@@ -26,28 +26,28 @@ export default function PropertyAmenitiesSection({
   const columns = splitAmenityColumns(amenities)
 
   return (
-    <section className="flex bg-background max-[820px]:flex-col">
+    <section className="flex flex-col bg-background lg:flex-row">
       {/* Left: full-height image */}
-      <div className="relative w-1/5 self-stretch max-[820px]:h-[300px] max-[820px]:w-full">
+      <div className="relative h-[280px] w-full self-stretch lg:h-auto lg:w-1/5">
         {imageUrl && (
           <Image
             src={imageUrl}
             alt=""
             fill
             className="object-cover"
-            sizes="(max-width: 820px) 100vw, 20vw"
+            sizes="(max-width: 1023px) 100vw, 20vw"
           />
         )}
       </div>
 
       {/* Right: content */}
-      <div className="w-4/5 py-[72px] pl-[64px] pr-[90px] max-[820px]:w-full max-[820px]:px-[18px] max-[820px]:py-[48px]">
+      <div className="w-full px-[18px] py-[48px] lg:w-4/5 lg:py-[72px] lg:pl-[64px] lg:pr-[90px]">
         <h2 className="mb-[48px] font-heading text-[30px] font-normal leading-[40px] tracking-[0.3em] text-foreground">
           FOR US, IT&rsquo;S COMFORT FIRST
         </h2>
 
         {amenities.length > 0 && (
-          <div className="mb-[48px] flex gap-[32px] max-[820px]:flex-col">
+          <div className="mb-[48px] flex flex-col gap-[32px] lg:flex-row">
             {columns.map((col, ci) =>
               col.length > 0 ? (
                 <div key={ci} className="flex flex-col gap-[16px]">
