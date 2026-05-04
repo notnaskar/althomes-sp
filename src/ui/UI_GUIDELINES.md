@@ -65,11 +65,19 @@ Body text: Poppins. Letter-spacing is prominent in this brand — `tracking-[0.1
 
 ---
 
-## Responsive Breakpoint
+## Responsive Breakpoints
 
-**Single breakpoint: 820px** — below is mobile, above is desktop.
+Use standard Tailwind v4 default breakpoints:
+- `sm`: 640px
+- `md`: 768px
+- `lg`: 1024px
+- `xl`: 1280px
 
-Use `max-[820px]:` prefix in Tailwind for mobile overrides. No other breakpoints unless design explicitly requires.
+**Guidance:**
+- Design mobile-first by default.
+- Use `md:` or `lg:` for primary tablet/desktop layout shifts.
+- Do not use arbitrary values like `min-[821px]:` or `max-[820px]:` in new code.
+- Existing code using `max-[820px]:` / `min-[821px]:` is legacy — leave as-is unless refactoring that component.
 
 ---
 
