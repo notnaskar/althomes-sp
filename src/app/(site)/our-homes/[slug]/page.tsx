@@ -117,7 +117,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 				{/* 3. Intro — subtitle + specs strip */}
 				<section
 					id="booking"
-					className="bg-background py-[48px] px-[90px] max-[820px]:px-[18px]"
+					className="bg-background py-[48px] px-[18px] lg:px-[90px]"
 				>
 					<div className="flex flex-col lg:flex-row gap-8 lg:gap-[26px]">
 						{/* Left: subtitle (Playfair 30px) */}
