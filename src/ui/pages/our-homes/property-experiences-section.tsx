@@ -41,7 +41,7 @@ export default function PropertyExperiencesSection({
   return (
     <section
       data-section="experiences"
-      className={`relative overflow-hidden px-[90px] py-[80px] max-[820px]:px-[18px] max-[820px]:py-[48px]${!hasBg ? ' bg-background' : ''}`}
+      className={`relative overflow-hidden px-[18px] lg:px-[90px] py-[48px] lg:py-[80px]${!hasBg ? ' bg-background' : ''}`}
     >
       {bgUrl && (
         <Image
@@ -57,17 +57,16 @@ export default function PropertyExperiencesSection({
       <div className="relative z-10">
         <h2
           className={[
-            'font-heading text-center tracking-[0.05em] text-[32px] leading-[1.2]',
-            'max-[820px]:text-[24px]',
+            'font-heading text-center tracking-[0.05em] text-[24px] lg:text-[32px] leading-[1.2]',
             hasBg ? 'text-white drop-shadow-md' : 'text-foreground',
           ].join(' ')}
         >
           EXPERIENCES NEAR {propertyTitle.toUpperCase()}
         </h2>
 
-        <div className="mt-[48px] flex justify-center gap-[24px] max-[820px]:flex-col max-[820px]:items-center">
+        <div className="mt-[48px] flex flex-col lg:flex-row gap-6 lg:gap-8 justify-center items-center lg:items-stretch">
           {experiences.slice(0, 3).map((exp, i) => (
-            <div key={exp.slug ?? exp.title ?? i} className="w-full max-w-[327px]">
+            <div key={exp.slug ?? exp.title ?? i} className="w-full max-w-[327px] mx-auto">
               <ExperienceCard
                 title={exp.title ?? ''}
                 description={exp.description}
