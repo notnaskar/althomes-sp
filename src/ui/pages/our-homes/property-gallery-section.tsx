@@ -22,9 +22,9 @@ export default function PropertyGallerySection({ gallery, quote, decorImage }: P
 	const secondaryImg = gallery[(index + 1) % total]
 
 	return (
-		<section className="flex h-[625px] max-[820px]:h-auto max-[820px]:flex-col items-end gap-[42px] overflow-hidden bg-background">
+		<section className="flex flex-col lg:flex-row gap-8 lg:gap-[42px] lg:h-[625px] lg:items-end overflow-hidden bg-background">
 			{/* Left: main gallery image */}
-			<div className="h-[577px] w-[720px] max-[820px]:w-full shrink-0 overflow-hidden rounded-[5px]">
+			<div className="h-[360px] lg:h-full w-full lg:w-[720px] shrink-0 overflow-hidden rounded-[5px]">
 				{mainImg && (
 					<Img
 						image={mainImg}
@@ -37,7 +37,7 @@ export default function PropertyGallerySection({ gallery, quote, decorImage }: P
 			</div>
 
 			{/* Right: Frame 71 */}
-			<div className="flex flex-1 flex-col justify-end gap-[11px] overflow-hidden">
+			<div className="flex w-full lg:w-[479px] flex-col justify-end gap-[11px] overflow-hidden">
 				{/* Frame 70: absolute-positioned collage */}
 				<div className="relative h-[614px] px-[3px]">
 					{/* Botanical decor illustration */}
@@ -61,7 +61,7 @@ export default function PropertyGallerySection({ gallery, quote, decorImage }: P
 
 					{/* Secondary gallery photo */}
 					{secondaryImg && (
-						<div className="absolute left-0 top-[336px] h-[361px] w-[479px] overflow-hidden rounded-[5px]">
+						<div className="relative mt-auto h-[280px] lg:h-[361px] w-full lg:w-[479px] overflow-hidden rounded-[5px]">
 							<Img
 								image={secondaryImg}
 								width={479}
