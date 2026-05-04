@@ -12,15 +12,17 @@ type Props = {
 	ctaQuestion: string | null
 	ctaButtonLabel: string | null
 	ctaBackground: PageData['ctaBackground']
+	noOverlap?: boolean
 }
 
 export default function OurHomesCta({
 	ctaQuestion,
 	ctaButtonLabel,
 	ctaBackground,
+	noOverlap,
 }: Props) {
 	return (
-		<section className="relative flex z-[-1] min-h-[720px] mt-[-300px] flex-col items-center justify-end overflow-hidden pb-[190px] max-[820px]:min-h-[360px] max-[820px]:pb-20">
+		<section className={`relative flex min-h-[720px] flex-col items-center justify-end overflow-hidden pb-[190px] max-[820px]:min-h-[360px] max-[820px]:pb-20${noOverlap ? '' : ' z-[-1] mt-[-300px]'}`}>
 			{/* CONTENT: ctaBackground */}
 			{ctaBackground?.asset && (
 				<Image

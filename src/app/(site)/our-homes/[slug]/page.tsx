@@ -12,6 +12,7 @@ import PropertyAmenitiesSection from '@/ui/pages/our-homes/property-amenities-se
 import PropertyFaqSection from '@/ui/pages/our-homes/property-faq-section'
 import ReactIcon from '@/ui/atoms/react-icon'
 import ReviewsSection from '@/ui/molecules/reviews-section'
+import OurHomesCta from '@/ui/pages/our-homes/our-homes-cta'
 
 type Props = {
 	params: Promise<{ slug: string }>
@@ -409,40 +410,43 @@ export default async function PropertyDetailPage({ params }: Props) {
 				{(property.causeHeadline ||
 					property.causeBody ||
 					(property.causeImages && property.causeImages.length >= 1)) && (
-					<section className="bg-primary text-primary-foreground min-h-[50vh]">
-						<div className="grid min-[821px]:grid-cols-[55fr_45fr] max-[820px]:grid-cols-1 min-h-[50vh]">
+					<section className="bg-background text-foreground py-16 md:py-24 px-[18px] md:px-[90px] min-h-[80vh] flex flex-col justify-center">
+						<div className="mx-auto w-full max-w-7xl grid grid-cols-1 md:grid-cols-[45fr_50fr] gap-12 md:gap-[60px] items-start md:justify-between">
 							{/* Left: images */}
-							<div className="relative overflow-hidden min-h-[40vh]">
+							<div className="relative w-full">
 								{property.causeImages?.[0] && (
-									<Img
-										image={property.causeImages[0]}
-										width={900}
-										height={600}
-										alt={property.causeImages[0].alt ?? ''}
-										className="absolute inset-0 h-full w-full object-cover"
-									/>
+									<div className="relative w-full">
+										<Img
+											image={property.causeImages[0]}
+											width={624}
+											height={497}
+											alt={property.causeImages[0].alt ?? ''}
+											className="w-full h-auto object-cover rounded-[8px]"
+										/>
+									</div>
 								)}
 								{property.causeImages?.[1] && (
-									<div className="absolute bottom-4 right-4 w-[20%] overflow-hidden rounded-xl">
+									<div className="absolute bottom-0 right-0 z-10 w-[120px] md:w-[160px]">
 										<Img
 											image={property.causeImages[1]}
 											width={200}
 											height={280}
 											alt={property.causeImages[1].alt ?? ''}
-											className="w-full h-full object-cover"
+											className="w-full h-auto object-contain"
 										/>
 									</div>
 								)}
 							</div>
+
 							{/* Right: text */}
-							<div className="flex flex-col justify-center px-[60px] py-[48px] max-[820px]:px-[18px] max-[820px]:py-[32px]">
+							<div className="flex flex-col items-center text-center md:items-start md:text-left">
 								{property.causeHeadline && (
-									<h2 className="mb-6 font-heading text-[30px] tracking-[0.3em] text-primary-foreground">
+									<h2 className="mb-5 font-heading italic text-[32px] md:text-[40px] tracking-[0.1em] text-foreground leading-[1.1] max-w-[515px]">
 										{property.causeHeadline}
 									</h2>
 								)}
 								{property.causeBody && (
-									<div className="text-primary-foreground text-[15px] leading-[23px] tracking-[0.1em]">
+									<div className="text-foreground text-[15px] md:text-[16px] leading-[1.6] md:leading-[1.8] space-y-4 max-w-[480px]">
 										<PortableText value={property.causeBody} />
 									</div>
 								)}
@@ -457,19 +461,12 @@ export default async function PropertyDetailPage({ params }: Props) {
 				)}
 
 				{/* 9. Bottom CTA */}
-				<section className="bg-primary py-20 text-center">
-					{property.ctaHeadline && (
-						<h2 className="mb-8 font-heading text-[30px] tracking-[0.3em] text-primary-foreground">
-							{property.ctaHeadline}
-						</h2>
-					)}
-					<a
-						href="#booking"
-						className="inline-block rounded-[5px] bg-accent px-10 py-4 font-bold text-accent-foreground tracking-[0.3em] uppercase transition hover:bg-accent/90"
-					>
-						FIND AVAILABILITY
-					</a>
-				</section>
+				<OurHomesCta
+					ctaQuestion={property.ctaHeadline ?? null}
+					ctaButtonLabel={property.ctaButtonLabel ?? null}
+					ctaBackground={property.ctaBackground ?? null}
+					noOverlap
+				/>
 			</main>
 		</>
 	)

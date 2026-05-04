@@ -58,16 +58,20 @@ Letter-spacing rules:
 | Overlay panel padding (desktop) | `p-[48px_40px_40px]` |
 | Overlay panel padding (mobile) | `p-[36px_24px_28px]` |
 
----
+## Responsive Breakpoints
 
-## Responsive Breakpoint
+We use standard Tailwind CSS v4 default breakpoints:
+- `sm`: 640px
+- `md`: 768px
+- `lg`: 1024px
+- `xl`: 1280px
+- `2xl`: 1536px
 
-**One breakpoint only: 820px.**
-
-- Below 820px = mobile
-- Above 820px = desktop
-- Mobile overrides use `max-[820px]:` prefix
-- Do not introduce other breakpoints unless the design explicitly requires it
+**Guidance:**
+- Design mobile-first by default.
+- Use `md:` (768px) or `lg:` (1024px) for your primary tablet/desktop layout shifts.
+- Do not use arbitrary breakpoint values like `min-[821px]:` or `max-[820px]:` unless there is a very specific, unavoidable design edge case.
+- For overrides targeting *only* mobile beneath a breakpoint, you may use Tailwind's max-width modifiers (e.g., `max-lg:`).
 
 ---
 

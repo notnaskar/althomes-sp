@@ -66,7 +66,7 @@ export default async function JoinUsPage() {
 			</section>
 
 			{/* Content ── Frame 60 ──────────────────────────────── */}
-			<section className="relative overflow-visible bg-background px-[18px] lg:px-[90px] pb-[72px] z-[10]">
+			<section className="relative overflow-visible bg-background px-[18px] lg:px-[90px] pb-[72px] z-[11]">
 				<div className="mx-auto flex max-w-[1100px] flex-col-reverse lg:flex-row items-center lg:items-start gap-[40px] lg:gap-[80px] justify-between">
 					<div className="w-full lg:w-[400px] shrink-0 space-y-5 lg:pt-[60px]">
 						{page.bodyParagraph && (
@@ -117,7 +117,7 @@ export default async function JoinUsPage() {
 						<Image src={formDecorUrl} alt="" fill className="object-cover" sizes="(max-width: 1024px) 550px, 847px" />
 					</div>
 				)}
-				<div className="relative z-10 mx-auto max-w-[800px] bg-[var(--color-white)] px-[24px] lg:px-[51px] pb-[48px] pt-[37px] shadow-sm lg:shadow-none">
+				<div className="relative z-10 mx-auto max-w-[100%] bg-[var(--color-white)] px-[24px] lg:px-[51px] pb-[48px] pt-[37px] shadow-sm lg:shadow-none">
 					<h2 className="mb-[40px] lg:mb-[75px] text-center font-heading text-[24px] lg:text-[30px] leading-[1.3] lg:leading-[40px] tracking-[0.1em] text-foreground">
 						{page.formHeadline || 'TELL US MORE ABOUT YOUR HOME'}
 					</h2>

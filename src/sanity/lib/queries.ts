@@ -58,7 +58,10 @@ export const JOIN_US_PAGE_QUERY =
 export const CONTACT_PAGE_QUERY =
 	defineQuery(`*[_type == 'contactPage' && _id == 'contactPage'][0]{
 	...,
-	heroImage { asset->, alt }
+	heroImage { asset->, alt },
+	mobileHeroAsset { asset->, alt },
+	backgroundCloudAsset { asset->, alt },
+	sideFlowerAsset { asset->, alt }
 }`)
 
 export const LEGAL_PAGE_QUERY = defineQuery(
@@ -115,6 +118,7 @@ export const PROPERTY_QUERY =
 	experiencesBgImage { asset->, alt, hotspot, crop },
 	highlights[]{ title, body, image { asset->, alt }, secondaryImage { asset->, alt }, decorImage { asset-> } },
 	causeImages[]{ asset->, alt },
+	ctaBackground { asset->, alt },
 	faqs[]{ question, answer },
 	location,
 	"reviews": *[_type=='review' && references(^._id) && published==true] | order(stayDate desc) [0..20]{

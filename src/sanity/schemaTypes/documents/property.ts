@@ -16,6 +16,7 @@ export default defineType({
 		{ name: 'faqs', title: 'FAQs' },
 		{ name: 'causes', title: 'Causes' },
 		{ name: 'reviews', title: 'Reviews' },
+		{ name: 'cta', title: 'CTA' },
 		{ name: 'seo', title: 'SEO' },
 	],
 	fields: [
@@ -522,6 +523,27 @@ export default defineType({
 			name: 'ctaHeadline',
 			title: 'CTA Headline',
 			type: 'string',
+			group: 'cta',
+		}),
+		defineField({
+			name: 'ctaButtonLabel',
+			title: 'CTA Button Label',
+			type: 'string',
+			group: 'cta',
+		}),
+		defineField({
+			name: 'ctaBackground',
+			title: 'CTA Background Image',
+			type: 'image',
+			options: { hotspot: true },
+			group: 'cta',
+			fields: [
+				{
+					name: 'alt',
+					title: 'Alt Text',
+					type: 'string',
+				},
+			],
 		}),
 
 		// SEO
