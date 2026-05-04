@@ -138,7 +138,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 							)}
 
 							{/* Specs strip */}
-							<div className="grid grid-cols-2 lg:flex lg:flex-row items-center gap-[14px]">
+							<div className="grid grid-cols-2 lg:flex lg:flex-row items-center justify-items-center gap-[14px]">
 								{property.propertyType && (
 									<div className="flex w-[96px] flex-col items-center gap-[3px]">
 										<div className="h-[46px] w-[46px]" />
@@ -255,7 +255,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 				{property.highlights && property.highlights.length > 0 && (
 					<section className="w-full overflow-hidden bg-background py-[72px]">
 						{/* Heading */}
-						<h2 className="mb-16 px-[90px] text-center font-heading text-[30px] font-normal leading-[40px] tracking-[0.3em] text-foreground">
+						<h2 className="mb-16 px-[18px] lg:px-[90px] text-center font-heading text-[30px] font-normal leading-[40px] tracking-[0.3em] text-foreground">
 							WHAT&rsquo;S WAITING FOR YOU?
 						</h2>
 
