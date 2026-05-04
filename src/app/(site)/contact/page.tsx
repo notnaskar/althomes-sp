@@ -94,7 +94,7 @@ export default async function ContactPage() {
 					{/* Our Office Block */}
 					{(page.officeCity || page.officeAddress) && (
 						<div>
-							<h2 className="font-stories text-[40px] min-[821px]:text-[56px] tracking-wide mb-4 min-[821px]:mb-6 text-foreground leading-none">Our Office</h2>
+							<h2 className="font-stories text-[40px] min-[821px]:text-[56px] tracking-wide mb-4 min-[821px]:mb-6 text-foreground leading-none">{page.officeSectionTitle ?? 'Our Office'}</h2>
 							<div className="space-y-2 pl-2">
 								<div className="flex items-start gap-3">
 									<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-foreground mt-1 shrink-0"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
@@ -117,7 +117,7 @@ export default async function ContactPage() {
 						site?.linkedinUrl ||
 						site?.youtubeUrl) && (
 						<div>
-							<h2 className="font-stories text-[40px] min-[821px]:text-[56px] tracking-wide mb-4 min-[821px]:mb-6 text-foreground leading-none">Follow Us</h2>
+							<h2 className="font-stories text-[40px] min-[821px]:text-[56px] tracking-wide mb-4 min-[821px]:mb-6 text-foreground leading-none">{page.followUsSectionTitle ?? 'Follow Us'}</h2>
 							<div className="pl-2">
 								<SocialLinks
 									size={16}
