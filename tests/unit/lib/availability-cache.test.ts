@@ -1,27 +1,30 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-const mockSearch = vi.fn()
+const mockQuery = vi.fn()
 
 vi.mock('@/lib/pms-client', () => ({
-  getPmsClient: () => ({ property: { search: mockSearch } }),
+  getPmsClient: () => ({ property: { query: mockQuery } }),
 }))
 
 const { getCachedAvailableIds } = await import('@/lib/availability-cache')
 
 describe('getCachedAvailableIds', () => {
-  beforeEach(() => mockSearch.mockReset())
+  beforeEach(() => mockQuery.mockReset())
 
-  it('calls property.search with correct daterange and guests', async () => {
-    mockSearch.mockResolvedValue({ response: { data: [] } })
+  it('calls property.query with correct availability daterange and guests', async () => {
+    mockQuery.mockResolvedValue({ response: { data: [] } })
     await getCachedAvailableIds('2030-06-01', '2030-06-07', 2)
-    expect(mockSearch).toHaveBeenCalledWith({
-      daterange: { start: '2030-06-01', end: '2030-06-07' },
-      guests: 2,
+    expect(mockQuery).toHaveBeenCalledWith({
+      availability: {
+        daterange: { start: '2030-06-01', end: '2030-06-07' },
+        guests: 2,
+        ignore: [],
+      },
     })
   })
 
   it('returns external_id strings from response', async () => {
-    mockSearch.mockResolvedValue({
+    mockQuery.mockResolvedValue({
       response: { data: [{ external_id: 'prop-1' }, { external_id: 'prop-2' }] },
     })
     const ids = await getCachedAvailableIds('2030-06-01', '2030-06-07', 2)
@@ -29,7 +32,7 @@ describe('getCachedAvailableIds', () => {
   })
 
   it('filters out null and undefined external_ids', async () => {
-    mockSearch.mockResolvedValue({
+    mockQuery.mockResolvedValue({
       response: {
         data: [
           { external_id: 'prop-1' },
@@ -44,7 +47,7 @@ describe('getCachedAvailableIds', () => {
   })
 
   it('returns empty array when response data is empty', async () => {
-    mockSearch.mockResolvedValue({ response: { data: [] } })
+    mockQuery.mockResolvedValue({ response: { data: [] } })
     const ids = await getCachedAvailableIds('2030-06-01', '2030-06-07', 2)
     expect(ids).toEqual([])
   })

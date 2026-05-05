@@ -7,7 +7,7 @@ export function getPmsClient() {
   if (!_client) {
     const token = process.env.RENTALWISE_API_TOKEN!
     _client = newPmsClient({
-      baseURL: process.env.RENTALWISE_API_HOST!,
+      baseURL: `${process.env.RENTALWISE_API_HOST}/rest`,
       tokenProvider: { get: () => token },
     })
   }

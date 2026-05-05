@@ -6,9 +6,12 @@ async function fetchAvailableIds(
   checkOut: string,
   guests: number,
 ): Promise<string[]> {
-  const res = await getPmsClient().property.search({
-    daterange: { start: checkIn, end: checkOut },
-    guests,
+  const res = await getPmsClient().property.query({
+    availability: {
+      daterange: { start: checkIn, end: checkOut },
+      guests,
+      ignore: [],
+    },
   })
   // PaginatedResponse shape: res.response.data is T[]
   return (res.response.data ?? [])
