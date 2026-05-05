@@ -22,6 +22,7 @@ import Footer from '@/ui/footer'
 import Header from '@/ui/header'
 import VisualEditing from '@/ui/modules/visual-editing'
 import { ThemeProvider } from '@/ui/theme-provider'
+import { Toaster } from 'sonner'
 import '@/app.css'
 
 const geist = Geist({
@@ -181,6 +182,7 @@ export default async function RootLayout({
 					<main>{children}</main>
 					<Footer />
 					<SanityLive />
+					<Toaster position="bottom-right" richColors />
 					<VisualEditing />
 				</body>
 			</NuqsAdapter>
