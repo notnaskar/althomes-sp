@@ -57,11 +57,16 @@ async function fetchAvailableIds(checkIn: string, checkOut: string, guests: numb
     daterange: { start: checkIn, end: checkOut },
     guests,
   })
-  return (res.data ?? []).map((p: any) => String(p.external_id)).filter(Boolean)
+  // PaginatedResponse shape: res.response.data is T[]
+  return (res.response.data ?? [])
+    .map((p: Property) => p.external_id)
+    .filter((id): id is string => typeof id === 'string')
 }
+// Note: unstable_cache includes JSON.stringify(args) in the invocation key —
+// each unique (checkIn, checkOut, guests) combination gets its own cache entry.
 
 export const getCachedAvailableIds = unstable_cache(fetchAvailableIds, ['availability'], {
-  revalidate: 900,
+  revalidate: 120,
 })
 ```
 
@@ -76,16 +81,19 @@ Discriminated union return type. Zod re-validates at action boundary (defense in
 import { availabilitySchema, type AvailabilityInput } from '@/lib/schemas/availability'
 import { getCachedAvailableIds } from '@/lib/availability-cache'
 
-export type AvailabilityResult = { availableIds: string[] } | { error: string }
+export type AvailabilityResult =
+  | { ok: true; availableIds: string[] }
+  | { ok: false; error: string }
 
 export async function searchAvailability(data: AvailabilityInput): Promise<AvailabilityResult> {
   const parsed = availabilitySchema.safeParse(data)
-  if (!parsed.success) return { error: 'Invalid search parameters.' }
+  if (!parsed.success) return { ok: false, error: 'Invalid search parameters.' }
   try {
     const ids = await getCachedAvailableIds(parsed.data.checkIn, parsed.data.checkOut, parsed.data.guests)
-    return { availableIds: ids }
-  } catch {
-    return { error: 'Availability search failed. Please try again.' }
+    return { ok: true, availableIds: ids }
+  } catch (err) {
+    console.error('[searchAvailability]', err)
+    return { ok: false, error: 'Availability search failed. Please try again.' }
   }
 }
 ```
@@ -106,24 +114,37 @@ Adds `searchError` state for its direct `searchAvailability` call. Handles discr
 `searchAvailability` changes from `{ availableIds: null }` stub to:
 
 ```typescript
-{ availableIds: string[] } | { error: string }
+{ ok: true; availableIds: string[] } | { ok: false; error: string }
 ```
 
 `AvailabilityResult` is exported from `src/actions/availability.ts` for use by call sites.
 
 All call sites updated:
-- `AvailabilityForm.onSubmit` — handles error internally, calls `onResult` on success only
-- `our-homes-client.tsx` handler — checks `'error' in result` before calling `setAvailableIds`
+- `AvailabilityForm.onSubmit` — checks `result.ok`, handles error state internally, calls `onResult` on success only
+- `our-homes-client.tsx` handler — checks `result.ok` before calling `setAvailableIds` (both call sites intentional — this component has its own custom DayPicker UI, not `AvailabilityForm`)
+
+## Zod Schema Updates
+
+`src/lib/schemas/availability.ts` gains a past-date guard:
+
+```typescript
+.refine((d) => d.checkIn >= new Date().toISOString().split('T')[0], {
+  message: 'Check-in must be today or later',
+  path: ['checkIn'],
+})
+```
+
+Existing `checkOut > checkIn` refine is retained. Invalid ranges never reach the SDK.
 
 ## Edge Cases
 
 | Case | Behaviour |
 |------|-----------|
-| SDK returns `[]` | `{ availableIds: [] }` → existing "no properties found" UI |
-| `external_id` null on some results | `.filter(Boolean)` drops silently |
-| Env vars missing | `getPmsClient()` throws → caught → inline error |
-| Rate limit hit (cold start burst) | SDK throws → caught → inline error |
-| Same params within 15 min | Cache hit, no SDK call |
+| SDK returns `[]` | `{ ok: true, availableIds: [] }` → existing "no properties found" UI |
+| `external_id` null on some results | Type-safe `.filter()` drops them |
+| Env vars missing | `getPmsClient()` throws → caught + logged → inline error |
+| Rate limit hit (cold start burst) | SDK throws → caught + logged → inline error |
+| Same params within 2 min | Cache hit, no SDK call |
 
 ## Environment Variables
 
