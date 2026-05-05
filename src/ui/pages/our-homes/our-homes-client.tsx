@@ -350,11 +350,11 @@ export default function OurHomesClient({ properties }: Props) {
 			</div>
 
 			{availableIds !== null && (
-				<div className="ml-[10%] mr-[10%] mb-2 flex items-center gap-2 font-sans text-xs text-muted tracking-[0.05em]">
+				<div className="px-[90px] max-[820px]:px-[18px] mb-2 flex items-center gap-2 font-sans text-xs text-muted tracking-[0.05em]">
 					<span>
-						Showing {displayed.length} of {properties.length} propert{properties.length === 1 ? 'y' : 'ies'}
+						Showing {displayed.length} of {properties.length} propert{displayed.length === 1 ? 'y' : 'ies'}
 					</span>
-					<span>·</span>
+					<span aria-hidden="true">·</span>
 					<button
 						type="button"
 						onClick={handleClearSearch}
