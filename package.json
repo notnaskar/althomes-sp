@@ -3,6 +3,7 @@
   "version": "0.0.81",
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
+    "@onemineral/pms-js-sdk": "^0.2.12",
     "@portabletext/to-html": "^5.0.2",
     "@sanity/assist": "^6.0.4",
     "@sanity/cli": "^6.3.2",
