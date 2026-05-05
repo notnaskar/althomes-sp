@@ -1,8 +1,14 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
-import { DayPicker, useDayPicker, type DateRange, type MonthCaptionProps } from 'react-day-picker'
 import { format } from 'date-fns'
+import { useEffect, useRef, useState } from 'react'
+import {
+	DayPicker,
+	useDayPicker,
+	type DateRange,
+	type MonthCaptionProps,
+} from 'react-day-picker'
+import { toast } from 'sonner'
 import { searchAvailability } from '@/actions/availability'
 import type { ALL_PROPERTIES_QUERY_RESULT } from '@/sanity/types'
 import PropertyShowcase from './property-showcase'
@@ -18,18 +24,37 @@ const counterBtnClass =
 	'flex h-7 w-7 items-center justify-center rounded-full border border-muted text-foreground text-sm font-semibold transition hover:border-foreground hover:bg-accent hover:text-accent-foreground select-none'
 
 const MONTH_NAMES = [
-	'January','February','March','April','May','June',
-	'July','August','September','October','November','December',
+	'January',
+	'February',
+	'March',
+	'April',
+	'May',
+	'June',
+	'July',
+	'August',
+	'September',
+	'October',
+	'November',
+	'December',
 ]
 
-function CustomCaption({ calendarMonth, displayIndex: _displayIndex, ...rest }: MonthCaptionProps) {
+function CustomCaption({
+	calendarMonth,
+	displayIndex: _displayIndex,
+	...rest
+}: MonthCaptionProps) {
 	const { goToMonth, nextMonth, previousMonth, dayPickerProps } = useDayPicker()
 	const d = calendarMonth.date
 	const month = d.getMonth()
 	const year = d.getFullYear()
 	const startYear = (dayPickerProps.startMonth ?? new Date()).getFullYear()
-	const endYear = (dayPickerProps.endMonth ?? new Date(year + 2, 11)).getFullYear()
-	const years = Array.from({ length: endYear - startYear + 1 }, (_, i) => startYear + i)
+	const endYear = (
+		dayPickerProps.endMonth ?? new Date(year + 2, 11)
+	).getFullYear()
+	const years = Array.from(
+		{ length: endYear - startYear + 1 },
+		(_, i) => startYear + i,
+	)
 
 	const selectClass =
 		'appearance-none bg-transparent text-xs font-semibold uppercase tracking-[0.1em] text-foreground cursor-pointer focus:outline-none'
@@ -37,7 +62,7 @@ function CustomCaption({ calendarMonth, displayIndex: _displayIndex, ...rest }: 
 		'flex h-7 w-7 items-center justify-center text-muted hover:text-foreground transition-colors disabled:opacity-30 disabled:cursor-not-allowed text-base'
 
 	return (
-		<div {...rest} className="flex items-center gap-2 mb-3">
+		<div {...rest} className="mb-3 flex items-center gap-2">
 			<button
 				type="button"
 				onClick={() => previousMonth && goToMonth(previousMonth)}
@@ -54,16 +79,22 @@ function CustomCaption({ calendarMonth, displayIndex: _displayIndex, ...rest }: 
 					className={selectClass}
 				>
 					{MONTH_NAMES.map((name, i) => (
-						<option key={i} value={i}>{name}</option>
+						<option key={i} value={i}>
+							{name}
+						</option>
 					))}
 				</select>
 				<select
 					value={year}
-					onChange={(e) => goToMonth(new Date(Number(e.target.value), month, 1))}
+					onChange={(e) =>
+						goToMonth(new Date(Number(e.target.value), month, 1))
+					}
 					className={selectClass}
 				>
 					{years.map((y) => (
-						<option key={y} value={y}>{y}</option>
+						<option key={y} value={y}>
+							{y}
+						</option>
 					))}
 				</select>
 			</div>
@@ -114,7 +145,6 @@ export default function OurHomesClient({ properties }: Props) {
 	const [calendarOpen, setCalendarOpen] = useState(false)
 	const [availableIds, setAvailableIds] = useState<string[] | null>(null)
 	const [isSearching, setIsSearching] = useState(false)
-	const [searchError, setSearchError] = useState<string | null>(null)
 	const [errors, setErrors] = useState<{ dates?: string }>({})
 	const barRef = useRef<HTMLDivElement>(null)
 
@@ -141,6 +171,13 @@ export default function OurHomesClient({ properties }: Props) {
 		}
 	}
 
+	function handleClearSearch() {
+		setAvailableIds(null)
+		setRange(undefined)
+		setAdults(1)
+		setChildren(0)
+	}
+
 	const displayed = availableIds
 		? properties.filter(
 				(p) =>
@@ -155,7 +192,6 @@ export default function OurHomesClient({ properties }: Props) {
 			return
 		}
 		setErrors({})
-		setSearchError(null)
 		setIsSearching(true)
 		const result = await searchAvailability({
 			checkIn: format(range.from, 'yyyy-MM-dd'),
@@ -164,10 +200,14 @@ export default function OurHomesClient({ properties }: Props) {
 		})
 		setIsSearching(false)
 		if (!result.ok) {
-			setSearchError(result.error)
+			toast.error(result.error)
 			return
 		}
 		setAvailableIds(result.availableIds)
+		if (result.availableIds.length > 0) {
+			const count = result.availableIds.length
+			toast.success(`Found ${count} available propert${count === 1 ? 'y' : 'ies'}`)
+		}
 	}
 
 	return (
@@ -175,26 +215,26 @@ export default function OurHomesClient({ properties }: Props) {
 			{/* Availability bar */}
 			<div
 				ref={barRef}
-				className="relative bg-white ml-[10%] mr-[10%] mt-[32px] mb-[32px] z-10 flex flex-row items-end gap-[40px] px-[32px] pt-8 pb-10 max-[820px]:flex-col max-[820px]:items-stretch max-[820px]:gap-5 max-[820px]:px-[18px] max-[820px]:pt-7 max-[820px]:pb-8"
+				className="relative z-10 mt-[32px] mr-[10%] mb-[32px] ml-[10%] flex flex-row items-end gap-[40px] bg-white px-[32px] pt-8 pb-10 max-[820px]:flex-col max-[820px]:items-stretch max-[820px]:gap-5 max-[820px]:px-[18px] max-[820px]:pt-7 max-[820px]:pb-8"
 			>
 				{/* Date range trigger */}
 				<div className="relative flex-[2]">
 					<button
 						type="button"
 						onClick={() => setCalendarOpen((v) => !v)}
-						className="w-full text-left focus:outline-none group"
+						className="group w-full text-left focus:outline-none"
 					>
 						<span className={labelClass}>Check In / Check Out</span>
-						<div className="flex items-center gap-2 min-h-[24px]">
-							<span className="text-[15px] tracking-[0.1em] font-sans text-foreground">
+						<div className="flex min-h-[24px] items-center gap-2">
+							<span className="text-foreground font-sans text-[15px] tracking-[0.1em]">
 								{range?.from ? (
 									format(range.from, 'dd MMM yyyy')
 								) : (
 									<span className="text-muted">Add dates</span>
 								)}
 							</span>
-							<span className="text-muted text-[15px] font-sans">→</span>
-							<span className="text-[15px] tracking-[0.1em] font-sans text-foreground">
+							<span className="text-muted font-sans text-[15px]">→</span>
+							<span className="text-foreground font-sans text-[15px] tracking-[0.1em]">
 								{range?.to ? (
 									format(range.to, 'dd MMM yyyy')
 								) : (
@@ -202,13 +242,13 @@ export default function OurHomesClient({ properties }: Props) {
 								)}
 							</span>
 						</div>
-						<div className="mt-1.5 h-px w-full bg-muted transition-colors group-focus:bg-foreground" />
+						<div className="bg-muted group-focus:bg-foreground mt-1.5 h-px w-full transition-colors" />
 					</button>
 					{(range?.from || range?.to) && (
 						<button
 							type="button"
-							onClick={() => setRange(undefined)}
-							className="mt-1 text-[11px] text-muted hover:text-foreground tracking-[0.1em] font-sans uppercase transition-colors"
+							onClick={() => { setRange(undefined); setAvailableIds(null) }}
+							className="text-muted hover:text-foreground mt-1 font-sans text-[11px] tracking-[0.1em] uppercase transition-colors"
 						>
 							Clear dates
 						</button>
@@ -221,7 +261,7 @@ export default function OurHomesClient({ properties }: Props) {
 
 					{/* Calendar popover — anchored to this field's width */}
 					{calendarOpen && (
-						<div className="absolute top-full left-0 z-50 mt-1 min-w-full rounded-xl border border-[color:var(--color-stroke)] bg-white shadow-xl overflow-x-auto">
+						<div className="absolute top-full left-0 z-50 mt-1 min-w-full overflow-x-auto rounded-xl border border-[color:var(--color-stroke)] bg-white shadow-xl">
 							<DayPicker
 								mode="range"
 								selected={range}
@@ -249,7 +289,7 @@ export default function OurHomesClient({ properties }: Props) {
 						>
 							−
 						</button>
-						<span className="w-4 text-center text-[15px] tracking-[0.1em] font-sans text-foreground">
+						<span className="text-foreground w-4 text-center font-sans text-[15px] tracking-[0.1em]">
 							{adults}
 						</span>
 						<button
@@ -261,7 +301,7 @@ export default function OurHomesClient({ properties }: Props) {
 							+
 						</button>
 					</div>
-					<div className="h-px w-full bg-muted" />
+					<div className="bg-muted h-px w-full" />
 				</div>
 
 				{/* Children */}
@@ -276,7 +316,7 @@ export default function OurHomesClient({ properties }: Props) {
 						>
 							−
 						</button>
-						<span className="w-4 text-center text-[15px] tracking-[0.1em] font-sans text-foreground">
+						<span className="text-foreground w-4 text-center font-sans text-[15px] tracking-[0.1em]">
 							{children}
 						</span>
 						<button
@@ -288,7 +328,7 @@ export default function OurHomesClient({ properties }: Props) {
 							+
 						</button>
 					</div>
-					<div className="h-px w-full bg-muted" />
+					<div className="bg-muted h-px w-full" />
 				</div>
 
 				{/* Submit */}
@@ -296,20 +336,17 @@ export default function OurHomesClient({ properties }: Props) {
 					type="button"
 					onClick={handleSearch}
 					disabled={isSearching}
-					className="bg-accent text-accent-foreground inline-flex flex-shrink-0 cursor-pointer items-center justify-center rounded-[5px] px-[22px] py-3 text-[12px] font-bold tracking-[0.3em] whitespace-nowrap uppercase transition hover:bg-accent/90 disabled:opacity-50 select-none"
+					className="bg-accent text-accent-foreground hover:bg-accent/90 inline-flex flex-shrink-0 cursor-pointer items-center justify-center rounded-[5px] px-[22px] py-3 text-[12px] font-bold tracking-[0.3em] whitespace-nowrap uppercase transition select-none disabled:opacity-50"
 				>
 					{isSearching ? 'SEARCHING…' : 'FIND AVAILABILITY'}
 				</button>
-				{searchError && (
-					<p className="mt-1 text-xs text-red-600">{searchError}</p>
-				)}
 
 			</div>
 
 			{/* Property listing */}
 			<section className="px-[90px] max-[820px]:px-[18px]">
 				{availableIds !== null && displayed.length === 0 ? (
-					<p className="py-12 text-center text-muted font-sans">
+					<p className="text-muted py-12 text-center font-sans">
 						No properties available for the selected dates. Try different dates.
 					</p>
 				) : (
