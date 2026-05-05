@@ -349,15 +349,40 @@ export default function OurHomesClient({ properties }: Props) {
 				</button>
 			</div>
 
+			{availableIds !== null && (
+				<div className="ml-[10%] mr-[10%] mb-2 flex items-center gap-2 font-sans text-xs text-muted tracking-[0.05em]">
+					<span>
+						Showing {displayed.length} of {properties.length} propert{properties.length === 1 ? 'y' : 'ies'}
+					</span>
+					<span>·</span>
+					<button
+						type="button"
+						onClick={handleClearSearch}
+						className="underline underline-offset-2 hover:text-foreground transition-colors"
+					>
+						Clear search
+					</button>
+				</div>
+			)}
+
 			{/* Property listing */}
 			<section
 				ref={resultsRef}
 				className={`px-[90px] max-[820px]:px-[18px] transition-opacity duration-300${isSearching ? ' opacity-50 pointer-events-none' : ''}`}
 			>
 				{availableIds !== null && displayed.length === 0 ? (
-					<p className="text-muted py-12 text-center font-sans">
-						No properties available for the selected dates. Try different dates.
-					</p>
+					<div className="py-12 text-center">
+						<p className="mb-6 font-sans text-muted">
+							No properties available for the selected dates.
+						</p>
+						<button
+							type="button"
+							onClick={handleClearSearch}
+							className="rounded-[5px] bg-accent px-6 py-3 text-sm font-bold uppercase tracking-[0.3em] text-accent-foreground transition hover:bg-accent/90"
+						>
+							Show all properties
+						</button>
+					</div>
 				) : (
 					displayed.map((property, index) => (
 						<div key={property._id} className={index > 0 ? 'mt-10' : undefined}>
