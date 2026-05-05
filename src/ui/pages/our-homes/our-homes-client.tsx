@@ -114,6 +114,7 @@ export default function OurHomesClient({ properties }: Props) {
 	const [calendarOpen, setCalendarOpen] = useState(false)
 	const [availableIds, setAvailableIds] = useState<string[] | null>(null)
 	const [isSearching, setIsSearching] = useState(false)
+	const [searchError, setSearchError] = useState<string | null>(null)
 	const [errors, setErrors] = useState<{ dates?: string }>({})
 	const barRef = useRef<HTMLDivElement>(null)
 
@@ -154,14 +155,19 @@ export default function OurHomesClient({ properties }: Props) {
 			return
 		}
 		setErrors({})
+		setSearchError(null)
 		setIsSearching(true)
 		const result = await searchAvailability({
 			checkIn: format(range.from, 'yyyy-MM-dd'),
 			checkOut: format(range.to, 'yyyy-MM-dd'),
 			guests: adults + children,
 		})
-		setAvailableIds(result.availableIds)
 		setIsSearching(false)
+		if (!result.ok) {
+			setSearchError(result.error)
+			return
+		}
+		setAvailableIds(result.availableIds)
 	}
 
 	return (
@@ -294,6 +300,9 @@ export default function OurHomesClient({ properties }: Props) {
 				>
 					{isSearching ? 'SEARCHING…' : 'FIND AVAILABILITY'}
 				</button>
+				{searchError && (
+					<p className="mt-1 text-xs text-red-600">{searchError}</p>
+				)}
 
 			</div>
 
