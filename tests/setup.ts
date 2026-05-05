@@ -4,6 +4,8 @@ import { vi } from 'vitest'
 process.env.SANITY_API_READ_TOKEN = 'test-token'
 process.env.NEXT_PUBLIC_SANITY_PROJECT_ID = '0uc19iuo'
 process.env.NEXT_PUBLIC_SANITY_DATASET = 'production'
+process.env.RENTALWISE_API_HOST = 'https://test.rentalwise.com'
+process.env.RENTALWISE_API_TOKEN = 'test-token'
 
 // Mock server-only to prevent errors when imported from test environment
 vi.mock('server-only', () => ({}))
@@ -24,4 +26,8 @@ vi.mock('next-sanity/live', () => ({
 		sanityFetch: vi.fn(async () => ({ data: {} })),
 		SanityLive: vi.fn(() => null),
 	})),
+}))
+
+vi.mock('next/cache', () => ({
+	unstable_cache: (fn: (...args: unknown[]) => unknown) => fn,
 }))
