@@ -4,7 +4,6 @@ import { getAltWayPage, getSite } from '@/sanity/lib/data'
 import Img from '@/ui/img'
 import ReviewsSection from '@/ui/molecules/reviews-section'
 import OurHomesCta from '@/ui/pages/our-homes/our-homes-cta'
-import TheAltWayCta from '@/ui/pages/the-alt-way/the-alt-way-cta'
 
 export default async function AltWayPage() {
 	const page = await getAltWayPage()
@@ -190,13 +189,11 @@ export default async function AltWayPage() {
 
 			{/* Promise CTA */}
 			{(page.promiseText || page.promiseCTALabel) && (
-				<TheAltWayCta
+				<OurHomesCta
 					ctaQuestion={page.promiseText ?? null}
 					ctaButtonLabel={page.promiseCTALabel ?? null}
 					ctaHref={page.promiseCTAHref ?? null}
 					ctaBackground={page.promiseBackground ?? null}
-					ctaDecorLeft={page.promiseCTADecorLeft ?? null}
-					ctaDecorRight={page.promiseCTADecorRight ?? null}
 					noOverlap={false}
 				/>
 			)}
