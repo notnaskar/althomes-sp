@@ -301,7 +301,7 @@ export default function OurHomesClient({ properties }: Props) {
 						</span>
 						<button
 							type="button"
-							onClick={() => setAdults((v) => v + 1)}
+							onClick={() => setAdults((v) => Math.min(16, v + 1))}
 							className={counterBtnClass}
 							aria-label="Increase adults"
 						>
@@ -328,7 +328,7 @@ export default function OurHomesClient({ properties }: Props) {
 						</span>
 						<button
 							type="button"
-							onClick={() => setChildren((v) => v + 1)}
+							onClick={() => setChildren((v) => Math.min(16, v + 1))}
 							className={counterBtnClass}
 							aria-label="Increase children"
 						>
