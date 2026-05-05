@@ -176,6 +176,7 @@ export default function OurHomesClient({ properties }: Props) {
 		setRange(undefined)
 		setAdults(1)
 		setChildren(0)
+		setErrors({})
 	}
 
 	const displayed = availableIds
@@ -206,7 +207,9 @@ export default function OurHomesClient({ properties }: Props) {
 		setAvailableIds(result.availableIds)
 		if (result.availableIds.length > 0) {
 			const count = result.availableIds.length
-			toast.success(`Found ${count} available propert${count === 1 ? 'y' : 'ies'}`)
+			toast.success(
+				`Found ${count} available propert${count === 1 ? 'y' : 'ies'}`,
+			)
 		}
 	}
 
@@ -247,7 +250,7 @@ export default function OurHomesClient({ properties }: Props) {
 					{(range?.from || range?.to) && (
 						<button
 							type="button"
-							onClick={() => { setRange(undefined); setAvailableIds(null) }}
+							onClick={handleClearSearch}
 							className="text-muted hover:text-foreground mt-1 font-sans text-[11px] tracking-[0.1em] uppercase transition-colors"
 						>
 							Clear dates
@@ -340,7 +343,6 @@ export default function OurHomesClient({ properties }: Props) {
 				>
 					{isSearching ? 'SEARCHING…' : 'FIND AVAILABILITY'}
 				</button>
-
 			</div>
 
 			{/* Property listing */}
