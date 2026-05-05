@@ -222,16 +222,29 @@ export default function OurHomesClient({ properties }: Props) {
 			{/* Availability bar */}
 			<div
 				ref={barRef}
-				className="relative z-10 mt-[32px] mr-[10%] mb-[32px] ml-[10%] flex flex-row items-end gap-[40px] bg-white px-[32px] pt-8 pb-10 max-[820px]:flex-col max-[820px]:items-stretch max-[820px]:gap-5 max-[820px]:px-[18px] max-[820px]:pt-7 max-[820px]:pb-8"
+				className="relative z-30 mt-[32px] mr-[10%] mb-[32px] ml-[10%] flex flex-row items-end gap-[40px] bg-white px-[32px] pt-8 pb-10 max-[820px]:flex-col max-[820px]:items-stretch max-[820px]:gap-5 max-[820px]:px-[18px] max-[820px]:pt-7 max-[820px]:pb-8"
 			>
 				{/* Date range trigger */}
 				<div className="relative flex-[2]">
+					<div className="mb-1 flex items-center justify-between">
+						<span className="text-xs font-semibold uppercase tracking-[0.1em] text-muted font-sans">
+							Check In / Check Out
+						</span>
+						{(range?.from || range?.to) && (
+							<button
+								type="button"
+								onClick={handleClearSearch}
+								className="text-muted hover:text-foreground font-sans text-[11px] tracking-[0.1em] uppercase transition-colors"
+							>
+								Clear dates
+							</button>
+						)}
+					</div>
 					<button
 						type="button"
 						onClick={() => setCalendarOpen((v) => !v)}
 						className="group w-full text-left focus:outline-none"
 					>
-						<span className={labelClass}>Check In / Check Out</span>
 						<div className="flex min-h-[24px] items-center gap-2">
 							<span className="text-foreground font-sans text-[15px] tracking-[0.1em]">
 								{range?.from ? (
@@ -251,15 +264,6 @@ export default function OurHomesClient({ properties }: Props) {
 						</div>
 						<div className="bg-muted group-focus:bg-foreground mt-1.5 h-px w-full transition-colors" />
 					</button>
-					{(range?.from || range?.to) && (
-						<button
-							type="button"
-							onClick={handleClearSearch}
-							className="text-muted hover:text-foreground mt-1 font-sans text-[11px] tracking-[0.1em] uppercase transition-colors"
-						>
-							Clear dates
-						</button>
-					)}
 					{errors.dates && (
 						<p className="mt-1 text-xs text-[color:var(--color-terracotta)]">
 							{errors.dates}
@@ -352,7 +356,7 @@ export default function OurHomesClient({ properties }: Props) {
 			</div>
 
 			{availableIds !== null && (
-				<div className="px-[90px] max-[820px]:px-[18px] mb-2 flex items-center gap-2 font-sans text-xs text-muted tracking-[0.05em]">
+				<div className="relative z-20 px-[90px] max-[820px]:px-[18px] mb-2 flex items-center gap-2 font-sans text-xs text-muted tracking-[0.05em]">
 					<span>
 						Showing {displayed.length} of {properties.length} propert{displayed.length === 1 ? 'y' : 'ies'}
 					</span>
@@ -370,7 +374,7 @@ export default function OurHomesClient({ properties }: Props) {
 			{/* Property listing */}
 			<section
 				ref={resultsRef}
-				className={`px-[90px] max-[820px]:px-[18px] transition-opacity duration-300${isSearching ? ' opacity-50 pointer-events-none' : ''}`}
+				className={`relative z-20 px-[90px] max-[820px]:px-[18px] transition-opacity duration-300${isSearching ? ' opacity-50 pointer-events-none' : ''}`}
 			>
 				{availableIds !== null && displayed.length === 0 ? (
 					<div className="py-12 text-center">
