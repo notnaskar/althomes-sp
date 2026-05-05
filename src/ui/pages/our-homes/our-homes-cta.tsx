@@ -28,7 +28,7 @@ export default function OurHomesCta({
 }: Props) {
 	return (
 		<section
-			className={`relative flex min-h-[720px] flex-col items-center justify-end overflow-hidden pb-[190px] max-[820px]:min-h-[360px] max-[820px]:pb-20${noOverlap ? '' : 'z-[-1] mt-[-300px]'}`}
+			className={`relative flex min-h-[720px] lg:mt-[-280px] flex-col items-center justify-end overflow-hidden pb-[200px] max-[820px]:min-h-[360px] max-[820px]:pb-20${noOverlap ? '' : ' z-[-1] mt-[-300px]'}`}
 		>
 			{/* CONTENT: ctaBackground */}
 			{ctaBackground?.asset && (

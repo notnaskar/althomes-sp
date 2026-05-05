@@ -127,6 +127,13 @@ export default defineType({
 			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
 		}),
 		defineField({
+			name: 'statsBackground',
+			title: 'Stats — Background Image',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
+		}),
+		defineField({
 			name: 'statsHeadline',
 			title: 'Stats Headline',
 			type: 'string',

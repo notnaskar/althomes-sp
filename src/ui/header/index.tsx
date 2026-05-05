@@ -6,7 +6,7 @@ export default async function Header() {
 	const site = await getSite()
 
 	return (
-		<header className="fixed top-0 right-0 left-0 z-10 flex items-center justify-between [padding:44px_90px_0] max-[820px]:[padding:36px_18px_0]">
+		<header className="fixed z-100 top-0 right-0 left-0 z-10 flex items-center justify-between [padding:44px_90px_0] max-[820px]:[padding:36px_18px_0]">
 			{/* Logo — hidden on mobile */}
 			<Logo className="[height:75px] [width:215px] flex-shrink-0 has-[img]:[height:75px] max-[820px]:hidden" />
 

@@ -36,6 +36,7 @@ export const ALT_WAY_PAGE_QUERY =
 	promiseCTADecorLeft { asset->, alt },
 	promiseCTADecorRight { asset->, alt },
 	bottomCTABackground { asset->, alt },
+	statsBackground { asset->, alt },
 	reviews[]->{
 		guestName, rating, body, guestLocation, stayDate,
 		guestPhoto { asset->, alt },

@@ -40,14 +40,16 @@ export default function ExperienceCard({
 				'group block w-full transition-transform duration-300',
 				'motion-safe:' + tiltClass,
 				'hover:scale-[1.02] hover:rotate-0',
-				'focus-visible:ring-primary focus-visible:ring-2 focus-visible:ring-offset-2',
+				'focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
 			].join(' ')}
 		>
 			{/* Outer beige shell */}
-			<div className="rounded-[5px] bg-[var(--color-card-shell)] p-[16px] pb-[20px]">
+			<div
+				className="rounded-[5px] p-[16px] pb-[20px] bg-[var(--color-white)]"
+			>
 				{/* Image area — fixed aspect ratio matches Figma 327×340 */}
 				<div
-					className="bg-muted relative w-full overflow-hidden rounded-[5px]"
+					className="relative w-full overflow-hidden rounded-[5px] bg-muted"
 					style={{
 						aspectRatio: '327 / 340',
 					}}

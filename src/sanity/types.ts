@@ -1526,6 +1526,14 @@ export type AltWayPage = {
 		alt?: string
 		_type: 'image'
 	}
+	statsBackground?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
 	statsHeadline?: string
 	stats?: Array<{
 		value?: string
@@ -2326,7 +2334,7 @@ export type OUR_HOMES_PAGE_QUERY_RESULT = {
 
 // Source: src/sanity/lib/queries.ts
 // Variable: ALT_WAY_PAGE_QUERY
-// Query: *[_type == 'altWayPage' && _id == 'altWayPage'][0]{	...,	heroBackground { asset->, alt },	missionImage { asset->, alt },	missionDecorImage { asset->, alt },	valuePropEditorialImage { asset->, alt },	valuePropEditorialDecorLeft { asset->, alt },	valuePropEditorialDecorRight { asset->, alt },	valuePropSecondaryImage { asset->, alt },	promiseBackground { asset->, alt },	promiseCTADecorLeft { asset->, alt },	promiseCTADecorRight { asset->, alt },	bottomCTABackground { asset->, alt },	reviews[]->{		guestName, rating, body, guestLocation, stayDate,		guestPhoto { asset->, alt },		"propertyTitle": property->title	}}
+// Query: *[_type == 'altWayPage' && _id == 'altWayPage'][0]{	...,	heroBackground { asset->, alt },	missionImage { asset->, alt },	missionDecorImage { asset->, alt },	valuePropEditorialImage { asset->, alt },	valuePropEditorialDecorLeft { asset->, alt },	valuePropEditorialDecorRight { asset->, alt },	valuePropSecondaryImage { asset->, alt },	promiseBackground { asset->, alt },	promiseCTADecorLeft { asset->, alt },	promiseCTADecorRight { asset->, alt },	bottomCTABackground { asset->, alt },	statsBackground { asset->, alt },	reviews[]->{		guestName, rating, body, guestLocation, stayDate,		guestPhoto { asset->, alt },		"propertyTitle": property->title	}}
 export type ALT_WAY_PAGE_QUERY_RESULT = {
 	_id: 'altWayPage'
 	_type: 'altWayPage'
@@ -2571,6 +2579,31 @@ export type ALT_WAY_PAGE_QUERY_RESULT = {
 		alt: string | null
 	} | null
 	promiseCTADecorRight: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
+	statsBackground: {
 		asset: {
 			_id: string
 			_type: 'sanity.imageAsset'
@@ -4093,7 +4126,7 @@ declare module '@sanity/client' {
 		"*[_type == 'site' && _id == 'site'][0]": SITE_QUERY_RESULT
 		"*[_type == 'homePage' && _id == 'homePage'][0]{\n\t...,\n\theroImage { asset->, alt },\n\tnavLabels[]{\n\t\t...,\n\t\ttarget->{ _type, \"slug\": slug.current }\n\t}\n}": HOME_PAGE_QUERY_RESULT
 		"*[_type == 'ourHomesPage' && _id == 'ourHomesPage'][0]{\n\theroHeadline,\n\theroImage { asset->, alt },\n\tctaQuestion,\n\texperiencesCtaLabel,\n\tctaBackground { asset->, alt },\n\tseo\n}": OUR_HOMES_PAGE_QUERY_RESULT
-		"*[_type == 'altWayPage' && _id == 'altWayPage'][0]{\n\t...,\n\theroBackground { asset->, alt },\n\tmissionImage { asset->, alt },\n\tmissionDecorImage { asset->, alt },\n\tvaluePropEditorialImage { asset->, alt },\n\tvaluePropEditorialDecorLeft { asset->, alt },\n\tvaluePropEditorialDecorRight { asset->, alt },\n\tvaluePropSecondaryImage { asset->, alt },\n\tpromiseBackground { asset->, alt },\n\tpromiseCTADecorLeft { asset->, alt },\n\tpromiseCTADecorRight { asset->, alt },\n\tbottomCTABackground { asset->, alt },\n\treviews[]->{\n\t\tguestName, rating, body, guestLocation, stayDate,\n\t\tguestPhoto { asset->, alt },\n\t\t\"propertyTitle\": property->title\n\t}\n}": ALT_WAY_PAGE_QUERY_RESULT
+		"*[_type == 'altWayPage' && _id == 'altWayPage'][0]{\n\t...,\n\theroBackground { asset->, alt },\n\tmissionImage { asset->, alt },\n\tmissionDecorImage { asset->, alt },\n\tvaluePropEditorialImage { asset->, alt },\n\tvaluePropEditorialDecorLeft { asset->, alt },\n\tvaluePropEditorialDecorRight { asset->, alt },\n\tvaluePropSecondaryImage { asset->, alt },\n\tpromiseBackground { asset->, alt },\n\tpromiseCTADecorLeft { asset->, alt },\n\tpromiseCTADecorRight { asset->, alt },\n\tbottomCTABackground { asset->, alt },\n\tstatsBackground { asset->, alt },\n\treviews[]->{\n\t\tguestName, rating, body, guestLocation, stayDate,\n\t\tguestPhoto { asset->, alt },\n\t\t\"propertyTitle\": property->title\n\t}\n}": ALT_WAY_PAGE_QUERY_RESULT
 		"*[_type == 'experiencesPage' && _id == 'experiencesPage'][0]{\n\t...,\n\theroBackground { asset->, alt },\n\theroFlower { asset->, alt },\n\tdecorBasket { asset->, alt },\n\tdecorStars { asset->, alt },\n\tdecorDaisy { asset->, alt }\n}": EXPERIENCES_PAGE_QUERY_RESULT
 		"*[_type == 'joinUsPage' && _id == 'joinUsPage'][0]{\n\t...,\n\theroImage { asset->, alt },\n\tpropertyImage { asset->, alt },\n\theroDecorFlower { asset-> },\n\tcontentDecorImage { asset-> },\n\tformDecorBg { asset-> }\n}": JOIN_US_PAGE_QUERY_RESULT
 		"*[_type == 'contactPage' && _id == 'contactPage'][0]{\n\t...,\n\theroImage { asset->, alt },\n\tmobileHeroAsset { asset->, alt },\n\tbackgroundCloudAsset { asset->, alt },\n\tsideFlowerAsset { asset->, alt }\n}": CONTACT_PAGE_QUERY_RESULT

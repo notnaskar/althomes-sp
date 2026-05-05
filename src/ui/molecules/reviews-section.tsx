@@ -18,10 +18,10 @@ export default function ReviewsSection({ reviews }: { reviews: Review[] }) {
 	const next = () => setActive((i) => (i + 1) % total)
 
 	return (
-		<section className="bg-background w-full overflow-hidden px-[18px] lg:px-[10%]">
+		<section className="w-full overflow-hidden px-[18px] lg:px-[10%]">
 			<div className="flex min-h-[60vh] flex-col gap-8 lg:min-h-[640px] lg:flex-row lg:gap-12">
 				{/* ── Left column: heading + slider controls ── */}
-				<div className="relative flex flex-col justify-center px-[18px] py-12 lg:w-[40%] lg:px-[60px] lg:py-16">
+				<div className="relative flex flex-col justify-center px-[18px] py-12 lg:w-[60%] lg:py-16">
 					{/* Section label */}
 					<p className="text-secondary-foreground/60 mb-6 font-sans text-[11px] font-semibold tracking-[0.3em] uppercase">
 						{/* STATIC */}
@@ -63,7 +63,7 @@ export default function ReviewsSection({ reviews }: { reviews: Review[] }) {
 				</div>
 
 				{/* ── Right column: review card ── */}
-				<div className="bg-background flex flex-col items-center justify-center px-[18px] py-12 lg:w-[60%] lg:px-[60px] lg:py-16">
+				<div className="flex flex-col items-center justify-center px-[18px] py-12 lg:w-[60%] lg:py-16">
 					{/* Card — rotated on desktop */}
 					<div
 						key={active}
