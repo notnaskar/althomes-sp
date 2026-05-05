@@ -224,6 +224,20 @@ export default defineType({
 
 		// Intro
 		defineField({
+			name: 'detailIntroHeading',
+			title: 'Detail Intro Heading',
+			type: 'string',
+			description: 'Large heading shown on the left of the intro section on the property detail page.',
+			group: 'intro',
+		}),
+		defineField({
+			name: 'detailIntroBody',
+			title: 'Detail Intro Body',
+			type: 'text',
+			description: 'Body text shown on the right of the intro section on the property detail page.',
+			group: 'intro',
+		}),
+		defineField({
 			name: 'description',
 			title: 'Description',
 			type: 'blockContent',

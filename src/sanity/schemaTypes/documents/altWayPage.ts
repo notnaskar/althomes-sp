@@ -30,6 +30,13 @@ export default defineType({
 			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
 		}),
 		defineField({
+			name: 'missionDecorImage',
+			title: 'Mission — Decorative Overlay Image',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
+		}),
+		defineField({
 			name: 'missionText',
 			title: 'Mission Statement',
 			type: 'text',
@@ -55,18 +62,32 @@ export default defineType({
 			validation: (Rule) => Rule.max(4),
 		}),
 		defineField({
-			name: 'editorialImages',
-			title: 'Editorial Images',
-			type: 'array',
-			of: [
-				{
-					type: 'image',
-					options: { hotspot: true },
-					fields: [
-						defineField({ name: 'alt', type: 'string', title: 'Alt text' }),
-					],
-				},
-			],
+			name: 'valuePropEditorialImage',
+			title: 'Value Props — Main Editorial Image',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
+		}),
+		defineField({
+			name: 'valuePropEditorialDecorLeft',
+			title: 'Value Props — Left Decorative Overlay',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
+		}),
+		defineField({
+			name: 'valuePropEditorialDecorRight',
+			title: 'Value Props — Right Decorative Overlay',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
+		}),
+		defineField({
+			name: 'valuePropSecondaryImage',
+			title: 'Value Props — Secondary Image',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
 		}),
 		defineField({
 			name: 'promiseText',
@@ -77,6 +98,33 @@ export default defineType({
 			name: 'promiseCTALabel',
 			title: 'Promise CTA Label',
 			type: 'string',
+		}),
+		defineField({
+			name: 'promiseCTAHref',
+			title: 'Promise CTA Link',
+			type: 'string',
+			description: 'Destination URL, e.g. /our-homes',
+		}),
+		defineField({
+			name: 'promiseBackground',
+			title: 'Promise CTA — Background Image',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
+		}),
+		defineField({
+			name: 'promiseCTADecorLeft',
+			title: 'Promise CTA — Left Decorative Image',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
+		}),
+		defineField({
+			name: 'promiseCTADecorRight',
+			title: 'Promise CTA — Right Decorative Image',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
 		}),
 		defineField({
 			name: 'statsHeadline',
@@ -108,6 +156,19 @@ export default defineType({
 			name: 'bottomCTALabel',
 			title: 'Bottom CTA Button Label',
 			type: 'string',
+		}),
+		defineField({
+			name: 'bottomCTABackground',
+			title: 'Bottom CTA — Background Image',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
+		}),
+		defineField({
+			name: 'bottomCTAHref',
+			title: 'Bottom CTA — Button Link',
+			type: 'string',
+			description: 'Destination URL, e.g. /experiences',
 		}),
 		defineField({
 			name: 'reviews',

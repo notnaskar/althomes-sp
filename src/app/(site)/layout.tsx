@@ -12,9 +12,11 @@ import {
 	Space_Mono,
 } from 'next/font/google'
 import localFont from 'next/font/local'
+import type { Metadata } from 'next'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { preconnect } from 'react-dom'
 import { getSite } from '@/sanity/lib/data'
+import { urlFor } from '@/sanity/lib/image'
 import { SanityLive } from '@/sanity/lib/live'
 import Footer from '@/ui/footer'
 import Header from '@/ui/header'
@@ -184,4 +186,14 @@ export default async function RootLayout({
 			</NuqsAdapter>
 		</html>
 	)
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+	const site = await getSite()
+	const favicon = site?.favicon
+	return {
+		icons: favicon?.asset
+			? { icon: urlFor(favicon).url() }
+			: { icon: '/favicon.ico' },
+	}
 }

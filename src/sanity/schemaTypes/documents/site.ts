@@ -44,6 +44,13 @@ export default defineType({
 			group: 'branding',
 		}),
 		defineField({
+			name: 'favicon',
+			title: 'Favicon',
+			type: 'image',
+			description: 'Browser tab icon (ICO or PNG, square)',
+			group: 'branding',
+		}),
+		defineField({
 			name: 'navCtaLabel',
 			title: 'Nav CTA Label',
 			type: 'string',

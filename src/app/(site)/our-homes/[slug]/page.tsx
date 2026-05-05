@@ -121,49 +121,25 @@ export default async function PropertyDetailPage({ params }: Props) {
 				>
 					<div className="flex flex-col lg:flex-row gap-8 lg:gap-[26px]">
 						{/* Left: subtitle (Playfair 30px) */}
-						{property.pullQuote && (
+						{property.detailIntroHeading && (
 							<div className="w-full lg:w-[527px] shrink-0">
 								<p className="font-heading text-[30px] leading-[40px] tracking-[0.1em] text-foreground">
-									{property.pullQuote}
+									{property.detailIntroHeading}
 								</p>
 							</div>
 						)}
 
 						{/* Right: short description + specs strip */}
 						<div className="flex flex-1 flex-col gap-[28px]">
-							{property.shortDescription && (
+							{property.detailIntroBody && (
 								<p className="font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground">
-									{property.shortDescription}
+									{property.detailIntroBody}
 								</p>
 							)}
 
 							{/* Specs strip */}
 							<div className="grid grid-cols-2 lg:flex lg:flex-row items-center justify-items-center gap-[14px]">
-								{property.propertyType && (
-									<div className="flex w-[96px] flex-col items-center gap-[3px]">
-										<div className="h-[46px] w-[46px]" />
-										<p className="text-center font-sans text-[15px] font-medium leading-[23px] tracking-[0.1em] text-foreground">
-											{property.propertyType}
-										</p>
-									</div>
-								)}
-								{property.maxGuests != null && (
-									<div className="flex w-[96px] flex-col items-center gap-[3px]">
-										<div className="h-[46px] w-[46px]" />
-										<p className="text-center font-sans text-[15px] font-medium leading-[23px] tracking-[0.1em] text-foreground">
-											Upto {property.maxGuests} Guests
-										</p>
-									</div>
-								)}
-								{property.bedrooms != null && property.bathrooms != null && (
-									<div className="flex w-[96px] flex-col items-center gap-[3px]">
-										<div className="h-[46px] w-[46px]" />
-										<p className="text-center font-sans text-[15px] font-medium leading-[23px] tracking-[0.1em] text-foreground">
-											{property.bedrooms} Rooms {property.bathrooms} Baths
-										</p>
-									</div>
-								)}
-								{property.amenities?.slice(0, 2).map((amenity, i) => (
+								{property.amenities?.map((amenity, i) => (
 									<div key={i} className="flex w-[82px] flex-col items-center gap-[3px]">
 										<div className="flex h-[46px] w-[46px] items-center justify-center text-foreground">
 											<ReactIcon name={amenity.icon} size={36} />
@@ -195,6 +171,11 @@ export default async function PropertyDetailPage({ params }: Props) {
 						{property.gallery?.[1] && (
 							<div className="absolute left-[46px] top-[265px] h-[216px] w-[55%] lg:w-[288px] overflow-hidden rounded-[5px]">
 								<Img image={property.gallery[1]} width={288} alt={property.gallery[1].alt ?? ''} className="h-full w-full object-cover" />
+							</div>
+						)}
+						{property.gallery?.[2] && (
+							<div className="pointer-events-none absolute -right-[10px] top-[310px] h-[30%] w-[470px]">
+								<Img image={property.gallery[2]} quality={100} width={470} alt={property.gallery[2].alt ?? ''} className="h-full w-full object-contain" />
 							</div>
 						)}
 					</div>
@@ -466,7 +447,6 @@ export default async function PropertyDetailPage({ params }: Props) {
 					ctaQuestion={property.ctaHeadline ?? null}
 					ctaButtonLabel={property.ctaButtonLabel ?? null}
 					ctaBackground={property.ctaBackground ?? null}
-					noOverlap
 				/>
 			</main>
 		</>
@@ -479,7 +459,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	const { metaTitle, metaDescription, ogImage } = property?.seo ?? {}
 	const title = metaTitle || `${property?.title ?? 'Property'} | AltHomes`
 	const description =
-		metaDescription || property?.shortDescription || site?.seo?.metaDescription
+		metaDescription || site?.seo?.metaDescription
 	return {
 		title,
 		description,

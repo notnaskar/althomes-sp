@@ -1,17 +1,21 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { urlFor } from '@/sanity/lib/image'
-import type { OUR_HOMES_PAGE_QUERY_RESULT } from '@/sanity/types'
 
 // FALLBACKS:
 // ctaButtonLabel → 'THE ALT HOME EXPERIENCES'
+// ctaHref → '/experiences'
 
-type PageData = NonNullable<OUR_HOMES_PAGE_QUERY_RESULT>
+type SanityImgField = {
+	asset?: { _ref?: string; _id?: string } | null
+	alt?: string | null
+} | null
 
 type Props = {
 	ctaQuestion: string | null
 	ctaButtonLabel: string | null
-	ctaBackground: PageData['ctaBackground']
+	ctaBackground: SanityImgField
+	ctaHref?: string | null
 	noOverlap?: boolean
 }
 
@@ -19,6 +23,7 @@ export default function OurHomesCta({
 	ctaQuestion,
 	ctaButtonLabel,
 	ctaBackground,
+	ctaHref,
 	noOverlap,
 }: Props) {
 	return (
@@ -30,7 +35,7 @@ export default function OurHomesCta({
 					alt={ctaBackground.alt ?? ''}
 					fill
 					sizes="100vw"
-					className="object-cover object-middletop"
+					className="object-cover object-top"
 					aria-hidden="true"
 				/>
 			)}
@@ -44,7 +49,7 @@ export default function OurHomesCta({
 				)}
 				{/* CONTENT: ctaButtonLabel */}
 				<Link
-					href="/experiences"
+					href={ctaHref ?? '/experiences'}
 					className="bg-accent text-accent-foreground inline-flex items-center justify-center rounded-[5px] px-[22px] py-3 text-[12px] font-bold tracking-[0.3em] whitespace-nowrap uppercase"
 				>
 					{ctaButtonLabel ?? 'THE ALT HOME EXPERIENCES'}
