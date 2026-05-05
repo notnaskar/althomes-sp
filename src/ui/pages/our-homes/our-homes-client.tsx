@@ -147,6 +147,7 @@ export default function OurHomesClient({ properties }: Props) {
 	const [isSearching, setIsSearching] = useState(false)
 	const [errors, setErrors] = useState<{ dates?: string }>({})
 	const barRef = useRef<HTMLDivElement>(null)
+	const resultsRef = useRef<HTMLElement>(null)
 
 	useEffect(() => {
 		if (!calendarOpen) return
@@ -205,6 +206,9 @@ export default function OurHomesClient({ properties }: Props) {
 			return
 		}
 		setAvailableIds(result.availableIds)
+		setTimeout(() => {
+			resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+		}, 50)
 		if (result.availableIds.length > 0) {
 			const count = result.availableIds.length
 			toast.success(
@@ -346,7 +350,10 @@ export default function OurHomesClient({ properties }: Props) {
 			</div>
 
 			{/* Property listing */}
-			<section className="px-[90px] max-[820px]:px-[18px]">
+			<section
+				ref={resultsRef}
+				className={`px-[90px] max-[820px]:px-[18px] transition-opacity duration-300${isSearching ? ' opacity-50 pointer-events-none' : ''}`}
+			>
 				{availableIds !== null && displayed.length === 0 ? (
 					<p className="text-muted py-12 text-center font-sans">
 						No properties available for the selected dates. Try different dates.
