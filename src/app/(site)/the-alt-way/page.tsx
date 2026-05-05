@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
-import OurHomesCta from '@/ui/pages/our-homes/our-homes-cta'
 import { notFound } from 'next/navigation'
 import { getAltWayPage, getSite } from '@/sanity/lib/data'
 import Img from '@/ui/img'
 import ReviewsSection from '@/ui/molecules/reviews-section'
+import OurHomesCta from '@/ui/pages/our-homes/our-homes-cta'
 import TheAltWayCta from '@/ui/pages/the-alt-way/the-alt-way-cta'
 
 export default async function AltWayPage() {
@@ -15,7 +15,7 @@ export default async function AltWayPage() {
 	return (
 		<main className="flex-1">
 			{/* Hero */}
-			<section className="relative w-full overflow-hidden bg-primary">
+			<section className="bg-primary relative w-full overflow-hidden">
 				{page.heroBackground && (
 					<Img
 						image={page.heroBackground}
@@ -28,7 +28,7 @@ export default async function AltWayPage() {
 				)}
 				<div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
 					{page.heroHeadline && (
-						<h1 className="text-[48px] leading-tight font-stories text-primary-foreground">
+						<h1 className="font-stories text-primary-foreground text-[48px] leading-tight">
 							{page.heroHeadline}
 							{page.heroHeadlineLine2 && (
 								<span className="mt-2 block">{page.heroHeadlineLine2}</span>
@@ -40,7 +40,7 @@ export default async function AltWayPage() {
 
 			{/* Mission split */}
 			{(page.missionImage || page.missionText) && (
-				<section className="px-[18px] md:px-[90px] grid items-center gap-12 md:gap-16 py-20 grid-cols-1 md:grid-cols-2">
+				<section className="grid grid-cols-1 items-center gap-12 px-[18px] py-20 md:grid-cols-2 md:gap-16 md:px-[90px]">
 					<div className="relative order-2 md:order-1">
 						{page.missionImage && (
 							<div className="overflow-hidden rounded-[5px]">
@@ -58,12 +58,12 @@ export default async function AltWayPage() {
 								width={288}
 								alt={page.missionDecorImage.alt ?? ''}
 								aria-hidden="true"
-								className="absolute -top-16 -right-8 z-10 w-40 rotate-[-11deg] object-contain pointer-events-none md:-top-24 md:-right-24 md:w-72"
+								className="pointer-events-none absolute -top-16 -right-8 z-10 w-40 rotate-[-11deg] object-contain md:-top-24 md:-right-24 md:w-72"
 							/>
 						)}
 					</div>
 					{page.missionText && (
-						<p className="order-1 text-left font-heading text-[19px] leading-[1.53] tracking-[0.07em] text-foreground md:order-2 md:text-right md:text-[30px] md:leading-[1.33]">
+						<p className="font-heading text-foreground order-1 text-left text-[19px] leading-[1.53] tracking-[0.07em] md:order-2 md:text-right md:text-[30px] md:leading-[1.33]">
 							{page.missionText}
 						</p>
 					)}
@@ -72,39 +72,55 @@ export default async function AltWayPage() {
 
 			{/* What's waiting for you (Value Props + Editorial Images) */}
 			{page.valueProps && page.valueProps.length > 0 && (
-				<section className="bg-background py-20 overflow-hidden">
+				<section className="bg-background overflow-hidden py-20">
 					<div className="px-[18px] md:px-[90px]">
 						{page.valuePropHeadline && (
 							<div className="mb-16 md:mb-20">
-								<h2 className="font-heading text-[24px] md:text-[40px] tracking-[0.2em] md:tracking-[0.3em] uppercase text-center md:text-left max-w-3xl">
+								<h2 className="font-heading max-w-3xl text-center text-[24px] tracking-[0.2em] uppercase md:text-left md:text-[40px] md:tracking-[0.3em]">
 									{page.valuePropHeadline}
 								</h2>
 							</div>
 						)}
-						<div className="flex flex-col md:grid md:grid-cols-3 gap-12 md:gap-x-12 md:gap-y-16 items-start relative">
+						<div className="relative flex flex-col items-start gap-12 md:grid md:grid-cols-3 md:gap-x-12 md:gap-y-16">
 							{/* Row 1 */}
 							{page.valueProps[0] && (
 								<div className="flex flex-col justify-start">
-									{page.valueProps[0].title && <h3 className="mb-4 text-xl md:text-2xl font-bold font-heading">{page.valueProps[0].title}</h3>}
-									{page.valueProps[0].body && <p className="leading-relaxed text-foreground/80 font-sans">{page.valueProps[0].body}</p>}
+									{page.valueProps[0].title && (
+										<h3 className="font-heading mb-4 text-xl font-bold md:text-2xl">
+											{page.valueProps[0].title}
+										</h3>
+									)}
+									{page.valueProps[0].body && (
+										<p className="text-foreground/80 font-sans leading-relaxed">
+											{page.valueProps[0].body}
+										</p>
+									)}
 								</div>
 							)}
 
 							{page.valueProps[1] && (
 								<div className="flex flex-col justify-start">
-									{page.valueProps[1].title && <h3 className="mb-4 text-xl md:text-2xl font-bold font-heading">{page.valueProps[1].title}</h3>}
-									{page.valueProps[1].body && <p className="leading-relaxed text-foreground/80 font-sans">{page.valueProps[1].body}</p>}
+									{page.valueProps[1].title && (
+										<h3 className="font-heading mb-4 text-xl font-bold md:text-2xl">
+											{page.valueProps[1].title}
+										</h3>
+									)}
+									{page.valueProps[1].body && (
+										<p className="text-foreground/80 font-sans leading-relaxed">
+											{page.valueProps[1].body}
+										</p>
+									)}
 								</div>
 							)}
 
-							<div className="relative w-full z-10">
-								<div className="overflow-hidden rounded-[5px] w-full aspect-[4/5] md:aspect-[3/4]">
+							<div className="relative z-10 w-full">
+								<div className="aspect-[4/5] w-full overflow-hidden rounded-[5px] md:aspect-[3/4]">
 									{page.valuePropEditorialImage && (
 										<Img
 											image={page.valuePropEditorialImage}
 											width={800}
 											alt={page.valuePropEditorialImage.alt ?? ''}
-											className="w-full h-full object-cover"
+											className="h-full w-full object-cover"
 										/>
 									)}
 								</div>
@@ -113,7 +129,7 @@ export default async function AltWayPage() {
 										image={page.valuePropEditorialDecorLeft}
 										width={160}
 										alt={page.valuePropEditorialDecorLeft.alt ?? ''}
-										className="absolute -left-8 top-[30%] w-28 drop-shadow-xl md:-left-16 md:w-40 z-10"
+										className="absolute top-[30%] -left-8 z-10 w-28 drop-shadow-xl md:-left-16 md:w-40"
 									/>
 								)}
 								{page.valuePropEditorialDecorRight && (
@@ -121,34 +137,50 @@ export default async function AltWayPage() {
 										image={page.valuePropEditorialDecorRight}
 										width={224}
 										alt={page.valuePropEditorialDecorRight.alt ?? ''}
-										className="absolute -right-6 -bottom-10 w-40 drop-shadow-xl md:-right-12 md:-bottom-12 md:w-56 z-20"
+										className="absolute -right-6 -bottom-10 z-20 w-40 drop-shadow-xl md:-right-12 md:-bottom-12 md:w-56"
 									/>
 								)}
 							</div>
 
 							{/* Row 2 */}
-							<div className="overflow-hidden rounded-[5px] aspect-[4/5] md:aspect-[3/4] w-full">
+							<div className="aspect-[4/5] w-full overflow-hidden rounded-[5px] md:aspect-[3/4]">
 								{page.valuePropSecondaryImage && (
 									<Img
 										image={page.valuePropSecondaryImage}
 										width={600}
 										alt={page.valuePropSecondaryImage.alt ?? ''}
-										className="w-full h-full object-cover"
+										className="h-full w-full object-cover"
 									/>
 								)}
 							</div>
 
 							{page.valueProps[2] && (
 								<div className="flex flex-col justify-start">
-									{page.valueProps[2].title && <h3 className="mb-4 text-xl md:text-2xl font-bold font-heading">{page.valueProps[2].title}</h3>}
-									{page.valueProps[2].body && <p className="leading-relaxed text-foreground/80 font-sans">{page.valueProps[2].body}</p>}
+									{page.valueProps[2].title && (
+										<h3 className="font-heading mb-4 text-xl font-bold md:text-2xl">
+											{page.valueProps[2].title}
+										</h3>
+									)}
+									{page.valueProps[2].body && (
+										<p className="text-foreground/80 font-sans leading-relaxed">
+											{page.valueProps[2].body}
+										</p>
+									)}
 								</div>
 							)}
 
 							{page.valueProps[3] && (
 								<div className="flex flex-col justify-start">
-									{page.valueProps[3].title && <h3 className="mb-4 text-xl md:text-2xl font-bold font-heading">{page.valueProps[3].title}</h3>}
-									{page.valueProps[3].body && <p className="leading-relaxed text-foreground/80 font-sans">{page.valueProps[3].body}</p>}
+									{page.valueProps[3].title && (
+										<h3 className="font-heading mb-4 text-xl font-bold md:text-2xl">
+											{page.valueProps[3].title}
+										</h3>
+									)}
+									{page.valueProps[3].body && (
+										<p className="text-foreground/80 font-sans leading-relaxed">
+											{page.valueProps[3].body}
+										</p>
+									)}
 								</div>
 							)}
 						</div>
@@ -171,10 +203,10 @@ export default async function AltWayPage() {
 
 			{/* Stats bar */}
 			{page.stats && page.stats.length > 0 && (
-				<section className="bg-primary py-16 text-primary-foreground">
+				<section className="bg-primary text-primary-foreground py-16">
 					<div className="px-[18px] md:px-[90px]">
 						{page.statsHeadline && (
-							<h2 className="mb-12 text-center text-2xl font-heading font-semibold text-primary-foreground/80">
+							<h2 className="font-heading text-primary-foreground/80 mb-12 text-center text-2xl font-semibold">
 								{page.statsHeadline}
 							</h2>
 						)}
@@ -182,17 +214,19 @@ export default async function AltWayPage() {
 							{page.stats.map((stat) => (
 								<div key={stat._key} className="text-center">
 									{stat.value && (
-										<p className="text-5xl font-bold text-primary-foreground">
+										<p className="text-primary-foreground text-5xl font-bold">
 											{stat.value}
 										</p>
 									)}
 									{stat.label && (
-										<p className="mt-2 text-sm font-semibold tracking-wide text-primary-foreground/80 uppercase">
+										<p className="text-primary-foreground/80 mt-2 text-sm font-semibold tracking-wide uppercase">
 											{stat.label}
 										</p>
 									)}
 									{stat.subtext && (
-										<p className="mt-1 text-xs text-primary-foreground/50">{stat.subtext}</p>
+										<p className="text-primary-foreground/50 mt-1 text-xs">
+											{stat.subtext}
+										</p>
 									)}
 								</div>
 							))}
@@ -202,9 +236,7 @@ export default async function AltWayPage() {
 			)}
 
 			{/* Reviews */}
-			{cappedReviews.length > 0 && (
-				<ReviewsSection reviews={cappedReviews} />
-			)}
+			{cappedReviews.length > 0 && <ReviewsSection reviews={cappedReviews} />}
 
 			{/* Bottom CTA */}
 			{(page.bottomCTAHeadline || page.bottomCTALabel) && (

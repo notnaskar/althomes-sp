@@ -52,19 +52,22 @@ export default defineType({
 			name: 'officeSectionTitle',
 			title: 'Office Section Title',
 			type: 'string',
-			description: 'Heading above the office address block. Defaults to "Our Office" if empty.',
+			description:
+				'Heading above the office address block. Defaults to "Our Office" if empty.',
 		}),
 		defineField({
 			name: 'followUsSectionTitle',
 			title: 'Follow Us Section Title',
 			type: 'string',
-			description: 'Heading above the social links block. Defaults to "Follow Us" if empty.',
+			description:
+				'Heading above the social links block. Defaults to "Follow Us" if empty.',
 		}),
 		defineField({
 			name: 'mobileHeroAsset',
 			title: 'Mobile Hero Asset',
 			type: 'image',
-			description: 'Decorative image (e.g. red tulip) overlapping the hero image on mobile view.',
+			description:
+				'Decorative image (e.g. red tulip) overlapping the hero image on mobile view.',
 			options: { hotspot: true },
 			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
 		}),
@@ -72,7 +75,8 @@ export default defineType({
 			name: 'backgroundCloudAsset',
 			title: 'Background Cloud Asset',
 			type: 'image',
-			description: 'Decorative cloud image placed behind the contact details text on desktop.',
+			description:
+				'Decorative cloud image placed behind the contact details text on desktop.',
 			options: { hotspot: true },
 			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
 		}),
@@ -80,7 +84,8 @@ export default defineType({
 			name: 'sideFlowerAsset',
 			title: 'Side Flower Asset',
 			type: 'image',
-			description: 'Decorative flower image positioned next to the contact form on desktop.',
+			description:
+				'Decorative flower image positioned next to the contact form on desktop.',
 			options: { hotspot: true },
 			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
 		}),

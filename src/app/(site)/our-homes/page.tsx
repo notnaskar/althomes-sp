@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getAllProperties, getOurHomesPage, getSite } from '@/sanity/lib/data'
+import OurHomesClient from '@/ui/pages/our-homes/our-homes-client'
 import OurHomesCta from '@/ui/pages/our-homes/our-homes-cta'
 import OurHomesHero from '@/ui/pages/our-homes/our-homes-hero'
-import OurHomesClient from '@/ui/pages/our-homes/our-homes-client'
 
 export default async function OurHomesPage() {
 	const [page, properties] = await Promise.all([

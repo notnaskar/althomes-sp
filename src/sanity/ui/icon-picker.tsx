@@ -1,5 +1,4 @@
-import type { StringInputProps } from 'sanity'
-import { set, unset, PatchEvent } from 'sanity'
+import { PatchEvent, set, unset, type StringInputProps } from 'sanity'
 import { Card, Flex, Grid, Stack, Text, TextInput } from '@sanity/ui'
 import { useState } from 'react'
 import { ICON_MAP } from '@/ui/atoms/icon-map'

@@ -7,11 +7,9 @@ export default async function Footer() {
 
 	return (
 		<footer className="bg-primary text-primary-foreground">
-			<div
-				className="flex flex-wrap gap-16 pt-[37px] pb-[30px] px-[90px] max-[820px]:flex-col max-[820px]:items-center max-[820px]:gap-7 max-[820px]:text-center max-[820px]:pt-[30px] max-[820px]:px-[24px]"
-			>
+			<div className="flex flex-wrap gap-16 px-[90px] pt-[37px] pb-[30px] max-[820px]:flex-col max-[820px]:items-center max-[820px]:gap-7 max-[820px]:px-[24px] max-[820px]:pt-[30px] max-[820px]:text-center">
 				{/* Brand */}
-				<div className="self-start font-stories text-[49px] leading-none tracking-[0.1em] text-primary-foreground max-[820px]:self-auto">
+				<div className="font-stories text-primary-foreground self-start text-[49px] leading-none tracking-[0.1em] max-[820px]:self-auto">
 					{site?.footerBrandName ?? site?.title ?? 'AltHomes'}
 				</div>
 
@@ -20,9 +18,7 @@ export default async function Footer() {
 					{/* OUR HOMES */}
 					{properties && properties.length > 0 && (
 						<div>
-							<h4
-								className="mb-3 font-sans font-bold text-[12px] tracking-[0.1em]"
-							>
+							<h4 className="mb-3 font-sans text-[12px] font-bold tracking-[0.1em]">
 								OUR HOMES
 							</h4>
 							<ul className="flex flex-col gap-1.5">
@@ -30,7 +26,7 @@ export default async function Footer() {
 									<li key={p._id}>
 										<a
 											href={`/our-homes/${p.slug}`}
-											className="text-white text-[11px] tracking-[0.1em] leading-[1.4] no-underline transition-opacity hover:opacity-75"
+											className="text-[11px] leading-[1.4] tracking-[0.1em] text-white no-underline transition-opacity hover:opacity-75"
 										>
 											{p.title?.toUpperCase()}
 										</a>
@@ -63,9 +59,7 @@ export default async function Footer() {
 
 				{/* Connect */}
 				<div className="flex flex-col items-start gap-3">
-					<h4
-						className="font-sans font-bold text-[12px] tracking-[0.1em]"
-					>
+					<h4 className="font-sans text-[12px] font-bold tracking-[0.1em]">
 						CONNECT
 					</h4>
 					<SocialLinks

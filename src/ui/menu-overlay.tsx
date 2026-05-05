@@ -1,8 +1,8 @@
 'use client'
 
 import Image from 'next/image'
-import { createPortal } from 'react-dom'
 import { useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { urlFor } from '@/sanity/lib/image'
 import type { SITE_QUERY_RESULT } from '@/sanity/types'
 import NavCta from '@/ui/atoms/nav-cta'
@@ -35,7 +35,7 @@ export default function MenuOverlay({ isOpen, onCloseAction, site }: Props) {
 
 	return createPortal(
 		<div
-			className="animate-in fade-in fixed inset-0 z-[100] grid duration-200 min-[821px]:grid-cols-[1fr_415px] bg-background"
+			className="animate-in fade-in bg-background fixed inset-0 z-[100] grid duration-200 min-[821px]:grid-cols-[1fr_415px]"
 			role="dialog"
 			aria-modal="true"
 		>
@@ -51,9 +51,7 @@ export default function MenuOverlay({ isOpen, onCloseAction, site }: Props) {
 				)}
 			</div>
 
-			<aside
-				className="flex flex-col overflow-y-auto bg-primary text-primary-foreground pt-[48px] px-[40px] pb-[40px]"
-			>
+			<aside className="bg-primary text-primary-foreground flex flex-col overflow-y-auto px-[40px] pt-[48px] pb-[40px]">
 				<div className="mb-10 flex items-center justify-between gap-6 md:justify-end">
 					{site?.navCtaLink && (
 						<NavCta
@@ -96,7 +94,7 @@ export default function MenuOverlay({ isOpen, onCloseAction, site }: Props) {
 						<a
 							key={item.url ?? item.label}
 							href={item.url ?? '#'}
-							className="font-heading text-[30px] leading-[40px] font-normal tracking-[0.1em] text-primary-foreground transition-opacity hover:opacity-75"
+							className="font-heading text-primary-foreground text-[30px] leading-[40px] font-normal tracking-[0.1em] transition-opacity hover:opacity-75"
 						>
 							{item.label}
 						</a>

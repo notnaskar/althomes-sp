@@ -18,20 +18,18 @@ export default function ReviewsSection({ reviews }: { reviews: Review[] }) {
 	const next = () => setActive((i) => (i + 1) % total)
 
 	return (
-		<section className="w-full bg-background overflow-hidden px-[18px] lg:px-[10%]">
-			<div className="flex flex-col lg:flex-row gap-8 lg:gap-12 min-h-[60vh] lg:min-h-[640px]">
-
+		<section className="bg-background w-full overflow-hidden px-[18px] lg:px-[10%]">
+			<div className="flex min-h-[60vh] flex-col gap-8 lg:min-h-[640px] lg:flex-row lg:gap-12">
 				{/* ── Left column: heading + slider controls ── */}
 				<div className="relative flex flex-col justify-center px-[18px] py-12 lg:w-[40%] lg:px-[60px] lg:py-16">
-
 					{/* Section label */}
-					<p className="font-sans text-[11px] font-semibold tracking-[0.3em] uppercase text-secondary-foreground/60 mb-6">
+					<p className="text-secondary-foreground/60 mb-6 font-sans text-[11px] font-semibold tracking-[0.3em] uppercase">
 						{/* STATIC */}
 						Alt Stories
 					</p>
 
 					{/* Heading */}
-					<h2 className="font-heading text-[28px] leading-[1.45] text-secondary-foreground max-w-[420px] lg:text-[34px]">
+					<h2 className="font-heading text-secondary-foreground max-w-[420px] text-[28px] leading-[1.45] lg:text-[34px]">
 						{/* STATIC */}
 						Hearts full, stories shared
 						<br />
@@ -39,26 +37,25 @@ export default function ReviewsSection({ reviews }: { reviews: Review[] }) {
 						<br />
 						than just memories.
 						<br />
-						These are the{' '}
-						<em className="italic font-heading">Alt Stories</em>.
+						These are the <em className="font-heading italic">Alt Stories</em>.
 					</h2>
 
 					{/* Slider controls — hidden on mobile (shown at bottom on mobile) */}
-					<div className="hidden lg:flex items-center gap-6 mt-12">
+					<div className="mt-12 hidden items-center gap-6 lg:flex">
 						<button
 							onClick={prev}
 							aria-label="Previous review"
-							className="font-sans text-[12px] font-semibold tracking-[0.3em] text-secondary-foreground hover:opacity-60 transition-opacity"
+							className="text-secondary-foreground font-sans text-[12px] font-semibold tracking-[0.3em] transition-opacity hover:opacity-60"
 						>
 							{'<'}
 						</button>
-						<span className="font-sans text-[12px] font-semibold tracking-[0.3em] text-secondary-foreground">
+						<span className="text-secondary-foreground font-sans text-[12px] font-semibold tracking-[0.3em]">
 							{active + 1}/{total}
 						</span>
 						<button
 							onClick={next}
 							aria-label="Next review"
-							className="font-sans text-[12px] font-semibold tracking-[0.3em] text-secondary-foreground hover:opacity-60 transition-opacity"
+							className="text-secondary-foreground font-sans text-[12px] font-semibold tracking-[0.3em] transition-opacity hover:opacity-60"
 						>
 							{'>'}
 						</button>
@@ -66,52 +63,56 @@ export default function ReviewsSection({ reviews }: { reviews: Review[] }) {
 				</div>
 
 				{/* ── Right column: review card ── */}
-				<div className="flex flex-col items-center justify-center bg-background px-[18px] py-12 lg:w-[60%] lg:px-[60px] lg:py-16">
+				<div className="bg-background flex flex-col items-center justify-center px-[18px] py-12 lg:w-[60%] lg:px-[60px] lg:py-16">
 					{/* Card — rotated on desktop */}
 					<div
 						key={active}
-						className="w-full max-w-[520px] bg-card-shell rounded-[8px] shadow-[0px_8px_32px_rgba(0,0,0,0.08)] overflow-hidden lg:-rotate-[2.94deg]"
+						className="bg-card-shell w-full max-w-[520px] overflow-hidden rounded-[8px] shadow-[0px_8px_32px_rgba(0,0,0,0.08)] lg:-rotate-[2.94deg]"
 					>
 						{/* Guest photo */}
 						<div className="h-[260px] w-full overflow-hidden">
 							{review.guestPhoto ? (
 								<Img
-									image={review.guestPhoto as Parameters<typeof Img>[0]['image']}
+									image={
+										review.guestPhoto as Parameters<typeof Img>[0]['image']
+									}
 									width={520}
 									height={260}
 									alt={review.guestPhoto.alt ?? review.guestName ?? ''}
 									className="h-full w-full object-cover"
 								/>
 							) : (
-								<div className="h-full w-full bg-muted/30" />
+								<div className="bg-muted/30 h-full w-full" />
 							)}
 						</div>
 
 						{/* Text block */}
 						<div className="flex flex-col items-center justify-center px-8 py-8 text-center">
 							{review.body && (
-								<p className="font-sans text-[15px] leading-[1.6] tracking-[0.03em] text-foreground italic mb-4">
+								<p className="text-foreground mb-4 font-sans text-[15px] leading-[1.6] tracking-[0.03em] italic">
 									&ldquo;{review.body}&rdquo;
 								</p>
 							)}
 
 							<div className="flex flex-col items-center gap-1">
 								{review.guestName && (
-									<p className="font-sans text-[14px] font-bold tracking-[0.08em] text-foreground uppercase">
+									<p className="text-foreground font-sans text-[14px] font-bold tracking-[0.08em] uppercase">
 										{review.guestName}
 									</p>
 								)}
-								<div className="flex flex-wrap items-center justify-center gap-2 mt-1">
+								<div className="mt-1 flex flex-wrap items-center justify-center gap-2">
 									{review.propertyTitle && (
-										<p className="font-sans text-[13px] tracking-[0.05em] text-foreground/70">
+										<p className="text-foreground/70 font-sans text-[13px] tracking-[0.05em]">
 											{review.propertyTitle}
 										</p>
 									)}
 									{review.propertyTitle && review.guestLocation && (
-										<span className="text-foreground/40 text-[10px]">&bull;</span>
+										<span className="text-foreground/40 text-[10px]">
+											&bull;
+										</span>
 									)}
 									{review.guestLocation && (
-										<p className="font-sans text-[13px] tracking-[0.05em] text-foreground/70">
+										<p className="text-foreground/70 font-sans text-[13px] tracking-[0.05em]">
 											{review.guestLocation}
 										</p>
 									)}
@@ -121,21 +122,21 @@ export default function ReviewsSection({ reviews }: { reviews: Review[] }) {
 					</div>
 
 					{/* Mobile-only slider controls (below the card) */}
-					<div className="flex lg:hidden items-center gap-6 mt-8">
+					<div className="mt-8 flex items-center gap-6 lg:hidden">
 						<button
 							onClick={prev}
 							aria-label="Previous review"
-							className="font-sans text-[12px] font-semibold tracking-[0.3em] text-foreground hover:opacity-60 transition-opacity"
+							className="text-foreground font-sans text-[12px] font-semibold tracking-[0.3em] transition-opacity hover:opacity-60"
 						>
 							{'<'}
 						</button>
-						<span className="font-sans text-[12px] font-semibold tracking-[0.3em] text-foreground">
+						<span className="text-foreground font-sans text-[12px] font-semibold tracking-[0.3em]">
 							{active + 1}/{total}
 						</span>
 						<button
 							onClick={next}
 							aria-label="Next review"
-							className="font-sans text-[12px] font-semibold tracking-[0.3em] text-foreground hover:opacity-60 transition-opacity"
+							className="text-foreground font-sans text-[12px] font-semibold tracking-[0.3em] transition-opacity hover:opacity-60"
 						>
 							{'>'}
 						</button>

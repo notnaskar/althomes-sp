@@ -2,9 +2,9 @@
 
 import { Resend } from 'resend'
 import { partnerSchema } from '@/lib/schemas/partner'
-import { getSite } from '@/sanity/lib/data'
-import { checkOrigin, checkRateLimit, getClientIp } from '@/lib/server/security'
 import { partnerEmailHtml } from '@/lib/server/email-templates/partner'
+import { checkOrigin, checkRateLimit, getClientIp } from '@/lib/server/security'
+import { getSite } from '@/sanity/lib/data'
 
 export async function submitPartner(rawData: unknown) {
 	const parsed = partnerSchema.safeParse(rawData)
@@ -17,7 +17,10 @@ export async function submitPartner(rawData: unknown) {
 
 	const ip = await getClientIp()
 	if (!checkRateLimit('partner', ip)) {
-		return { success: false, error: 'Too many requests. Please wait before trying again.' }
+		return {
+			success: false,
+			error: 'Too many requests. Please wait before trying again.',
+		}
 	}
 
 	const apiKey = process.env.RESEND_API_KEY
@@ -28,7 +31,9 @@ export async function submitPartner(rawData: unknown) {
 
 	const site = await getSite()
 	const to =
-		site?.partnerEnquiryEmail ?? site?.formNotificationEmail ?? process.env.RESEND_TO_EMAIL
+		site?.partnerEnquiryEmail ??
+		site?.formNotificationEmail ??
+		process.env.RESEND_TO_EMAIL
 	const from = process.env.RESEND_FROM_EMAIL ?? 'onboarding@resend.dev'
 
 	if (!to) {

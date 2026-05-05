@@ -64,7 +64,7 @@ export default function ExperiencesHero({
 						))}
 					</h1>
 
-					<p className="text-foreground max-w-[432px] font-heading text-[30px] leading-[40px] tracking-[0.1em] max-[820px]:max-w-none max-[820px]:text-[19px] max-[820px]:leading-[29px]">
+					<p className="text-foreground font-heading max-w-[432px] text-[30px] leading-[40px] tracking-[0.1em] max-[820px]:max-w-none max-[820px]:text-[19px] max-[820px]:leading-[29px]">
 						{supportingTagline}
 					</p>
 				</div>
@@ -86,9 +86,7 @@ export default function ExperiencesHero({
 						aria-hidden="true"
 					>
 						{/* Red-orange filled circle */}
-						<div
-							className="absolute inset-0 rounded-full bg-[var(--color-terracotta)]"
-						/>
+						<div className="absolute inset-0 rounded-full bg-[var(--color-terracotta)]" />
 						{/* Cream diamond cut-out — rotated square */}
 						<div
 							className="bg-background absolute"
@@ -104,7 +102,7 @@ export default function ExperiencesHero({
 						<svg
 							viewBox="0 0 60 60"
 							fill="none"
-							className="absolute inset-0 h-full w-full text-primary-foreground"
+							className="text-primary-foreground absolute inset-0 h-full w-full"
 							aria-hidden="true"
 						>
 							<line

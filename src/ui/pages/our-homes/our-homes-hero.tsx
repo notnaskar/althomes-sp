@@ -14,11 +14,11 @@ type Props = {
 
 export default function OurHomesHero({ heroHeadline, heroBackground }: Props) {
 	return (
-		<section className="z-0 bg-background relative min-h-[490px] overflow-hidden">
+		<section className="bg-background relative z-0 min-h-[490px] overflow-hidden">
 			{/* CONTENT: heroBackground */}
 			{heroBackground?.asset && (
 				<div
-					className="pointer-events-none left-[15%] absolute top-[-157px] h-[646px] w-full max-w-100% max-[820px]:top-[-43px] max-[820px]:left-0 max-[820px]:h-[336px]"
+					className="max-w-100% pointer-events-none absolute top-[-157px] left-[15%] h-[646px] w-full max-[820px]:top-[-43px] max-[820px]:left-0 max-[820px]:h-[336px]"
 					aria-hidden="true"
 				>
 					<Image
@@ -39,7 +39,6 @@ export default function OurHomesHero({ heroHeadline, heroBackground }: Props) {
 					{heroHeadline ?? 'Welcome to our homes, find your next escape'}
 				</h1>
 			</div>
-
 		</section>
 	)
 }

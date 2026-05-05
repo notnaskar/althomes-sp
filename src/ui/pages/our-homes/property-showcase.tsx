@@ -95,7 +95,7 @@ export default function PropertyShowcase({
 				)}
 
 				{/* Overlay */}
-				<div className="absolute top-0 inset-x-0 bottom-0 z-[2] flex flex-col items-center gap-1 bg-gradient-to-t from-black/[0.55] to-transparent px-[140px] pt-[120px] pb-[40px] max-[820px]:px-[40px] max-[820px]:pb-6">
+				<div className="absolute inset-x-0 top-0 bottom-0 z-[2] flex flex-col items-center gap-1 bg-gradient-to-t from-black/[0.55] to-transparent px-[140px] pt-[120px] pb-[40px] max-[820px]:px-[40px] max-[820px]:pb-6">
 					{/* CONTENT: tagline */}
 					{tagline && (
 						<span className="text-center text-[14px] tracking-[0.07em] text-white">
@@ -129,7 +129,10 @@ export default function PropertyShowcase({
 				{showcaseSecondaryImage?.asset && (
 					<div className="relative h-[337px] w-full max-w-[625px] flex-shrink-0 overflow-hidden rounded-[5px_10px_10px_5px] max-[820px]:h-[200px]">
 						<Image
-							src={urlFor(showcaseSecondaryImage.asset).width(625).quality(85).url()}
+							src={urlFor(showcaseSecondaryImage.asset)
+								.width(625)
+								.quality(85)
+								.url()}
 							alt={showcaseSecondaryImage.alt ?? ''}
 							fill
 							sizes="(max-width: 820px) 100vw, 45vw"

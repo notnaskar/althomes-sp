@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { checkRateLimit, _resetForTesting } from '@/lib/server/rate-limit'
+import { _resetForTesting, checkRateLimit } from '@/lib/server/rate-limit'
 
 describe('checkRateLimit', () => {
 	beforeEach(() => {

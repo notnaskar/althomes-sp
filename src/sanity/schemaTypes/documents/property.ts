@@ -197,8 +197,7 @@ export default defineType({
 					validation: (Rule) => Rule.required(),
 				},
 			],
-			description:
-				'Full-bleed left photo on the Our Homes listing page.',
+			description: 'Full-bleed left photo on the Our Homes listing page.',
 			group: 'listingCard',
 		}),
 		defineField({
@@ -206,9 +205,7 @@ export default defineType({
 			title: 'Detail Page Cover Image',
 			type: 'image',
 			options: { hotspot: true },
-			fields: [
-				defineField({ name: 'alt', type: 'string', title: 'Alt text' }),
-			],
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
 			description:
 				'Full-bleed hero shown on the property detail page. Falls back to Main Listing Photo if not set.',
 			group: 'intro',
@@ -227,14 +224,16 @@ export default defineType({
 			name: 'detailIntroHeading',
 			title: 'Detail Intro Heading',
 			type: 'string',
-			description: 'Large heading shown on the left of the intro section on the property detail page.',
+			description:
+				'Large heading shown on the left of the intro section on the property detail page.',
 			group: 'intro',
 		}),
 		defineField({
 			name: 'detailIntroBody',
 			title: 'Detail Intro Body',
 			type: 'text',
-			description: 'Body text shown on the right of the intro section on the property detail page.',
+			description:
+				'Body text shown on the right of the intro section on the property detail page.',
 			group: 'intro',
 		}),
 		defineField({
@@ -269,14 +268,16 @@ export default defineType({
 			name: 'gallerySectionQuote',
 			title: 'Gallery Section Quote',
 			type: 'text',
-			description: 'Pull quote displayed over the gallery section on the property detail page.',
+			description:
+				'Pull quote displayed over the gallery section on the property detail page.',
 			group: 'intro',
 		}),
 		defineField({
 			name: 'galleryDecorImage',
 			title: 'Gallery Decor Image',
 			type: 'image',
-			description: 'Botanical/decorative illustration shown in the gallery section.',
+			description:
+				'Botanical/decorative illustration shown in the gallery section.',
 			group: 'intro',
 		}),
 
@@ -355,7 +356,8 @@ export default defineType({
 			name: 'locationBody',
 			title: 'Location Body',
 			type: 'blockContent',
-			description: 'Rich text for the Getting Here section. Supports bold title + body paragraphs.',
+			description:
+				'Rich text for the Getting Here section. Supports bold title + body paragraphs.',
 			group: 'location',
 		}),
 		defineField({
@@ -401,7 +403,8 @@ export default defineType({
 							name: 'secondaryImage',
 							type: 'image',
 							title: 'Secondary Image',
-							description: 'Optional small overlay photo for multi-image collage layouts.',
+							description:
+								'Optional small overlay photo for multi-image collage layouts.',
 							options: { hotspot: true },
 							fields: [{ name: 'alt', type: 'string', title: 'Alt text' }],
 						},
@@ -409,7 +412,8 @@ export default defineType({
 							name: 'decorImage',
 							type: 'image',
 							title: 'Decor Image',
-							description: 'Optional organic/illustrative decoration (e.g. plant, flower) for this section.',
+							description:
+								'Optional organic/illustrative decoration (e.g. plant, flower) for this section.',
 							options: { hotspot: true },
 						},
 					],
@@ -441,16 +445,15 @@ export default defineType({
 			description: 'Full-bleed background image for the Experiences section.',
 			options: { hotspot: true },
 			group: 'experiences',
-			fields: [
-				defineField({ name: 'alt', type: 'string', title: 'Alt text' }),
-			],
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
 		}),
 
 		defineField({
 			name: 'menuCta',
 			title: 'Menu CTA',
 			type: 'object',
-			description: '"What\'s on the menu?" CTA shown at the bottom of the food highlight.',
+			description:
+				'"What\'s on the menu?" CTA shown at the bottom of the food highlight.',
 			group: 'highlights',
 			fields: [
 				defineField({ name: 'label', title: 'Label', type: 'string' }),

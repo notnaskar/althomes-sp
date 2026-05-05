@@ -1,83 +1,88 @@
 import Image from 'next/image'
 import { urlFor } from '@/sanity/lib/image'
-import ExperienceCard from '@/ui/pages/experiences/experiences-updated/experience-card'
 import type {
-  SanityImageAsset,
-  SanityImageCrop,
-  SanityImageHotspot,
+	SanityImageAsset,
+	SanityImageCrop,
+	SanityImageHotspot,
 } from '@/sanity/types'
+import ExperienceCard from '@/ui/pages/experiences/experiences-updated/experience-card'
 
 interface BgImage {
-  asset?: SanityImageAsset | null
-  alt?: string | null
-  hotspot?: SanityImageHotspot | null
-  crop?: SanityImageCrop | null
+	asset?: SanityImageAsset | null
+	alt?: string | null
+	hotspot?: SanityImageHotspot | null
+	crop?: SanityImageCrop | null
 }
 
 interface ExperienceItem {
-  title?: string | null
-  slug?: string | null
-  description?: string | null
-  image?: {
-    asset?: SanityImageAsset | null
-    alt?: string | null
-  } | null
+	title?: string | null
+	slug?: string | null
+	description?: string | null
+	image?: {
+		asset?: SanityImageAsset | null
+		alt?: string | null
+	} | null
 }
 
 interface PropertyExperiencesSectionProps {
-  bgImage?: BgImage | null
-  experiences: ExperienceItem[]
-  propertyTitle: string
+	bgImage?: BgImage | null
+	experiences: ExperienceItem[]
+	propertyTitle: string
 }
 
 export default function PropertyExperiencesSection({
-  bgImage,
-  experiences,
-  propertyTitle,
+	bgImage,
+	experiences,
+	propertyTitle,
 }: PropertyExperiencesSectionProps) {
-  const hasBg = bgImage?.asset != null
-  const bgUrl = hasBg ? urlFor(bgImage!).width(1600).quality(85).url() : null
+	const hasBg = bgImage?.asset != null
+	const bgUrl = hasBg ? urlFor(bgImage!).width(1600).quality(85).url() : null
 
-  return (
-    <section
-      data-section="experiences"
-      className={`relative overflow-hidden px-[18px] lg:px-[90px] py-[48px] lg:py-[80px]${!hasBg ? ' bg-background' : ''}`}
-    >
-      {bgUrl && (
-        <Image
-          src={bgUrl}
-          alt={bgImage?.alt ?? ''}
-          fill
-          priority
-          quality={85}
-          className="object-cover"
-          sizes="100vw"
-        />
-      )}
-      <div className="relative z-10">
-        <h2
-          className={[
-            'font-heading text-center tracking-[0.05em] text-[24px] lg:text-[32px] leading-[1.2]',
-            hasBg ? 'text-white drop-shadow-md' : 'text-foreground',
-          ].join(' ')}
-        >
-          EXPERIENCES NEAR {propertyTitle.toUpperCase()}
-        </h2>
+	return (
+		<section
+			data-section="experiences"
+			className={`relative overflow-hidden px-[18px] py-[48px] lg:px-[90px] lg:py-[80px]${!hasBg ? 'bg-background' : ''}`}
+		>
+			{bgUrl && (
+				<Image
+					src={bgUrl}
+					alt={bgImage?.alt ?? ''}
+					fill
+					priority
+					quality={85}
+					className="object-cover"
+					sizes="100vw"
+				/>
+			)}
+			<div className="relative z-10">
+				<h2
+					className={[
+						'font-heading text-center text-[24px] leading-[1.2] tracking-[0.05em] lg:text-[32px]',
+						hasBg ? 'text-white drop-shadow-md' : 'text-foreground',
+					].join(' ')}
+				>
+					EXPERIENCES NEAR {propertyTitle.toUpperCase()}
+				</h2>
 
-        <div className="mt-[48px] flex flex-col lg:flex-row gap-6 lg:gap-8 justify-center items-center lg:items-stretch">
-          {experiences.slice(0, 3).map((exp, i) => (
-            <div key={exp.slug ?? exp.title ?? i} className="w-full max-w-[327px] mx-auto">
-              <ExperienceCard
-                title={exp.title ?? ''}
-                description={exp.description}
-                image={exp.image as Parameters<typeof ExperienceCard>[0]['image']}
-                slug={exp.slug}
-                tilt={i % 2 === 0 ? 'cw' : 'ccw'}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
+				<div className="mt-[48px] flex flex-col items-center justify-center gap-6 lg:flex-row lg:items-stretch lg:gap-8">
+					{experiences.slice(0, 3).map((exp, i) => (
+						<div
+							key={exp.slug ?? exp.title ?? i}
+							className="mx-auto w-full max-w-[327px]"
+						>
+							<ExperienceCard
+								title={exp.title ?? ''}
+								description={exp.description}
+								image={
+									exp.image as Parameters<typeof ExperienceCard>[0]['image']
+								}
+								slug={exp.slug}
+								tilt={i % 2 === 0 ? 'cw' : 'ccw'}
+							/>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+	)
 }

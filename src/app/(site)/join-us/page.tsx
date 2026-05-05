@@ -31,9 +31,8 @@ export default async function JoinUsPage() {
 
 	return (
 		<main className="bg-background overflow-x-hidden">
-
 			{/* Hero ── Frame 59 ─────────────────────────────────── */}
-			<section className="relative w-full h-auto lg:h-[600px] overflow-hidden bg-background pt-[100px] pb-[160px] lg:pt-[80px] lg:pb-0">
+			<section className="bg-background relative h-auto w-full overflow-hidden pt-[100px] pb-[160px] lg:h-[600px] lg:pt-[80px] lg:pb-0">
 				{coverUrl && (
 					<Image
 						src={coverUrl}
@@ -46,19 +45,25 @@ export default async function JoinUsPage() {
 				)}
 
 				{flowerUrl && (
-					<div className="pointer-events-none absolute -left-[204px] top-0 h-[614px] w-[365px] z-10 max-lg:hidden">
-						<Image src={flowerUrl} alt="" fill className="object-cover" sizes="365px" />
+					<div className="pointer-events-none absolute top-0 -left-[204px] z-10 h-[614px] w-[365px] max-lg:hidden">
+						<Image
+							src={flowerUrl}
+							alt=""
+							fill
+							className="object-cover"
+							sizes="365px"
+						/>
 					</div>
 				)}
 
-				<div className="relative z-10 mx-auto flex max-w-[1200px] flex-col lg:flex-row justify-center items-start gap-[24px] lg:gap-[90px] px-[24px] lg:px-[90px]">
-					<div className="w-full lg:w-[292px] shrink-0">
-						<h1 className="font-stories text-[48px] lg:text-[72px] leading-[1] lg:leading-[70px] tracking-[0.1em] text-foreground">
+				<div className="relative z-10 mx-auto flex max-w-[1200px] flex-col items-start justify-center gap-[24px] px-[24px] lg:flex-row lg:gap-[90px] lg:px-[90px]">
+					<div className="w-full shrink-0 lg:w-[292px]">
+						<h1 className="font-stories text-foreground text-[48px] leading-[1] tracking-[0.1em] lg:text-[72px] lg:leading-[70px]">
 							{page.heroHeadline || 'Partner With Us'}
 						</h1>
 					</div>
 					{page.pullQuote && (
-						<p className="w-full max-w-[672px] font-heading text-[20px] lg:text-[30px] leading-[1.3] lg:leading-[40px] tracking-[0.07em] text-foreground">
+						<p className="font-heading text-foreground w-full max-w-[672px] text-[20px] leading-[1.3] tracking-[0.07em] lg:text-[30px] lg:leading-[40px]">
 							{page.pullQuote}
 						</p>
 					)}
@@ -66,31 +71,31 @@ export default async function JoinUsPage() {
 			</section>
 
 			{/* Content ── Frame 60 ──────────────────────────────── */}
-			<section className="relative overflow-visible bg-background px-[18px] lg:px-[90px] pb-[72px] z-[11]">
-				<div className="mx-auto flex max-w-[1100px] flex-col-reverse lg:flex-row items-center lg:items-start gap-[40px] lg:gap-[80px] justify-between">
-					<div className="w-full lg:w-[400px] shrink-0 space-y-5 lg:pt-[60px]">
+			<section className="bg-background relative z-[11] overflow-visible px-[18px] pb-[72px] lg:px-[90px]">
+				<div className="mx-auto flex max-w-[1100px] flex-col-reverse items-center justify-between gap-[40px] lg:flex-row lg:items-start lg:gap-[80px]">
+					<div className="w-full shrink-0 space-y-5 lg:w-[400px] lg:pt-[60px]">
 						{page.bodyParagraph && (
-							<p className="font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground">
+							<p className="text-foreground font-sans text-[15px] leading-[23px] tracking-[0.1em]">
 								{page.bodyParagraph}
 							</p>
 						)}
 						{page.bulletPoints?.map((point, i) => (
 							<p
 								key={i}
-								className="font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground"
+								className="text-foreground font-sans text-[15px] leading-[23px] tracking-[0.1em]"
 							>
 								– {point}
 							</p>
 						))}
 						{page.formCTAText && (
-							<p className="font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground">
+							<p className="text-foreground font-sans text-[15px] leading-[23px] tracking-[0.1em]">
 								{page.formCTAText}
 							</p>
 						)}
 					</div>
 
 					{propertyUrl && (
-						<div className="relative z-20 -mt-[80px] lg:-mt-[120px] h-[300px] lg:h-[480px] w-full lg:flex-1 lg:max-w-[624px]">
+						<div className="relative z-20 -mt-[80px] h-[300px] w-full lg:-mt-[120px] lg:h-[480px] lg:max-w-[624px] lg:flex-1">
 							<div className="absolute inset-0 overflow-hidden rounded-[5px]">
 								<Image
 									src={propertyUrl}
@@ -101,8 +106,14 @@ export default async function JoinUsPage() {
 								/>
 							</div>
 							{contentDecorUrl && (
-								<div className="pointer-events-none absolute right-0 top-[50%] lg:top-[60%] z-10 w-[35%] lg:w-[228px] aspect-[228/554] translate-x-[20%] lg:translate-x-[40%]">
-									<Image src={contentDecorUrl} alt="" fill className="object-cover" sizes="(max-width: 1024px) 35vw, 228px" />
+								<div className="pointer-events-none absolute top-[50%] right-0 z-10 aspect-[228/554] w-[35%] translate-x-[20%] lg:top-[60%] lg:w-[228px] lg:translate-x-[40%]">
+									<Image
+										src={contentDecorUrl}
+										alt=""
+										fill
+										className="object-cover"
+										sizes="(max-width: 1024px) 35vw, 228px"
+									/>
 								</div>
 							)}
 						</div>
@@ -111,20 +122,25 @@ export default async function JoinUsPage() {
 			</section>
 
 			{/* Form ── Frame 61 ─────────────────────────────────── */}
-			<section className="relative bg-background pb-[40px] lg:pb-[72px] px-[18px] lg:px-[90px]">
+			<section className="bg-background relative px-[18px] pb-[40px] lg:px-[90px] lg:pb-[72px]">
 				{formDecorUrl && (
-					<div className="pointer-events-none absolute left-0 bottom-0 z-0 h-[300px] lg:h-[462px] w-[100%] lg:w-[847px] -left-[100px] lg:left-0">
-						<Image src={formDecorUrl} alt="" fill className="object-cover" sizes="(max-width: 1024px) 550px, 847px" />
+					<div className="pointer-events-none absolute bottom-0 -left-[100px] left-0 z-0 h-[300px] w-[100%] lg:left-0 lg:h-[462px] lg:w-[847px]">
+						<Image
+							src={formDecorUrl}
+							alt=""
+							fill
+							className="object-cover"
+							sizes="(max-width: 1024px) 550px, 847px"
+						/>
 					</div>
 				)}
-				<div className="relative z-10 mx-auto max-w-[100%] bg-[var(--color-white)] px-[24px] lg:px-[51px] pb-[48px] pt-[37px] shadow-sm lg:shadow-none">
-					<h2 className="mb-[40px] lg:mb-[75px] text-center font-heading text-[24px] lg:text-[30px] leading-[1.3] lg:leading-[40px] tracking-[0.1em] text-foreground">
+				<div className="relative z-10 mx-auto max-w-[100%] bg-[var(--color-white)] px-[24px] pt-[37px] pb-[48px] shadow-sm lg:px-[51px] lg:shadow-none">
+					<h2 className="font-heading text-foreground mb-[40px] text-center text-[24px] leading-[1.3] tracking-[0.1em] lg:mb-[75px] lg:text-[30px] lg:leading-[40px]">
 						{page.formHeadline || 'TELL US MORE ABOUT YOUR HOME'}
 					</h2>
 					<PartnerForm />
 				</div>
 			</section>
-
 		</main>
 	)
 }

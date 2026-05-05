@@ -76,7 +76,9 @@ test.describe('Property detail page (/our-homes/[slug])', () => {
 		await expect(page.locator('main')).toBeVisible()
 	})
 
-	test('renders experiences section when experiences exist', async ({ page }) => {
+	test('renders experiences section when experiences exist', async ({
+		page,
+	}) => {
 		await page.goto(propertyUrl)
 		const section = page.locator('[data-section="experiences"]')
 		const count = await section.count()

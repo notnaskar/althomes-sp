@@ -7,8 +7,14 @@ export default defineConfig({
 	resolve: {
 		alias: {
 			'@': path.resolve(__dirname, './src'),
-			'@/sanity/lib/live.ts': path.resolve(__dirname, './tests/__mocks__/sanity-live.ts'),
-			'@/sanity/lib/live': path.resolve(__dirname, './tests/__mocks__/sanity-live.ts'),
+			'@/sanity/lib/live.ts': path.resolve(
+				__dirname,
+				'./tests/__mocks__/sanity-live.ts',
+			),
+			'@/sanity/lib/live': path.resolve(
+				__dirname,
+				'./tests/__mocks__/sanity-live.ts',
+			),
 		},
 	},
 	test: {

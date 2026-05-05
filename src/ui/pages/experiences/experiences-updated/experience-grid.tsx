@@ -101,7 +101,7 @@ export default function ExperienceGrid({
 			>
 				<HeroDecorImage asset={decorDaisy} alt="" sizes="200px" />
 			</div>
-			
+
 			{/* ── Filter bar ── */}
 			{properties.length > 0 && (
 				<div
@@ -144,7 +144,7 @@ export default function ExperienceGrid({
 						<div
 							id="filter-panel"
 							role="menu"
-							className="absolute top-[44px] left-0 z-10 w-[288px] rounded-b-[16px] bg-background py-[8px] shadow-[0_8px_24px_rgba(0,0,0,0.08)] max-[820px]:w-[calc(100vw-36px)]"
+							className="bg-background absolute top-[44px] left-0 z-10 w-[288px] rounded-b-[16px] py-[8px] shadow-[0_8px_24px_rgba(0,0,0,0.08)] max-[820px]:w-[calc(100vw-36px)]"
 						>
 							{/* All locations row */}
 							<label className="text-foreground hover:bg-background flex cursor-pointer items-center gap-[12px] px-[24px] font-sans text-[15px] leading-[42px] tracking-[0.1em] transition-colors">

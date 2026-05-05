@@ -31,8 +31,8 @@ export default function ContactForm() {
 
 	if (success) {
 		return (
-			<div className="rounded-xl border border-primary bg-background p-8 text-center">
-				<p className="text-lg font-semibold text-primary">
+			<div className="border-primary bg-background rounded-xl border p-8 text-center">
+				<p className="text-primary text-lg font-semibold">
 					Thanks for reaching out! We&rsquo;ll be in touch soon.
 				</p>
 			</div>
@@ -52,14 +52,17 @@ export default function ContactForm() {
 			/>
 
 			<div>
-				<label htmlFor="cf-name" className="mb-1 block text-[11px] font-bold text-foreground/80 tracking-[0.15em] uppercase">
+				<label
+					htmlFor="cf-name"
+					className="text-foreground/80 mb-1 block text-[11px] font-bold tracking-[0.15em] uppercase"
+				>
 					NAME*
 				</label>
 				<input
 					id="cf-name"
 					type="text"
 					{...register('name')}
-					className="w-full border-0 border-b border-foreground/30 bg-transparent rounded-none px-0 py-3 text-sm focus:ring-0 focus:border-foreground focus:outline-none transition-colors"
+					className="border-foreground/30 focus:border-foreground w-full rounded-none border-0 border-b bg-transparent px-0 py-3 text-sm transition-colors focus:ring-0 focus:outline-none"
 				/>
 				{errors.name && (
 					<p className="mt-1 text-xs text-red-600">{errors.name.message}</p>
@@ -67,14 +70,17 @@ export default function ContactForm() {
 			</div>
 
 			<div>
-				<label htmlFor="cf-email" className="mb-1 block text-[11px] font-bold text-foreground/80 tracking-[0.15em] uppercase">
+				<label
+					htmlFor="cf-email"
+					className="text-foreground/80 mb-1 block text-[11px] font-bold tracking-[0.15em] uppercase"
+				>
 					EMAIL*
 				</label>
 				<input
 					id="cf-email"
 					type="email"
 					{...register('email')}
-					className="w-full border-0 border-b border-foreground/30 bg-transparent rounded-none px-0 py-3 text-sm focus:ring-0 focus:border-foreground focus:outline-none transition-colors"
+					className="border-foreground/30 focus:border-foreground w-full rounded-none border-0 border-b bg-transparent px-0 py-3 text-sm transition-colors focus:ring-0 focus:outline-none"
 				/>
 				{errors.email && (
 					<p className="mt-1 text-xs text-red-600">{errors.email.message}</p>
@@ -82,14 +88,17 @@ export default function ContactForm() {
 			</div>
 
 			<div>
-				<label htmlFor="cf-phone" className="mb-1 block text-[11px] font-bold text-foreground/80 tracking-[0.15em] uppercase">
+				<label
+					htmlFor="cf-phone"
+					className="text-foreground/80 mb-1 block text-[11px] font-bold tracking-[0.15em] uppercase"
+				>
 					PHONE NUMBER*
 				</label>
 				<input
 					id="cf-phone"
 					type="tel"
 					{...register('phone')}
-					className="w-full border-0 border-b border-foreground/30 bg-transparent rounded-none px-0 py-3 text-sm focus:ring-0 focus:border-foreground focus:outline-none transition-colors"
+					className="border-foreground/30 focus:border-foreground w-full rounded-none border-0 border-b bg-transparent px-0 py-3 text-sm transition-colors focus:ring-0 focus:outline-none"
 				/>
 				{errors.phone && (
 					<p className="mt-1 text-xs text-red-600">{errors.phone.message}</p>
@@ -99,7 +108,7 @@ export default function ContactForm() {
 			<div>
 				<label
 					htmlFor="cf-message"
-					className="mb-1 block text-[11px] font-bold text-foreground/80 tracking-[0.15em] uppercase"
+					className="text-foreground/80 mb-1 block text-[11px] font-bold tracking-[0.15em] uppercase"
 				>
 					MESSAGE
 				</label>
@@ -107,23 +116,29 @@ export default function ContactForm() {
 					id="cf-message"
 					rows={3}
 					{...register('message')}
-					className="w-full resize-none border-0 border-b border-foreground/30 bg-transparent rounded-none px-0 py-3 text-sm focus:ring-0 focus:border-foreground focus:outline-none transition-colors"
+					className="border-foreground/30 focus:border-foreground w-full resize-none rounded-none border-0 border-b bg-transparent px-0 py-3 text-sm transition-colors focus:ring-0 focus:outline-none"
 				/>
 				{errors.message && (
 					<p className="mt-1 text-xs text-red-600">{errors.message.message}</p>
 				)}
 			</div>
 
-			<div className="flex items-start gap-3 mt-8">
+			<div className="mt-8 flex items-start gap-3">
 				<input
 					id="cf-consent"
 					type="checkbox"
 					{...register('privacyConsent')}
-					className="mt-[2px] h-3.5 w-3.5 rounded-sm border-foreground/40 bg-transparent focus:ring-0 text-foreground/70"
+					className="border-foreground/40 text-foreground/70 mt-[2px] h-3.5 w-3.5 rounded-sm bg-transparent focus:ring-0"
 				/>
-				<label htmlFor="cf-consent" className="text-[11px] font-bold text-foreground/70 tracking-wide">
+				<label
+					htmlFor="cf-consent"
+					className="text-foreground/70 text-[11px] font-bold tracking-wide"
+				>
 					I have read the{' '}
-					<Link href="/privacy-policy" className="underline text-foreground/80 hover:text-foreground">
+					<Link
+						href="/privacy-policy"
+						className="text-foreground/80 hover:text-foreground underline"
+					>
 						Privacy Policy
 					</Link>
 				</label>
@@ -137,7 +152,7 @@ export default function ContactForm() {
 			<button
 				type="submit"
 				disabled={isSubmitting}
-				className="mt-6 inline-block w-full min-[821px]:w-auto rounded-[3px] bg-accent px-10 py-3.5 text-[11px] font-bold text-accent-foreground tracking-[0.3em] uppercase transition hover:bg-accent/90 disabled:opacity-50"
+				className="bg-accent text-accent-foreground hover:bg-accent/90 mt-6 inline-block w-full rounded-[3px] px-10 py-3.5 text-[11px] font-bold tracking-[0.3em] uppercase transition disabled:opacity-50 min-[821px]:w-auto"
 			>
 				{isSubmitting ? 'Sending…' : 'SUBMIT'}
 			</button>
