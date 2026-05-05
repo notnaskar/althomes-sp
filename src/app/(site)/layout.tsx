@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import {
 	Cormorant_Garamond,
 	DM_Sans,
@@ -12,9 +13,9 @@ import {
 	Space_Mono,
 } from 'next/font/google'
 import localFont from 'next/font/local'
-import type { Metadata } from 'next'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { preconnect } from 'react-dom'
+import { Toaster } from 'sonner'
 import { getSite } from '@/sanity/lib/data'
 import { urlFor } from '@/sanity/lib/image'
 import { SanityLive } from '@/sanity/lib/live'
@@ -22,7 +23,6 @@ import Footer from '@/ui/footer'
 import Header from '@/ui/header'
 import VisualEditing from '@/ui/modules/visual-editing'
 import { ThemeProvider } from '@/ui/theme-provider'
-import { Toaster } from 'sonner'
 import '@/app.css'
 
 const geist = Geist({
