@@ -58,7 +58,7 @@ export default function PropertyExperiencesSection({
 				<h2
 					className={[
 						'font-heading text-center text-[24px] leading-[1.2] tracking-[0.05em] lg:text-[32px]',
-						hasBg ? 'text-white drop-shadow-md' : 'text-foreground',
+						hasBg ? 'text-white drop-shadow-[0_4px_10px_rgba(0,0,0,0.08)]' : 'text-foreground',
 					].join(' ')}
 				>
 					EXPERIENCES NEAR {propertyTitle.toUpperCase()}

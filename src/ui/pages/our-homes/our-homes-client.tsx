@@ -222,7 +222,7 @@ export default function OurHomesClient({ properties }: Props) {
 			{/* Availability bar */}
 			<div
 				ref={barRef}
-				className="relative z-30 mt-[32px] mr-[10%] mb-[32px] ml-[10%] flex flex-row items-end gap-[40px] bg-white px-[32px] pt-8 pb-10 max-[820px]:flex-col max-[820px]:items-stretch max-[820px]:gap-5 max-[820px]:px-[18px] max-[820px]:pt-7 max-[820px]:pb-8"
+				className="relative z-30 mt-[-50px] mr-[10%] mb-[32px] ml-[10%] flex flex-row items-end gap-[40px] bg-white px-[32px] pt-8 pb-10 max-[820px]:flex-col max-[820px]:items-stretch max-[820px]:gap-5 max-[820px]:px-[18px] max-[820px]:pt-7 max-[820px]:pb-8"
 			>
 				{/* Date range trigger */}
 				<div className="relative flex-[2]">
@@ -272,7 +272,7 @@ export default function OurHomesClient({ properties }: Props) {
 
 					{/* Calendar popover — anchored to this field's width */}
 					{calendarOpen && (
-						<div className="absolute top-full left-0 z-50 mt-1 min-w-full overflow-x-auto rounded-xl border border-[color:var(--color-stroke)] bg-white shadow-xl">
+						<div className="absolute top-full left-0 z-50 mt-1 min-w-full overflow-x-auto rounded-xl border border-[color:var(--color-stroke)] bg-white shadow-[0_4px_10px_rgba(0,0,0,0.08)]">
 							<DayPicker
 								mode="range"
 								selected={range}
@@ -374,7 +374,7 @@ export default function OurHomesClient({ properties }: Props) {
 			{/* Property listing */}
 			<section
 				ref={resultsRef}
-				className={`relative z-20 px-[90px] max-[820px]:px-[18px] transition-opacity duration-300${isSearching ? ' opacity-50 pointer-events-none' : ''}`}
+				className={`relative z-20 pr-12 max-[820px]:px-[18px] transition-opacity duration-300${isSearching ? ' opacity-50 pointer-events-none' : ''}`}
 			>
 				{availableIds !== null && displayed.length === 0 ? (
 					<div className="py-12 text-center">

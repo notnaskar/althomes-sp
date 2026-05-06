@@ -37,7 +37,7 @@ export default function NavLabels({ heroImage, navLabels }: Props) {
 						key={item._key ?? i}
 						href={item.link ?? '#'}
 						data-nav-label={i}
-						className="nav-label absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/90 px-4 py-2 text-sm font-semibold shadow-md transition-colors hover:bg-white"
+						className="nav-label absolute -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/90 px-4 py-2 text-sm font-semibold transition-colors hover:bg-white hover:shadow-[0_4px_10px_rgba(0,0,0,0.08)]"
 						style={
 							{
 								'--xm': `${xM}%`,

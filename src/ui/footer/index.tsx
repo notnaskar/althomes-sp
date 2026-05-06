@@ -21,12 +21,12 @@ export default async function Footer() {
 							<h4 className="mb-3 font-sans text-[12px] font-bold tracking-[0.1em]">
 								OUR HOMES
 							</h4>
-							<ul className="flex flex-col gap-1.5">
+							<ul className="flex flex-col gap-2">
 								{properties.map((p) => (
 									<li key={p._id}>
 										<a
 											href={`/our-homes/${p.slug}`}
-											className="text-[11px] leading-[1.4] tracking-[0.1em] text-white no-underline transition-opacity hover:opacity-75"
+											className="text-[11px] leading-[1.4] tracking-[0.1em] text-primary-foreground no-underline transition-opacity hover:opacity-75"
 										>
 											{p.title?.toUpperCase()}
 										</a>

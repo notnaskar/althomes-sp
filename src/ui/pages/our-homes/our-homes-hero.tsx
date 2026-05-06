@@ -28,13 +28,13 @@ export default function OurHomesHero({ heroHeadline, heroBackground }: Props) {
 						sizes="100vw"
 						loading="eager"
 						priority
-						className="object-cover"
+						objectFit='contain'
 					/>
 				</div>
 			)}
 
 			{/* CONTENT: heroHeadline */}
-			<div className="relative z-10 px-[90px] pt-[232px] max-[820px]:px-[18px] max-[820px]:pt-[167px]">
+			<div className="relative z-10 mx-[auto] lg:max-w-[800px] md:max-w-[800px] pt-[232px] max-[820px]:px-[18px] max-[820px]:pt-[167px]">
 				<h1 className="font-stories text-foreground max-w-[60%] pb-[32px] text-[72px] leading-[70px] tracking-[0.1em] max-[820px]:text-[48px] max-[820px]:leading-[56px]">
 					{heroHeadline ?? 'Welcome to our homes, find your next escape'}
 				</h1>

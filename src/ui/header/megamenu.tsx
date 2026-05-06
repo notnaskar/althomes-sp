@@ -26,7 +26,7 @@ export default function MegamenuNav({
 				{link?.label || (link?.internal as { title?: string })?.title}
 			</summary>
 
-			<div className="anim-fade-to-b min-[821px]:bg-background border-stroke inset-x-0 top-full min-[821px]:absolute min-[821px]:max-h-[calc(100vh-var(--header-height))] min-[821px]:overflow-y-auto min-[821px]:border-b min-[821px]:shadow-lg">
+			<div className="anim-fade-to-b min-[821px]:bg-background border-stroke inset-x-0 top-full min-[821px]:absolute min-[821px]:max-h-[calc(100vh-var(--header-height))] min-[821px]:overflow-y-auto min-[821px]:border-b min-[821px]:shadow-[0_4px_10px_rgba(0,0,0,0.08)]">
 				<div className="section min-[821px]:py-lh gap-x-lh border-stroke max-[820px]:pl-ch min-[821px]:*:mb-lh py-0 max-[820px]:grid max-[820px]:grid-cols-1 max-[820px]:border-l min-[821px]:columns-3xs">
 					{items?.map((item) => {
 						switch (item._type) {

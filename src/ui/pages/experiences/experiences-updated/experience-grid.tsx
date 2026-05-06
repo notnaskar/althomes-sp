@@ -144,7 +144,7 @@ export default function ExperienceGrid({
 						<div
 							id="filter-panel"
 							role="menu"
-							className="bg-background absolute top-[44px] left-0 z-10 w-[288px] rounded-b-[16px] py-[8px] shadow-[0_8px_24px_rgba(0,0,0,0.08)] max-[820px]:w-[calc(100vw-36px)]"
+							className="bg-background absolute top-[44px] left-0 z-10 w-[288px] rounded-b-[16px] py-[8px] shadow-[0_4px_10px_rgba(0,0,0,0.08)] max-[820px]:w-[calc(100vw-36px)]"
 						>
 							{/* All locations row */}
 							<label className="text-foreground hover:bg-background flex cursor-pointer items-center gap-[12px] px-[24px] font-sans text-[15px] leading-[42px] tracking-[0.1em] transition-colors">
@@ -207,7 +207,7 @@ export default function ExperienceGrid({
 				<div className="mt-[80px] flex justify-center max-[820px]:mt-[56px]">
 					<Link
 						href={ctaHref}
-						className="bg-accent text-accent-foreground inline-flex h-[26px] items-center justify-center rounded-[5px] px-[24px] font-sans text-[12px] font-bold tracking-[0.3em] transition-transform hover:-translate-y-px hover:shadow-[0_4px_12px_rgba(0,0,0,0.1)] max-[820px]:h-[44px]"
+						className="bg-accent text-accent-foreground inline-flex h-[26px] items-center justify-center rounded-[5px] px-[24px] font-sans text-[12px] font-bold tracking-[0.3em] transition-transform hover:-translate-y-px hover:shadow-[0_4px_10px_rgba(0,0,0,0.08)] max-[820px]:h-[44px]"
 					>
 						{ctaLabel}
 					</Link>

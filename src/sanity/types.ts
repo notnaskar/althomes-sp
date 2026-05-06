@@ -891,6 +891,7 @@ export type Property = {
 	displayOrder?: number
 	rentalwisePropertyId?: string
 	rentalwiseIdentifier?: string
+	rentalwiseWidgetPropertyId?: string
 	tagline?: string
 	shortDescription?: string
 	cardThumbnail?: {
@@ -3272,6 +3273,7 @@ export type PROPERTY_QUERY_RESULT = {
 	displayOrder?: number
 	rentalwisePropertyId?: string
 	rentalwiseIdentifier?: string
+	rentalwiseWidgetPropertyId?: string
 	tagline?: string
 	shortDescription?: string
 	cardThumbnail: {

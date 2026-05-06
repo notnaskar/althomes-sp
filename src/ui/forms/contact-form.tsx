@@ -128,7 +128,7 @@ export default function ContactForm() {
 					id="cf-consent"
 					type="checkbox"
 					{...register('privacyConsent')}
-					className="border-foreground/40 text-foreground/70 mt-[2px] h-3.5 w-3.5 rounded-sm bg-transparent focus:ring-0"
+					className="border-foreground/40 text-foreground/70 mt-[2px] h-3.5 w-3.5 rounded-[5px] bg-transparent focus:ring-0"
 				/>
 				<label
 					htmlFor="cf-consent"
@@ -152,7 +152,7 @@ export default function ContactForm() {
 			<button
 				type="submit"
 				disabled={isSubmitting}
-				className="bg-accent text-accent-foreground hover:bg-accent/90 mt-6 inline-block w-full rounded-[3px] px-10 py-3.5 text-[11px] font-bold tracking-[0.3em] uppercase transition disabled:opacity-50 min-[821px]:w-auto"
+				className="bg-accent text-accent-foreground hover:bg-accent/90 mt-6 inline-block w-full rounded-[5px] px-10 py-3 text-[11px] font-bold tracking-[0.3em] uppercase transition disabled:opacity-50 min-[821px]:w-auto"
 			>
 				{isSubmitting ? 'Sending…' : 'SUBMIT'}
 			</button>

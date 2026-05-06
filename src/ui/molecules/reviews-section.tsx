@@ -67,7 +67,7 @@ export default function ReviewsSection({ reviews }: { reviews: Review[] }) {
 					{/* Card — rotated on desktop */}
 					<div
 						key={active}
-						className="bg-card-shell w-full max-w-[520px] overflow-hidden rounded-[8px] shadow-[0px_8px_32px_rgba(0,0,0,0.08)] lg:-rotate-[2.94deg]"
+						className="bg-card-shell w-full max-w-[520px] overflow-hidden rounded-[8px] border border-stroke lg:-rotate-[2.94deg]"
 					>
 						{/* Guest photo */}
 						<div className="h-[260px] w-full overflow-hidden">

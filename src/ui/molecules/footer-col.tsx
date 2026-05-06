@@ -16,7 +16,7 @@ export default function FooterCol({ heading, links }: FooterColProps) {
 					<li key={link.url}>
 						<Link
 							href={link.url}
-							className="text-[11px] leading-[1.4] tracking-[0.1em] text-white no-underline transition-opacity hover:opacity-75"
+							className="text-[11px] leading-[1.4] tracking-[0.1em] text-primary-foreground no-underline transition-opacity hover:opacity-75"
 						>
 							{link.label}
 						</Link>

@@ -13,6 +13,7 @@ import PropertyFaqSection from '@/ui/pages/our-homes/property-faq-section'
 import ReactIcon from '@/ui/atoms/react-icon'
 import ReviewsSection from '@/ui/molecules/reviews-section'
 import OurHomesCta from '@/ui/pages/our-homes/our-homes-cta'
+import RentalwiseWidget from '@/ui/pages/our-homes/rentalwise-widget'
 
 type Props = {
 	params: Promise<{ slug: string }>
@@ -82,37 +83,47 @@ export default async function PropertyDetailPage({ params }: Props) {
 				</section>
 
 				{/* 2. Booking bar */}
-				<div className="mx-[18px] lg:mx-[90px] flex flex-col lg:flex-row lg:items-center lg:justify-center gap-4 lg:gap-[40px] bg-background px-[48px] py-[12px]">
-					<p className="lg:hidden text-center font-heading uppercase tracking-wider text-sm text-foreground">READY TO ESCAPE?</p>
-					<div className="flex flex-col gap-[5px]">
-						<p className="font-sans text-[15px] tracking-[0.1em] text-foreground">
-							Check In &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Check Out
-						</p>
-						<div className="h-px w-full lg:w-[289px] bg-muted" />
+				{property.rentalwiseIdentifier && property.rentalwiseWidgetPropertyId ? (
+					<div className="mx-[18px] lg:mx-[90px]">
+						<RentalwiseWidget
+							instance={process.env.NEXT_PUBLIC_RENTALWISE_INSTANCE_URL ?? 'https://althomes.rentalwise.io'}
+							identifier={property.rentalwiseIdentifier}
+							propertyId={property.rentalwiseWidgetPropertyId}
+						/>
 					</div>
-					<div className="flex flex-col gap-[8px]">
-						<p className="font-sans text-[15px] tracking-[0.1em] text-foreground">Guests</p>
-						<div className="h-px w-full lg:w-[289px] bg-muted" />
-					</div>
-					<div className="flex items-center gap-[32px]">
-						<div className="text-right">
-							<p className="font-sans text-[9px] leading-[23px] tracking-[0.1em] text-foreground">
-								TAXES INCLUDED
+				) : (
+					<div className="mx-[18px] lg:mx-[90px] flex flex-col lg:flex-row lg:items-center lg:justify-center gap-4 lg:gap-[40px] bg-background px-[48px] py-[12px]">
+						<p className="lg:hidden text-center font-heading uppercase tracking-wider text-sm text-foreground">READY TO ESCAPE?</p>
+						<div className="flex flex-col gap-[5px]">
+							<p className="font-sans text-[15px] tracking-[0.1em] text-foreground">
+								Check In &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Check Out
 							</p>
-							{property.priceFrom != null && (
-								<p className="font-sans text-[15px] font-semibold leading-[16px] tracking-[0.1em] text-foreground">
-									INR {property.priceFrom.toLocaleString()}
-								</p>
-							)}
+							<div className="h-px w-full lg:w-[289px] bg-muted" />
 						</div>
-						<a
-							href="#booking"
-							className="flex h-auto w-full lg:w-[208px] items-center justify-center rounded-[5px] bg-accent py-[5px] font-sans text-[12px] font-semibold tracking-[0.3em] text-accent-foreground"
-						>
-							BOOK NOW
-						</a>
+						<div className="flex flex-col gap-[8px]">
+							<p className="font-sans text-[15px] tracking-[0.1em] text-foreground">Guests</p>
+							<div className="h-px w-full lg:w-[289px] bg-muted" />
+						</div>
+						<div className="flex items-center gap-[32px]">
+							<div className="text-right">
+								<p className="font-sans text-[9px] leading-[23px] tracking-[0.1em] text-foreground">
+									TAXES INCLUDED
+								</p>
+								{property.priceFrom != null && (
+									<p className="font-sans text-[15px] font-semibold leading-[16px] tracking-[0.1em] text-foreground">
+										INR {property.priceFrom.toLocaleString()}
+									</p>
+								)}
+							</div>
+							<a
+								href="#booking"
+								className="flex h-auto w-full lg:w-[208px] items-center justify-center rounded-[5px] bg-accent py-[5px] font-sans text-[12px] font-semibold tracking-[0.3em] text-accent-foreground"
+							>
+								BOOK NOW
+							</a>
+						</div>
 					</div>
-				</div>
+				)}
 
 				{/* 3. Intro — subtitle + specs strip */}
 				<section
@@ -155,7 +166,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 				</section>
 
 				{/* 4. Image collage + description */}
-				<section className="flex flex-col max-w-[1000px] justify-self-center lg:flex-row lg:h-[490px] items-center lg:justify-center gap-8 lg:gap-[48px] bg-background overflow-hidden">
+				<section className="flex flex-col max-w-[1000px] justify-self-center lg:flex-row lg:h-[490px] items-center lg:justify-center gap-8 lg:gap-[48px] bg-background overflow-visible">
 					{/* Left: collage */}
 					<div className="relative w-full overflow-visible lg:w-[575px] h-[360px] lg:h-full shrink-0 overflow-hidden">
 						{property.showcaseDecorImage?.asset && (

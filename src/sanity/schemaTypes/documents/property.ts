@@ -73,6 +73,13 @@ export default defineType({
 			validation: (Rule) => Rule.required(),
 			group: 'rentalwise',
 		}),
+		defineField({
+			name: 'rentalwiseWidgetPropertyId',
+			title: 'RentalWise Widget Property ID',
+			type: 'string',
+			description: 'Property ID used by the booking widget (separate from the availability API external ID)',
+			group: 'rentalwise',
+		}),
 
 		// Listing Card
 		defineField({

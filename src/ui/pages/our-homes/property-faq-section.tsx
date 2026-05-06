@@ -34,7 +34,7 @@ export default function PropertyFaqSection({ faqs }: { faqs: Faq[] }) {
 				<div className="divide-card-shell/20 border-card-shell/20 divide-y border-b">
 					{faqs.map((faq, i) => (
 						<details key={i} className="group py-4 md:py-5">
-							<summary className="focus-visible:ring-primary-foreground flex cursor-pointer list-none items-center justify-between gap-4 outline-none focus-visible:rounded-sm focus-visible:ring-2">
+							<summary className="focus-visible:ring-primary-foreground flex cursor-pointer list-none items-center justify-between gap-4 outline-none focus-visible:rounded-[5px] focus-visible:ring-2">
 								<span className="font-sans text-base leading-snug font-semibold tracking-wider md:text-[17px]">
 									{faq.question}
 								</span>
