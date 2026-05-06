@@ -1040,6 +1040,60 @@ export type Property = {
 		}
 		_key: string
 	}>
+	windDownHighlight?: {
+		title?: string
+		body?: string
+		image?: {
+			asset?: SanityImageAssetReference
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			alt?: string
+			_type: 'image'
+		}
+		decorImage?: {
+			asset?: SanityImageAssetReference
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			_type: 'image'
+		}
+		secondaryDecorImage?: {
+			asset?: SanityImageAssetReference
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			_type: 'image'
+		}
+	}
+	wakeUpHighlight?: {
+		title?: string
+		body?: string
+		image?: {
+			asset?: SanityImageAssetReference
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			alt?: string
+			_type: 'image'
+		}
+	}
+	hostedWithHeartHighlight?: {
+		title?: string
+		body?: string
+	}
+	symphonyHighlight?: {
+		title?: string
+		body?: string
+		image?: {
+			asset?: SanityImageAssetReference
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			alt?: string
+			_type: 'image'
+		}
+	}
 	experiences?: Array<
 		{
 			_key: string
@@ -3606,6 +3660,60 @@ export type PROPERTY_QUERY_RESULT = {
 			} | null
 		} | null
 	}> | null
+	windDownHighlight?: {
+		title?: string
+		body?: string
+		image?: {
+			asset?: SanityImageAssetReference
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			alt?: string
+			_type: 'image'
+		}
+		decorImage?: {
+			asset?: SanityImageAssetReference
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			_type: 'image'
+		}
+		secondaryDecorImage?: {
+			asset?: SanityImageAssetReference
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			_type: 'image'
+		}
+	}
+	wakeUpHighlight?: {
+		title?: string
+		body?: string
+		image?: {
+			asset?: SanityImageAssetReference
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			alt?: string
+			_type: 'image'
+		}
+	}
+	hostedWithHeartHighlight?: {
+		title?: string
+		body?: string
+	}
+	symphonyHighlight?: {
+		title?: string
+		body?: string
+		image?: {
+			asset?: SanityImageAssetReference
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			alt?: string
+			_type: 'image'
+		}
+	}
 	experiences: Array<{
 		title: string | null
 		slug: string | null

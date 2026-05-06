@@ -453,24 +453,16 @@ export default defineType({
 		// Highlights
 		defineField({
 			name: 'highlights',
-			title: 'Highlights',
+			title: 'Highlights (DEPRECATED — use named slots below)',
 			type: 'array',
+			description:
+				'DEPRECATED. Migrate content to the four named slots: Wind Down, Wake Up, Hosted With Heart, Symphony. This array is no longer rendered on the live page.',
 			of: [
 				{
 					type: 'object',
 					fields: [
-						{
-							name: 'title',
-							type: 'string',
-							title: 'Title',
-							validation: (Rule) => Rule.required(),
-						},
-						{
-							name: 'body',
-							type: 'text',
-							title: 'Body',
-							validation: (Rule) => Rule.required(),
-						},
+						{ name: 'title', type: 'string', title: 'Title' },
+						{ name: 'body', type: 'text', title: 'Body' },
 						{
 							name: 'image',
 							type: 'image',
@@ -482,8 +474,6 @@ export default defineType({
 							name: 'secondaryImage',
 							type: 'image',
 							title: 'Secondary Image',
-							description:
-								'Optional small overlay photo for multi-image collage layouts.',
 							options: { hotspot: true },
 							fields: [{ name: 'alt', type: 'string', title: 'Alt text' }],
 						},
@@ -491,15 +481,135 @@ export default defineType({
 							name: 'decorImage',
 							type: 'image',
 							title: 'Decor Image',
-							description:
-								'Optional organic/illustrative decoration (e.g. plant, flower) for this section.',
 							options: { hotspot: true },
 						},
 					],
 				},
 			],
-			validation: (Rule) => Rule.min(2),
 			group: 'highlights',
+		}),
+
+		defineField({
+			name: 'windDownHighlight',
+			title: 'Wind Down Highlight',
+			type: 'object',
+			description:
+				'Top-left text block + dining-table image cell (desktop row 1, cols 2-3). On mobile the image renders above the section heading.',
+			group: 'highlights',
+			fields: [
+				defineField({
+					name: 'title',
+					title: 'Title',
+					type: 'string',
+					validation: (Rule) => Rule.required(),
+				}),
+				defineField({
+					name: 'body',
+					title: 'Body',
+					type: 'text',
+					validation: (Rule) => Rule.required(),
+				}),
+				defineField({
+					name: 'image',
+					title: 'Image (dining table)',
+					type: 'image',
+					options: { hotspot: true },
+					fields: [{ name: 'alt', type: 'string', title: 'Alt text' }],
+				}),
+				defineField({
+					name: 'decorImage',
+					title: 'Decor Image (wrap with tassels)',
+					type: 'image',
+					options: { hotspot: true },
+				}),
+				defineField({
+					name: 'secondaryDecorImage',
+					title: 'Secondary Decor Image (leaf)',
+					type: 'image',
+					options: { hotspot: true },
+				}),
+			],
+		}),
+
+		defineField({
+			name: 'wakeUpHighlight',
+			title: 'Wake Up Highlight',
+			type: 'object',
+			description: 'Tea-leaves image cell + text (desktop row 2, cols 1 and 2).',
+			group: 'highlights',
+			fields: [
+				defineField({
+					name: 'title',
+					title: 'Title',
+					type: 'string',
+					validation: (Rule) => Rule.required(),
+				}),
+				defineField({
+					name: 'body',
+					title: 'Body',
+					type: 'text',
+					validation: (Rule) => Rule.required(),
+				}),
+				defineField({
+					name: 'image',
+					title: 'Image (tea-leaves hand)',
+					type: 'image',
+					options: { hotspot: true },
+					fields: [{ name: 'alt', type: 'string', title: 'Alt text' }],
+				}),
+			],
+		}),
+
+		defineField({
+			name: 'hostedWithHeartHighlight',
+			title: 'Hosted With Heart Highlight',
+			type: 'object',
+			description: 'Text-only block (desktop row 2, col 3). No image.',
+			group: 'highlights',
+			fields: [
+				defineField({
+					name: 'title',
+					title: 'Title',
+					type: 'string',
+					validation: (Rule) => Rule.required(),
+				}),
+				defineField({
+					name: 'body',
+					title: 'Body',
+					type: 'text',
+					validation: (Rule) => Rule.required(),
+				}),
+			],
+		}),
+
+		defineField({
+			name: 'symphonyHighlight',
+			title: 'Symphony of Flavours Highlight',
+			type: 'object',
+			description:
+				'Text + menu CTA + food plate image (desktop row 3). Menu CTA is the existing top-level menuCta field on the property document.',
+			group: 'highlights',
+			fields: [
+				defineField({
+					name: 'title',
+					title: 'Title',
+					type: 'string',
+					validation: (Rule) => Rule.required(),
+				}),
+				defineField({
+					name: 'body',
+					title: 'Body',
+					type: 'text',
+					validation: (Rule) => Rule.required(),
+				}),
+				defineField({
+					name: 'image',
+					title: 'Image (food plate)',
+					type: 'image',
+					options: { hotspot: true },
+					fields: [{ name: 'alt', type: 'string', title: 'Alt text' }],
+				}),
+			],
 		}),
 
 		// Experiences
