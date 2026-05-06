@@ -56,8 +56,7 @@ const GRID_CONFIG = {
       "symText   foodImg    foodImg"
     `,
   },
-  maxWidth: '1260px',
-  paddingX: { mobile: '18px', desktop: '90px' },
+  mobilePaddingX: '18px',
   decor: {
     wrap: { left: '-30px', top: '60px', width: '180px', rotate: '0deg' },
     leaf: { right: '-20px', top: '20px', width: '160px', rotate: '15deg' },
@@ -110,23 +109,12 @@ export default function PropertyHighlightsSection({
       )}
 
       <h2
-        className="mb-16 text-center font-heading text-[30px] font-normal leading-[40px] tracking-[0.3em] text-foreground"
-        style={{
-          paddingLeft: GRID_CONFIG.paddingX.mobile,
-          paddingRight: GRID_CONFIG.paddingX.mobile,
-        }}
+        className="mb-16 px-[18px] text-center font-heading text-[30px] font-normal leading-[40px] tracking-[0.3em] text-foreground"
       >
         WHAT&rsquo;S WAITING FOR YOU?
       </h2>
 
-      <div
-        className="mx-auto"
-        style={{
-          maxWidth: GRID_CONFIG.maxWidth,
-          paddingLeft: GRID_CONFIG.paddingX.mobile,
-          paddingRight: GRID_CONFIG.paddingX.mobile,
-        }}
-      >
+      <div>
         {/* Desktop grid */}
         <div
           className="max-lg:hidden lg:grid"
@@ -135,8 +123,6 @@ export default function PropertyHighlightsSection({
             gridTemplateRows: GRID_CONFIG.desktop.rows,
             gridTemplateAreas: GRID_CONFIG.desktop.areas,
             gap: GRID_CONFIG.desktop.gap,
-            paddingLeft: `calc(${GRID_CONFIG.paddingX.desktop} - ${GRID_CONFIG.paddingX.mobile})`,
-            paddingRight: `calc(${GRID_CONFIG.paddingX.desktop} - ${GRID_CONFIG.paddingX.mobile})`,
           }}
         >
           <div style={{ gridArea: 'windText' }} className="flex flex-col justify-center text-right">
@@ -234,7 +220,7 @@ export default function PropertyHighlightsSection({
         </div>
 
         {/* Mobile stack */}
-        <div className="flex flex-col gap-12 lg:hidden">
+        <div className="flex flex-col gap-12 px-[18px] lg:hidden">
           {/* Wind down text */}
           <div>
             {windDown?.title && <h3 className={TITLE_CLASS}>{windDown.title}</h3>}
