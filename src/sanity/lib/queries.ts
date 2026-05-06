@@ -135,7 +135,6 @@ export const PROPERTY_QUERY =
 		image { asset->, alt }
 	},
 	experiencesBgImage { asset->, alt, hotspot, crop },
-	highlights[]{ title, body, image { asset->, alt }, secondaryImage { asset->, alt }, decorImage { asset-> } },
 	windDownHighlight{
 		title,
 		body,

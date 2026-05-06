@@ -452,44 +452,6 @@ export default defineType({
 
 		// Highlights
 		defineField({
-			name: 'highlights',
-			title: 'Highlights (DEPRECATED — use named slots below)',
-			type: 'array',
-			description:
-				'DEPRECATED. Migrate content to the four named slots: Wind Down, Wake Up, Hosted With Heart, Symphony. This array is no longer rendered on the live page.',
-			of: [
-				{
-					type: 'object',
-					fields: [
-						{ name: 'title', type: 'string', title: 'Title' },
-						{ name: 'body', type: 'text', title: 'Body' },
-						{
-							name: 'image',
-							type: 'image',
-							title: 'Image',
-							options: { hotspot: true },
-							fields: [{ name: 'alt', type: 'string', title: 'Alt text' }],
-						},
-						{
-							name: 'secondaryImage',
-							type: 'image',
-							title: 'Secondary Image',
-							options: { hotspot: true },
-							fields: [{ name: 'alt', type: 'string', title: 'Alt text' }],
-						},
-						{
-							name: 'decorImage',
-							type: 'image',
-							title: 'Decor Image',
-							options: { hotspot: true },
-						},
-					],
-				},
-			],
-			group: 'highlights',
-		}),
-
-		defineField({
 			name: 'windDownHighlight',
 			title: 'Wind Down Highlight',
 			type: 'object',
