@@ -129,7 +129,7 @@ export default function PropertyHighlightsSection({
       >
         {/* Desktop grid */}
         <div
-          className="hidden lg:grid"
+          className="max-lg:hidden lg:grid"
           style={{
             gridTemplateColumns: GRID_CONFIG.desktop.columns,
             gridTemplateRows: GRID_CONFIG.desktop.rows,
