@@ -139,14 +139,14 @@ export const PROPERTY_QUERY =
 	windDownHighlight{
 		title,
 		body,
-		image { asset->, alt },
+		image { asset->, alt, hotspot, crop },
 		decorImage { asset-> },
 		secondaryDecorImage { asset-> }
 	},
 	wakeUpHighlight{
 		title,
 		body,
-		image { asset->, alt }
+		image { asset->, alt, hotspot, crop }
 	},
 	hostedWithHeartHighlight{
 		title,
@@ -155,7 +155,7 @@ export const PROPERTY_QUERY =
 	symphonyHighlight{
 		title,
 		body,
-		image { asset->, alt }
+		image { asset->, alt, hotspot, crop }
 	},
 	causeImages[]{ asset->, alt },
 	ctaBackground { asset->, alt },
