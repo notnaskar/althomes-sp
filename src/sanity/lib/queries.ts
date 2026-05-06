@@ -136,6 +136,27 @@ export const PROPERTY_QUERY =
 	},
 	experiencesBgImage { asset->, alt, hotspot, crop },
 	highlights[]{ title, body, image { asset->, alt }, secondaryImage { asset->, alt }, decorImage { asset-> } },
+	windDownHighlight{
+		title,
+		body,
+		image { asset->, alt },
+		decorImage { asset-> },
+		secondaryDecorImage { asset-> }
+	},
+	wakeUpHighlight{
+		title,
+		body,
+		image { asset->, alt }
+	},
+	hostedWithHeartHighlight{
+		title,
+		body
+	},
+	symphonyHighlight{
+		title,
+		body,
+		image { asset->, alt }
+	},
 	causeImages[]{ asset->, alt },
 	ctaBackground { asset->, alt },
 	faqs[]{ question, answer },
