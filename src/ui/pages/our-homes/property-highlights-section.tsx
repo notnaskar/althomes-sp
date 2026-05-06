@@ -220,7 +220,7 @@ export default function PropertyHighlightsSection({
         </div>
 
         {/* Mobile stack */}
-        <div className="flex flex-col gap-12 px-[18px] lg:hidden">
+        <div className="max-lg:flex flex-col gap-12 px-[18px] lg:hidden">
           {/* Wind down text */}
           <div>
             {windDown?.title && <h3 className={TITLE_CLASS}>{windDown.title}</h3>}
