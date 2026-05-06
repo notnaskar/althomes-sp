@@ -14,6 +14,7 @@ import ReactIcon from '@/ui/atoms/react-icon'
 import ReviewsSection from '@/ui/molecules/reviews-section'
 import OurHomesCta from '@/ui/pages/our-homes/our-homes-cta'
 import RentalwiseWidget from '@/ui/pages/our-homes/rentalwise-widget'
+import PropertyHighlightsSection from '@/ui/pages/our-homes/property-highlights-section'
 
 type Props = {
 	params: Promise<{ slug: string }>
@@ -244,134 +245,13 @@ export default async function PropertyDetailPage({ params }: Props) {
 				)}
 
 				{/* 4. Highlights — What's Waiting For You? */}
-				{property.highlights && property.highlights.length > 0 && (
-					<section className="w-full overflow-hidden bg-background py-[72px]">
-						{/* Heading */}
-						<h2 className="mb-16 px-[18px] lg:px-[90px] text-center font-heading text-[30px] font-normal leading-[40px] tracking-[0.3em] text-foreground">
-							WHAT&rsquo;S WAITING FOR YOU?
-						</h2>
-
-						<div className="flex w-full flex-col gap-6">
-							{/* Row 1: text right-aligned + image collage (highlights[0]) */}
-							{property.highlights[0] && (
-								<div className="flex flex-col lg:flex-row lg:items-end lg:justify-end gap-6 lg:gap-12 px-[18px] lg:px-[90px]">
-									<div className="w-full lg:w-96 text-right">
-										{property.highlights[0].title && (
-											<h3 className="font-heading text-[20px] leading-[28px] tracking-[0.2em] text-foreground mb-3">
-												{property.highlights[0].title}
-											</h3>
-										)}
-										{property.highlights[0].body && (
-											<p className="font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground">
-												{property.highlights[0].body}
-											</p>
-										)}
-									</div>
-									<div className="relative h-96 w-full lg:w-[576px] shrink-0">
-										{property.highlights[0].image?.asset && (
-											<div className="absolute left-0 top-0 h-96 w-full lg:w-[576px] overflow-hidden rounded-[5px]">
-												<Img image={property.highlights[0].image} width={576} alt={property.highlights[0].image.alt ?? ''} className="h-full w-full object-cover" />
-											</div>
-										)}
-										{property.highlights[0].decorImage?.asset && (
-											<div className="pointer-events-none absolute -left-[72px] -top-[32px] h-[192px] w-[120px] -rotate-[21deg]">
-												<Img image={property.highlights[0].decorImage} width={120} alt="" className="h-full w-full object-cover" />
-											</div>
-										)}
-										{property.highlights[0].secondaryImage?.asset && (
-											<div className="absolute left-0 top-[121px] h-80 w-48 overflow-hidden rounded-[5px]">
-												<Img image={property.highlights[0].secondaryImage} width={192} alt={property.highlights[0].secondaryImage.alt ?? ''} className="h-full w-full object-cover" />
-											</div>
-										)}
-									</div>
-								</div>
-							)}
-
-							{/* Row 2: highlights[1] — image left, text right */}
-							{property.highlights[1] && (
-								<div className="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-12 px-[18px] lg:px-[90px]">
-									{property.highlights[1].image?.asset && (
-										<div className="relative h-80 w-full lg:w-[494px] shrink-0 overflow-hidden rounded-[5px]">
-											<Img image={property.highlights[1].image} width={494} alt={property.highlights[1].image.alt ?? ''} className="h-full w-full object-cover" />
-										</div>
-									)}
-									<div className="flex-1">
-										{property.highlights[1].title && (
-											<h3 className="font-heading text-[20px] leading-[28px] tracking-[0.2em] text-foreground mb-3">
-												{property.highlights[1].title}
-											</h3>
-										)}
-										{property.highlights[1].body && (
-											<p className="font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground">
-												{property.highlights[1].body}
-											</p>
-										)}
-									</div>
-								</div>
-							)}
-
-							{/* Row 3: highlights[2] — text left, image right */}
-							{property.highlights[2] && (
-								<div className="flex flex-col lg:flex-row lg:items-center lg:justify-end gap-6 lg:gap-12 px-[18px] lg:px-[90px]">
-									<div className="flex-1">
-										{property.highlights[2].title && (
-											<h3 className="font-heading text-[20px] leading-[28px] tracking-[0.2em] text-foreground mb-3">
-												{property.highlights[2].title}
-											</h3>
-										)}
-										{property.highlights[2].body && (
-											<p className="font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground">
-												{property.highlights[2].body}
-											</p>
-										)}
-									</div>
-									{property.highlights[2].image?.asset && (
-										<div className="relative h-80 w-full lg:w-[494px] shrink-0 overflow-hidden rounded-[5px]">
-											<Img image={property.highlights[2].image} width={494} alt={property.highlights[2].image.alt ?? ''} className="h-full w-full object-cover" />
-										</div>
-									)}
-								</div>
-							)}
-
-							{/* Row 3: text + CTA left, image right (highlights[3]) */}
-							{property.highlights[3] && (
-								<div className="flex flex-col lg:flex-row lg:items-center lg:justify-end gap-6 lg:gap-12 px-[18px] lg:px-[90px]">
-									<div className="flex w-full lg:w-96 shrink-0 flex-col gap-12">
-										<div>
-											{property.highlights[3].title && (
-												<h3 className="font-heading text-[20px] leading-[28px] tracking-[0.2em] text-foreground mb-3">
-													{property.highlights[3].title}
-												</h3>
-											)}
-											{property.highlights[3].body && (
-												<p className="font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground">
-													{property.highlights[3].body}
-												</p>
-											)}
-										</div>
-										{property.menuCta?.url && (
-											<a
-												href={property.menuCta.url}
-												target="_blank"
-												rel="noopener noreferrer"
-												className="font-sans text-[12px] font-semibold tracking-[0.3em] text-foreground underline underline-offset-2 hover:opacity-70"
-											>
-												{property.menuCta.label || "WHAT'S ON THE MENU?"}
-											</a>
-										)}
-									</div>
-									<div className="relative h-80 w-full lg:w-[788px] shrink-0 overflow-hidden rounded-tl-[5px] rounded-bl-[5px]">
-										{property.highlights[3].image?.asset && (
-											<div className="absolute left-0 top-0 h-80 w-full overflow-hidden">
-												<Img image={property.highlights[3].image} width={788} alt={property.highlights[3].image.alt ?? ''} className="h-full w-full object-cover" />
-											</div>
-										)}
-									</div>
-								</div>
-							)}
-						</div>
-					</section>
-				)}
+				<PropertyHighlightsSection
+					windDown={property.windDownHighlight ?? null}
+					wakeUp={property.wakeUpHighlight ?? null}
+					hostedWithHeart={property.hostedWithHeartHighlight ?? null}
+					symphony={property.symphonyHighlight ?? null}
+					menuCta={property.menuCta ?? null}
+				/>
 
 				{/* 5. Experiences */}
 				{cappedExperiences.length > 0 && (
