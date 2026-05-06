@@ -1,4 +1,4 @@
-import React from 'react'
+import type { CSSProperties } from 'react'
 import Img from '@/ui/img'
 
 type ImageWithAlt = {
@@ -78,7 +78,7 @@ function decorStyle(d: { left?: string; right?: string; top?: string; width: str
     top: d.top,
     width: d.width,
     transform: `rotate(${d.rotate})`,
-  } as React.CSSProperties
+  } as CSSProperties
 }
 
 export default function PropertyHighlightsSection({
