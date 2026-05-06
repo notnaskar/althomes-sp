@@ -28,7 +28,7 @@ export default function OurHomesCta({
 }: Props) {
 	return (
 		<section
-			className={`relative flex min-h-[720px] lg:mt-[-280px] flex-col items-center justify-end overflow-hidden pb-[200px] max-[820px]:min-h-[360px] max-[820px]:pb-20${noOverlap ? '' : ' z-[-1] mt-[-300px]'}`}
+			className={`relative flex min-h-[400px] flex-col items-center justify-end overflow-hidden pb-45 lg:min-h-[720px] lg:pb-65 ${noOverlap ? '' : 'z-[-1] mt-[-300px] lg:mt-[-280px]'}`}
 		>
 			{/* CONTENT: ctaBackground */}
 			{ctaBackground?.asset && (
@@ -39,13 +39,14 @@ export default function OurHomesCta({
 					sizes="100vw"
 					className="object-cover object-top"
 					aria-hidden="true"
+					objectPosition="center"
 				/>
 			)}
 
 			<div className="relative z-10 flex flex-col items-center gap-6">
 				{/* CONTENT: ctaQuestion */}
 				{ctaQuestion && (
-					<p className="font-heading text-foreground max-w-[642px] text-center text-[30px] leading-[40px] tracking-[0.1em] max-[820px]:px-[18px] max-[820px]:text-[22px] max-[820px]:leading-[32px]">
+					<p className="font-heading text-foreground max-w-[642px] px-[18px] text-center text-[22px] leading-[32px] tracking-[0.1em] lg:px-0 lg:text-[30px] lg:leading-[40px]">
 						{ctaQuestion}
 					</p>
 				)}

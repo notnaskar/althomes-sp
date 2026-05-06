@@ -921,9 +921,26 @@ export type Property = {
 	}
 	showcaseDecorTop?: string
 	showcaseDecorRight?: string
+	showcaseDecorBottom?: string
+	showcaseDecorLeft?: string
 	showcaseDecorWidth?: number
 	showcaseDecorHeight?: number
 	showcaseDecorRotation?: number
+	showcaseSecondaryDecorImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	showcaseSecondaryDecorTop?: string
+	showcaseSecondaryDecorRight?: string
+	showcaseSecondaryDecorBottom?: string
+	showcaseSecondaryDecorLeft?: string
+	showcaseSecondaryDecorWidth?: number
+	showcaseSecondaryDecorHeight?: number
+	showcaseSecondaryDecorRotation?: number
 	propertyType?: string
 	priceFrom?: string
 	heroImage?: {
@@ -3133,7 +3150,7 @@ export type ALL_LEGAL_PAGES_QUERY_RESULT = Array<string | null>
 
 // Source: src/sanity/lib/queries.ts
 // Variable: ALL_PROPERTIES_QUERY
-// Query: *[_type == 'property' && status != 'hidden'] | order(displayOrder asc){	_id,	title,	"slug": slug.current,	tagline,	shortDescription,	cardThumbnail { asset->, alt },	heroImage { asset->, alt },	showcaseSecondaryImage { asset->, alt },	showcaseDecorImage { asset->, alt },	showcaseDecorTop,	showcaseDecorRight,	showcaseDecorWidth,	showcaseDecorHeight,	showcaseDecorRotation,	pullQuote,	locationHeadline,	cardAmenities,	propertyType,	priceFrom,	maxGuests,	bedrooms,	bathrooms,	status,	displayOrder,	rentalwisePropertyId}
+// Query: *[_type == 'property' && status != 'hidden'] | order(displayOrder asc){	_id,	title,	"slug": slug.current,	tagline,	shortDescription,	cardThumbnail { asset->, alt },	heroImage { asset->, alt },	showcaseSecondaryImage { asset->, alt },	showcaseDecorImage { asset->, alt },	showcaseDecorTop,	showcaseDecorRight,	showcaseDecorBottom,	showcaseDecorLeft,	showcaseDecorWidth,	showcaseDecorHeight,	showcaseDecorRotation,	showcaseSecondaryDecorImage { asset->, alt },	showcaseSecondaryDecorTop,	showcaseSecondaryDecorRight,	showcaseSecondaryDecorBottom,	showcaseSecondaryDecorLeft,	showcaseSecondaryDecorWidth,	showcaseSecondaryDecorHeight,	showcaseSecondaryDecorRotation,	pullQuote,	locationHeadline,	cardAmenities,	propertyType,	priceFrom,	maxGuests,	bedrooms,	bathrooms,	status,	displayOrder,	rentalwisePropertyId}
 export type ALL_PROPERTIES_QUERY_RESULT = Array<{
 	_id: string
 	title: string | null
@@ -3242,9 +3259,43 @@ export type ALL_PROPERTIES_QUERY_RESULT = Array<{
 	} | null
 	showcaseDecorTop: string | null
 	showcaseDecorRight: string | null
+	showcaseDecorBottom: string | null
+	showcaseDecorLeft: string | null
 	showcaseDecorWidth: number | null
 	showcaseDecorHeight: number | null
 	showcaseDecorRotation: number | null
+	showcaseSecondaryDecorImage: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
+	showcaseSecondaryDecorTop: string | null
+	showcaseSecondaryDecorRight: string | null
+	showcaseSecondaryDecorBottom: string | null
+	showcaseSecondaryDecorLeft: string | null
+	showcaseSecondaryDecorWidth: number | null
+	showcaseSecondaryDecorHeight: number | null
+	showcaseSecondaryDecorRotation: number | null
 	pullQuote: string | null
 	locationHeadline: string | null
 	cardAmenities: string | null
@@ -3320,9 +3371,26 @@ export type PROPERTY_QUERY_RESULT = {
 	}
 	showcaseDecorTop?: string
 	showcaseDecorRight?: string
+	showcaseDecorBottom?: string
+	showcaseDecorLeft?: string
 	showcaseDecorWidth?: number
 	showcaseDecorHeight?: number
 	showcaseDecorRotation?: number
+	showcaseSecondaryDecorImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	showcaseSecondaryDecorTop?: string
+	showcaseSecondaryDecorRight?: string
+	showcaseSecondaryDecorBottom?: string
+	showcaseSecondaryDecorLeft?: string
+	showcaseSecondaryDecorWidth?: number
+	showcaseSecondaryDecorHeight?: number
+	showcaseSecondaryDecorRotation?: number
 	propertyType?: string
 	priceFrom?: string
 	heroImage: {
@@ -4134,7 +4202,7 @@ declare module '@sanity/client' {
 		"*[_type == 'contactPage' && _id == 'contactPage'][0]{\n\t...,\n\theroImage { asset->, alt },\n\tmobileHeroAsset { asset->, alt },\n\tbackgroundCloudAsset { asset->, alt },\n\tsideFlowerAsset { asset->, alt }\n}": CONTACT_PAGE_QUERY_RESULT
 		"*[_type == 'legalPage' && slug.current == $slug][0]": LEGAL_PAGE_QUERY_RESULT
 		"*[_type == 'legalPage' && defined(slug.current)].slug.current": ALL_LEGAL_PAGES_QUERY_RESULT
-		"*[_type == 'property' && status != 'hidden'] | order(displayOrder asc){\n\t_id,\n\ttitle,\n\t\"slug\": slug.current,\n\ttagline,\n\tshortDescription,\n\tcardThumbnail { asset->, alt },\n\theroImage { asset->, alt },\n\tshowcaseSecondaryImage { asset->, alt },\n\tshowcaseDecorImage { asset->, alt },\n\tshowcaseDecorTop,\n\tshowcaseDecorRight,\n\tshowcaseDecorWidth,\n\tshowcaseDecorHeight,\n\tshowcaseDecorRotation,\n\tpullQuote,\n\tlocationHeadline,\n\tcardAmenities,\n\tpropertyType,\n\tpriceFrom,\n\tmaxGuests,\n\tbedrooms,\n\tbathrooms,\n\tstatus,\n\tdisplayOrder,\n\trentalwisePropertyId\n}": ALL_PROPERTIES_QUERY_RESULT
+		"*[_type == 'property' && status != 'hidden'] | order(displayOrder asc){\n\t_id,\n\ttitle,\n\t\"slug\": slug.current,\n\ttagline,\n\tshortDescription,\n\tcardThumbnail { asset->, alt },\n\theroImage { asset->, alt },\n\tshowcaseSecondaryImage { asset->, alt },\n\tshowcaseDecorImage { asset->, alt },\n\tshowcaseDecorTop,\n\tshowcaseDecorRight,\n\tshowcaseDecorBottom,\n\tshowcaseDecorLeft,\n\tshowcaseDecorWidth,\n\tshowcaseDecorHeight,\n\tshowcaseDecorRotation,\n\tshowcaseSecondaryDecorImage { asset->, alt },\n\tshowcaseSecondaryDecorTop,\n\tshowcaseSecondaryDecorRight,\n\tshowcaseSecondaryDecorBottom,\n\tshowcaseSecondaryDecorLeft,\n\tshowcaseSecondaryDecorWidth,\n\tshowcaseSecondaryDecorHeight,\n\tshowcaseSecondaryDecorRotation,\n\tpullQuote,\n\tlocationHeadline,\n\tcardAmenities,\n\tpropertyType,\n\tpriceFrom,\n\tmaxGuests,\n\tbedrooms,\n\tbathrooms,\n\tstatus,\n\tdisplayOrder,\n\trentalwisePropertyId\n}": ALL_PROPERTIES_QUERY_RESULT
 		'*[_type == \'property\' && slug.current == $slug][0]{\n\t...,\n\theroImage { asset->, alt },\n\tdetailCoverImage { asset->, alt },\n\tgallery[]{ asset->, alt },\n\tcardThumbnail { asset->, alt },\n\tamenities[]->{ name, icon },\n\tamenitiesSectionImage { asset->, alt },\n\texperiences[]->{\n\t\ttitle,\n\t\t"slug": slug.current,\n\t\tdescription,\n\t\timage { asset->, alt }\n\t},\n\texperiencesBgImage { asset->, alt, hotspot, crop },\n\thighlights[]{ title, body, image { asset->, alt }, secondaryImage { asset->, alt }, decorImage { asset-> } },\n\tcauseImages[]{ asset->, alt },\n\tctaBackground { asset->, alt },\n\tfaqs[]{ question, answer },\n\tlocation,\n\t"reviews": *[_type==\'review\' && references(^._id) && published==true] | order(stayDate desc) [0..20]{\n\t\tguestName, rating, body, guestLocation, stayDate,\n\t\tguestPhoto { asset->, alt },\n\t\t"propertyTitle": property->title\n\t}\n}': PROPERTY_QUERY_RESULT
 		"*[_type == 'property' && defined(slug.current)].slug.current": ALL_PROPERTY_SLUGS_QUERY_RESULT
 		"*[_type == 'blog.post'] | order(publishDate desc)": ALL_POSTS_QUERY_RESULT

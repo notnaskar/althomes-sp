@@ -4,13 +4,29 @@
 	z-index: 3;
 	top: var(--deco-top);
 	right: var(--deco-right);
+	bottom: var(--deco-bottom);
+	left: var(--deco-left);
 	width: var(--deco-width);
 	height: var(--deco-height);
 	transform: rotate(var(--deco-rotation));
 }
 
-@media (max-width: 820px) {
-	.deco {
+.secondaryDeco {
+	position: absolute;
+	pointer-events: none;
+	z-index: 3;
+	top: var(--secondary-deco-top);
+	right: var(--secondary-deco-right);
+	bottom: var(--secondary-deco-bottom);
+	left: var(--secondary-deco-left);
+	width: var(--secondary-deco-width);
+	height: var(--secondary-deco-height);
+	transform: rotate(var(--secondary-deco-rotation));
+}
+
+@media (max-width: 1023px) {
+	.deco,
+	.secondaryDeco {
 		display: none;
 	}
 }

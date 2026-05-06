@@ -25,6 +25,7 @@ export default async function OurHomesPage() {
 				ctaQuestion={page.ctaQuestion ?? null}
 				ctaButtonLabel={page.experiencesCtaLabel ?? null}
 				ctaBackground={page.ctaBackground ?? null}
+				noOverlap
 			/>
 		</main>
 	)

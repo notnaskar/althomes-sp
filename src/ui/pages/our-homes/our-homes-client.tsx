@@ -112,7 +112,7 @@ function CustomCaption({
 }
 
 const pickerClassNames = {
-	root: 'p-5 font-sans select-none',
+	root: 'p-3 lg:p-5 font-sans select-none',
 	months: 'flex',
 	month: 'w-full',
 	month_caption: '',
@@ -124,7 +124,7 @@ const pickerClassNames = {
 	week: 'flex',
 	day: 'flex-1 relative',
 	day_button:
-		'mx-auto flex h-8 w-8 items-center justify-center text-sm text-foreground transition-all rounded-full hover:bg-accent/40 focus:outline-none',
+		'mx-auto flex h-7 w-7 lg:h-8 lg:w-8 items-center justify-center text-sm text-foreground transition-all rounded-full hover:bg-accent/40 focus:outline-none',
 	selected: '',
 	range_start:
 		'bg-accent/20 rounded-l-full [&>button]:bg-accent [&>button]:text-accent-foreground [&>button]:font-semibold',
@@ -222,12 +222,12 @@ export default function OurHomesClient({ properties }: Props) {
 			{/* Availability bar */}
 			<div
 				ref={barRef}
-				className="relative z-30 mt-[-50px] mr-[10%] mb-[32px] ml-[10%] flex flex-row items-end gap-[40px] bg-white px-[32px] pt-8 pb-10 max-[820px]:flex-col max-[820px]:items-stretch max-[820px]:gap-5 max-[820px]:px-[18px] max-[820px]:pt-7 max-[820px]:pb-8"
+				className="relative z-30 mx-[6%] mt-[-50px] mb-[32px] flex flex-col items-stretch gap-5 bg-white px-[18px] pt-7 pb-8 lg:mx-[10%] lg:flex-row lg:items-end lg:gap-[40px] lg:px-[32px] lg:pt-8 lg:pb-10"
 			>
 				{/* Date range trigger */}
 				<div className="relative flex-[2]">
 					<div className="mb-1 flex items-center justify-between">
-						<span className="text-xs font-semibold uppercase tracking-[0.1em] text-muted font-sans">
+						<span className="text-muted font-sans text-xs font-semibold tracking-[0.1em] uppercase">
 							Check In / Check Out
 						</span>
 						{(range?.from || range?.to) && (
@@ -272,7 +272,7 @@ export default function OurHomesClient({ properties }: Props) {
 
 					{/* Calendar popover — anchored to this field's width */}
 					{calendarOpen && (
-						<div className="absolute top-full left-0 z-50 mt-1 min-w-full overflow-x-auto rounded-xl border border-[color:var(--color-stroke)] bg-white shadow-[0_4px_10px_rgba(0,0,0,0.08)]">
+						<div className="absolute top-full left-0 z-50 mt-1 w-full max-w-[calc(100vw-3rem)] overflow-x-auto rounded-xl border border-[color:var(--color-stroke)] bg-white shadow-[0_4px_10px_rgba(0,0,0,0.08)] lg:w-auto lg:max-w-none lg:min-w-full">
 							<DayPicker
 								mode="range"
 								selected={range}
@@ -288,60 +288,63 @@ export default function OurHomesClient({ properties }: Props) {
 					)}
 				</div>
 
-				{/* Adults */}
-				<div className="flex flex-1 flex-col gap-2 max-[820px]:flex-none">
-					<span className={labelClass}>Adults</span>
-					<div className="flex items-center gap-3">
-						<button
-							type="button"
-							onClick={() => setAdults((v) => Math.max(1, v - 1))}
-							className={counterBtnClass}
-							aria-label="Decrease adults"
-						>
-							−
-						</button>
-						<span className="text-foreground w-4 text-center font-sans text-[15px] tracking-[0.1em]">
-							{adults}
-						</span>
-						<button
-							type="button"
-							onClick={() => setAdults((v) => Math.min(16, v + 1))}
-							disabled={adults >= 16}
-							className={counterBtnClass}
-							aria-label="Increase adults"
-						>
-							+
-						</button>
+				{/* Adults + Children — side-by-side on mobile, inline at lg */}
+				<div className="flex gap-5 lg:contents">
+					{/* Adults */}
+					<div className="flex flex-1 flex-col gap-2">
+						<span className={labelClass}>Adults</span>
+						<div className="flex items-center gap-3">
+							<button
+								type="button"
+								onClick={() => setAdults((v) => Math.max(1, v - 1))}
+								className={counterBtnClass}
+								aria-label="Decrease adults"
+							>
+								−
+							</button>
+							<span className="text-foreground w-4 text-center font-sans text-[15px] tracking-[0.1em]">
+								{adults}
+							</span>
+							<button
+								type="button"
+								onClick={() => setAdults((v) => Math.min(16, v + 1))}
+								disabled={adults >= 16}
+								className={counterBtnClass}
+								aria-label="Increase adults"
+							>
+								+
+							</button>
+						</div>
+						<div className="bg-muted h-px w-full" />
 					</div>
-					<div className="bg-muted h-px w-full" />
-				</div>
 
-				{/* Children */}
-				<div className="flex flex-1 flex-col gap-2 max-[820px]:flex-none">
-					<span className={labelClass}>Children</span>
-					<div className="flex items-center gap-3">
-						<button
-							type="button"
-							onClick={() => setChildren((v) => Math.max(0, v - 1))}
-							className={counterBtnClass}
-							aria-label="Decrease children"
-						>
-							−
-						</button>
-						<span className="text-foreground w-4 text-center font-sans text-[15px] tracking-[0.1em]">
-							{children}
-						</span>
-						<button
-							type="button"
-							onClick={() => setChildren((v) => Math.min(16, v + 1))}
-							disabled={children >= 16}
-							className={counterBtnClass}
-							aria-label="Increase children"
-						>
-							+
-						</button>
+					{/* Children */}
+					<div className="flex flex-1 flex-col gap-2">
+						<span className={labelClass}>Children</span>
+						<div className="flex items-center gap-3">
+							<button
+								type="button"
+								onClick={() => setChildren((v) => Math.max(0, v - 1))}
+								className={counterBtnClass}
+								aria-label="Decrease children"
+							>
+								−
+							</button>
+							<span className="text-foreground w-4 text-center font-sans text-[15px] tracking-[0.1em]">
+								{children}
+							</span>
+							<button
+								type="button"
+								onClick={() => setChildren((v) => Math.min(16, v + 1))}
+								disabled={children >= 16}
+								className={counterBtnClass}
+								aria-label="Increase children"
+							>
+								+
+							</button>
+						</div>
+						<div className="bg-muted h-px w-full" />
 					</div>
-					<div className="bg-muted h-px w-full" />
 				</div>
 
 				{/* Submit */}
@@ -349,22 +352,23 @@ export default function OurHomesClient({ properties }: Props) {
 					type="button"
 					onClick={handleSearch}
 					disabled={isSearching}
-					className="bg-accent text-accent-foreground hover:bg-accent/90 inline-flex flex-shrink-0 cursor-pointer items-center justify-center rounded-[5px] px-[22px] py-3 text-[12px] font-bold tracking-[0.3em] whitespace-nowrap uppercase transition select-none disabled:opacity-50"
+					className="bg-accent text-accent-foreground hover:bg-accent/90 mt-2 inline-flex w-full flex-shrink-0 cursor-pointer items-center justify-center rounded-[5px] px-[22px] py-3 text-[12px] font-bold tracking-[0.3em] whitespace-nowrap uppercase transition select-none disabled:opacity-50 lg:mt-0 lg:w-auto"
 				>
 					{isSearching ? 'SEARCHING…' : 'FIND AVAILABILITY'}
 				</button>
 			</div>
 
 			{availableIds !== null && (
-				<div className="relative z-20 px-[90px] max-[820px]:px-[18px] mb-2 flex items-center gap-2 font-sans text-xs text-muted tracking-[0.05em]">
+				<div className="text-muted relative z-20 mb-2 flex items-center gap-2 px-[18px] font-sans text-xs tracking-[0.05em] lg:px-[90px]">
 					<span>
-						Showing {displayed.length} of {properties.length} propert{displayed.length === 1 ? 'y' : 'ies'}
+						Showing {displayed.length} of {properties.length} propert
+						{displayed.length === 1 ? 'y' : 'ies'}
 					</span>
 					<span aria-hidden="true">·</span>
 					<button
 						type="button"
 						onClick={handleClearSearch}
-						className="underline underline-offset-2 hover:text-foreground transition-colors"
+						className="hover:text-foreground underline underline-offset-2 transition-colors"
 					>
 						Clear search
 					</button>
@@ -374,17 +378,17 @@ export default function OurHomesClient({ properties }: Props) {
 			{/* Property listing */}
 			<section
 				ref={resultsRef}
-				className={`relative z-20 pr-12 max-[820px]:px-[18px] transition-opacity duration-300${isSearching ? ' opacity-50 pointer-events-none' : ''}`}
+				className={`relative z-20 px-[18px] lg:px-0 transition-opacity duration-300${isSearching ? 'pointer-events-none opacity-50' : ''}`}
 			>
 				{availableIds !== null && displayed.length === 0 ? (
 					<div className="py-12 text-center">
-						<p className="mb-6 font-sans text-muted">
+						<p className="text-muted mb-6 font-sans">
 							No properties available for the selected dates.
 						</p>
 						<button
 							type="button"
 							onClick={handleClearSearch}
-							className="rounded-[5px] bg-accent px-6 py-3 text-sm font-bold uppercase tracking-[0.3em] text-accent-foreground transition hover:bg-accent/90"
+							className="bg-accent text-accent-foreground hover:bg-accent/90 rounded-[5px] px-6 py-3 text-sm font-bold tracking-[0.3em] uppercase transition"
 						>
 							Show all properties
 						</button>
@@ -401,9 +405,35 @@ export default function OurHomesClient({ properties }: Props) {
 								showcaseDecorImage={property.showcaseDecorImage ?? null}
 								showcaseDecorTop={property.showcaseDecorTop ?? null}
 								showcaseDecorRight={property.showcaseDecorRight ?? null}
+								showcaseDecorBottom={property.showcaseDecorBottom ?? null}
+								showcaseDecorLeft={property.showcaseDecorLeft ?? null}
 								showcaseDecorWidth={property.showcaseDecorWidth ?? null}
 								showcaseDecorHeight={property.showcaseDecorHeight ?? null}
 								showcaseDecorRotation={property.showcaseDecorRotation ?? null}
+								showcaseSecondaryDecorImage={
+									property.showcaseSecondaryDecorImage ?? null
+								}
+								showcaseSecondaryDecorTop={
+									property.showcaseSecondaryDecorTop ?? null
+								}
+								showcaseSecondaryDecorRight={
+									property.showcaseSecondaryDecorRight ?? null
+								}
+								showcaseSecondaryDecorWidth={
+									property.showcaseSecondaryDecorWidth ?? null
+								}
+								showcaseSecondaryDecorHeight={
+									property.showcaseSecondaryDecorHeight ?? null
+								}
+								showcaseSecondaryDecorBottom={
+									property.showcaseSecondaryDecorBottom ?? null
+								}
+								showcaseSecondaryDecorLeft={
+									property.showcaseSecondaryDecorLeft ?? null
+								}
+								showcaseSecondaryDecorRotation={
+									property.showcaseSecondaryDecorRotation ?? null
+								}
 								shortDescription={property.shortDescription ?? null}
 								pullQuote={property.pullQuote ?? null}
 								locationHeadline={property.locationHeadline ?? null}
