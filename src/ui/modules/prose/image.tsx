@@ -1,16 +1,17 @@
 import { PortableText, type PortableTextTypeComponentProps } from 'next-sanity'
 import Img from '@/ui/img'
 
-export default function ({
+export default function ProseImage({
 	value: { figcaption, ...image },
 }: PortableTextTypeComponentProps<any>) {
 	return (
-		<figure className="max-md:full-bleed my-6 space-y-2 text-center first:mt-0 md:col-[bleed]!">
+		<figure className="max-[820px]:full-bleed my-6 space-y-2 text-center first:mt-0 min-[821px]:col-[bleed]!">
 			<Img
 				className="mx-auto"
 				image={image}
 				width={900}
 				alt={image.alt ?? ''}
+				sizes="(max-width: 820px) 100vw, 768px"
 			/>
 
 			{figcaption && (

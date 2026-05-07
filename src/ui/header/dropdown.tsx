@@ -3,7 +3,7 @@ import type { LinkList } from '@/sanity/types'
 import HoverDetails from '@/ui/hover-details'
 import SanityLink, { type SanityLinkType } from '@/ui/sanity-link'
 
-export default function ({
+export default function DropdownMenu({
 	link: summary,
 	links,
 	_key,
@@ -22,7 +22,7 @@ export default function ({
 		>
 			<summary
 				className={cn(
-					'h-full group-open/dropdown:max-md:font-bold',
+					'h-full group-open/dropdown:max-[820px]:font-bold',
 					summaryClassName,
 				)}
 				style={{ anchorName }}
@@ -31,7 +31,7 @@ export default function ({
 			</summary>
 
 			<ul
-				className="md:bg-background anim-fade-to-b border-stroke max-md:pl-ch mb-ch md:py-ch top-0 z-1 leading-tight max-md:border-l md:absolute md:-ml-[1.5ch] md:min-w-max md:border md:p-[1ch_1.5ch] md:shadow-lg"
+				className="md:bg-background anim-fade-to-b border-stroke max-md:pl-ch mb-ch md:py-ch top-0 z-1 leading-tight max-md:border-l md:absolute md:-ml-[1.5ch] md:min-w-max md:border md:p-[1ch_1.5ch] md:shadow-[0_4px_10px_rgba(0,0,0,0.08)]"
 				style={{
 					positionAnchor: anchorName,
 					positionArea: 'end span-end',

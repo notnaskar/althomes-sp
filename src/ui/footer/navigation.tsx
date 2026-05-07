@@ -12,7 +12,7 @@ const FOOTER_NAV = [
 export default function () {
 	return (
 		<nav>
-			<ul className="gap-y-lh flex items-start justify-center gap-x-[2lh] max-md:flex-col">
+			<ul className="gap-y-lh flex items-start justify-center gap-x-[2lh] max-[820px]:flex-col">
 				{FOOTER_NAV.map(({ href, label }) => (
 					<li key={href}>
 						<Link href={href} className="text-current hover:underline">

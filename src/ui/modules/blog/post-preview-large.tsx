@@ -2,14 +2,18 @@ import Image from 'next/image'
 import { ROUTES } from '@/lib/env'
 import { cn } from '@/lib/utils'
 import type { BlogPost } from '@/sanity/types'
-
-type BlogCategory = { _id?: string; title?: string; slug?: { current?: string } }
-type Person = { name?: string; image?: unknown }
 import Img from '@/ui/img'
 import SanityLink, { type SanityLinkType } from '@/ui/sanity-link'
 import Byline from './byline'
 import Categories from './categories'
 import Date from './date'
+
+type BlogCategory = {
+	_id?: string
+	title?: string
+	slug?: { current?: string }
+}
+type Person = { name?: string; image?: unknown }
 
 export default function ({
 	post,
@@ -27,6 +31,7 @@ export default function ({
 						className="aspect-video w-full object-cover"
 						image={post.metadata?.image}
 						width={600}
+						sizes="(max-width: 767px) 100vw, 50vw"
 						alt={post.title ?? ''}
 					/>
 				) : (
@@ -56,9 +61,7 @@ export default function ({
 
 				<div className="flex flex-wrap items-center justify-between gap-x-4">
 					<Date date={post.publishDate} />
-					<Categories
-						categories={(post as any).categories as BlogCategory[]}
-					/>
+					<Categories categories={(post as any).categories as BlogCategory[]} />
 				</div>
 
 				<Byline author={(post as any).author as Person} />

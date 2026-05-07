@@ -1,4 +1,4 @@
-import { defineType, defineField } from 'sanity'
+import { defineField, defineType } from 'sanity'
 
 export default defineType({
 	name: 'altWayPage',
@@ -20,18 +20,21 @@ export default defineType({
 			title: 'Hero Background',
 			type: 'image',
 			options: { hotspot: true },
-			fields: [
-				defineField({ name: 'alt', type: 'string', title: 'Alt text' }),
-			],
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
 		}),
 		defineField({
 			name: 'missionImage',
 			title: 'Mission Image',
 			type: 'image',
 			options: { hotspot: true },
-			fields: [
-				defineField({ name: 'alt', type: 'string', title: 'Alt text' }),
-			],
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
+		}),
+		defineField({
+			name: 'missionDecorImage',
+			title: 'Mission — Decorative Overlay Image',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
 		}),
 		defineField({
 			name: 'missionText',
@@ -59,18 +62,32 @@ export default defineType({
 			validation: (Rule) => Rule.max(4),
 		}),
 		defineField({
-			name: 'editorialImages',
-			title: 'Editorial Images',
-			type: 'array',
-			of: [
-				{
-					type: 'image',
-					options: { hotspot: true },
-					fields: [
-						defineField({ name: 'alt', type: 'string', title: 'Alt text' }),
-					],
-				},
-			],
+			name: 'valuePropEditorialImage',
+			title: 'Value Props — Main Editorial Image',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
+		}),
+		defineField({
+			name: 'valuePropEditorialDecorLeft',
+			title: 'Value Props — Left Decorative Overlay',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
+		}),
+		defineField({
+			name: 'valuePropEditorialDecorRight',
+			title: 'Value Props — Right Decorative Overlay',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
+		}),
+		defineField({
+			name: 'valuePropSecondaryImage',
+			title: 'Value Props — Secondary Image',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
 		}),
 		defineField({
 			name: 'promiseText',
@@ -81,6 +98,40 @@ export default defineType({
 			name: 'promiseCTALabel',
 			title: 'Promise CTA Label',
 			type: 'string',
+		}),
+		defineField({
+			name: 'promiseCTAHref',
+			title: 'Promise CTA Link',
+			type: 'string',
+			description: 'Destination URL, e.g. /our-homes',
+		}),
+		defineField({
+			name: 'promiseBackground',
+			title: 'Promise CTA — Background Image',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
+		}),
+		defineField({
+			name: 'promiseCTADecorLeft',
+			title: 'Promise CTA — Left Decorative Image',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
+		}),
+		defineField({
+			name: 'promiseCTADecorRight',
+			title: 'Promise CTA — Right Decorative Image',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
+		}),
+		defineField({
+			name: 'statsBackground',
+			title: 'Stats — Background Image',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
 		}),
 		defineField({
 			name: 'statsHeadline',
@@ -114,10 +165,24 @@ export default defineType({
 			type: 'string',
 		}),
 		defineField({
-			name: 'reviewsMaxShown',
-			title: 'Max Reviews Shown',
-			type: 'number',
-			initialValue: 5,
+			name: 'bottomCTABackground',
+			title: 'Bottom CTA — Background Image',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
+		}),
+		defineField({
+			name: 'bottomCTAHref',
+			title: 'Bottom CTA — Button Link',
+			type: 'string',
+			description: 'Destination URL, e.g. /experiences',
+		}),
+		defineField({
+			name: 'reviews',
+			title: 'Featured Reviews',
+			type: 'array',
+			of: [{ type: 'reference', to: [{ type: 'review' }] }],
+			validation: (Rule) => Rule.max(5),
 		}),
 		defineField({
 			name: 'seo',

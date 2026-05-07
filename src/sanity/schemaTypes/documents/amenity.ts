@@ -1,4 +1,5 @@
-import { defineType, defineField } from 'sanity'
+import { defineField, defineType } from 'sanity'
+import IconPicker from '@/sanity/ui/icon-picker'
 
 export default defineType({
 	name: 'amenity',
@@ -15,7 +16,8 @@ export default defineType({
 			name: 'icon',
 			title: 'Icon',
 			type: 'string',
-			description: 'Emoji or icon key',
+			description: 'Search and select an icon from the picker below.',
+			components: { input: IconPicker },
 			validation: (Rule) => Rule.required(),
 		}),
 	],

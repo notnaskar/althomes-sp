@@ -1,10 +1,20 @@
-import { getProperty, getSite } from '@/sanity/lib/data'
-import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { PortableText } from 'next-sanity'
-import Img from '@/ui/img'
+import Image from 'next/image'
+import { notFound } from 'next/navigation'
+import { buildLodgingSchema } from '@/lib/schema-org'
+import { getProperty, getSite } from '@/sanity/lib/data'
 import { urlFor } from '@/sanity/lib/image'
+import ReactIcon from '@/ui/atoms/react-icon'
+import Img from '@/ui/img'
+import ReviewsSection from '@/ui/molecules/reviews-section'
+import OurHomesCta from '@/ui/pages/our-homes/our-homes-cta'
+import PropertyAmenitiesSection from '@/ui/pages/our-homes/property-amenities-section'
+import PropertyExperiencesSection from '@/ui/pages/our-homes/property-experiences-section'
+import PropertyFaqSection from '@/ui/pages/our-homes/property-faq-section'
+import PropertyGallerySection from '@/ui/pages/our-homes/property-gallery-section'
+import PropertyHighlightsSection from '@/ui/pages/our-homes/property-highlights-section'
+import RentalwiseWidget from '@/ui/pages/our-homes/rentalwise-widget'
 
 type Props = {
 	params: Promise<{ slug: string }>
@@ -12,327 +22,366 @@ type Props = {
 
 export default async function PropertyDetailPage({ params }: Props) {
 	const { slug } = await params
-	const property = await getProperty(slug)
+	const [property, site] = await Promise.all([getProperty(slug), getSite()])
 	if (!property) notFound()
 
-	const cappedExperiences = property.experiences?.slice(0, property.experiencesMaxShown ?? 6) ?? []
-	const cappedReviews = property.reviews?.slice(0, property.reviewsMaxShown ?? 20) ?? []
+	const cappedExperiences =
+		property.experiences?.slice(0, property.experiencesMaxShown ?? 6) ?? []
+	const cappedReviews = property.reviews ?? []
+
+	const coverAsset =
+		property.detailCoverImage?.asset ?? property.heroImage?.asset
+	const coverAlt =
+		property.detailCoverImage?.alt ?? property.heroImage?.alt ?? ''
+	const heroUrl = coverAsset
+		? urlFor(coverAsset).width(1440).quality(85).url()
+		: null
+
+	const amenitiesImageUrl = property.amenitiesSectionImage?.asset
+		? urlFor(property.amenitiesSectionImage.asset).width(800).quality(80).url()
+		: null
+
+	const schemaJson = site
+		? JSON.stringify(
+				buildLodgingSchema(
+					property,
+					site,
+					process.env.NEXT_PUBLIC_BASE_URL ?? '',
+				),
+			).replace(/</g, '\\u003c')
+		: null
 
 	return (
-		<main className="flex-1">
-			{/* 1. Hero */}
-			<section id="booking" className="relative w-full overflow-hidden bg-gray-900">
-				{property.heroImage && (
-					<Img
-						image={property.heroImage}
-						width={1440}
-						loading="eager"
-						alt={property.heroImage.alt ?? ''}
-						className="w-full h-[70vh] object-cover opacity-70"
-					/>
-				)}
-				<div className="absolute inset-0 flex flex-col items-end justify-end p-8 md:p-16">
-					<div className="w-full md:max-w-sm bg-white rounded-2xl p-6 shadow-xl">
-						<h2 className="text-xl font-bold mb-2">{property.title}</h2>
+		<>
+			{schemaJson && (
+				<script
+					type="application/ld+json"
+					// eslint-disable-next-line react/no-danger
+					dangerouslySetInnerHTML={{ __html: schemaJson }}
+				/>
+			)}
+			<main className="flex-1 overflow-x-clip">
+				{/* 1. Hero */}
+				<section className="bg-background relative -z-1 h-[50vh] overflow-hidden lg:h-[70vh]">
+					{heroUrl && (
+						<Image
+							src={heroUrl}
+							alt={coverAlt}
+							fill
+							priority
+							className="object-cover"
+							sizes="100vw"
+						/>
+					)}
+					<div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/20">
 						{property.tagline && (
-							<p className="text-sm text-gray-500 mb-4">{property.tagline}</p>
-						)}
-						<div className="min-h-[200px] flex items-center justify-center bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
-							<p className="text-xs text-gray-400 text-center px-4">
-								BOOKING WIDGET — RentalWise
+							<p className="font-sans text-[12px] tracking-[0.1em] text-white uppercase">
+								{property.tagline}
 							</p>
-						</div>
-					</div>
-				</div>
-				<div className="absolute top-8 left-8 md:left-16">
-					{property.title && (
-						<h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-lg">
-							{property.title}
-						</h1>
-					)}
-				</div>
-			</section>
-
-			{/* 2. Intro */}
-			<section className="container py-16 space-y-10">
-				{/* Property type + specs strip */}
-				<div className="flex flex-wrap items-center gap-6 py-4 border-b border-gray-200">
-					{property.propertyType && (
-						<span className="rounded-full bg-black text-white px-4 py-1 text-sm font-semibold">
-							{property.propertyType}
-						</span>
-					)}
-					{property.maxGuests != null && (
-						<span className="text-sm font-medium text-gray-700">
-							{property.maxGuests} Guests
-						</span>
-					)}
-					{property.bedrooms != null && (
-						<span className="text-sm font-medium text-gray-700">
-							{property.bedrooms} Bedrooms
-						</span>
-					)}
-					{property.bathrooms != null && (
-						<span className="text-sm font-medium text-gray-700">
-							{property.bathrooms} Bathrooms
-						</span>
-					)}
-				</div>
-
-				{/* Description */}
-				{property.description && (
-					<div className="prose prose-lg max-w-none">
-						<PortableText value={property.description} />
-					</div>
-				)}
-
-				{/* Amenity icon strip */}
-				{property.amenities && property.amenities.length > 0 && (
-					<div className="flex flex-wrap gap-3">
-						{property.amenities.map((amenity, i) => (
-							<span
-								key={i}
-								className="flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium"
-							>
-								{amenity.icon && <span>{amenity.icon}</span>}
-								{amenity.name}
-							</span>
-						))}
-					</div>
-				)}
-
-				{/* Pull quote */}
-				{property.pullQuote && (
-					<blockquote className="border-l-4 border-black pl-6 text-2xl font-semibold italic text-gray-700">
-						&ldquo;{property.pullQuote}&rdquo;
-					</blockquote>
-				)}
-
-				{/* Gallery */}
-				{property.gallery && property.gallery.length > 0 && (
-					<div className="overflow-x-auto">
-						<div className="flex gap-4 pb-2">
-							{property.gallery.map((img, i) => (
-								<div key={i} className="flex-shrink-0 overflow-hidden rounded-xl">
-									<Img
-										image={img}
-										width={500}
-										alt={img.alt ?? ''}
-										className="h-64 w-auto object-cover"
-									/>
-								</div>
-							))}
-						</div>
-					</div>
-				)}
-			</section>
-
-			{/* 3. Location */}
-			{(property.locationHeadline || property.locationDescription || property.location?.googleMapsUrl) && (
-				<section className="bg-gray-50 py-16">
-					<div className="container space-y-6">
-						{property.locationHeadline && (
-							<h2 className="text-3xl font-bold">{property.locationHeadline}</h2>
 						)}
-						{property.locationDescription && (
-							<p className="text-lg text-gray-700 max-w-2xl">{property.locationDescription}</p>
-						)}
-						{property.location?.googleMapsUrl && (
-							<a
-								href={property.location.googleMapsUrl}
-								target="_blank"
-								rel="noopener noreferrer"
-								className="inline-block px-6 py-3 bg-black text-white font-semibold rounded-full hover:bg-gray-800 transition"
-							>
-								View on Google Maps
-							</a>
+						{property.title && (
+							<h1 className="font-heading px-6 text-center text-[47px] leading-[1.1] tracking-[0.05em] text-white lg:text-[57px]">
+								{property.title}
+							</h1>
 						)}
 					</div>
 				</section>
-			)}
 
-			{/* 4. Highlights */}
-			{property.highlights && property.highlights.length > 0 && (
-				<section className="container py-16">
-					<h2 className="text-3xl font-bold mb-10">WHAT&rsquo;S WAITING FOR YOU?</h2>
-					<div className="space-y-10">
-						{property.highlights.map((highlight, i) => (
-							<div key={i} className="grid gap-8 md:grid-cols-2 items-center">
-								<div>
-									{highlight.title && (
-										<h3 className="text-2xl font-bold mb-3">{highlight.title}</h3>
-									)}
-									{highlight.body && (
-										<p className="text-gray-700 leading-relaxed">{highlight.body}</p>
-									)}
-								</div>
-								{highlight.image && (
-									<div className="overflow-hidden rounded-xl">
-										<Img
-											image={highlight.image}
-											width={600}
-											alt={highlight.image.alt ?? ''}
-											className="w-full h-auto object-cover"
-										/>
-									</div>
+				{/* 2. Booking bar */}
+				{property.rentalwiseIdentifier &&
+				property.rentalwiseWidgetPropertyId ? (
+					<div className="mx-[18px] mt-[-4%] lg:mx-[90px] lg:-mt-10">
+						<RentalwiseWidget
+							instance={
+								process.env.NEXT_PUBLIC_RENTALWISE_INSTANCE_URL ??
+								'https://althomes.rentalwise.io'
+							}
+							identifier={property.rentalwiseIdentifier}
+							propertyId={property.rentalwiseWidgetPropertyId}
+						/>
+					</div>
+				) : (
+					<div className="bg-background mx-[18px] flex flex-col gap-4 px-[48px] py-[12px] lg:mx-[90px] lg:flex-row lg:items-center lg:justify-center lg:gap-[40px]">
+						<p className="font-heading text-foreground text-center text-sm tracking-wider uppercase lg:hidden">
+							READY TO ESCAPE?
+						</p>
+						<div className="flex flex-col gap-[5px]">
+							<p className="text-foreground font-sans text-[15px] tracking-[0.1em]">
+								Check In &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Check Out
+							</p>
+							<div className="bg-muted h-px w-full lg:w-[289px]" />
+						</div>
+						<div className="flex flex-col gap-[8px]">
+							<p className="text-foreground font-sans text-[15px] tracking-[0.1em]">
+								Guests
+							</p>
+							<div className="bg-muted h-px w-full lg:w-[289px]" />
+						</div>
+						<div className="flex items-center gap-[32px]">
+							<div className="text-right">
+								<p className="text-foreground font-sans text-[9px] leading-[23px] tracking-[0.1em]">
+									TAXES INCLUDED
+								</p>
+								{property.priceFrom != null && (
+									<p className="text-foreground font-sans text-[15px] leading-[16px] font-semibold tracking-[0.1em]">
+										INR {property.priceFrom.toLocaleString()}
+									</p>
 								)}
 							</div>
-						))}
-					</div>
-				</section>
-			)}
-
-			{/* 5. Experiences */}
-			{cappedExperiences.length > 0 && (
-				<section className="bg-gray-50 py-16">
-					<div className="container">
-						<h2 className="text-3xl font-bold mb-10">
-							EXPERIENCES NEAR {property.title?.toUpperCase()}
-						</h2>
-						<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-							{cappedExperiences.map((exp) => (
-								<Link
-									key={exp.slug ?? exp.title ?? ''}
-									href={`/experiences/${exp.slug ?? ''}`}
-									className="group block overflow-hidden rounded-xl border bg-white hover:shadow-md transition"
-								>
-									{exp.image && (
-										<div className="overflow-hidden">
-											<Img
-												image={exp.image}
-												width={500}
-												alt={exp.image.alt ?? ''}
-												className="w-full h-48 object-cover group-hover:scale-105 transition duration-300"
-											/>
-										</div>
-									)}
-									<div className="p-5">
-										{exp.title && (
-											<h3 className="font-bold text-lg">{exp.title}</h3>
-										)}
-										{exp.description && (
-											<p className="mt-2 text-sm text-gray-600 line-clamp-2">
-												{exp.description}
-											</p>
-										)}
-									</div>
-								</Link>
-							))}
-						</div>
-						<div className="mt-8 text-center">
-							<Link
-								href="/experiences"
-								className="inline-block px-8 py-3 border-2 border-black text-black font-bold rounded-full hover:bg-black hover:text-white transition"
+							<a
+								href="#booking"
+								className="bg-accent text-accent-foreground flex h-auto w-full items-center justify-center rounded-[5px] py-[5px] font-sans text-[12px] font-semibold tracking-[0.3em] lg:w-[208px]"
 							>
-								View All Experiences
-							</Link>
+								BOOK NOW
+							</a>
 						</div>
 					</div>
-				</section>
-			)}
+				)}
 
-			{/* 6. Amenities + House Rules */}
-			{(property.amenities && property.amenities.length > 0 || property.houseRulesTeaser || property.houseRules) && (
-				<section className="container py-16">
-					<h2 className="text-3xl font-bold mb-10">FOR US, IT&rsquo;S COMFORT FIRST</h2>
-					{property.amenities && property.amenities.length > 0 && (
-						<div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 mb-10">
-							{property.amenities.map((amenity, i) => (
-								<div key={i} className="flex items-center gap-3 p-4 rounded-xl border">
-									{amenity.icon && <span className="text-xl">{amenity.icon}</span>}
-									{amenity.name && <span className="font-medium">{amenity.name}</span>}
-								</div>
-							))}
-						</div>
-					)}
-					{(property.houseRulesTeaser || property.houseRules) && (
-						<details className="border rounded-xl overflow-hidden">
-							<summary className="px-6 py-4 font-bold text-lg cursor-pointer hover:bg-gray-50 transition">
-								{property.houseRulesTeaser ?? 'House Rules'}
-							</summary>
-							{property.houseRules && (
-								<div className="px-6 py-4 border-t prose max-w-none">
-									<PortableText value={property.houseRules} />
-								</div>
-							)}
-						</details>
-					)}
-				</section>
-			)}
-
-			{/* 7. Causes */}
-			{(property.causeHeadline || property.causeBody || (property.causeImages && property.causeImages.length > 0)) && (
-				<section className="bg-gray-900 text-white py-16">
-					<div className="container">
-						{property.causeHeadline && (
-							<h2 className="text-3xl font-bold mb-6">{property.causeHeadline}</h2>
-						)}
-						{property.causeBody && (
-							<div className="prose prose-invert max-w-2xl mb-10">
-								<PortableText value={property.causeBody} />
+				{/* 3. Intro — subtitle + specs strip */}
+				<section
+					id="booking"
+					className="bg-background px-[18px] py-[48px] lg:justify-items-center lg:px-[90px]"
+				>
+					<div className="flex flex-col gap-8 lg:max-w-[1000px] lg:flex-row lg:gap-[26px]">
+						{/* Left: subtitle (Playfair 30px) */}
+						{property.detailIntroHeading && (
+							<div className="w-full shrink-0 lg:w-[527px]">
+								<p className="font-heading text-foreground text-[30px] leading-[40px] tracking-[0.1em]">
+									{property.detailIntroHeading}
+								</p>
 							</div>
 						)}
-						{property.causeImages && property.causeImages.length > 0 && (
-							<div className="grid gap-6 md:grid-cols-2">
-								{property.causeImages.slice(0, 2).map((img, i) => (
-									<div key={i} className="overflow-hidden rounded-2xl">
-										<Img
-											image={img}
-											width={700}
-											alt={img.alt ?? ''}
-											className="w-full h-64 object-cover"
-										/>
+
+						{/* Right: short description + specs strip */}
+						<div className="flex flex-1 flex-col gap-[28px]">
+							{property.detailIntroBody && (
+								<p className="text-foreground font-sans text-[15px] leading-[23px] tracking-[0.1em]">
+									{property.detailIntroBody}
+								</p>
+							)}
+
+							{/* Specs strip */}
+							<div className="grid grid-cols-5 items-center justify-items-center gap-[14px] lg:flex lg:flex-row">
+								{property.amenities?.map((amenity, i) => (
+									<div
+										key={i}
+										className="flex w-[82px] flex-col items-center gap-[3px]"
+									>
+										<div className="text-foreground flex h-[46px] w-[46px] items-center justify-center">
+											<ReactIcon name={amenity.icon} size={36} />
+										</div>
+										<p className="text-foreground text-center font-sans text-[15px] leading-[23px] font-medium tracking-[0.1em]">
+											{amenity.name}
+										</p>
 									</div>
 								))}
 							</div>
+						</div>
+					</div>
+				</section>
+
+				{/* 4. Image collage + description */}
+				<section className="bg-background flex max-w-[1000px] flex-col items-center gap-8 justify-self-center overflow-visible lg:h-[490px] lg:flex-row lg:justify-center lg:gap-[48px]">
+					{/* Left: collage — desktop dimensions scaled down on mobile */}
+					<div className="h-[319px] w-[374px] shrink-0 overflow-hidden lg:h-full lg:w-[575px]">
+						<div className="relative h-[490px] w-[575px] origin-top-left scale-[0.65] lg:scale-100">
+							{property.gallery?.[3] && (
+								<div className="absolute top-[128px] -left-[11px] h-[159px] w-[238px] overflow-hidden rounded-[5px]">
+									<Img
+										image={property.gallery[3]}
+										width={238}
+										alt={property.gallery[3].alt ?? ''}
+										className="h-full w-full object-cover"
+									/>
+								</div>
+							)}
+							{property.gallery?.[0] && (
+								<div className="absolute top-0 left-[142px] h-[364px] w-[433px] overflow-hidden rounded-[5px]">
+									<Img
+										image={property.gallery[0]}
+										width={433}
+										alt={property.gallery[0].alt ?? ''}
+										className="h-full w-full object-cover"
+									/>
+								</div>
+							)}
+							{property.gallery?.[1] && (
+								<div className="absolute top-[265px] left-[46px] h-[216px] w-[288px] overflow-hidden rounded-[5px]">
+									<Img
+										image={property.gallery[1]}
+										width={288}
+										alt={property.gallery[1].alt ?? ''}
+										className="h-full w-full object-cover"
+									/>
+								</div>
+							)}
+							{property.gallery?.[2] && (
+								<div className="absolute top-[310px] right-30 h-[147px] w-fit overflow-hidden rounded-[5px]">
+									<Img
+										image={property.gallery[2]}
+										quality={100}
+										width={470}
+										alt={property.gallery[2].alt ?? ''}
+										className="h-full w-full object-cover"
+									/>
+								</div>
+							)}
+						</div>
+					</div>
+
+					{/* Right: description */}
+					<div className="w-full shrink-0 lg:w-[479px]">
+						{property.description && (
+							<div className="text-foreground px-4 font-sans text-[15px] leading-[23px] tracking-[0.1em] [&_p]:mb-4 [&_p:last-child]:mb-0">
+								<PortableText value={property.description} />
+							</div>
 						)}
 					</div>
 				</section>
-			)}
 
-			{/* 8. Reviews */}
-			{cappedReviews.length > 0 && (
-				<section className="container py-16">
-					<h2 className="text-3xl font-bold mb-10">What Our Guests Say</h2>
-					<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-						{cappedReviews.map((review, i) => (
-							<div key={i} className="rounded-2xl border p-6 space-y-3">
-								{review.rating != null && (
-									<div className="flex gap-1">
-										{Array.from({ length: review.rating }).map((_, j) => (
-											<span key={j} className="text-yellow-400">★</span>
-										))}
+				{/* 5. Gallery carousel */}
+				{property.gallery && property.gallery.length > 0 && (
+					<PropertyGallerySection
+						gallery={property.gallery}
+						quote={property.gallerySectionQuote}
+						decorImage={property.galleryDecorImage}
+					/>
+				)}
+
+				{/* 3. Location — Getting Here */}
+				{(property.locationBody || property.locationCta) && (
+					<section className="bg-background flex flex-col gap-8 py-[48px] lg:flex-row lg:items-center lg:justify-center lg:gap-[45px]">
+						{property.locationImage?.asset && (
+							<div className="order-2 h-[310px] w-full shrink-0 overflow-hidden lg:order-none lg:w-[576px]">
+								<Img
+									image={property.locationImage}
+									width={576}
+									sizes="(max-width: 1023px) 100vw, 576px"
+									alt=""
+									className="h-full w-full object-contain"
+								/>
+							</div>
+						)}
+						<div className="contents lg:flex lg:w-[435px] lg:shrink-0 lg:flex-col lg:gap-[44px]">
+							{property.locationBody && (
+								<div className="text-foreground order-1 mx-4 font-sans text-[15px] leading-[23px] tracking-[0.1em] lg:order-none [&_p]:mb-[8px] [&_p:last-child]:mb-0 [&_strong]:font-bold">
+									<PortableText value={property.locationBody} />
+								</div>
+							)}
+							{property.locationCta?.url && (
+								<a
+									href={property.locationCta.url}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="text-foreground order-3 mx-auto w-fit font-sans text-[12px] font-semibold tracking-[0.3em] underline underline-offset-2 hover:opacity-70 lg:order-none lg:mx-0"
+								>
+									{property.locationCta.label || 'FIND US ON THE MAP'}
+								</a>
+							)}
+						</div>
+					</section>
+				)}
+
+				{/* 4. Highlights — What's Waiting For You? */}
+				<PropertyHighlightsSection
+					windDown={property.windDownHighlight ?? null}
+					wakeUp={property.wakeUpHighlight ?? null}
+					hostedWithHeart={property.hostedWithHeartHighlight ?? null}
+					symphony={property.symphonyHighlight ?? null}
+					menuCta={property.menuCta ?? null}
+				/>
+
+				{/* 5. Experiences */}
+				{cappedExperiences.length > 0 && (
+					<PropertyExperiencesSection
+						bgImage={property.experiencesBgImage}
+						experiences={cappedExperiences}
+						propertyTitle={property.title ?? ''}
+					/>
+				)}
+
+				{/* 6. Amenities + House Rules */}
+				{((property.amenities && property.amenities.length > 0) ||
+					property.houseRulesTeaser ||
+					property.houseRules) && (
+					<PropertyAmenitiesSection
+						imageUrl={amenitiesImageUrl}
+						amenities={property.amenities ?? []}
+						houseRulesTeaser={property.houseRulesTeaser}
+						houseRules={property.houseRules}
+					/>
+				)}
+
+				{/* 6b. FAQs */}
+				{property.faqs && property.faqs.length > 0 && (
+					<PropertyFaqSection
+						faqs={property.faqs}
+						badgeText={property.faqBadgeText}
+					/>
+				)}
+
+				{/* 7. Causes */}
+				{(property.causeHeadline ||
+					property.causeBody ||
+					(property.causeImages && property.causeImages.length >= 1)) && (
+					<section className="bg-background text-foreground flex min-h-0 flex-col justify-center px-[18px] py-16 md:px-[90px] md:py-24 lg:min-h-[80vh]">
+						<div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-start gap-12 md:justify-between md:gap-[60px] lg:grid-cols-[45fr_50fr]">
+							{/* Left: images */}
+							<div className="relative w-full">
+								{property.causeImages?.[0] && (
+									<div className="relative w-full">
+										<Img
+											image={property.causeImages[0]}
+											width={624}
+											height={497}
+											sizes="(max-width: 767px) calc(100vw - 36px), 624px"
+											alt={property.causeImages[0].alt ?? ''}
+											className="h-auto w-full rounded-[8px] object-cover"
+										/>
 									</div>
 								)}
-								{review.body && (
-									<p className="text-gray-700 italic leading-relaxed">
-										&ldquo;{review.body}&rdquo;
-									</p>
+								{property.causeImages?.[1] && (
+									<div className="absolute right-0 bottom-0 z-10 w-[120px] md:w-[160px]">
+										<Img
+											image={property.causeImages[1]}
+											width={200}
+											height={280}
+											alt={property.causeImages[1].alt ?? ''}
+											className="h-auto w-full object-contain"
+										/>
+									</div>
 								)}
-								<div className="text-sm text-gray-500">
-									{review.guestName && <p className="font-semibold">{review.guestName}</p>}
-									{review.guestLocation && <p>{review.guestLocation}</p>}
-									{review.stayDate && <p>{review.stayDate}</p>}
-								</div>
 							</div>
-						))}
-					</div>
-				</section>
-			)}
 
-			{/* 9. Bottom CTA */}
-			<section className="bg-black text-white py-20 text-center">
-				{property.ctaHeadline && (
-					<h2 className="text-3xl md:text-4xl font-bold mb-8">{property.ctaHeadline}</h2>
+							{/* Right: text */}
+							<div className="text-star flex flex-col items-start md:items-start md:text-left lg:items-start">
+								{property.causeHeadline && (
+									<h2 className="font-heading text-foreground mb-5 max-w-[515px] text-[32px] leading-[1.1] tracking-[0.1em] md:text-[40px]">
+										{property.causeHeadline}
+									</h2>
+								)}
+								{property.causeBody && (
+									<div className="text-foreground max-w-[100%] space-y-4 text-[15px] leading-[1.6] md:text-[16px] md:leading-[1.8]">
+										<PortableText value={property.causeBody} />
+									</div>
+								)}
+							</div>
+						</div>
+					</section>
 				)}
-				<a
-					href="#booking"
-					className="inline-block px-10 py-4 bg-white text-black font-bold rounded-full hover:bg-gray-100 transition"
-				>
-					FIND AVAILABILITY
-				</a>
-			</section>
-		</main>
+
+				{/* 8. Reviews */}
+				{cappedReviews.length > 0 && <ReviewsSection reviews={cappedReviews} />}
+
+				{/* 9. Bottom CTA */}
+				<OurHomesCta
+					ctaQuestion={property.ctaHeadline ?? null}
+					ctaButtonLabel={property.ctaButtonLabel ?? null}
+					ctaBackground={property.ctaBackground ?? null}
+				/>
+			</main>
+		</>
 	)
 }
 
@@ -341,7 +390,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	const [property, site] = await Promise.all([getProperty(slug), getSite()])
 	const { metaTitle, metaDescription, ogImage } = property?.seo ?? {}
 	const title = metaTitle || `${property?.title ?? 'Property'} | AltHomes`
-	const description = metaDescription || property?.shortDescription || site?.seo?.metaDescription
+	const description = metaDescription || site?.seo?.metaDescription
 	return {
 		title,
 		description,

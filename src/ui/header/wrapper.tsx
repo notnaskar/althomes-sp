@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef } from 'react'
 
-export default function (props: React.ComponentProps<'header'>) {
+export default function HeaderWrapper(props: React.ComponentProps<'header'>) {
 	const ref = useRef<HTMLDivElement>(null)
 	const pathname = usePathname()
 

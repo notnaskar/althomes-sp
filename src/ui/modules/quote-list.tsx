@@ -1,6 +1,14 @@
 import { PortableText } from 'next-sanity'
-type QuoteList = { intro?: any[]; testimonials?: Array<{ _key: string; quote?: any[]; author?: { name?: string; title?: string; image?: any } }> }
 import Img from '@/ui/img'
+
+type QuoteList = {
+	intro?: any[]
+	testimonials?: Array<{
+		_key: string
+		quote?: any[]
+		author?: { name?: string; title?: string; image?: any }
+	}>
+}
 
 export default function ({
 	intro = [],

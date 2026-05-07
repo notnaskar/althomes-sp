@@ -1,4 +1,4 @@
-import { defineType, defineField } from 'sanity'
+import { defineField, defineType } from 'sanity'
 
 export default defineType({
 	name: 'homePage',
@@ -15,16 +15,14 @@ export default defineType({
 			title: 'Hero Image',
 			type: 'image',
 			options: { hotspot: true },
-			fields: [
-				defineField({ name: 'alt', type: 'string', title: 'Alt text' }),
-			],
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
 		}),
 		defineField({
 			name: 'navLabels',
 			title: 'Navigation Labels',
 			type: 'array',
 			of: [{ type: 'navLabel' }],
-			validation: (Rule) => Rule.length(6),
+			validation: (Rule) => Rule.length(5),
 		}),
 		defineField({
 			name: 'seo',

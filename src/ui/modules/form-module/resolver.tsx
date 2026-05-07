@@ -1,6 +1,7 @@
 import { stegaClean } from 'next-sanity'
-type Form = { endpoint?: string; identifier?: string }
 import Contact from './contact'
+
+type Form = { endpoint?: string; identifier?: string }
 
 export default function ({ form }: { form?: Form }) {
 	if (!form) return null

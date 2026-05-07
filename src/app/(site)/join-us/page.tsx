@@ -1,94 +1,145 @@
-import { getJoinUsPage, getSite } from '@/sanity/lib/data'
-import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import Img from '@/ui/img'
+import Image from 'next/image'
+import { notFound } from 'next/navigation'
+import { getJoinUsPage, getSite } from '@/sanity/lib/data'
+import { urlFor } from '@/sanity/lib/image'
 import PartnerForm from '@/ui/forms/partner-form'
 
 export default async function JoinUsPage() {
 	const page = await getJoinUsPage()
 	if (!page) notFound()
 
-	return (
-		<main className="flex-1">
-			{/* Hero */}
-			{page.heroImage && (
-				<section className="relative w-full overflow-hidden bg-gray-900">
-					<Img
-						image={page.heroImage}
-						width={1440}
-						loading="eager"
-						alt={page.heroImage.alt ?? ''}
-						className="w-full h-[60vh] object-cover opacity-70"
-					/>
-					<div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
-						{page.heroHeadline && (
-							<h1 className="text-4xl md:text-6xl font-bold text-white">
-								{page.heroHeadline}
-							</h1>
-						)}
-						{page.pullQuote && (
-							<p className="mt-6 text-xl md:text-2xl italic text-white/80 max-w-2xl">
-								{page.pullQuote}
-							</p>
-						)}
-					</div>
-				</section>
-			)}
+	const coverUrl = page.heroImage?.asset
+		? urlFor(page.heroImage.asset).width(1440).quality(85).url()
+		: null
 
-			{/* Hero fallback (no image) */}
-			{!page.heroImage && (page.heroHeadline || page.pullQuote) && (
-				<section className="container py-20 text-center">
-					{page.heroHeadline && (
-						<h1 className="text-4xl md:text-6xl font-bold">{page.heroHeadline}</h1>
-					)}
+	const propertyUrl = page.propertyImage?.asset
+		? urlFor(page.propertyImage.asset).width(624).height(480).url()
+		: null
+
+	const flowerUrl = page.heroDecorFlower?.asset
+		? urlFor(page.heroDecorFlower.asset).width(365).url()
+		: null
+
+	const contentDecorUrl = page.contentDecorImage?.asset
+		? urlFor(page.contentDecorImage.asset).width(228).url()
+		: null
+
+	const formDecorUrl = page.formDecorBg?.asset
+		? urlFor(page.formDecorBg.asset).width(847).url()
+		: null
+
+	return (
+		<main className="bg-background overflow-x-hidden">
+			{/* Hero ── Frame 59 ─────────────────────────────────── */}
+			<section className="bg-background relative h-auto w-full overflow-hidden pt-[100px] pb-[160px] lg:h-[600px] lg:pt-[80px] lg:pb-0">
+				{coverUrl && (
+					<Image
+						src={coverUrl}
+						alt={page.heroImage?.alt ?? ''}
+						fill
+						priority
+						className="object-cover object-bottom"
+						sizes="100vw"
+					/>
+				)}
+
+				{flowerUrl && (
+					<div className="pointer-events-none absolute top-0 -left-[204px] z-10 h-[614px] w-[365px] max-lg:hidden">
+						<Image
+							src={flowerUrl}
+							alt=""
+							fill
+							className="object-cover"
+							sizes="365px"
+						/>
+					</div>
+				)}
+
+				<div className="relative z-10 mx-auto flex max-w-[1200px] flex-col items-start justify-center gap-[24px] px-[24px] lg:flex-row lg:gap-[90px] lg:px-[90px]">
+					<div className="w-full shrink-0 lg:w-[292px]">
+						<h1 className="font-stories text-foreground text-[48px] leading-[1] tracking-[0.1em] lg:text-[72px] lg:leading-[70px]">
+							{page.heroHeadline || 'Partner With Us'}
+						</h1>
+					</div>
 					{page.pullQuote && (
-						<p className="mt-6 text-xl italic text-gray-500 max-w-2xl mx-auto">
+						<p className="font-heading text-foreground w-full max-w-[672px] text-[20px] leading-[1.3] tracking-[0.07em] lg:text-[30px] lg:leading-[40px]">
 							{page.pullQuote}
 						</p>
 					)}
-				</section>
-			)}
-
-			{/* Body section — two-column */}
-			<section className="container py-16 grid gap-12 md:grid-cols-2">
-				{/* Left: body paragraph + bullet points */}
-				<div className="space-y-6">
-					{page.bodyParagraph && (
-						<p className="text-lg text-gray-700 leading-relaxed">{page.bodyParagraph}</p>
-					)}
-					{page.bulletPoints && page.bulletPoints.length > 0 && (
-						<ul className="list-disc pl-6 space-y-2 text-gray-700">
-							{page.bulletPoints.map((point, i) => (
-								<li key={i}>{point}</li>
-							))}
-						</ul>
-					)}
 				</div>
+			</section>
 
-				{/* Right: CTA text + property image */}
-				<div className="space-y-6">
-					{page.formCTAText && (
-						<p className="text-xl font-semibold text-gray-800">{page.formCTAText}</p>
-					)}
-					{page.propertyImage && (
-						<div className="overflow-hidden rounded-xl">
-							<Img
-								image={page.propertyImage}
-								width={600}
-								alt={page.propertyImage.alt ?? ''}
-								className="w-full h-auto object-cover"
-							/>
+			{/* Content ── Frame 60 ──────────────────────────────── */}
+			<section className="bg-background relative z-[11] overflow-visible px-[18px] pb-[72px] lg:px-[90px]">
+				<div className="mx-auto flex max-w-[1100px] flex-col-reverse items-center justify-between gap-[40px] lg:flex-row lg:items-start lg:gap-[80px]">
+					<div className="w-full shrink-0 space-y-5 lg:w-[400px] lg:pt-[60px]">
+						{page.bodyParagraph && (
+							<p className="text-foreground font-sans text-[15px] leading-[23px] tracking-[0.1em]">
+								{page.bodyParagraph}
+							</p>
+						)}
+						{page.bulletPoints?.map((point, i) => (
+							<p
+								key={i}
+								className="text-foreground font-sans text-[15px] leading-[23px] tracking-[0.1em]"
+							>
+								– {point}
+							</p>
+						))}
+						{page.formCTAText && (
+							<p className="text-foreground font-sans text-[15px] leading-[23px] tracking-[0.1em]">
+								{page.formCTAText}
+							</p>
+						)}
+					</div>
+
+					{propertyUrl && (
+						<div className="relative z-20 -mt-[80px] h-[300px] w-full lg:-mt-[120px] lg:h-[480px] lg:max-w-[624px] lg:flex-1">
+							<div className="absolute inset-0 overflow-hidden rounded-[5px]">
+								<Image
+									src={propertyUrl}
+									alt={page.propertyImage?.alt ?? ''}
+									fill
+									className="object-cover"
+									sizes="(max-width: 1024px) 100vw, 624px"
+								/>
+							</div>
+							{contentDecorUrl && (
+								<div className="pointer-events-none absolute top-[50%] right-0 z-10 aspect-[228/554] w-[35%] translate-x-[20%] lg:top-[60%] lg:w-[228px] lg:translate-x-[40%]">
+									<Image
+										src={contentDecorUrl}
+										alt=""
+										fill
+										className="object-cover"
+										sizes="(max-width: 1024px) 35vw, 228px"
+									/>
+								</div>
+							)}
 						</div>
 					)}
 				</div>
 			</section>
 
-			{/* Form section */}
-			<section className="container py-16">
-				{page.formHeadline && (
-					<h2 className="text-3xl font-bold mb-8 text-center">{page.formHeadline}</h2>
+			{/* Form ── Frame 61 ─────────────────────────────────── */}
+			<section className="bg-background relative px-[18px] pb-[40px] lg:px-[90px] lg:pb-[72px]">
+				{formDecorUrl && (
+					<div className="pointer-events-none absolute bottom-0 -left-[100px] left-0 z-0 h-[300px] w-[100%] lg:left-0 lg:h-[462px] lg:w-[847px]">
+						<Image
+							src={formDecorUrl}
+							alt=""
+							fill
+							className="object-cover"
+							sizes="(max-width: 1024px) 550px, 847px"
+						/>
+					</div>
 				)}
-				<PartnerForm />
+				<div className="relative z-10 mx-auto max-w-[100%] bg-[var(--color-white)] px-[24px] pt-[37px] pb-[48px] shadow-sm lg:px-[51px] lg:shadow-none">
+					<h2 className="font-heading text-foreground mb-[40px] text-center text-[24px] leading-[1.3] tracking-[0.1em] lg:mb-[75px] lg:text-[30px] lg:leading-[40px]">
+						{page.formHeadline || 'TELL US MORE ABOUT YOUR HOME'}
+					</h2>
+					<PartnerForm />
+				</div>
 			</section>
 		</main>
 	)

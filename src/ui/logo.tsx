@@ -3,11 +3,7 @@ import { cn } from '@/lib/utils'
 import { getSite } from '@/sanity/lib/data'
 import Img from './img'
 
-export default async function ({
-	className,
-}: {
-	className?: string
-}) {
+export default async function ({ className }: { className?: string }) {
 	const site = await getSite()
 
 	return (

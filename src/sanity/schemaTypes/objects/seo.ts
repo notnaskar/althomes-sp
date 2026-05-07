@@ -1,4 +1,4 @@
-import { defineType, defineField } from 'sanity'
+import { defineField, defineType } from 'sanity'
 
 export default defineType({
 	title: 'SEO',
@@ -14,7 +14,8 @@ export default defineType({
 			name: 'metaDescription',
 			title: 'Meta Description',
 			type: 'text',
-			validation: (Rule) => Rule.max(160).warning('Optimal length is under 160 characters'),
+			validation: (Rule) =>
+				Rule.max(160).warning('Optimal length is under 160 characters'),
 		}),
 		defineField({
 			name: 'ogImage',

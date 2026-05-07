@@ -11,7 +11,6 @@ import {
 	projectUsersWidget,
 } from '@sanity/dashboard'
 import { visionTool } from '@sanity/vision'
-import { vercelWidget } from 'sanity-plugin-dashboard-widget-vercel'
 import { apiVersion, dataset, projectId } from './src/sanity/env'
 import icon from './src/sanity/icon'
 import presentation from './src/sanity/presentation'
@@ -32,7 +31,7 @@ export default defineConfig({
 		dashboardTool({
 			name: 'info',
 			title: 'Info',
-			widgets: [projectInfoWidget(), projectUsersWidget(), vercelWidget()],
+			widgets: [projectInfoWidget(), projectUsersWidget()],
 		}),
 		// Vision is for querying with GROQ from inside the Studio
 		// https://www.sanity.io/docs/the-vision-plugin

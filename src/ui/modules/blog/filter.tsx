@@ -1,8 +1,13 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-type BlogCategory = { _id?: string; title?: string; slug?: { current?: string } }
 import { useBlogIndexStore } from './blog-index/store'
+
+type BlogCategory = {
+	_id?: string
+	title?: string
+	slug?: { current?: string }
+}
 
 export default function ({
 	category,

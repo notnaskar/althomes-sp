@@ -2,8 +2,8 @@ import { groq } from 'next-sanity'
 import { ImageResponse } from 'next/og'
 import { ROUTES } from '@/lib/env'
 import { cn } from '@/lib/utils'
-import { sanityFetchLive } from '@/sanity/lib/live'
 import { getSite } from '@/sanity/lib/data'
+import { sanityFetchLive } from '@/sanity/lib/live'
 import type { OG_QUERY_RESULT } from '@/sanity/types'
 
 const hostname = process.env.NEXT_PUBLIC_BASE_URL

@@ -1,4 +1,4 @@
-import { defineType, defineField } from 'sanity'
+import { defineField, defineType } from 'sanity'
 
 export default defineType({
 	title: 'Location',
@@ -29,6 +29,32 @@ export default defineType({
 			name: 'lng',
 			title: 'Longitude',
 			type: 'number',
+		}),
+		defineField({
+			name: 'streetAddress',
+			title: 'Street Address',
+			type: 'string',
+		}),
+		defineField({
+			name: 'addressLocality',
+			title: 'City',
+			type: 'string',
+		}),
+		defineField({
+			name: 'addressRegion',
+			title: 'State / Region',
+			type: 'string',
+		}),
+		defineField({
+			name: 'postalCode',
+			title: 'Postal Code',
+			type: 'string',
+		}),
+		defineField({
+			name: 'addressCountry',
+			title: 'Country Code',
+			type: 'string',
+			description: 'ISO 3166-1 alpha-2, e.g. IN',
 		}),
 	],
 })

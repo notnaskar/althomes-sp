@@ -638,6 +638,11 @@ export type Location = {
 	googleMapsUrl?: string
 	lat?: number
 	lng?: number
+	streetAddress?: string
+	addressLocality?: string
+	addressRegion?: string
+	postalCode?: string
+	addressCountry?: string
 }
 
 export type LinkList = {
@@ -702,14 +707,90 @@ export type Site = {
 		_type: 'image'
 	}
 	logoText?: string
+	favicon?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		_type: 'image'
+	}
 	navCtaLabel?: string
 	navCtaLink?: string
 	whatsappNumber?: string
 	bookDirectLink?: string
+	overlayNavLinks?: Array<{
+		label?: string
+		url?: string
+		_key: string
+	}>
+	menuPhoto?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	contactEmail?: string
+	contactPhone?: string
+	checkinTime?: string
+	checkoutTime?: string
 	instagramUrl?: string
 	facebookUrl?: string
 	linkedinUrl?: string
 	youtubeUrl?: string
+	footerBrandName?: string
+	footerAboutLinks?: Array<{
+		label?: string
+		url?: string
+		_key: string
+	}>
+	footerPolicyLinks?: Array<{
+		label?: string
+		url?: string
+		_key: string
+	}>
+	heroBgCircle?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	heroFgCircle?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	heroDecorStars?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	heroDecorFlowers?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	heroDecorStripes?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	formNotificationEmail?: string
 	contactFormEmail?: string
 	partnerEnquiryEmail?: string
 	colours?: {
@@ -764,6 +845,14 @@ export type Review = {
 	body?: string
 	published?: boolean
 	featured?: boolean
+	guestPhoto?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
 }
 
 export type Redirect = {
@@ -802,6 +891,7 @@ export type Property = {
 	displayOrder?: number
 	rentalwisePropertyId?: string
 	rentalwiseIdentifier?: string
+	rentalwiseWidgetPropertyId?: string
 	tagline?: string
 	shortDescription?: string
 	cardThumbnail?: {
@@ -813,6 +903,44 @@ export type Property = {
 		_type: 'image'
 	}
 	cardAmenities?: string
+	showcaseSecondaryImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	showcaseDecorImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	showcaseDecorTop?: string
+	showcaseDecorRight?: string
+	showcaseDecorBottom?: string
+	showcaseDecorLeft?: string
+	showcaseDecorWidth?: number
+	showcaseDecorHeight?: number
+	showcaseDecorRotation?: number
+	showcaseSecondaryDecorImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	showcaseSecondaryDecorTop?: string
+	showcaseSecondaryDecorRight?: string
+	showcaseSecondaryDecorBottom?: string
+	showcaseSecondaryDecorLeft?: string
+	showcaseSecondaryDecorWidth?: number
+	showcaseSecondaryDecorHeight?: number
+	showcaseSecondaryDecorRotation?: number
 	propertyType?: string
 	priceFrom?: string
 	heroImage?: {
@@ -823,8 +951,18 @@ export type Property = {
 		alt?: string
 		_type: 'image'
 	}
-	description?: BlockContent
+	detailCoverImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
 	pullQuote?: string
+	detailIntroHeading?: string
+	detailIntroBody?: string
+	description?: BlockContent
 	gallery?: Array<{
 		asset?: SanityImageAssetReference
 		media?: unknown
@@ -834,6 +972,21 @@ export type Property = {
 		_type: 'image'
 		_key: string
 	}>
+	gallerySectionQuote?: string
+	galleryDecorImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		_type: 'image'
+	}
+	locationImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		_type: 'image'
+	}
 	maxGuests?: number
 	bedrooms?: number
 	bathrooms?: number
@@ -844,10 +997,22 @@ export type Property = {
 	>
 	houseRulesTeaser?: string
 	houseRules?: BlockContent
+	amenitiesSectionImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
 	location?: Location
 	locationHeadline?: string
-	locationDescription?: string
-	highlights?: Array<{
+	locationBody?: BlockContent
+	locationCta?: {
+		label?: string
+		url?: string
+	}
+	windDownHighlight?: {
 		title?: string
 		body?: string
 		image?: {
@@ -858,14 +1023,74 @@ export type Property = {
 			alt?: string
 			_type: 'image'
 		}
-		_key: string
-	}>
+		decorImage?: {
+			asset?: SanityImageAssetReference
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			_type: 'image'
+		}
+		secondaryDecorImage?: {
+			asset?: SanityImageAssetReference
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			_type: 'image'
+		}
+	}
+	wakeUpHighlight?: {
+		title?: string
+		body?: string
+		image?: {
+			asset?: SanityImageAssetReference
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			alt?: string
+			_type: 'image'
+		}
+	}
+	hostedWithHeartHighlight?: {
+		title?: string
+		body?: string
+	}
+	symphonyHighlight?: {
+		title?: string
+		body?: string
+		image?: {
+			asset?: SanityImageAssetReference
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			alt?: string
+			_type: 'image'
+		}
+	}
 	experiences?: Array<
 		{
 			_key: string
 		} & ExperienceReference
 	>
 	experiencesMaxShown?: number
+	experiencesBgImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	menuCta?: {
+		label?: string
+		url?: string
+	}
+	faqBadgeText?: string
+	faqs?: Array<{
+		question?: string
+		answer?: BlockContent
+		_type: 'faq'
+		_key: string
+	}>
 	causeHeadline?: string
 	causeBody?: BlockContent
 	causeImages?: Array<{
@@ -879,6 +1104,15 @@ export type Property = {
 	}>
 	reviewsMaxShown?: number
 	ctaHeadline?: string
+	ctaButtonLabel?: string
+	ctaBackground?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
 	seo?: Seo
 }
 
@@ -905,6 +1139,15 @@ export type OurHomesPage = {
 	}
 	experiencesCtaBody?: BlockContent
 	experiencesCtaLabel?: string
+	ctaQuestion?: string
+	ctaBackground?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
 	seo?: Seo
 }
 
@@ -915,10 +1158,11 @@ export type LegalPage = {
 	_updatedAt: string
 	_rev: string
 	displayTitle?: string
+	displayTitleLine2?: string
 	seoTitle?: string
 	slug?: Slug
 	body?: BlockContent
-	backgroundImage?: {
+	ctaBackground?: {
 		asset?: SanityImageAssetReference
 		media?: unknown
 		hotspot?: SanityImageHotspot
@@ -957,6 +1201,27 @@ export type JoinUsPage = {
 		_type: 'image'
 	}
 	formHeadline?: string
+	heroDecorFlower?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		_type: 'image'
+	}
+	contentDecorImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		_type: 'image'
+	}
+	formDecorBg?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		_type: 'image'
+	}
 	seo?: Seo
 }
 
@@ -990,7 +1255,6 @@ export type ExperiencesPage = {
 	_updatedAt: string
 	_rev: string
 	heroHeadline?: string
-	heroSubtext?: string
 	heroBackground?: {
 		asset?: SanityImageAssetReference
 		media?: unknown
@@ -999,9 +1263,53 @@ export type ExperiencesPage = {
 		alt?: string
 		_type: 'image'
 	}
-	introBody?: BlockContent
-	discountBadgeText?: string
 	cardsMaxShown?: number
+	leadingTagline?: string
+	supportingTagline?: string
+	heroFlower?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	heroBadgeText?: string
+	decorBasket?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	decorStars?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	decorDaisy?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	ctaQuestion?: string
+	ctaButtonLabel?: string
+	ctaHref?: string
+	ctaBackground?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
 	seo?: Seo
 }
 
@@ -1051,6 +1359,33 @@ export type ContactPage = {
 	officeCity?: string
 	officeAddress?: string
 	formHeadline?: string
+	formCardHeading?: string
+	officeSectionTitle?: string
+	followUsSectionTitle?: string
+	mobileHeroAsset?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	backgroundCloudAsset?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	sideFlowerAsset?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
 	seo?: Seo
 }
 
@@ -1144,6 +1479,13 @@ export type Amenity = {
 	icon?: string
 }
 
+export type ReviewReference = {
+	_ref: string
+	_type: 'reference'
+	_weak?: boolean
+	[internalGroqTypeReferenceTo]?: 'review'
+}
+
 export type AltWayPage = {
 	_id: string
 	_type: 'altWayPage'
@@ -1168,6 +1510,14 @@ export type AltWayPage = {
 		alt?: string
 		_type: 'image'
 	}
+	missionDecorImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
 	missionText?: string
 	valuePropHeadline?: string
 	valueProps?: Array<{
@@ -1175,17 +1525,73 @@ export type AltWayPage = {
 		body?: string
 		_key: string
 	}>
-	editorialImages?: Array<{
+	valuePropEditorialImage?: {
 		asset?: SanityImageAssetReference
 		media?: unknown
 		hotspot?: SanityImageHotspot
 		crop?: SanityImageCrop
 		alt?: string
 		_type: 'image'
-		_key: string
-	}>
+	}
+	valuePropEditorialDecorLeft?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	valuePropEditorialDecorRight?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	valuePropSecondaryImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
 	promiseText?: string
 	promiseCTALabel?: string
+	promiseCTAHref?: string
+	promiseBackground?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	promiseCTADecorLeft?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	promiseCTADecorRight?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	statsBackground?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
 	statsHeadline?: string
 	stats?: Array<{
 		value?: string
@@ -1195,7 +1601,20 @@ export type AltWayPage = {
 	}>
 	bottomCTAHeadline?: string
 	bottomCTALabel?: string
-	reviewsMaxShown?: number
+	bottomCTABackground?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	bottomCTAHref?: string
+	reviews?: Array<
+		{
+			_key: string
+		} & ReviewReference
+	>
 	seo?: Seo
 }
 
@@ -1486,6 +1905,7 @@ export type AllSanitySchemaTypes =
 	| BlogPost
 	| Code
 	| Amenity
+	| ReviewReference
 	| AltWayPage
 	| SanityAssistInstructionTask
 	| SanityAssistTaskStatus
@@ -1744,14 +2164,90 @@ export type SITE_QUERY_RESULT = {
 		_type: 'image'
 	}
 	logoText?: string
+	favicon?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		_type: 'image'
+	}
 	navCtaLabel?: string
 	navCtaLink?: string
 	whatsappNumber?: string
 	bookDirectLink?: string
+	overlayNavLinks?: Array<{
+		label?: string
+		url?: string
+		_key: string
+	}>
+	menuPhoto?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	contactEmail?: string
+	contactPhone?: string
+	checkinTime?: string
+	checkoutTime?: string
 	instagramUrl?: string
 	facebookUrl?: string
 	linkedinUrl?: string
 	youtubeUrl?: string
+	footerBrandName?: string
+	footerAboutLinks?: Array<{
+		label?: string
+		url?: string
+		_key: string
+	}>
+	footerPolicyLinks?: Array<{
+		label?: string
+		url?: string
+		_key: string
+	}>
+	heroBgCircle?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	heroFgCircle?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	heroDecorStars?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	heroDecorFlowers?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	heroDecorStripes?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	formNotificationEmail?: string
 	contactFormEmail?: string
 	partnerEnquiryEmail?: string
 	colours?: {
@@ -1836,30 +2332,67 @@ export type HOME_PAGE_QUERY_RESULT = {
 
 // Source: src/sanity/lib/queries.ts
 // Variable: OUR_HOMES_PAGE_QUERY
-// Query: *[_type == 'ourHomesPage' && _id == 'ourHomesPage'][0]
+// Query: *[_type == 'ourHomesPage' && _id == 'ourHomesPage'][0]{	heroHeadline,	heroImage { asset->, alt },	ctaQuestion,	experiencesCtaLabel,	ctaBackground { asset->, alt },	seo}
 export type OUR_HOMES_PAGE_QUERY_RESULT = {
-	_id: 'ourHomesPage'
-	_type: 'ourHomesPage'
-	_createdAt: string
-	_updatedAt: string
-	_rev: string
-	heroHeadline?: string
-	heroImage?: {
-		asset?: SanityImageAssetReference
-		media?: unknown
-		hotspot?: SanityImageHotspot
-		crop?: SanityImageCrop
-		alt?: string
-		_type: 'image'
-	}
-	experiencesCtaBody?: BlockContent
-	experiencesCtaLabel?: string
-	seo?: Seo
+	heroHeadline: string | null
+	heroImage: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
+	ctaQuestion: string | null
+	experiencesCtaLabel: string | null
+	ctaBackground: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
+	seo: Seo | null
 } | null
 
 // Source: src/sanity/lib/queries.ts
 // Variable: ALT_WAY_PAGE_QUERY
-// Query: *[_type == 'altWayPage' && _id == 'altWayPage'][0]{	...,	heroBackground { asset->, alt },	missionImage { asset->, alt },	editorialImages[]{ asset->, alt },	"reviews": *[_type=='review' && featured==true && published==true] | order(stayDate desc) [0..20]{		guestName, rating, body, guestLocation, stayDate	}}
+// Query: *[_type == 'altWayPage' && _id == 'altWayPage'][0]{	...,	heroBackground { asset->, alt },	missionImage { asset->, alt },	missionDecorImage { asset->, alt },	valuePropEditorialImage { asset->, alt },	valuePropEditorialDecorLeft { asset->, alt },	valuePropEditorialDecorRight { asset->, alt },	valuePropSecondaryImage { asset->, alt },	promiseBackground { asset->, alt },	promiseCTADecorLeft { asset->, alt },	promiseCTADecorRight { asset->, alt },	bottomCTABackground { asset->, alt },	statsBackground { asset->, alt },	reviews[]->{		guestName, rating, body, guestLocation, stayDate,		guestPhoto { asset->, alt },		"propertyTitle": property->title	}}
 export type ALT_WAY_PAGE_QUERY_RESULT = {
 	_id: 'altWayPage'
 	_type: 'altWayPage'
@@ -1918,14 +2451,7 @@ export type ALT_WAY_PAGE_QUERY_RESULT = {
 		} | null
 		alt: string | null
 	} | null
-	missionText?: string
-	valuePropHeadline?: string
-	valueProps?: Array<{
-		title?: string
-		body?: string
-		_key: string
-	}>
-	editorialImages: Array<{
+	missionDecorImage: {
 		asset: {
 			_id: string
 			_type: 'sanity.imageAsset'
@@ -1949,9 +2475,217 @@ export type ALT_WAY_PAGE_QUERY_RESULT = {
 			source?: SanityAssetSourceData
 		} | null
 		alt: string | null
-	}> | null
+	} | null
+	missionText?: string
+	valuePropHeadline?: string
+	valueProps?: Array<{
+		title?: string
+		body?: string
+		_key: string
+	}>
+	valuePropEditorialImage: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
+	valuePropEditorialDecorLeft: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
+	valuePropEditorialDecorRight: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
+	valuePropSecondaryImage: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
 	promiseText?: string
 	promiseCTALabel?: string
+	promiseCTAHref?: string
+	promiseBackground: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
+	promiseCTADecorLeft: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
+	promiseCTADecorRight: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
+	statsBackground: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
 	statsHeadline?: string
 	stats?: Array<{
 		value?: string
@@ -1961,20 +2695,71 @@ export type ALT_WAY_PAGE_QUERY_RESULT = {
 	}>
 	bottomCTAHeadline?: string
 	bottomCTALabel?: string
-	reviewsMaxShown?: number
-	seo?: Seo
+	bottomCTABackground: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
+	bottomCTAHref?: string
 	reviews: Array<{
 		guestName: string | null
 		rating: number | null
 		body: string | null
 		guestLocation: string | null
 		stayDate: string | null
-	}>
+		guestPhoto: {
+			asset: {
+				_id: string
+				_type: 'sanity.imageAsset'
+				_createdAt: string
+				_updatedAt: string
+				_rev: string
+				originalFilename?: string
+				label?: string
+				title?: string
+				description?: string
+				altText?: string
+				sha1hash?: string
+				extension?: string
+				mimeType?: string
+				size?: number
+				assetId?: string
+				uploadId?: string
+				path?: string
+				url?: string
+				metadata?: SanityImageMetadata
+				source?: SanityAssetSourceData
+			} | null
+			alt: string | null
+		} | null
+		propertyTitle: string | null
+	}> | null
+	seo?: Seo
 } | null
 
 // Source: src/sanity/lib/queries.ts
 // Variable: EXPERIENCES_PAGE_QUERY
-// Query: *[_type == 'experiencesPage' && _id == 'experiencesPage'][0]{	...,	heroBackground { asset->, alt }}
+// Query: *[_type == 'experiencesPage' && _id == 'experiencesPage'][0]{	...,	heroBackground { asset->, alt },	heroFlower { asset->, alt },	decorBasket { asset->, alt },	decorStars { asset->, alt },	decorDaisy { asset->, alt },	ctaBackground { asset->, alt }}
 export type EXPERIENCES_PAGE_QUERY_RESULT = {
 	_id: 'experiencesPage'
 	_type: 'experiencesPage'
@@ -1982,7 +2767,6 @@ export type EXPERIENCES_PAGE_QUERY_RESULT = {
 	_updatedAt: string
 	_rev: string
 	heroHeadline?: string
-	heroSubtext?: string
 	heroBackground: {
 		asset: {
 			_id: string
@@ -2008,15 +2792,144 @@ export type EXPERIENCES_PAGE_QUERY_RESULT = {
 		} | null
 		alt: string | null
 	} | null
-	introBody?: BlockContent
-	discountBadgeText?: string
 	cardsMaxShown?: number
+	leadingTagline?: string
+	supportingTagline?: string
+	heroFlower: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
+	heroBadgeText?: string
+	decorBasket: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
+	decorStars: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
+	decorDaisy: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
+	ctaQuestion?: string
+	ctaButtonLabel?: string
+	ctaHref?: string
+	ctaBackground: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
 	seo?: Seo
 } | null
 
 // Source: src/sanity/lib/queries.ts
 // Variable: JOIN_US_PAGE_QUERY
-// Query: *[_type == 'joinUsPage' && _id == 'joinUsPage'][0]{	...,	heroImage { asset->, alt },	propertyImage { asset->, alt }}
+// Query: *[_type == 'joinUsPage' && _id == 'joinUsPage'][0]{	...,	heroImage { asset->, alt },	propertyImage { asset->, alt },	heroDecorFlower { asset-> },	contentDecorImage { asset-> },	formDecorBg { asset-> }}
 export type JOIN_US_PAGE_QUERY_RESULT = {
 	_id: 'joinUsPage'
 	_type: 'joinUsPage'
@@ -2079,12 +2992,84 @@ export type JOIN_US_PAGE_QUERY_RESULT = {
 		alt: string | null
 	} | null
 	formHeadline?: string
+	heroDecorFlower: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+	} | null
+	contentDecorImage: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+	} | null
+	formDecorBg: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+	} | null
 	seo?: Seo
 } | null
 
 // Source: src/sanity/lib/queries.ts
 // Variable: CONTACT_PAGE_QUERY
-// Query: *[_type == 'contactPage' && _id == 'contactPage'][0]{	...,	heroImage { asset->, alt }}
+// Query: *[_type == 'contactPage' && _id == 'contactPage'][0]{	...,	heroImage { asset->, alt },	mobileHeroAsset { asset->, alt },	backgroundCloudAsset { asset->, alt },	sideFlowerAsset { asset->, alt }}
 export type CONTACT_PAGE_QUERY_RESULT = {
 	_id: 'contactPage'
 	_type: 'contactPage'
@@ -2122,12 +3107,90 @@ export type CONTACT_PAGE_QUERY_RESULT = {
 	officeCity?: string
 	officeAddress?: string
 	formHeadline?: string
+	formCardHeading?: string
+	officeSectionTitle?: string
+	followUsSectionTitle?: string
+	mobileHeroAsset: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
+	backgroundCloudAsset: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
+	sideFlowerAsset: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
 	seo?: Seo
 } | null
 
 // Source: src/sanity/lib/queries.ts
 // Variable: LEGAL_PAGE_QUERY
-// Query: *[_type == 'legalPage' && slug.current == $slug][0]
+// Query: *[_type == 'legalPage' && slug.current == $slug][0] {		...,		ctaBackground { asset->, alt }	}
 export type LEGAL_PAGE_QUERY_RESULT = {
 	_id: string
 	_type: 'legalPage'
@@ -2135,17 +3198,35 @@ export type LEGAL_PAGE_QUERY_RESULT = {
 	_updatedAt: string
 	_rev: string
 	displayTitle?: string
+	displayTitleLine2?: string
 	seoTitle?: string
 	slug?: Slug
 	body?: BlockContent
-	backgroundImage?: {
-		asset?: SanityImageAssetReference
-		media?: unknown
-		hotspot?: SanityImageHotspot
-		crop?: SanityImageCrop
-		alt?: string
-		_type: 'image'
-	}
+	ctaBackground: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
 	seo?: Seo
 } | null
 
@@ -2156,7 +3237,7 @@ export type ALL_LEGAL_PAGES_QUERY_RESULT = Array<string | null>
 
 // Source: src/sanity/lib/queries.ts
 // Variable: ALL_PROPERTIES_QUERY
-// Query: *[_type == 'property' && status != 'hidden'] | order(displayOrder asc){	_id,	title,	"slug": slug.current,	tagline,	shortDescription,	cardThumbnail { asset->, alt },	propertyType,	priceFrom,	maxGuests,	bedrooms,	bathrooms,	status,	displayOrder,	rentalwisePropertyId}
+// Query: *[_type == 'property' && status != 'hidden'] | order(displayOrder asc){	_id,	title,	"slug": slug.current,	tagline,	shortDescription,	cardThumbnail { asset->, alt },	heroImage { asset->, alt },	showcaseSecondaryImage { asset->, alt },	showcaseDecorImage { asset->, alt },	showcaseDecorTop,	showcaseDecorRight,	showcaseDecorBottom,	showcaseDecorLeft,	showcaseDecorWidth,	showcaseDecorHeight,	showcaseDecorRotation,	showcaseSecondaryDecorImage { asset->, alt },	showcaseSecondaryDecorTop,	showcaseSecondaryDecorRight,	showcaseSecondaryDecorBottom,	showcaseSecondaryDecorLeft,	showcaseSecondaryDecorWidth,	showcaseSecondaryDecorHeight,	showcaseSecondaryDecorRotation,	pullQuote,	locationHeadline,	cardAmenities,	propertyType,	priceFrom,	maxGuests,	bedrooms,	bathrooms,	status,	displayOrder,	rentalwisePropertyId}
 export type ALL_PROPERTIES_QUERY_RESULT = Array<{
 	_id: string
 	title: string | null
@@ -2188,6 +3269,123 @@ export type ALL_PROPERTIES_QUERY_RESULT = Array<{
 		} | null
 		alt: string | null
 	} | null
+	heroImage: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
+	showcaseSecondaryImage: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
+	showcaseDecorImage: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
+	showcaseDecorTop: string | null
+	showcaseDecorRight: string | null
+	showcaseDecorBottom: string | null
+	showcaseDecorLeft: string | null
+	showcaseDecorWidth: number | null
+	showcaseDecorHeight: number | null
+	showcaseDecorRotation: number | null
+	showcaseSecondaryDecorImage: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
+	showcaseSecondaryDecorTop: string | null
+	showcaseSecondaryDecorRight: string | null
+	showcaseSecondaryDecorBottom: string | null
+	showcaseSecondaryDecorLeft: string | null
+	showcaseSecondaryDecorWidth: number | null
+	showcaseSecondaryDecorHeight: number | null
+	showcaseSecondaryDecorRotation: number | null
+	pullQuote: string | null
+	locationHeadline: string | null
+	cardAmenities: string | null
 	propertyType: string | null
 	priceFrom: string | null
 	maxGuests: number | null
@@ -2200,7 +3398,7 @@ export type ALL_PROPERTIES_QUERY_RESULT = Array<{
 
 // Source: src/sanity/lib/queries.ts
 // Variable: PROPERTY_QUERY
-// Query: *[_type == 'property' && slug.current == $slug][0]{	...,	heroImage { asset->, alt },	gallery[]{ asset->, alt },	cardThumbnail { asset->, alt },	amenities[]->{ name, icon },	experiences[]->{		title,		"slug": slug.current,		description,		image { asset->, alt }	},	highlights[]{ title, body, image { asset->, alt } },	causeImages[]{ asset->, alt },	location,	"reviews": *[_type=='review' && references(^._id) && published==true] | order(stayDate desc) [0..20]{		guestName, rating, body, guestLocation, stayDate	}}
+// Query: *[_type == 'property' && slug.current == $slug][0]{	...,	heroImage { asset->, alt },	detailCoverImage { asset->, alt },	gallery[]{ asset->, alt },	cardThumbnail { asset->, alt },	amenities[]->{ name, icon },	amenitiesSectionImage { asset->, alt },	experiences[]->{		title,		"slug": slug.current,		description,		image { asset->, alt }	},	experiencesBgImage { asset->, alt, hotspot, crop },	windDownHighlight{		title,		body,		image { asset->, alt, hotspot, crop },		decorImage { asset-> },		secondaryDecorImage { asset-> }	},	wakeUpHighlight{		title,		body,		image { asset->, alt, hotspot, crop }	},	hostedWithHeartHighlight{		title,		body	},	symphonyHighlight{		title,		body,		image { asset->, alt, hotspot, crop }	},	causeImages[]{ asset->, alt },	ctaBackground { asset->, alt },	faqs[]{ question, answer },	location,	"reviews": *[_type=='review' && references(^._id) && published==true] | order(stayDate desc) [0..20]{		guestName, rating, body, guestLocation, stayDate,		guestPhoto { asset->, alt },		"propertyTitle": property->title	}}
 export type PROPERTY_QUERY_RESULT = {
 	_id: string
 	_type: 'property'
@@ -2213,6 +3411,7 @@ export type PROPERTY_QUERY_RESULT = {
 	displayOrder?: number
 	rentalwisePropertyId?: string
 	rentalwiseIdentifier?: string
+	rentalwiseWidgetPropertyId?: string
 	tagline?: string
 	shortDescription?: string
 	cardThumbnail: {
@@ -2241,6 +3440,44 @@ export type PROPERTY_QUERY_RESULT = {
 		alt: string | null
 	} | null
 	cardAmenities?: string
+	showcaseSecondaryImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	showcaseDecorImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	showcaseDecorTop?: string
+	showcaseDecorRight?: string
+	showcaseDecorBottom?: string
+	showcaseDecorLeft?: string
+	showcaseDecorWidth?: number
+	showcaseDecorHeight?: number
+	showcaseDecorRotation?: number
+	showcaseSecondaryDecorImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+	}
+	showcaseSecondaryDecorTop?: string
+	showcaseSecondaryDecorRight?: string
+	showcaseSecondaryDecorBottom?: string
+	showcaseSecondaryDecorLeft?: string
+	showcaseSecondaryDecorWidth?: number
+	showcaseSecondaryDecorHeight?: number
+	showcaseSecondaryDecorRotation?: number
 	propertyType?: string
 	priceFrom?: string
 	heroImage: {
@@ -2268,8 +3505,35 @@ export type PROPERTY_QUERY_RESULT = {
 		} | null
 		alt: string | null
 	} | null
-	description?: BlockContent
+	detailCoverImage: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
 	pullQuote?: string
+	detailIntroHeading?: string
+	detailIntroBody?: string
+	description?: BlockContent
 	gallery: Array<{
 		asset: {
 			_id: string
@@ -2295,6 +3559,21 @@ export type PROPERTY_QUERY_RESULT = {
 		} | null
 		alt: string | null
 	}> | null
+	gallerySectionQuote?: string
+	galleryDecorImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		_type: 'image'
+	}
+	locationImage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		_type: 'image'
+	}
 	maxGuests?: number
 	bedrooms?: number
 	bathrooms?: number
@@ -2304,10 +3583,39 @@ export type PROPERTY_QUERY_RESULT = {
 	}> | null
 	houseRulesTeaser?: string
 	houseRules?: BlockContent
+	amenitiesSectionImage: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
 	location: Location | null
 	locationHeadline?: string
-	locationDescription?: string
-	highlights: Array<{
+	locationBody?: BlockContent
+	locationCta?: {
+		label?: string
+		url?: string
+	}
+	windDownHighlight: {
 		title: string | null
 		body: string | null
 		image: {
@@ -2334,8 +3642,124 @@ export type PROPERTY_QUERY_RESULT = {
 				source?: SanityAssetSourceData
 			} | null
 			alt: string | null
+			hotspot: SanityImageHotspot | null
+			crop: SanityImageCrop | null
 		} | null
-	}> | null
+		decorImage: {
+			asset: {
+				_id: string
+				_type: 'sanity.imageAsset'
+				_createdAt: string
+				_updatedAt: string
+				_rev: string
+				originalFilename?: string
+				label?: string
+				title?: string
+				description?: string
+				altText?: string
+				sha1hash?: string
+				extension?: string
+				mimeType?: string
+				size?: number
+				assetId?: string
+				uploadId?: string
+				path?: string
+				url?: string
+				metadata?: SanityImageMetadata
+				source?: SanityAssetSourceData
+			} | null
+		} | null
+		secondaryDecorImage: {
+			asset: {
+				_id: string
+				_type: 'sanity.imageAsset'
+				_createdAt: string
+				_updatedAt: string
+				_rev: string
+				originalFilename?: string
+				label?: string
+				title?: string
+				description?: string
+				altText?: string
+				sha1hash?: string
+				extension?: string
+				mimeType?: string
+				size?: number
+				assetId?: string
+				uploadId?: string
+				path?: string
+				url?: string
+				metadata?: SanityImageMetadata
+				source?: SanityAssetSourceData
+			} | null
+		} | null
+	} | null
+	wakeUpHighlight: {
+		title: string | null
+		body: string | null
+		image: {
+			asset: {
+				_id: string
+				_type: 'sanity.imageAsset'
+				_createdAt: string
+				_updatedAt: string
+				_rev: string
+				originalFilename?: string
+				label?: string
+				title?: string
+				description?: string
+				altText?: string
+				sha1hash?: string
+				extension?: string
+				mimeType?: string
+				size?: number
+				assetId?: string
+				uploadId?: string
+				path?: string
+				url?: string
+				metadata?: SanityImageMetadata
+				source?: SanityAssetSourceData
+			} | null
+			alt: string | null
+			hotspot: SanityImageHotspot | null
+			crop: SanityImageCrop | null
+		} | null
+	} | null
+	hostedWithHeartHighlight: {
+		title: string | null
+		body: string | null
+	} | null
+	symphonyHighlight: {
+		title: string | null
+		body: string | null
+		image: {
+			asset: {
+				_id: string
+				_type: 'sanity.imageAsset'
+				_createdAt: string
+				_updatedAt: string
+				_rev: string
+				originalFilename?: string
+				label?: string
+				title?: string
+				description?: string
+				altText?: string
+				sha1hash?: string
+				extension?: string
+				mimeType?: string
+				size?: number
+				assetId?: string
+				uploadId?: string
+				path?: string
+				url?: string
+				metadata?: SanityImageMetadata
+				source?: SanityAssetSourceData
+			} | null
+			alt: string | null
+			hotspot: SanityImageHotspot | null
+			crop: SanityImageCrop | null
+		} | null
+	} | null
 	experiences: Array<{
 		title: string | null
 		slug: string | null
@@ -2367,6 +3791,42 @@ export type PROPERTY_QUERY_RESULT = {
 		} | null
 	}> | null
 	experiencesMaxShown?: number
+	experiencesBgImage: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+		hotspot: SanityImageHotspot | null
+		crop: SanityImageCrop | null
+	} | null
+	menuCta?: {
+		label?: string
+		url?: string
+	}
+	faqBadgeText?: string
+	faqs: Array<{
+		question: string | null
+		answer: BlockContent | null
+	}> | null
 	causeHeadline?: string
 	causeBody?: BlockContent
 	causeImages: Array<{
@@ -2396,6 +3856,32 @@ export type PROPERTY_QUERY_RESULT = {
 	}> | null
 	reviewsMaxShown?: number
 	ctaHeadline?: string
+	ctaButtonLabel?: string
+	ctaBackground: {
+		asset: {
+			_id: string
+			_type: 'sanity.imageAsset'
+			_createdAt: string
+			_updatedAt: string
+			_rev: string
+			originalFilename?: string
+			label?: string
+			title?: string
+			description?: string
+			altText?: string
+			sha1hash?: string
+			extension?: string
+			mimeType?: string
+			size?: number
+			assetId?: string
+			uploadId?: string
+			path?: string
+			url?: string
+			metadata?: SanityImageMetadata
+			source?: SanityAssetSourceData
+		} | null
+		alt: string | null
+	} | null
 	seo?: Seo
 	reviews: Array<{
 		guestName: string | null
@@ -2403,6 +3889,32 @@ export type PROPERTY_QUERY_RESULT = {
 		body: string | null
 		guestLocation: string | null
 		stayDate: string | null
+		guestPhoto: {
+			asset: {
+				_id: string
+				_type: 'sanity.imageAsset'
+				_createdAt: string
+				_updatedAt: string
+				_rev: string
+				originalFilename?: string
+				label?: string
+				title?: string
+				description?: string
+				altText?: string
+				sha1hash?: string
+				extension?: string
+				mimeType?: string
+				size?: number
+				assetId?: string
+				uploadId?: string
+				path?: string
+				url?: string
+				metadata?: SanityImageMetadata
+				source?: SanityAssetSourceData
+			} | null
+			alt: string | null
+		} | null
+		propertyTitle: string | null
 	}>
 } | null
 
@@ -2838,15 +4350,15 @@ declare module '@sanity/client' {
 		'{\n\t\'blog\': *[_type == \'site\'][0]{\n\t\t"metadata": {\n\t\t\t"title": coalesce(seo.metaTitle, title) + " Blog",\n\t\t\t"description": seo.metaDescription\n\t\t}\n\t},\n\t\'posts\': *[_type == \'blog.post\' && metadata.noIndex != true]|order(publishDate desc){\n\t\ttitle,\n\t\tcontent,\n\t\tpublishDate,\n\t\tmetadata\n\t}\n}': BLOG_RSS_QUERY_RESULT
 		"*[_type == 'site' && _id == 'site'][0]": SITE_QUERY_RESULT
 		"*[_type == 'homePage' && _id == 'homePage'][0]{\n\t...,\n\theroImage { asset->, alt },\n\tnavLabels[]{\n\t\t...,\n\t\ttarget->{ _type, \"slug\": slug.current }\n\t}\n}": HOME_PAGE_QUERY_RESULT
-		"*[_type == 'ourHomesPage' && _id == 'ourHomesPage'][0]": OUR_HOMES_PAGE_QUERY_RESULT
-		"*[_type == 'altWayPage' && _id == 'altWayPage'][0]{\n\t...,\n\theroBackground { asset->, alt },\n\tmissionImage { asset->, alt },\n\teditorialImages[]{ asset->, alt },\n\t\"reviews\": *[_type=='review' && featured==true && published==true] | order(stayDate desc) [0..20]{\n\t\tguestName, rating, body, guestLocation, stayDate\n\t}\n}": ALT_WAY_PAGE_QUERY_RESULT
-		"*[_type == 'experiencesPage' && _id == 'experiencesPage'][0]{\n\t...,\n\theroBackground { asset->, alt }\n}": EXPERIENCES_PAGE_QUERY_RESULT
-		"*[_type == 'joinUsPage' && _id == 'joinUsPage'][0]{\n\t...,\n\theroImage { asset->, alt },\n\tpropertyImage { asset->, alt }\n}": JOIN_US_PAGE_QUERY_RESULT
-		"*[_type == 'contactPage' && _id == 'contactPage'][0]{\n\t...,\n\theroImage { asset->, alt }\n}": CONTACT_PAGE_QUERY_RESULT
-		"*[_type == 'legalPage' && slug.current == $slug][0]": LEGAL_PAGE_QUERY_RESULT
+		"*[_type == 'ourHomesPage' && _id == 'ourHomesPage'][0]{\n\theroHeadline,\n\theroImage { asset->, alt },\n\tctaQuestion,\n\texperiencesCtaLabel,\n\tctaBackground { asset->, alt },\n\tseo\n}": OUR_HOMES_PAGE_QUERY_RESULT
+		"*[_type == 'altWayPage' && _id == 'altWayPage'][0]{\n\t...,\n\theroBackground { asset->, alt },\n\tmissionImage { asset->, alt },\n\tmissionDecorImage { asset->, alt },\n\tvaluePropEditorialImage { asset->, alt },\n\tvaluePropEditorialDecorLeft { asset->, alt },\n\tvaluePropEditorialDecorRight { asset->, alt },\n\tvaluePropSecondaryImage { asset->, alt },\n\tpromiseBackground { asset->, alt },\n\tpromiseCTADecorLeft { asset->, alt },\n\tpromiseCTADecorRight { asset->, alt },\n\tbottomCTABackground { asset->, alt },\n\tstatsBackground { asset->, alt },\n\treviews[]->{\n\t\tguestName, rating, body, guestLocation, stayDate,\n\t\tguestPhoto { asset->, alt },\n\t\t\"propertyTitle\": property->title\n\t}\n}": ALT_WAY_PAGE_QUERY_RESULT
+		"*[_type == 'experiencesPage' && _id == 'experiencesPage'][0]{\n\t...,\n\theroBackground { asset->, alt },\n\theroFlower { asset->, alt },\n\tdecorBasket { asset->, alt },\n\tdecorStars { asset->, alt },\n\tdecorDaisy { asset->, alt },\n\tctaBackground { asset->, alt }\n}": EXPERIENCES_PAGE_QUERY_RESULT
+		"*[_type == 'joinUsPage' && _id == 'joinUsPage'][0]{\n\t...,\n\theroImage { asset->, alt },\n\tpropertyImage { asset->, alt },\n\theroDecorFlower { asset-> },\n\tcontentDecorImage { asset-> },\n\tformDecorBg { asset-> }\n}": JOIN_US_PAGE_QUERY_RESULT
+		"*[_type == 'contactPage' && _id == 'contactPage'][0]{\n\t...,\n\theroImage { asset->, alt },\n\tmobileHeroAsset { asset->, alt },\n\tbackgroundCloudAsset { asset->, alt },\n\tsideFlowerAsset { asset->, alt }\n}": CONTACT_PAGE_QUERY_RESULT
+		"*[_type == 'legalPage' && slug.current == $slug][0] {\n\t\t...,\n\t\tctaBackground { asset->, alt }\n\t}": LEGAL_PAGE_QUERY_RESULT
 		"*[_type == 'legalPage' && defined(slug.current)].slug.current": ALL_LEGAL_PAGES_QUERY_RESULT
-		"*[_type == 'property' && status != 'hidden'] | order(displayOrder asc){\n\t_id,\n\ttitle,\n\t\"slug\": slug.current,\n\ttagline,\n\tshortDescription,\n\tcardThumbnail { asset->, alt },\n\tpropertyType,\n\tpriceFrom,\n\tmaxGuests,\n\tbedrooms,\n\tbathrooms,\n\tstatus,\n\tdisplayOrder,\n\trentalwisePropertyId\n}": ALL_PROPERTIES_QUERY_RESULT
-		'*[_type == \'property\' && slug.current == $slug][0]{\n\t...,\n\theroImage { asset->, alt },\n\tgallery[]{ asset->, alt },\n\tcardThumbnail { asset->, alt },\n\tamenities[]->{ name, icon },\n\texperiences[]->{\n\t\ttitle,\n\t\t"slug": slug.current,\n\t\tdescription,\n\t\timage { asset->, alt }\n\t},\n\thighlights[]{ title, body, image { asset->, alt } },\n\tcauseImages[]{ asset->, alt },\n\tlocation,\n\t"reviews": *[_type==\'review\' && references(^._id) && published==true] | order(stayDate desc) [0..20]{\n\t\tguestName, rating, body, guestLocation, stayDate\n\t}\n}': PROPERTY_QUERY_RESULT
+		"*[_type == 'property' && status != 'hidden'] | order(displayOrder asc){\n\t_id,\n\ttitle,\n\t\"slug\": slug.current,\n\ttagline,\n\tshortDescription,\n\tcardThumbnail { asset->, alt },\n\theroImage { asset->, alt },\n\tshowcaseSecondaryImage { asset->, alt },\n\tshowcaseDecorImage { asset->, alt },\n\tshowcaseDecorTop,\n\tshowcaseDecorRight,\n\tshowcaseDecorBottom,\n\tshowcaseDecorLeft,\n\tshowcaseDecorWidth,\n\tshowcaseDecorHeight,\n\tshowcaseDecorRotation,\n\tshowcaseSecondaryDecorImage { asset->, alt },\n\tshowcaseSecondaryDecorTop,\n\tshowcaseSecondaryDecorRight,\n\tshowcaseSecondaryDecorBottom,\n\tshowcaseSecondaryDecorLeft,\n\tshowcaseSecondaryDecorWidth,\n\tshowcaseSecondaryDecorHeight,\n\tshowcaseSecondaryDecorRotation,\n\tpullQuote,\n\tlocationHeadline,\n\tcardAmenities,\n\tpropertyType,\n\tpriceFrom,\n\tmaxGuests,\n\tbedrooms,\n\tbathrooms,\n\tstatus,\n\tdisplayOrder,\n\trentalwisePropertyId\n}": ALL_PROPERTIES_QUERY_RESULT
+		'*[_type == \'property\' && slug.current == $slug][0]{\n\t...,\n\theroImage { asset->, alt },\n\tdetailCoverImage { asset->, alt },\n\tgallery[]{ asset->, alt },\n\tcardThumbnail { asset->, alt },\n\tamenities[]->{ name, icon },\n\tamenitiesSectionImage { asset->, alt },\n\texperiences[]->{\n\t\ttitle,\n\t\t"slug": slug.current,\n\t\tdescription,\n\t\timage { asset->, alt }\n\t},\n\texperiencesBgImage { asset->, alt, hotspot, crop },\n\twindDownHighlight{\n\t\ttitle,\n\t\tbody,\n\t\timage { asset->, alt, hotspot, crop },\n\t\tdecorImage { asset-> },\n\t\tsecondaryDecorImage { asset-> }\n\t},\n\twakeUpHighlight{\n\t\ttitle,\n\t\tbody,\n\t\timage { asset->, alt, hotspot, crop }\n\t},\n\thostedWithHeartHighlight{\n\t\ttitle,\n\t\tbody\n\t},\n\tsymphonyHighlight{\n\t\ttitle,\n\t\tbody,\n\t\timage { asset->, alt, hotspot, crop }\n\t},\n\tcauseImages[]{ asset->, alt },\n\tctaBackground { asset->, alt },\n\tfaqs[]{ question, answer },\n\tlocation,\n\t"reviews": *[_type==\'review\' && references(^._id) && published==true] | order(stayDate desc) [0..20]{\n\t\tguestName, rating, body, guestLocation, stayDate,\n\t\tguestPhoto { asset->, alt },\n\t\t"propertyTitle": property->title\n\t}\n}': PROPERTY_QUERY_RESULT
 		"*[_type == 'property' && defined(slug.current)].slug.current": ALL_PROPERTY_SLUGS_QUERY_RESULT
 		"*[_type == 'blog.post'] | order(publishDate desc)": ALL_POSTS_QUERY_RESULT
 		"*[_type == 'blog.post' && metadata.slug.current == $slug][0]": POST_BY_SLUG_QUERY_RESULT

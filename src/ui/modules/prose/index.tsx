@@ -8,7 +8,7 @@ import AnchoredHeading from './anchored-heading'
 import Code from './code'
 import Image from './image'
 
-export default function ({
+export default function ProseModule({
 	content,
 	tableOfContents,
 	headings,
@@ -20,7 +20,7 @@ export default function ({
 		<section
 			className={cn(
 				'section',
-				toc && 'flex gap-4 max-md:flex-col md:items-start',
+				toc && 'flex gap-4 max-[820px]:flex-col min-[821px]:items-start',
 			)}
 			{...moduleAttributes(props)}
 		>
@@ -28,8 +28,8 @@ export default function ({
 				<TableOfContents
 					headings={headings}
 					className={cn(
-						'md:sticky-below-header shrink-0 [--offset:1rem] md:w-[20ch]',
-						toc === 'right' && 'md:order-last',
+						'min-[821px]:sticky-below-header shrink-0 [--offset:1rem] min-[821px]:w-[20ch]',
+						toc === 'right' && 'min-[821px]:order-last',
 					)}
 					open
 				/>

@@ -1,4 +1,5 @@
 'use client'
+
 import { useLayoutEffect } from 'react'
 
 export function ThemeProvider({ vars }: { vars: Record<string, string> }) {

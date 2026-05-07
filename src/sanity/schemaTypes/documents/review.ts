@@ -1,4 +1,4 @@
-import { defineType, defineField } from 'sanity'
+import { defineField, defineType } from 'sanity'
 
 export default defineType({
 	name: 'review',
@@ -52,6 +52,20 @@ export default defineType({
 			title: 'Featured',
 			type: 'boolean',
 			initialValue: false,
+		}),
+		defineField({
+			name: 'guestPhoto',
+			title: 'Guest Photo',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [
+				{
+					name: 'alt',
+					type: 'string',
+					title: 'Alt text',
+					validation: (Rule) => Rule.required(),
+				},
+			],
 		}),
 	],
 	preview: {

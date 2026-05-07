@@ -1,4 +1,4 @@
-import { defineType, defineArrayMember } from 'sanity'
+import { defineArrayMember, defineType } from 'sanity'
 import { ImageIcon } from '@sanity/icons'
 
 export default defineType({

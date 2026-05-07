@@ -1,7 +1,7 @@
 import type { PortableTextBlock, PortableTextComponentProps } from 'next-sanity'
 import { slug } from '@/lib/utils'
 
-export default function ({
+export default function AnchoredHeading({
 	as: Tag = 'h1',
 	children,
 	value,
