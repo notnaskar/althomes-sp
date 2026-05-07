@@ -27,6 +27,7 @@ export default function ({
 						className="aspect-video w-full object-cover"
 						image={post.metadata?.image}
 						width={400}
+						sizes="(max-width: 767px) calc(100vw - 36px), (max-width: 1023px) 50vw, 33vw"
 						alt={post.title ?? ''}
 					/>
 				) : (

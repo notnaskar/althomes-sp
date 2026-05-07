@@ -23,6 +23,7 @@ export default async function BlogIndexPage() {
 									<Img
 										image={post.metadata.image}
 										width={600}
+										sizes="(max-width: 767px) calc(100vw - 36px), (max-width: 1023px) 50vw, 33vw"
 										alt={post.title || ''}
 										className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
 									/>

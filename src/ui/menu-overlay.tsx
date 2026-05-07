@@ -39,7 +39,7 @@ export default function MenuOverlay({ isOpen, onCloseAction, site }: Props) {
 			role="dialog"
 			aria-modal="true"
 		>
-			<div className="relative hidden overflow-hidden min-[821px]:block">
+			<div className="relative overflow-hidden max-[820px]:hidden">
 				{site?.menuPhoto?.asset && (
 					<Image
 						src={urlFor(site.menuPhoto.asset).url()}
@@ -58,6 +58,7 @@ export default function MenuOverlay({ isOpen, onCloseAction, site }: Props) {
 							label={site.navCtaLabel ?? 'STAY WITH US'}
 							href={site.navCtaLink}
 							variant="light"
+							onClick={onCloseAction}
 						/>
 					)}
 					<button

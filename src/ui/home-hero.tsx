@@ -34,7 +34,6 @@ export default function HomeHero({ page, site }: Props) {
 							alt={page.heroImage?.alt ?? ''}
 							fill
 							priority
-							sizes="(max-width: 820px) 320px, 856px"
 							className="object-cover"
 						/>
 					</div>

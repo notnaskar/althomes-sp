@@ -40,6 +40,14 @@ export default function ({
 
 	const loading = stegaClean(props.loading || image.loading)
 
+	const resolvedWidth =
+		width ?? Math.round(height ? (Number(height) * w) / h : w)
+	const resolvedHeight =
+		height ?? Math.round(width ? (Number(width) * h) / w : h)
+	const defaultSizes =
+		props.sizes ??
+		(props.fill ? undefined : `${Number(resolvedWidth)}px`)
+
 	return (
 		<NextImage
 			src={
@@ -47,14 +55,15 @@ export default function ({
 					.withOptions({ auto: 'format', q: 100, ...imageOptions })
 					.url() ?? image.asset.url!
 			}
-			width={width ?? Math.round(height ? (Number(height) * w) / h : w)}
-			height={height ?? Math.round(width ? (Number(width) * h) / w : h)}
+			width={resolvedWidth}
+			height={resolvedHeight}
 			loading={loading}
 			{...(loading === 'eager'
 				? { priority: true, fetchPriority: 'high' }
 				: {})}
 			placeholder={lqip ? 'blur' : undefined}
 			blurDataURL={lqip}
+			sizes={defaultSizes}
 			{...props}
 		/>
 	)

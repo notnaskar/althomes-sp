@@ -18,6 +18,7 @@ export default async function ContactPage() {
 						image={page.heroImage}
 						width={1440}
 						loading="eager"
+						sizes="100vw"
 						alt={page.heroImage.alt ?? ''}
 						className="h-full w-full object-cover"
 					/>

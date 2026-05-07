@@ -34,6 +34,7 @@ export default function ({
 						image={post.metadata?.image}
 						imageOptions={{ blur: 30 }}
 						width={1000}
+						sizes="100vw"
 						className="absolute inset-0 size-full object-cover opacity-10 delay-1000 duration-2000 starting:opacity-0"
 						alt={post.metadata?.title ?? ''}
 						draggable={false}

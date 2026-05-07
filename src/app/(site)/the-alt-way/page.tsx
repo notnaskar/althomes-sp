@@ -22,6 +22,7 @@ export default async function AltWayPage() {
 						width={1440}
 						loading="eager"
 						imageOptions={{ q: 85 }}
+						sizes="100vw"
 						alt={page.heroBackground.alt ?? ''}
 						className="h-[70vh] w-full object-cover"
 					/>
@@ -47,6 +48,7 @@ export default async function AltWayPage() {
 								<Img
 									image={page.missionImage}
 									width={700}
+									sizes="(max-width: 767px) calc(100vw - 36px), 50vw"
 									alt={page.missionImage.alt ?? ''}
 									className="h-auto w-full object-cover"
 								/>
@@ -103,6 +105,7 @@ export default async function AltWayPage() {
 										<Img
 											image={page.valuePropEditorialImage}
 											width={800}
+											sizes="(max-width: 767px) calc(100vw - 36px), 400px"
 											alt={page.valuePropEditorialImage.alt ?? ''}
 											className="w-full h-full object-cover"
 										/>
@@ -132,6 +135,7 @@ export default async function AltWayPage() {
 									<Img
 										image={page.valuePropSecondaryImage}
 										width={600}
+										sizes="(max-width: 767px) calc(100vw - 36px), 400px"
 										alt={page.valuePropSecondaryImage.alt ?? ''}
 										className="w-full h-full object-cover"
 									/>
@@ -176,6 +180,7 @@ export default async function AltWayPage() {
 						<Img
 							image={page.statsBackground}
 							width={1440}
+							sizes="100vw"
 							alt={page.statsBackground.alt ?? ''}
 							className="absolute inset-0 h-full w-full object-cover"
 						/>

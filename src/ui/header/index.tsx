@@ -6,8 +6,8 @@ export default async function Header() {
 	const site = await getSite()
 
 	return (
-		<header className="fixed top-0 right-0 left-0 z-10 flex items-center justify-between [padding:44px_90px_0] max-[820px]:[padding:36px_18px_0]">
-			{/* Logo — hidden on mobile */}
+		<header className="fixed top-0 right-0 left-0 z-10 flex items-center justify-between [padding:44px_90px_0] max-[820px]:[padding:calc(env(safe-area-inset-top)+36px)_18px_0]">
+			{/* Desktop logo — left aligned */}
 			<Logo className="[height:75px] [width:215px] flex-shrink-0 has-[img]:[height:75px] max-[820px]:hidden" />
 
 			{/* Right controls */}
@@ -43,6 +43,9 @@ export default async function Header() {
 						STAY
 					</a>
 				)}
+				{/* Mobile logo — center-ish via justify-between on row */}
+				<Logo className="[height:60px] [width:auto] flex-shrink-0 has-[img]:[height:60px] min-[821px]:hidden" />
+
 				{/* Hamburger + menu overlay */}
 				{site && <MenuState site={site} />}
 			</div>

@@ -21,27 +21,19 @@ export default function ReviewsSection({ reviews }: { reviews: Review[] }) {
 		<section className="w-full overflow-hidden px-[18px] lg:px-[10%]">
 			<div className="flex min-h-[60vh] flex-col gap-8 lg:min-h-[640px] lg:flex-row lg:gap-12">
 				{/* ── Left column: heading + slider controls ── */}
-				<div className="relative flex flex-col justify-center px-[18px] py-12 lg:w-[60%] lg:py-16">
+				<div className="align-center relative flex flex-col justify-center px-[18px] lg:w-[60%] lg:py-16">
 					{/* Section label */}
-					<p className="text-secondary-foreground/60 mb-6 font-sans text-[11px] font-semibold tracking-[0.3em] uppercase">
-						{/* STATIC */}
-						Alt Stories
-					</p>
 
 					{/* Heading */}
-					<h2 className="font-heading text-secondary-foreground max-w-[420px] text-[28px] leading-[1.45] lg:text-[34px]">
+					<h2 className="font-heading text-secondary-foreground max-w-[90%] self-center text-center text-[28px] leading-[1.45] lg:text-[34px]">
 						{/* STATIC */}
-						Hearts full, stories shared
-						<br />
-						by guests who took back more
-						<br />
-						than just memories.
-						<br />
-						These are the <em className="font-heading italic">Alt Stories</em>.
+						Hearts full, stories shared by guests who took back more than just
+						memories. These are the{' '}
+						<em className="font-heading italic">Alt Stories</em>.
 					</h2>
 
 					{/* Slider controls — hidden on mobile (shown at bottom on mobile) */}
-					<div className="mt-12 hidden items-center gap-6 lg:flex">
+					<div className="mt-12 flex items-center justify-center gap-6 max-lg:!hidden">
 						<button
 							onClick={prev}
 							aria-label="Previous review"
@@ -63,11 +55,11 @@ export default function ReviewsSection({ reviews }: { reviews: Review[] }) {
 				</div>
 
 				{/* ── Right column: review card ── */}
-				<div className="flex flex-col items-center justify-center px-[18px] py-12 lg:w-[60%] lg:py-16">
+				<div className="flex flex-col items-center justify-center px-[18px] lg:w-[60%] lg:py-16">
 					{/* Card — rotated on desktop */}
 					<div
 						key={active}
-						className="bg-card-shell w-full max-w-[520px] overflow-hidden rounded-[8px] border border-stroke lg:-rotate-[2.94deg]"
+						className="bg-card-shell w-full max-w-[520px] overflow-hidden rounded-[8px] p-3 lg:-rotate-[-4deg]"
 					>
 						{/* Guest photo */}
 						<div className="h-[260px] w-full overflow-hidden">
@@ -79,7 +71,7 @@ export default function ReviewsSection({ reviews }: { reviews: Review[] }) {
 									width={520}
 									height={260}
 									alt={review.guestPhoto.alt ?? review.guestName ?? ''}
-									className="h-full w-full object-cover"
+									className="h-full w-full rounded-md border object-cover"
 								/>
 							) : (
 								<div className="bg-muted/30 h-full w-full" />
@@ -122,7 +114,7 @@ export default function ReviewsSection({ reviews }: { reviews: Review[] }) {
 					</div>
 
 					{/* Mobile-only slider controls (below the card) */}
-					<div className="mt-8 flex items-center gap-6 lg:hidden">
+					<div className="mt-8 flex items-center gap-6 lg:!hidden">
 						<button
 							onClick={prev}
 							aria-label="Previous review"
