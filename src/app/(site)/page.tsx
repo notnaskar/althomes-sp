@@ -33,6 +33,6 @@ export async function generateMetadata(): Promise<Metadata> {
 						: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og`,
 			],
 		},
-		generator: `SanityPress v${pkg.version}`,
+		generator: `AltHomes v${pkg.version}`,
 	}
 }
