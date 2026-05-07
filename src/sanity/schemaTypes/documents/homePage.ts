@@ -22,7 +22,7 @@ export default defineType({
 			title: 'Navigation Labels',
 			type: 'array',
 			of: [{ type: 'navLabel' }],
-			validation: (Rule) => Rule.length(6),
+			validation: (Rule) => Rule.length(5),
 		}),
 		defineField({
 			name: 'seo',

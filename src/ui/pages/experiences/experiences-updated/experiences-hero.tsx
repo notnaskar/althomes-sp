@@ -10,7 +10,6 @@ interface SanityImageField {
 interface ExperiencesHeroProps {
 	headline?: string | null
 	leadingTagline?: string | null
-	supportingTagline?: string | null
 	heroFlower?: SanityImageField | null
 	heroBackground?: SanityImageField | null
 }
@@ -18,7 +17,6 @@ interface ExperiencesHeroProps {
 export default function ExperiencesHero({
 	headline = 'The Alt Home\nExperiences',
 	leadingTagline = "Things to feel, not just do.\nThese aren't just activities,\nthey are memories in the making.",
-	supportingTagline = 'Access the most memorable experiences in and around our homes.',
 	heroFlower,
 	heroBackground,
 }: ExperiencesHeroProps) {
@@ -28,7 +26,7 @@ export default function ExperiencesHero({
 		: null
 
 	return (
-		<section className="bg-background relative w-full overflow-hidden px-[90px] pt-[140px] pb-[80px] max-[820px]:px-[18px] max-[820px]:pt-[100px] max-[820px]:pb-[56px]">
+		<section className="bg-background relative mt-[100px] w-full overflow-hidden px-[90px] pt-[80px] pb-[80px] md:px-[18px] md:pb-[56px] lg:min-h-[600px] lg:pt-[60px]">
 			{/* Background image */}
 			{bgUrl && (
 				<Image
@@ -37,7 +35,7 @@ export default function ExperiencesHero({
 					fill
 					sizes="100vw"
 					priority
-					className="object-cover opacity-60"
+					className="object-cover object-top opacity-100"
 				/>
 			)}
 
@@ -52,9 +50,9 @@ export default function ExperiencesHero({
 			</div>
 
 			{/* Two-column editorial grid */}
-			<div className="relative grid grid-cols-2 gap-x-[80px] max-[820px]:grid-cols-1 max-[820px]:text-center">
-				{/* LEFT — display headline + supporting tagline */}
-				<div className="flex flex-col justify-between gap-[80px] max-[820px]:gap-[24px]">
+			<div className="relative grid grid-cols-2 gap-x-[80px] max-[820px]:grid-cols-1 max-[820px]:text-center lg:mx-auto lg:w-[70%]">
+				{/* LEFT — display headline */}
+				<div className="flex w-fit flex-col justify-center gap-[80px] max-[820px]:gap-[24px]">
 					<h1 className="text-foreground font-stories text-[72px] leading-[70px] font-normal tracking-[0.1em] max-[820px]:text-[60px] max-[820px]:leading-[52px] max-[820px]:tracking-[0.09em]">
 						{headlineLines.map((line, i) => (
 							<span key={i}>
@@ -63,14 +61,10 @@ export default function ExperiencesHero({
 							</span>
 						))}
 					</h1>
-
-					<p className="text-foreground font-heading max-w-[432px] text-[30px] leading-[40px] tracking-[0.1em] max-[820px]:max-w-none max-[820px]:text-[19px] max-[820px]:leading-[29px]">
-						{supportingTagline}
-					</p>
 				</div>
 
-				{/* RIGHT — leading tagline + decorative circle motif */}
-				<div className="relative flex flex-col justify-start pt-[8px] max-[820px]:mt-[28px] max-[820px]:pt-0">
+				{/* RIGHT — leading tagline */}
+				<div className="relative flex flex-col justify-start max-[820px]:mt-[28px] max-[820px]:pt-0">
 					<p className="text-foreground font-heading text-[30px] leading-[40px] tracking-[0.1em] max-[820px]:text-[19px] max-[820px]:leading-[29px]">
 						{(leadingTagline ?? '').split('\n').map((line, i, arr) => (
 							<span key={i}>
@@ -79,51 +73,6 @@ export default function ExperiencesHero({
 							</span>
 						))}
 					</p>
-
-					{/* Decorative circle — pure CSS, no asset */}
-					<div
-						className="absolute right-0 bottom-[-40px] h-[192px] w-[192px] max-[820px]:relative max-[820px]:right-auto max-[820px]:bottom-auto max-[820px]:mt-[32px] max-[820px]:h-[160px] max-[820px]:w-[160px] max-[820px]:self-end"
-						aria-hidden="true"
-					>
-						{/* Red-orange filled circle */}
-						<div className="absolute inset-0 rounded-full bg-[var(--color-terracotta)]" />
-						{/* Cream diamond cut-out — rotated square */}
-						<div
-							className="bg-background absolute"
-							style={{
-								width: '45%',
-								height: '45%',
-								top: '50%',
-								left: '50%',
-								transform: 'translate(-50%, -50%) rotate(45deg)',
-							}}
-						/>
-						{/* White arrow — iconography, not a content placeholder */}
-						<svg
-							viewBox="0 0 60 60"
-							fill="none"
-							className="text-primary-foreground absolute inset-0 h-full w-full"
-							aria-hidden="true"
-						>
-							<line
-								x1="16"
-								y1="30"
-								x2="44"
-								y2="30"
-								stroke="currentColor"
-								strokeWidth="2"
-								strokeLinecap="round"
-							/>
-							<polyline
-								points="36,22 44,30 36,38"
-								stroke="currentColor"
-								strokeWidth="2"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								fill="none"
-							/>
-						</svg>
-					</div>
 				</div>
 			</div>
 		</section>

@@ -614,6 +614,14 @@ export default defineType({
 
 		// FAQs
 		defineField({
+			name: 'faqBadgeText',
+			title: 'FAQ Circle Badge Text',
+			description:
+				'Text shown around the decorative circle badge next to the FAQs. Defaults to "your questions, answered" if empty.',
+			type: 'string',
+			group: 'faqs',
+		}),
+		defineField({
 			name: 'faqs',
 			title: 'FAQs',
 			type: 'array',

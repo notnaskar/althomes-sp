@@ -51,7 +51,8 @@ export const EXPERIENCES_PAGE_QUERY =
 	heroFlower { asset->, alt },
 	decorBasket { asset->, alt },
 	decorStars { asset->, alt },
-	decorDaisy { asset->, alt }
+	decorDaisy { asset->, alt },
+	ctaBackground { asset->, alt }
 }`)
 
 export const JOIN_US_PAGE_QUERY =
@@ -74,7 +75,10 @@ export const CONTACT_PAGE_QUERY =
 }`)
 
 export const LEGAL_PAGE_QUERY = defineQuery(
-	`*[_type == 'legalPage' && slug.current == $slug][0]`,
+	`*[_type == 'legalPage' && slug.current == $slug][0] {
+		...,
+		ctaBackground { asset->, alt }
+	}`,
 )
 export const ALL_LEGAL_PAGES_QUERY = defineQuery(
 	`*[_type == 'legalPage' && defined(slug.current)].slug.current`,

@@ -6,6 +6,7 @@ import type {
 	ALL_EXPERIENCES_QUERY_RESULT,
 	ALL_PROPERTIES_QUERY_RESULT,
 } from '@/sanity/types'
+import CircleBadge from '@/ui/atoms/circle-badge'
 import HeroDecorImage from '@/ui/molecules/hero-decor-image'
 import ExperienceCard from './experience-card'
 
@@ -24,6 +25,10 @@ interface ExperienceGridProps {
 	ctaLabel?: string | null
 	/** Sanity: experiencesPage.exploreCtaLink */
 	ctaHref?: string | null
+	/** Sanity: experiencesPage.supportingTagline */
+	supportingTagline?: string | null
+	/** Sanity: experiencesPage.heroBadgeText */
+	badgeText?: string | null
 	/** Sanity: site.experiencesHeroBasket */
 	decorBasket?: SanityImageField | null
 	/** Sanity: site.experiencesHeroStars */
@@ -39,6 +44,8 @@ export default function ExperienceGrid({
 	filterLabel = 'Filter',
 	ctaLabel = 'EXPLORE ALL ALT HOMES',
 	ctaHref = '/our-homes',
+	supportingTagline,
+	badgeText,
 	decorBasket,
 	decorStars,
 	decorDaisy,
@@ -102,11 +109,33 @@ export default function ExperienceGrid({
 				<HeroDecorImage asset={decorDaisy} alt="" sizes="200px" />
 			</div>
 
+			{/* ── Supporting tagline + decorative badge ── */}
+			{(supportingTagline || badgeText) && (
+				<div className="relative mb-[48px] flex items-end justify-between gap-[32px] max-[820px]:mb-[32px] max-[820px]:flex-col max-[820px]:items-stretch max-[820px]:gap-[24px]">
+					{supportingTagline ? (
+						<p className="text-foreground font-heading max-w-[432px] text-[30px] leading-[40px] tracking-[0.1em] max-[820px]:max-w-none max-[820px]:text-[19px] max-[820px]:leading-[29px]">
+							{supportingTagline}
+						</p>
+					) : (
+						<span />
+					)}
+
+					<CircleBadge
+						text={badgeText?.trim() || 'your questions, answered'}
+						textOffset="50%"
+						bgClass="bg-[var(--color-terracotta)]"
+						textClass="fill-primary-foreground"
+						arrowColorClass="bg-primary-foreground"
+						className="absolute right-0 z-10 shrink-0 max-[820px]:self-end"
+					/>
+				</div>
+			)}
+
 			{/* ── Filter bar ── */}
 			{properties.length > 0 && (
 				<div
 					ref={dropdownRef}
-					className="relative mb-[48px] max-[820px]:mb-[32px]"
+					className="relative mb-[48px] w-fit bg-white px-4 py-2 max-[820px]:mb-[32px]"
 				>
 					<button
 						onClick={() => setFilterOpen((v) => !v)}
@@ -144,7 +173,7 @@ export default function ExperienceGrid({
 						<div
 							id="filter-panel"
 							role="menu"
-							className="bg-background absolute top-[44px] left-0 z-10 w-[288px] rounded-b-[16px] py-[8px] shadow-[0_4px_10px_rgba(0,0,0,0.08)] max-[820px]:w-[calc(100vw-36px)]"
+							className="absolute top-[44px] left-0 z-10 w-[288px] rounded-b-[16px] bg-white py-[8px] shadow-[0_4px_10px_rgba(0,0,0,0.08)] max-[820px]:w-[calc(100vw-36px)]"
 						>
 							{/* All locations row */}
 							<label className="text-foreground hover:bg-background flex cursor-pointer items-center gap-[12px] px-[24px] font-sans text-[15px] leading-[42px] tracking-[0.1em] transition-colors">

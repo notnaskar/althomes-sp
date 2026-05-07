@@ -7,9 +7,15 @@ export default defineType({
 	fields: [
 		defineField({
 			name: 'displayTitle',
-			title: 'Display Title',
+			title: 'Display Title (Line 1)',
 			type: 'string',
 			validation: (Rule) => Rule.required(),
+		}),
+		defineField({
+			name: 'displayTitleLine2',
+			title: 'Display Title (Line 2)',
+			type: 'string',
+			description: 'Optional second line for the heading.',
 		}),
 		defineField({
 			name: 'seoTitle',
@@ -31,11 +37,11 @@ export default defineType({
 			validation: (Rule) => Rule.required(),
 		}),
 		defineField({
-			name: 'backgroundImage',
-			title: 'Background Image',
+			name: 'ctaBackground',
+			title: 'Bottom CTA Background Image',
 			type: 'image',
 			options: { hotspot: true },
-			fields: [{ name: 'alt', type: 'string', title: 'Alt text' }],
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
 		}),
 		defineField({
 			name: 'seo',
