@@ -26,9 +26,9 @@ export default function PropertyAmenitiesSection({
 	const columns = splitAmenityColumns(amenities)
 
 	return (
-		<section className="bg-background flex flex-col lg:flex-row">
+		<section className="bg-background flex flex-col-reverse lg:flex-row lg:pb-20">
 			{/* Left: full-height image */}
-			<div className="relative h-[280px] w-full self-stretch lg:h-auto lg:w-1/5">
+			<div className="relative h-[280px] w-full self-stretch lg:-mt-10 lg:h-auto lg:w-2/7">
 				{imageUrl && (
 					<Image
 						src={imageUrl}

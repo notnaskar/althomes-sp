@@ -726,7 +726,7 @@ Locate lines 246-374, the block beginning with:
 ```tsx
 {/* 4. Highlights — What's Waiting For You? */}
 {property.highlights && property.highlights.length > 0 && (
-  <section className="w-full overflow-hidden bg-background py-[72px]">
+  <section className="w-full overflow-hidden bg-background">
 ```
 
 …and ending with:

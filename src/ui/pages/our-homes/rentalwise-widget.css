@@ -22,8 +22,7 @@ rw-widget {
 	width: 100%;
 	background: white;
 	padding-block: 16px;
-	padding-inline:32px
-
+	padding-inline: 32px;
 }
 
 /* ─── Shared field base ─── */
@@ -119,7 +118,7 @@ rw-quote-coupon-input [data-value] {
 	padding: 0 !important;
 	margin: 0 !important;
 	width: 100% !important;
-	height: 24px !important;
+	height: 21px !important;
 	line-height: 24px !important;
 }
 
@@ -137,7 +136,10 @@ rw-quote-guests-input button {
 	font-size: 14px;
 	font-weight: 600;
 	cursor: pointer;
-	transition: border-color 0.15s, background 0.15s, color 0.15s;
+	transition:
+		border-color 0.15s,
+		background 0.15s,
+		color 0.15s;
 	flex-shrink: 0;
 }
 
@@ -157,7 +159,11 @@ rw-quote-daterange-input .react-datepicker__day--keyboard-selected {
 
 rw-quote-daterange-input .react-datepicker__day--in-range,
 rw-quote-daterange-input .react-datepicker__day--in-selecting-range {
-	background-color: color-mix(in srgb, var(--color-primary) 50%, transparent) !important;
+	background-color: color-mix(
+		in srgb,
+		var(--color-primary) 50%,
+		transparent
+	) !important;
 	color: var(--color-foreground) !important;
 	border-radius: 0 !important;
 }
@@ -172,13 +178,18 @@ rw-quote-daterange-input .react-datepicker__day--selecting-range-end {
 }
 
 /* ─── Total price ─── */
-rw-quote-total {
+.rw-quote-total {
 	display: flex !important;
 	flex-direction: column !important;
-	align-items: flex-end !important;
+	align-items: center !important;
+	justify-items: center !important;
 	gap: 2px !important;
 	font-family: var(--font-sans) !important;
+	margin-top: 0px !important;
 	color: var(--color-foreground) !important;
+
+	justify-self: center !important;
+	align-self: center !important;
 }
 
 rw-quote-total [data-label],
@@ -198,6 +209,13 @@ rw-quote-total .amount {
 	font-weight: 600 !important;
 	line-height: 16px !important;
 	letter-spacing: 0.1em !important;
+}
+
+.rw-quote-line-item {
+	display: flex !important;
+	align-items: center !important;
+	flex-direction: column !important;
+	justify-items: center !important;
 }
 
 /* ─── Book button ─── */
@@ -231,7 +249,11 @@ rw-quote-book-button button {
 
 rw-quote-book-button a.rw-widget-book-now-link:hover,
 rw-quote-book-button button:hover {
-	background: color-mix(in srgb, var(--color-accent) 90%, transparent) !important;
+	background: color-mix(
+		in srgb,
+		var(--color-accent) 90%,
+		transparent
+	) !important;
 }
 
 /* ─── Status rows ─── */

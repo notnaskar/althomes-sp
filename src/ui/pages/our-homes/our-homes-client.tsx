@@ -17,8 +17,10 @@ type Props = {
 	properties: ALL_PROPERTIES_QUERY_RESULT
 }
 
-const labelClass =
-	'block text-xs font-semibold uppercase tracking-[0.1em] mb-1 text-muted font-sans'
+const labelTypography =
+	'text-[10px] font-semibold uppercase tracking-[0.1em] text-muted font-sans'
+
+const labelClass = `block ${labelTypography} mb-1.5`
 
 const counterBtnClass =
 	'flex h-7 w-7 items-center justify-center rounded-full border border-muted text-foreground text-sm font-semibold transition hover:border-foreground hover:bg-accent hover:text-accent-foreground select-none'
@@ -226,15 +228,13 @@ export default function OurHomesClient({ properties }: Props) {
 			>
 				{/* Date range trigger */}
 				<div className="relative flex-[2]">
-					<div className="mb-1 flex items-center justify-between">
-						<span className="text-muted font-sans text-xs font-semibold tracking-[0.1em] uppercase">
-							Check In / Check Out
-						</span>
+					<div className="mb-1.5 flex items-center justify-between">
+						<span className={labelTypography}>Check In / Check Out</span>
 						{(range?.from || range?.to) && (
 							<button
 								type="button"
 								onClick={handleClearSearch}
-								className="text-muted hover:text-foreground font-sans text-[11px] tracking-[0.1em] uppercase transition-colors"
+								className="text-muted hover:text-foreground font-sans text-[10px] font-semibold tracking-[0.1em] uppercase transition-colors"
 							>
 								Clear dates
 							</button>
@@ -245,7 +245,7 @@ export default function OurHomesClient({ properties }: Props) {
 						onClick={() => setCalendarOpen((v) => !v)}
 						className="group w-full text-left focus:outline-none"
 					>
-						<div className="flex min-h-[24px] items-center gap-2">
+						<div className="border-muted group-focus:border-foreground flex h-6 items-center gap-2 border-b pb-[10px] leading-6 transition-colors">
 							<span className="text-foreground font-sans text-[15px] tracking-[0.1em]">
 								{range?.from ? (
 									format(range.from, 'dd MMM yyyy')
@@ -262,7 +262,6 @@ export default function OurHomesClient({ properties }: Props) {
 								)}
 							</span>
 						</div>
-						<div className="bg-muted group-focus:bg-foreground mt-1.5 h-px w-full transition-colors" />
 					</button>
 					{errors.dates && (
 						<p className="mt-1 text-xs text-[color:var(--color-terracotta)]">
@@ -291,9 +290,9 @@ export default function OurHomesClient({ properties }: Props) {
 				{/* Adults + Children — side-by-side on mobile, inline at lg */}
 				<div className="flex gap-5 lg:contents">
 					{/* Adults */}
-					<div className="flex flex-1 flex-col gap-2">
+					<div className="flex flex-1 flex-col">
 						<span className={labelClass}>Adults</span>
-						<div className="flex items-center gap-3">
+						<div className="border-muted flex items-center gap-3 border-b pb-[10px] leading-6">
 							<button
 								type="button"
 								onClick={() => setAdults((v) => Math.max(1, v - 1))}
@@ -315,13 +314,12 @@ export default function OurHomesClient({ properties }: Props) {
 								+
 							</button>
 						</div>
-						<div className="bg-muted h-px w-full" />
 					</div>
 
 					{/* Children */}
-					<div className="flex flex-1 flex-col gap-2">
+					<div className="flex flex-1 flex-col">
 						<span className={labelClass}>Children</span>
-						<div className="flex items-center gap-3">
+						<div className="border-muted flex items-center gap-3 border-b pb-[10px] leading-6">
 							<button
 								type="button"
 								onClick={() => setChildren((v) => Math.max(0, v - 1))}
@@ -343,7 +341,6 @@ export default function OurHomesClient({ properties }: Props) {
 								+
 							</button>
 						</div>
-						<div className="bg-muted h-px w-full" />
 					</div>
 				</div>
 

@@ -12,7 +12,11 @@ type Props = {
 	propertyId: string
 }
 
-export default function RentalwiseWidget({ instance, identifier, propertyId }: Props) {
+export default function RentalwiseWidget({
+	instance,
+	identifier,
+	propertyId,
+}: Props) {
 	useEffect(() => {
 		if (!document.querySelector('link[data-rw-style]')) {
 			const link = document.createElement('link')
@@ -31,15 +35,18 @@ export default function RentalwiseWidget({ instance, identifier, propertyId }: P
 	}, [])
 
 	return (
-		<rw-widget instance={instance} identifier={identifier} property-id={propertyId} >
-
-			<rw-quote-daterange-input/>
+		<rw-widget
+			instance={instance}
+			identifier={identifier}
+			property-id={propertyId}
+		>
+			<rw-quote-daterange-input />
 			<rw-quote-guests-input />
 			<rw-quote-coupon-input />
 
 			<rw-quote-total />
-			<rw-quote-book-button />
 
+			<rw-quote-book-button />
 
 			{/* <rw-quote-no-results>
 				<p className="font-sans text-[15px] tracking-[0.1em] text-foreground text-center pt-5">

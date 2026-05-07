@@ -17,15 +17,15 @@ export default function OurHomesHero({ heroHeadline, heroBackground }: Props) {
 		<section className="bg-background relative z-0 min-h-[280px] overflow-x-clip sm:min-h-[340px] md:min-h-[390px]">
 			{/* CONTENT: heroBackground */}
 			{heroBackground?.asset && (
-				<div className="absolute inset-y-0 left-0 -right-[80px] sm:-right-[160px] md:-right-[220px] lg:-right-[290px]">
+				<div className="inset-y-0 -right-[80px] left-0 sm:-right-[160px] md:-right-[220px] lg:-right-[290px]">
 					<Image
-						src={urlFor(heroBackground.asset).width(1440).quality(85).url()}
+						src={urlFor(heroBackground.asset).width(1440).quality(100).url()}
 						alt=""
 						fill
 						sizes="(min-width: 1024px) 1440px, 100vw"
 						loading="eager"
 						priority
-						className="object-cover"
+						className="top-0 -right-[100px] object-cover"
 					/>
 				</div>
 			)}

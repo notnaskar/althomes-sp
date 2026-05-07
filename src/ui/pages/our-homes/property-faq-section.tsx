@@ -1,36 +1,34 @@
 import { PortableText } from 'next-sanity'
 import type { BlockContent } from '@/sanity/types'
+import CircleBadge from '@/ui/atoms/circle-badge'
 
 type Faq = {
 	question: string | null
 	answer: BlockContent | null
 }
 
-export default function PropertyFaqSection({ faqs }: { faqs: Faq[] }) {
+export default function PropertyFaqSection({
+	faqs,
+	badgeText,
+}: {
+	faqs: Faq[]
+	badgeText?: string | null
+}) {
 	if (!faqs.length) return null
 
 	return (
-		<section className="bg-primary text-card-shell grid grid-cols-1 items-start gap-8 px-4 py-16 md:grid-cols-[192px_1fr] md:gap-16 md:px-[90px] md:py-24 lg:gap-32">
-			{/* Left Column: Circle Badge */}
-			<div className="flex justify-center md:justify-start">
-				<div className="relative flex size-[120px] rotate-90 items-center justify-center md:size-[192px]">
-					<svg viewBox="0 0 100 100" className="h-full w-full overflow-visible">
-						<path
-							id="faq-circle-path"
-							d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0"
-							fill="transparent"
-						/>
-						<text className="fill-card-shell font-sans text-[10px] font-semibold tracking-[0.15em] uppercase md:text-[11.5px]">
-							<textPath href="#faq-circle-path" startOffset="0%">
-								your questions, answered ➔ your questions, answered ➔
-							</textPath>
-						</text>
-					</svg>
-				</div>
+		<section className="bg-primary text-card-shell relative px-4 py-16 md:px-[90px] md:py-24">
+			{/* Circle Badge — absolutely positioned */}
+			<div className="absolute -top-10 right-4 md:top-24 md:right-auto md:left-[90px] lg:-top-10">
+				<CircleBadge
+					text={badgeText?.trim() || 'your questions, answered'}
+					bgClass="bg-card-shell"
+					textClass="fill-foreground"
+				/>
 			</div>
 
-			{/* Right Column: FAQs */}
-			<div className="mx-auto w-full max-w-[594px] md:mx-0 md:mt-[68px]">
+			{/* FAQs */}
+			<div className="mx-auto max-w-[100%] pt-24 md:mx-0 md:max-w-[100%] md:pt-0 md:pl-[224px] lg:pl-[256px]">
 				<div className="divide-card-shell/20 border-card-shell/20 divide-y border-b">
 					{faqs.map((faq, i) => (
 						<details key={i} className="group py-4 md:py-5">
