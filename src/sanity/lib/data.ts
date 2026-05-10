@@ -90,12 +90,12 @@ export async function getLegalPage(slug: string) {
 	})
 }
 
-export async function getAllProperties() {
+export const getAllProperties = cache(async () => {
 	return await sanityFetchLive<ALL_PROPERTIES_QUERY_RESULT>({
 		query: ALL_PROPERTIES_QUERY,
 		tags: ['property'],
 	})
-}
+})
 
 export async function getProperty(slug: string) {
 	return await sanityFetchLive<PROPERTY_QUERY_RESULT>({
