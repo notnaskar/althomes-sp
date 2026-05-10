@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
 	images: {
 		localPatterns: [{ pathname: '/api/og' }],
 		remotePatterns: [{ protocol: 'https', hostname: 'cdn.sanity.io' }],
-		qualities: [75, 85, 100],
+		qualities: [70, 75, 80, 85, 100],
 	},
 
 	async redirects() {
