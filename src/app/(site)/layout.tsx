@@ -15,7 +15,6 @@ import {
 } from 'next/font/google'
 import localFont from 'next/font/local'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
-import { preconnect } from 'react-dom'
 import { Toaster } from 'sonner'
 import { getSite } from '@/sanity/lib/data'
 import { urlFor } from '@/sanity/lib/image'
@@ -137,8 +136,6 @@ export default async function RootLayout({
 }: Readonly<{
 	children: React.ReactNode
 }>) {
-	preconnect('https://cdn.sanity.io')
-
 	const isDraft = (await draftMode()).isEnabled
 	const site = await getSite()
 	const c = site?.colours
