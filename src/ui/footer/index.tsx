@@ -69,30 +69,12 @@ export default async function Footer() {
 
 	return (
 		<footer className="bg-primary text-primary-foreground">
-			{/* Desktop ≥ lg */}
-			<div className="hidden flex-wrap gap-16 px-[90px] pt-[37px] pb-[30px] xl:flex">
-				<div className="self-start">{brand}</div>
-				<div className="ml-auto flex gap-16">
-					{ourHomes}
-					{about}
-					{policies}
-				</div>
-				{connect}
-			</div>
-
-			{/* Mobile < lg */}
-			<div className="flex flex-col gap-7 px-[24px] pt-[30px] pb-[30px] xl:hidden">
-				{/* Row 1: brand + connect */}
-				<div className="flex items-start justify-between gap-4">
-					{brand}
-					{connect}
-				</div>
-				{/* Row 2: 3 columns, collapse to 1 col left-aligned below 480px */}
-				<div className="grid grid-cols-3 gap-7 max-[480px]:grid-cols-1 max-[480px]:gap-6">
-					{ourHomes}
-					{about}
-					{policies}
-				</div>
+			<div className="grid gap-7 px-6 py-[30px] [grid-template-areas:'brand_connect''ourhomes_ourhomes''about_about''policies_policies'] [grid-template-columns:1fr_auto] max-[480px]:[grid-template-areas:'brand''connect''ourhomes''about''policies'] max-[480px]:[grid-template-columns:1fr] xl:gap-16 xl:px-[90px] xl:pt-[37px] xl:pb-[30px] xl:[grid-template-areas:'brand_ourhomes_about_policies_connect'] xl:[grid-template-columns:auto_1fr_auto_auto_auto]">
+				<div className="[grid-area:brand]">{brand}</div>
+				{ourHomes && <div className="[grid-area:ourhomes]">{ourHomes}</div>}
+				{about && <div className="[grid-area:about]">{about}</div>}
+				{policies && <div className="[grid-area:policies]">{policies}</div>}
+				<div className="[grid-area:connect]">{connect}</div>
 			</div>
 		</footer>
 	)
