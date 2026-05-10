@@ -16,7 +16,7 @@ export default function HomeHero({ page, site }: Props) {
 		: null
 
 	const imageUrl = page.heroImage?.asset
-		? urlFor(page.heroImage.asset).width(900).url()
+		? urlFor(page.heroImage.asset).width(1920).auto('format').url()
 		: null
 
 	return (
@@ -34,6 +34,8 @@ export default function HomeHero({ page, site }: Props) {
 							alt={page.heroImage?.alt ?? ''}
 							fill
 							priority
+							sizes="(max-width: 768px) 100vw, 1024px"
+							quality={80}
 							className="object-cover"
 						/>
 					</div>
