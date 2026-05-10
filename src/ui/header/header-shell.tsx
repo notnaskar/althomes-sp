@@ -1,6 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
+
+const useIsoLayoutEffect =
+	typeof window !== 'undefined' ? useLayoutEffect : useEffect
 
 export default function HeaderShell({
 	children,
@@ -9,9 +12,12 @@ export default function HeaderShell({
 }) {
 	const [scrolled, setScrolled] = useState(false)
 
+	useIsoLayoutEffect(() => {
+		setScrolled(window.scrollY > 4)
+	}, [])
+
 	useEffect(() => {
 		const onScroll = () => setScrolled(window.scrollY > 4)
-		onScroll()
 		window.addEventListener('scroll', onScroll, { passive: true })
 		return () => window.removeEventListener('scroll', onScroll)
 	}, [])
