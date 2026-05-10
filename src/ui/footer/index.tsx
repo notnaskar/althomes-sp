@@ -47,14 +47,14 @@ export default async function Footer() {
 		)
 
 	const brand = (
-		<div className="font-stories text-primary-foreground text-[49px] leading-none tracking-[0.1em] max-xl:text-[40px]">
+		<div className="font-stories text-primary-foreground text-[49px] leading-none tracking-[0.1em] max-lg:text-[40px]">
 			{site?.footerBrandName ?? site?.title ?? 'AltHomes'}
 		</div>
 	)
 
 	const connect = (
-		<div className="flex flex-col max-xl:items-end">
-			<h4 className="self-start font-sans text-[12px] font-bold tracking-[0.1em]">
+		<div className="flex flex-col">
+			<h4 className="font-sans text-[12px] font-bold tracking-[0.1em]">
 				CONNECT
 			</h4>
 			<SocialLinks
@@ -69,7 +69,7 @@ export default async function Footer() {
 
 	return (
 		<footer className="bg-primary text-primary-foreground">
-			<div className="grid gap-7 px-6 py-[30px] [grid-template-areas:'brand_connect''ourhomes_ourhomes''about_about''policies_policies'] [grid-template-columns:1fr_auto] max-[480px]:[grid-template-areas:'brand''connect''ourhomes''about''policies'] max-[480px]:[grid-template-columns:1fr] xl:gap-16 xl:px-[90px] xl:pt-[37px] xl:pb-[30px] xl:[grid-template-areas:'brand_ourhomes_about_policies_connect'] xl:[grid-template-columns:auto_1fr_auto_auto_auto]">
+			<div className="grid gap-7 px-6 py-[30px] [grid-template-areas:'brand_connect''ourhomes_ourhomes''about_about''policies_policies'] [grid-template-columns:1fr_auto] sm:[grid-template-areas:'brand_._connect''ourhomes_about_policies'] sm:[grid-template-columns:1fr_1fr_1fr] lg:gap-16 lg:px-[90px] lg:pt-[37px] lg:pb-[30px] lg:[grid-template-areas:'brand_._ourhomes_about_policies_connect'] lg:[grid-template-columns:auto_1fr_auto_auto_auto_auto]">
 				<div className="[grid-area:brand]">{brand}</div>
 				{ourHomes && <div className="[grid-area:ourhomes]">{ourHomes}</div>}
 				{about && <div className="[grid-area:about]">{about}</div>}
