@@ -128,7 +128,7 @@ export default function ContactForm() {
 					id="cf-consent"
 					type="checkbox"
 					{...register('privacyConsent')}
-					className="border-foreground/40 text-foreground/70 mt-[2px] h-3.5 w-3.5 rounded-[5px] bg-transparent focus:ring-0"
+					className="border-foreground/40 text-foreground/70 mt-[2px] h-3.5 w-3.5 rounded-[5px] bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-foreground/60"
 				/>
 				<label
 					htmlFor="cf-consent"

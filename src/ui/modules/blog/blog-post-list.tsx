@@ -1,6 +1,6 @@
 import { groq, PortableText } from 'next-sanity'
 import { ROUTES } from '@/lib/env'
-import { sanityFetchLive } from '@/sanity/lib/live'
+import { sanityFetchLive } from '@/sanity/lib/live-actions'
 import type { BlogPost, BlogPostList } from '@/sanity/types'
 import CTAList from '@/ui/cta-list'
 import PostPreview from './post-preview'

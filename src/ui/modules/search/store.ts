@@ -1,7 +1,7 @@
 import { groq } from 'next-sanity'
 import { create } from 'zustand'
 import { ROUTES } from '@/lib/env'
-import { sanityFetchLive } from '@/sanity/lib/live'
+import { sanityFetchLive } from '@/sanity/lib/live-actions'
 import type { SEARCH_QUERY_RESULT, SearchModule } from '@/sanity/types'
 
 export const useSearchStore = create<{

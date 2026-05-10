@@ -7,8 +7,8 @@ import type {
 	ALL_PROPERTIES_QUERY_RESULT,
 } from '@/sanity/types'
 import CircleBadge from '@/ui/atoms/circle-badge'
-import HeroDecorImage from '@/ui/molecules/hero-decor-image'
 import ExperienceCard from './experience-card'
+import { DecorBleed } from './experience-grid-decor'
 
 interface SanityImageField {
 	asset?: { _ref?: string; _id?: string; _type?: string; url?: string } | null
@@ -35,6 +35,10 @@ interface ExperienceGridProps {
 	decorStars?: SanityImageField | null
 	/** Sanity: site.experiencesHeroDaisy */
 	decorDaisy?: SanityImageField | null
+	/** Sanity: experiencesPage.decorGalaxy */
+	decorGalaxy?: SanityImageField | null
+	/** Sanity: experiencesPage.heroFlower */
+	heroFlower?: SanityImageField | null
 }
 
 export default function ExperienceGrid({
@@ -49,6 +53,8 @@ export default function ExperienceGrid({
 	decorBasket,
 	decorStars,
 	decorDaisy,
+	decorGalaxy,
+	heroFlower,
 }: ExperienceGridProps) {
 	const [selectedId, setSelectedId] = useState<string | null>(null)
 	const [filterOpen, setFilterOpen] = useState(false)
@@ -85,29 +91,13 @@ export default function ExperienceGrid({
 	}, [])
 
 	return (
-		<section className="bg-background relative w-full overflow-hidden px-[90px] pt-[48px] pb-[80px] max-[820px]:px-[18px] max-[820px]:pt-[32px] max-[820px]:pb-[56px]">
-			{/* ── Decorative bleeds — desktop only ── */}
-			{/* Stars — mid-left */}
-			<div
-				className="pointer-events-none absolute top-[40%] left-[-80px] h-[320px] w-[480px] max-[820px]:hidden"
-				aria-hidden="true"
-			>
-				<HeroDecorImage asset={decorStars} alt="" sizes="480px" />
-			</div>
-			{/* Basket — top-right */}
-			<div
-				className="pointer-events-none absolute top-[60px] right-0 h-[284px] w-[354px] max-[820px]:hidden"
-				aria-hidden="true"
-			>
-				<HeroDecorImage asset={decorBasket} alt="" sizes="354px" />
-			</div>
-			{/* Daisy — bottom-right */}
-			<div
-				className="pointer-events-none absolute right-[40px] bottom-[80px] h-[200px] w-[200px] max-[820px]:hidden"
-				aria-hidden="true"
-			>
-				<HeroDecorImage asset={decorDaisy} alt="" sizes="200px" />
-			</div>
+		<section className="bg-background relative z-10 w-full overflow-x-clip px-[90px] pt-[48px] pb-[80px] max-[820px]:px-[18px] max-[820px]:pt-[32px] max-[820px]:pb-[56px]">
+			{/* ── Decorative bleeds — config in ./experience-grid-decor.tsx ── */}
+			<DecorBleed placement="flower" asset={heroFlower} />
+			<DecorBleed placement="galaxy" asset={decorGalaxy} />
+			<DecorBleed placement="stars" asset={decorStars} />
+			<DecorBleed placement="basket" asset={decorBasket} />
+			<DecorBleed placement="daisy" asset={decorDaisy} />
 
 			{/* ── Supporting tagline + decorative badge ── */}
 			{(supportingTagline || badgeText) && (
@@ -126,7 +116,7 @@ export default function ExperienceGrid({
 						bgClass="bg-[var(--color-terracotta)]"
 						textClass="fill-primary-foreground"
 						arrowColorClass="bg-primary-foreground"
-						className="absolute right-0 z-10 shrink-0 max-[820px]:self-end"
+						className="absolute -top-[48px] right-0 z-10 shrink-0 max-[820px]:self-end"
 					/>
 				</div>
 			)}
@@ -224,7 +214,6 @@ export default function ExperienceGrid({
 							title={exp.title ?? ''}
 							description={exp.description ?? null}
 							image={exp.image ?? null}
-							slug={exp.slug ?? null}
 							tilt={i % 2 === 0 ? 'cw' : 'ccw'}
 						/>
 					))}

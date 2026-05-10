@@ -5658,98 +5658,6 @@
         },
         "optional": true
       },
-      "fonts": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "object",
-          "attributes": {
-            "body": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "union",
-                "of": [
-                  {
-                    "type": "string",
-                    "value": "geist"
-                  },
-                  {
-                    "type": "string",
-                    "value": "inter"
-                  },
-                  {
-                    "type": "string",
-                    "value": "dm-sans"
-                  },
-                  {
-                    "type": "string",
-                    "value": "plus-jakarta-sans"
-                  }
-                ]
-              },
-              "optional": true
-            },
-            "heading": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "union",
-                "of": [
-                  {
-                    "type": "string",
-                    "value": "geist"
-                  },
-                  {
-                    "type": "string",
-                    "value": "inter"
-                  },
-                  {
-                    "type": "string",
-                    "value": "dm-sans"
-                  },
-                  {
-                    "type": "string",
-                    "value": "plus-jakarta-sans"
-                  },
-                  {
-                    "type": "string",
-                    "value": "playfair-display"
-                  },
-                  {
-                    "type": "string",
-                    "value": "lora"
-                  },
-                  {
-                    "type": "string",
-                    "value": "libre-baskerville"
-                  },
-                  {
-                    "type": "string",
-                    "value": "cormorant-garamond"
-                  }
-                ]
-              },
-              "optional": true
-            },
-            "mono": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "union",
-                "of": [
-                  {
-                    "type": "string",
-                    "value": "jetbrains-mono"
-                  },
-                  {
-                    "type": "string",
-                    "value": "space-mono"
-                  }
-                ]
-              },
-              "optional": true
-            }
-          }
-        },
-        "optional": true
-      },
       "seo": {
         "type": "objectAttribute",
         "value": {
@@ -8821,6 +8729,60 @@
         },
         "optional": true
       },
+      "decorGalaxy": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "object",
+          "attributes": {
+            "asset": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "inline",
+                "name": "sanity.imageAsset.reference"
+              },
+              "optional": true
+            },
+            "media": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "unknown"
+              },
+              "optional": true
+            },
+            "hotspot": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "inline",
+                "name": "sanity.imageHotspot"
+              },
+              "optional": true
+            },
+            "crop": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "inline",
+                "name": "sanity.imageCrop"
+              },
+              "optional": true
+            },
+            "alt": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": true
+            },
+            "_type": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string",
+                "value": "image"
+              }
+            }
+          }
+        },
+        "optional": true
+      },
       "ctaQuestion": {
         "type": "objectAttribute",
         "value": {
@@ -8948,14 +8910,6 @@
         },
         "optional": true
       },
-      "slug": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "slug"
-        },
-        "optional": true
-      },
       "description": {
         "type": "objectAttribute",
         "value": {
@@ -9043,14 +8997,6 @@
         "type": "objectAttribute",
         "value": {
           "type": "number"
-        },
-        "optional": true
-      },
-      "seo": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "seo"
         },
         "optional": true
       }

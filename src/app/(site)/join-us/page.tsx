@@ -32,40 +32,57 @@ export default async function JoinUsPage() {
 	return (
 		<main className="bg-background overflow-x-hidden">
 			{/* Hero ── Frame 59 ─────────────────────────────────── */}
-			<section className="bg-background relative h-auto w-full overflow-hidden pt-[100px] pb-[160px] lg:h-[600px] lg:pt-[80px] lg:pb-0">
+			<section className="bg-background relative z-0 min-h-[500px] overflow-x-clip md:mt-0 md:min-h-[700px]">
 				{coverUrl && (
-					<Image
-						src={coverUrl}
-						alt={page.heroImage?.alt ?? ''}
-						fill
-						priority
-						className="object-cover object-bottom"
-						sizes="100vw"
-					/>
+					<div className="absolute inset-y-0 mt-[250px] w-full justify-self-center overflow-x-visible md:mt-[100px]">
+						<Image
+							src={coverUrl}
+							alt={page.heroImage?.alt ?? ''}
+							sizes="100vw"
+							fill
+							priority
+							className="object-cover object-top opacity-100"
+						/>
+					</div>
 				)}
 
 				{flowerUrl && (
-					<div className="pointer-events-none absolute top-0 -left-[204px] z-10 h-[614px] w-[365px] max-lg:hidden">
+					<div className="pointer-events-none absolute -bottom-[10] left-0 z-10 h-[614px] w-[190px] max-lg:hidden">
 						<Image
 							src={flowerUrl}
 							alt=""
 							fill
-							className="object-cover"
+							className="object-cover object-top"
 							sizes="365px"
 						/>
 					</div>
 				)}
 
-				<div className="relative z-10 mx-auto flex max-w-[1200px] flex-col items-start justify-center gap-[24px] px-[24px] lg:flex-row lg:gap-[90px] lg:px-[90px]">
-					<div className="w-full shrink-0 lg:w-[292px]">
-						<h1 className="font-stories text-foreground text-[48px] leading-[1] tracking-[0.1em] lg:text-[72px] lg:leading-[70px]">
-							{page.heroHeadline || 'Partner With Us'}
+				<div className="absolute top-45 right-0 bottom-2/5 left-0 grid items-center gap-x-[80px] p-4 md:text-center lg:mx-auto lg:w-[70%] lg:grid-cols-[30%_70%] lg:items-start">
+					<div className="flex w-full flex-col gap-[80px] justify-self-center md:gap-[24px]">
+						<h1 className="text-foreground font-stories text-start text-[60px] leading-[52px] font-normal tracking-[0.1em] lg:text-[72px] lg:leading-[90px]">
+							{(page.heroHeadline || 'Partner With Us')
+								.split('\n')
+								.map((line, i, arr) => (
+									<span key={i}>
+										{line}
+										{i < arr.length - 1 && <br />}
+									</span>
+								))}
 						</h1>
 					</div>
+
 					{page.pullQuote && (
-						<p className="font-heading text-foreground w-full max-w-[672px] text-[20px] leading-[1.3] tracking-[0.07em] lg:text-[30px] lg:leading-[40px]">
-							{page.pullQuote}
-						</p>
+						<div className="relative flex flex-col justify-center md:pt-0">
+							<p className="text-foreground font-heading text-start text-[19px] leading-[30px] tracking-[0.1em] lg:text-start lg:text-[30px] lg:leading-[40px]">
+								{page.pullQuote.split('\n').map((line, i, arr) => (
+									<span key={i}>
+										{line}
+										{i < arr.length - 1 && <br />}
+									</span>
+								))}
+							</p>
+						</div>
 					)}
 				</div>
 			</section>
@@ -75,7 +92,7 @@ export default async function JoinUsPage() {
 				<div className="mx-auto flex max-w-[1100px] flex-col-reverse items-center justify-between gap-[40px] lg:flex-row lg:items-start lg:gap-[80px]">
 					<div className="w-full shrink-0 space-y-5 lg:w-[400px] lg:pt-[60px]">
 						{page.bodyParagraph && (
-							<p className="text-foreground font-sans text-[15px] leading-[23px] tracking-[0.1em]">
+							<p className="text-foreground w-[80%] font-sans text-[15px] leading-[23px] tracking-[0.1em] sm:w-full">
 								{page.bodyParagraph}
 							</p>
 						)}
@@ -106,7 +123,7 @@ export default async function JoinUsPage() {
 								/>
 							</div>
 							{contentDecorUrl && (
-								<div className="pointer-events-none absolute top-[50%] right-0 z-10 aspect-[228/554] w-[35%] translate-x-[20%] lg:top-[60%] lg:w-[228px] lg:translate-x-[40%]">
+								<div className="pointer-events-none absolute top-[50%] right-0 z-10 aspect-[228/554] w-[25%] translate-x-[20%] lg:top-[60%] lg:w-[228px] lg:translate-x-[40%]">
 									<Image
 										src={contentDecorUrl}
 										alt=""
@@ -122,7 +139,7 @@ export default async function JoinUsPage() {
 			</section>
 
 			{/* Form ── Frame 61 ─────────────────────────────────── */}
-			<section className="bg-background relative px-[18px] pb-[40px] lg:px-[90px] lg:pb-[72px]">
+			<section className="bg-background relative px-[18px] pb-[40px] lg:px-[180px] lg:pb-[72px]">
 				{formDecorUrl && (
 					<div className="pointer-events-none absolute bottom-0 -left-[100px] left-0 z-0 h-[300px] w-[100%] lg:left-0 lg:h-[462px] lg:w-[847px]">
 						<Image

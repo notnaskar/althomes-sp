@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { FaRightToBracket } from 'react-icons/fa6'
 import { urlFor } from '@/sanity/lib/image'
 import type { OUR_HOMES_PAGE_QUERY_RESULT } from '@/sanity/types'
 
@@ -14,25 +15,30 @@ type Props = {
 
 export default function OurHomesHero({ heroHeadline, heroBackground }: Props) {
 	return (
-		<section className="bg-background relative z-0 min-h-[280px] overflow-x-clip sm:min-h-[340px] md:min-h-[390px]">
+		<section className="bg-background relative z-0 min-h-[400px] overflow-x-clip md:min-h-[500px]">
 			{/* CONTENT: heroBackground */}
 			{heroBackground?.asset && (
-				<div className="inset-y-0 -right-[80px] left-0 sm:-right-[160px] md:-right-[220px] lg:-right-[290px]">
+				<div className="absolute inset-y-0 right-[-90px] w-full sm:-right-[160px] md:-right-[220px] lg:-right-[190px] lg:w-[90%]">
 					<Image
-						src={urlFor(heroBackground.asset).width(1440).quality(100).url()}
+						src={urlFor(heroBackground.asset)
+							.width(1440)
+							.height(650)
+							.quality(100)
+							.url()}
 						alt=""
 						fill
 						sizes="(min-width: 1024px) 1440px, 100vw"
 						loading="eager"
 						priority
-						className="top-0 -right-[100px] object-cover"
+						className="top-0 object-cover object-left lg:-right-[100px]"
+						style={{ right: 0 }}
 					/>
 				</div>
 			)}
 
 			{/* CONTENT: heroHeadline */}
-			<div className="relative z-10 mx-6 pt-20 sm:mx-8 sm:pt-[110px] md:mx-[100px] md:max-w-[800px] md:pt-[140px] lg:mx-[200px] lg:pt-[167px]">
-				<h1 className="font-stories text-foreground max-w-[500px] pb-6 text-[30px] leading-[42px] tracking-[0.08em] sm:pb-8 sm:text-[36px] sm:leading-[50px] md:text-[44px] md:leading-[56px] lg:text-[48px] lg:tracking-[0.1em]">
+			<div className="absolute bottom-1/8 left-1/8 z-10 w-[80%] max-w-[480px]">
+				<h1 className="font-stories text-foreground pb-6 text-[60px] leading-[60px] tracking-[0.08em] lg:text-[72px] lg:tracking-[0.1em]">
 					{heroHeadline ?? 'Welcome to our homes, find your next escape'}
 				</h1>
 			</div>

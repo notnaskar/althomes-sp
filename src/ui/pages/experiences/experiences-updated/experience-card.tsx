@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import type {
 	SanityImageAsset,
 	SanityImageCrop,
@@ -17,7 +16,6 @@ interface ExperienceCardProps {
 	title: string
 	description?: string | null
 	image?: ExperienceCardImage | null
-	slug?: string | null
 	/** Derived from grid index — even = clockwise, odd = counter-clockwise */
 	tilt?: 'cw' | 'ccw'
 }
@@ -26,23 +24,15 @@ export default function ExperienceCard({
 	title,
 	description,
 	image,
-	slug,
 	tilt = 'cw',
 }: ExperienceCardProps) {
-	const tiltClass = tilt === 'cw' ? 'rotate-[1.5deg]' : '-rotate-[1.5deg]'
-	const href = slug ? `/experiences/${slug}` : '#'
+	const tiltClass =
+		tilt === 'cw'
+			? 'motion-safe:rotate-[1.5deg]'
+			: 'motion-safe:-rotate-[1.5deg]'
 
 	return (
-		<Link
-			href={href}
-			aria-label={title}
-			className={[
-				'group block w-full transition-transform duration-300',
-				'motion-safe:' + tiltClass,
-				'hover:scale-[1.02] hover:rotate-0',
-				'focus-visible:ring-primary focus-visible:ring-2 focus-visible:ring-offset-2',
-			].join(' ')}
-		>
+		<div className={`block w-full ${tiltClass}`}>
 			{/* Outer beige shell */}
 			<div className="bg-card-shell rounded-[5px] p-[16px] pb-[20px]">
 				{/* Image area — fixed aspect ratio matches Figma 327×340 */}
@@ -58,7 +48,7 @@ export default function ExperienceCard({
 							width={700}
 							alt={image.alt ?? title}
 							sizes="(max-width: 820px) 100vw, 360px"
-							className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+							className="absolute inset-0 h-full w-full object-cover"
 						/>
 					) : null}
 				</div>
@@ -75,6 +65,6 @@ export default function ExperienceCard({
 					)}
 				</div>
 			</div>
-		</Link>
+		</div>
 	)
 }

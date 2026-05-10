@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { groq } from 'next-sanity'
 import { ROUTES } from '@/lib/env'
-import { sanityFetchLive } from '@/sanity/lib/live'
+import { sanityFetchLive } from '@/sanity/lib/live-actions'
 
 export const dynamic = 'force-dynamic'
 

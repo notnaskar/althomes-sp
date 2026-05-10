@@ -52,6 +52,7 @@ export const EXPERIENCES_PAGE_QUERY =
 	decorBasket { asset->, alt },
 	decorStars { asset->, alt },
 	decorDaisy { asset->, alt },
+	decorGalaxy { asset->, alt },
 	ctaBackground { asset->, alt }
 }`)
 
@@ -134,7 +135,6 @@ export const PROPERTY_QUERY =
 	amenitiesSectionImage { asset->, alt },
 	experiences[]->{
 		title,
-		"slug": slug.current,
 		description,
 		image { asset->, alt }
 	},
@@ -186,7 +186,6 @@ export const ALL_EXPERIENCES_QUERY =
 	defineQuery(`*[_type == 'experience'] | order(displayOrder asc){
 	_id,
 	title,
-	"slug": slug.current,
 	description,
 	image { asset->, alt },
 	"propertyIds": properties[]->._id

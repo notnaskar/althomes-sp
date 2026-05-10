@@ -4,6 +4,13 @@ export default defineType({
 	name: 'experiencesPage',
 	title: 'Experiences Page',
 	type: 'document',
+	fieldsets: [
+		{
+			name: 'gridDecor',
+			title: 'Grid Decorations',
+			options: { collapsible: true, collapsed: true },
+		},
+	],
 	fields: [
 		defineField({
 			name: 'heroHeadline',
@@ -39,6 +46,7 @@ export default defineType({
 			type: 'image',
 			options: { hotspot: true },
 			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
+			fieldset: 'gridDecor',
 		}),
 		defineField({
 			name: 'heroBadgeText',
@@ -53,6 +61,7 @@ export default defineType({
 			type: 'image',
 			options: { hotspot: true },
 			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
+			fieldset: 'gridDecor',
 		}),
 		defineField({
 			name: 'decorStars',
@@ -60,6 +69,7 @@ export default defineType({
 			type: 'image',
 			options: { hotspot: true },
 			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
+			fieldset: 'gridDecor',
 		}),
 		defineField({
 			name: 'decorDaisy',
@@ -67,6 +77,15 @@ export default defineType({
 			type: 'image',
 			options: { hotspot: true },
 			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
+			fieldset: 'gridDecor',
+		}),
+		defineField({
+			name: 'decorGalaxy',
+			title: 'Grid Decoration — Galaxy',
+			type: 'image',
+			options: { hotspot: true },
+			fields: [defineField({ name: 'alt', type: 'string', title: 'Alt text' })],
+			fieldset: 'gridDecor',
 		}),
 		defineField({
 			name: 'ctaQuestion',

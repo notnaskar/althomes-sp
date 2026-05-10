@@ -88,7 +88,7 @@ export default function PropertyExperiencesSection({
 						<div className="mt-[48px] flex justify-center gap-8 max-lg:!hidden">
 							{items.map((exp, i) => (
 								<div
-									key={exp.slug ?? exp.title ?? i}
+									key={exp.title ?? i}
 									className="h-full w-full max-w-[340px]"
 								>
 									<ExperienceCard
@@ -99,7 +99,6 @@ export default function PropertyExperiencesSection({
 												typeof ExperienceCard
 											>[0]['image']
 										}
-										slug={exp.slug}
 										tilt={i % 2 === 0 ? 'cw' : 'ccw'}
 									/>
 								</div>
@@ -125,7 +124,6 @@ export default function PropertyExperiencesSection({
 												typeof ExperienceCard
 											>[0]['image']
 										}
-										slug={items[safeIndex].slug}
 										tilt={safeIndex % 2 === 0 ? 'cw' : 'ccw'}
 									/>
 								)}

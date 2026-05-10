@@ -3,7 +3,7 @@ import { ImageResponse } from 'next/og'
 import { ROUTES } from '@/lib/env'
 import { cn } from '@/lib/utils'
 import { getSite } from '@/sanity/lib/data'
-import { sanityFetchLive } from '@/sanity/lib/live'
+import { sanityFetchLive } from '@/sanity/lib/live-actions'
 import type { OG_QUERY_RESULT } from '@/sanity/types'
 
 const hostname = process.env.NEXT_PUBLIC_BASE_URL

@@ -19,13 +19,14 @@ export default function HeroDecorImage({
 	style,
 }: HeroDecorImageProps) {
 	if (!asset?.asset) return null
-	const url = urlFor(asset.asset).url()
+	const url = urlFor(asset.asset).width(1200).auto('format').url()
 	return (
 		<Image
 			src={url}
 			alt={alt}
 			fill
 			sizes={sizes}
+			quality={70}
 			className={className ?? 'object-contain'}
 			style={style}
 		/>

@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import { ROUTES } from '@/lib/env'
 import { client } from '@/sanity/lib/client'
 import { urlFor } from '@/sanity/lib/image'
-import { sanityFetchLive } from '@/sanity/lib/live'
+import { sanityFetchLive } from '@/sanity/lib/live-actions'
 import type { BLOG_POST_QUERY_RESULT } from '@/sanity/types'
 import ModulesResolver from '@/ui/modules'
 
