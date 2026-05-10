@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { draftMode } from 'next/headers'
 import {
 	Cormorant_Garamond,
 	DM_Sans,
@@ -138,6 +139,7 @@ export default async function RootLayout({
 }>) {
 	preconnect('https://cdn.sanity.io')
 
+	const isDraft = (await draftMode()).isEnabled
 	const site = await getSite()
 	const c = site?.colours
 	const f = site?.fonts
@@ -185,7 +187,7 @@ export default async function RootLayout({
 					<Header />
 					<main>{children}</main>
 					<Footer />
-					<SanityLive />
+					{isDraft && <SanityLive />}
 					<Toaster position="bottom-right" richColors />
 					<VisualEditing />
 				</body>
