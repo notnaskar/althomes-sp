@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import { urlFor } from '@/sanity/lib/image'
-import HeroDecorImage from '@/ui/molecules/hero-decor-image'
 
 interface SanityImageField {
 	asset?: { _ref?: string; _type?: string; _id?: string; url?: string } | null
@@ -10,14 +9,12 @@ interface SanityImageField {
 interface ExperiencesHeroProps {
 	headline?: string | null
 	leadingTagline?: string | null
-	heroFlower?: SanityImageField | null
 	heroBackground?: SanityImageField | null
 }
 
 export default function ExperiencesHero({
 	headline = 'The Alt Home\nExperiences',
 	leadingTagline = "Things to feel, not just do.\nThese aren't just activities,\nthey are memories in the making.",
-	heroFlower,
 	heroBackground,
 }: ExperiencesHeroProps) {
 	const headlineLines = (headline ?? '').split('\n')
@@ -26,34 +23,26 @@ export default function ExperiencesHero({
 		: null
 
 	return (
-		<section className="bg-background relative mt-[100px] w-full overflow-hidden px-[90px] pt-[80px] pb-[80px] md:px-[18px] md:pb-[56px] lg:min-h-[600px] lg:pt-[60px]">
+		<section className="bg-background relative z-0 min-h-[600px] overflow-x-clip md:mt-0 md:min-h-[600px]">
 			{/* Background image */}
 			{bgUrl && (
-				<Image
-					src={bgUrl}
-					alt={heroBackground?.alt ?? ''}
-					fill
-					sizes="100vw"
-					priority
-					className="object-cover object-top opacity-100"
-				/>
+				<div className="absolute inset-y-0 mt-[250px] w-full justify-self-center overflow-x-visible md:mt-[100px]">
+					<Image
+						src={bgUrl}
+						alt={heroBackground?.alt ?? ''}
+						sizes="100vw"
+						fill
+						priority
+						className="object-cover object-top opacity-100"
+					/>
+				</div>
 			)}
 
-			{/* Decorative flower — bottom-left bleed, desktop only */}
-			<div className="pointer-events-none absolute bottom-0 left-0 h-[260px] w-[200px] max-[820px]:hidden">
-				<HeroDecorImage
-					asset={heroFlower}
-					alt=""
-					sizes="200px"
-					style={{ objectFit: 'contain', objectPosition: 'bottom left' }}
-				/>
-			</div>
-
 			{/* Two-column editorial grid */}
-			<div className="relative grid grid-cols-2 gap-x-[80px] max-[820px]:grid-cols-1 max-[820px]:text-center lg:mx-auto lg:w-[70%]">
+			<div className="absolute right-0 bottom-2/5 left-0 grid items-center gap-x-[80px] md:grid-cols-2 md:text-center lg:mx-auto lg:w-[70%]">
 				{/* LEFT — display headline */}
-				<div className="flex w-fit flex-col justify-center gap-[80px] max-[820px]:gap-[24px]">
-					<h1 className="text-foreground font-stories text-[72px] leading-[70px] font-normal tracking-[0.1em] max-[820px]:text-[60px] max-[820px]:leading-[52px] max-[820px]:tracking-[0.09em]">
+				<div className="flex w-2/3 flex-col gap-[80px] justify-self-center md:gap-[24px]">
+					<h1 className="text-foreground font-stories text-center text-[60px] leading-[52px] font-normal tracking-[0.1em] md:text-start md:text-[60px] md:text-[72px] md:leading-[52px] md:tracking-[0.09em] lg:text-[72px] lg:leading-[70px]">
 						{headlineLines.map((line, i) => (
 							<span key={i}>
 								{line}
@@ -64,8 +53,8 @@ export default function ExperiencesHero({
 				</div>
 
 				{/* RIGHT — leading tagline */}
-				<div className="relative flex flex-col justify-start max-[820px]:mt-[28px] max-[820px]:pt-0">
-					<p className="text-foreground font-heading text-[30px] leading-[40px] tracking-[0.1em] max-[820px]:text-[19px] max-[820px]:leading-[29px]">
+				<div className="relative flex flex-col justify-center md:pt-0">
+					<p className="text-foreground font-heading text-center text-[19px] leading-[30px] tracking-[0.1em] md:text-start md:text-[30px] md:leading-[40px]">
 						{(leadingTagline ?? '').split('\n').map((line, i, arr) => (
 							<span key={i}>
 								{line}

@@ -55,7 +55,7 @@ export default function SocialLinks({
 	if (links.length === 0) return null
 
 	return (
-		<div className="flex items-center gap-[5px]">
+		<div className="flex items-center gap-2">
 			{links.map((link) => (
 				<a
 					key={link.label}
@@ -63,7 +63,7 @@ export default function SocialLinks({
 					aria-label={link.label}
 					target="_blank"
 					rel="noopener noreferrer"
-					className="inline-flex min-h-[44px] min-w-[44px] items-start justify-start"
+					className="inline-flex min-h-[44px] items-center justify-center px-1"
 					style={{ color: 'inherit' }}
 				>
 					{link.icon}

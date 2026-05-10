@@ -1,10 +1,7 @@
-'use server'
-
 // Querying with "sanityFetch" will keep content automatically updated
 // Before using it, import and render "<SanityLive />" in your layout, see
 // https://github.com/sanity-io/next-sanity#live-content-api for more information.
 import { defineLive } from 'next-sanity/live'
-import { draftMode } from 'next/headers'
 import { client } from './client'
 import { token } from './token'
 
@@ -17,14 +14,3 @@ export const { sanityFetch, SanityLive } = defineLive({
 	serverToken: token,
 	browserToken: token,
 })
-
-export async function sanityFetchLive<T>(
-	args: Parameters<typeof sanityFetch>[0],
-) {
-	const { data } = await sanityFetch({
-		perspective: (await draftMode()).isEnabled ? 'previewDrafts' : 'published',
-		...args,
-	})
-
-	return data as T
-}

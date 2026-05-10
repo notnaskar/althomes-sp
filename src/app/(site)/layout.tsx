@@ -25,6 +25,10 @@ import VisualEditing from '@/ui/modules/visual-editing'
 import { ThemeProvider } from '@/ui/theme-provider'
 import '@/app.css'
 
+// ISR safety net: re-render every 5min if no webhook revalidation arrived.
+// Webhook (POST /api/revalidate) handles instant invalidation on Sanity publish.
+export const revalidate = 300
+
 const geist = Geist({
 	subsets: ['latin'],
 	variable: '--font-geist',

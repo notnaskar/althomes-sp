@@ -133,7 +133,7 @@ export default function PropertyShowcase({
 
 			{/* CONTENT: showcaseSecondaryImage — mobile #2, desktop col-2 row-3 */}
 			{showcaseSecondaryImage?.asset && (
-				<div className="px-[18px] lg:col-start-2 lg:row-start-3 lg:px-0 lg:pl-[90px]">
+				<div className="z-2 mt-[-40px] pl-[18px] lg:col-start-2 lg:row-start-3 lg:mt-0 lg:px-0 lg:px-[18px] lg:pl-[90px]">
 					<div className="relative h-[200px] w-full lg:h-[337px]">
 						<Image
 							src={urlFor(showcaseSecondaryImage.asset)
@@ -209,7 +209,7 @@ export default function PropertyShowcase({
 					<div className="flex min-w-0 flex-1 flex-col gap-1">
 						{/* CONTENT: cardAmenities */}
 						{cardAmenities && (
-							<p className="text-foreground text-[15px] leading-[23px] tracking-[0.1em] whitespace-pre-line break-words">
+							<p className="text-foreground text-[15px] leading-[23px] tracking-[0.1em] break-words whitespace-pre-line">
 								{cardAmenities}
 							</p>
 						)}

@@ -191,16 +191,13 @@ export default function PartnerForm() {
 			</div>
 
 			<div className="mt-[42px] flex flex-col items-center gap-[10px]">
-				<div className="flex items-center gap-3">
-					<div className="relative h-[11px] w-[11px] shrink-0">
-						<input
-							id="pf-consent"
-							type="checkbox"
-							{...register('privacyConsent')}
-							className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
-						/>
-						<span className="border-muted bg-background pointer-events-none block h-full w-full border" />
-					</div>
+				<div className="flex items-start gap-3">
+					<input
+						id="pf-consent"
+						type="checkbox"
+						{...register('privacyConsent')}
+						className="border-foreground/40 text-foreground/70 mt-[6px] h-3.5 w-3.5 rounded-[5px] bg-transparent focus:ring-0"
+					/>
 					<label
 						htmlFor="pf-consent"
 						className="text-foreground font-sans text-[15px] leading-[23px] tracking-[0.1em]"

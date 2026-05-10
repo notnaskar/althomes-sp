@@ -23,7 +23,6 @@ export default async function ExperiencesPage() {
 			<ExperiencesHero
 				headline={page.heroHeadline}
 				leadingTagline={page.leadingTagline}
-				heroFlower={page.heroFlower}
 				heroBackground={page.heroBackground}
 			/>
 			<ExperienceGrid
@@ -35,6 +34,8 @@ export default async function ExperiencesPage() {
 				decorBasket={page.decorBasket}
 				decorStars={page.decorStars}
 				decorDaisy={page.decorDaisy}
+				decorGalaxy={page.decorGalaxy}
+				heroFlower={page.heroFlower}
 			/>
 			{(page.ctaQuestion || page.ctaButtonLabel) && (
 				<OurHomesCta

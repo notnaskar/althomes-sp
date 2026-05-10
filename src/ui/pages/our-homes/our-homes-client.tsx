@@ -375,7 +375,7 @@ export default function OurHomesClient({ properties }: Props) {
 			{/* Property listing */}
 			<section
 				ref={resultsRef}
-				className={`relative z-20 px-[18px] lg:px-0 transition-opacity duration-300${isSearching ? 'pointer-events-none opacity-50' : ''}`}
+				className={`relative z-20 transition-opacity lg:px-0 duration-300${isSearching ? 'pointer-events-none opacity-50' : ''}`}
 			>
 				{availableIds !== null && displayed.length === 0 ? (
 					<div className="py-12 text-center">

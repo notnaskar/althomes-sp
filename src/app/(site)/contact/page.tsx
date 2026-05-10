@@ -42,7 +42,7 @@ export default async function ContactPage() {
 						image={page.mobileHeroAsset}
 						width={300}
 						alt={page.mobileHeroAsset.alt || 'Tulip decoration'}
-						className="pointer-events-none absolute -top-[140px] -left-[20px] z-20 w-[220px] object-contain min-[821px]:hidden"
+						className="pointer-events-none absolute -top-[140px] -left-20 z-20 w-[220px] object-contain min-[821px]:hidden"
 					/>
 				)}
 
@@ -64,7 +64,7 @@ export default async function ContactPage() {
 					/>
 				)}
 
-				<section className="relative z-10 grid w-full grid-cols-1 min-[821px]:grid-cols-2 min-[821px]:items-start">
+				<section className="relative z-10 grid w-full grid-cols-1 md:grid-cols-2 md:items-start">
 					{/* Left: contact details */}
 					<div className="relative z-10 flex flex-col gap-10 px-[18px] py-12 min-[821px]:gap-12 min-[821px]:py-20 min-[821px]:pr-[40px] min-[821px]:pl-[90px]">
 						{/* Contact Us Block */}
@@ -195,8 +195,8 @@ export default async function ContactPage() {
 					</div>
 
 					{/* Right: contact form */}
-					<div className="relative flex h-full w-full justify-end min-[821px]:-mt-[120px]">
-						<div className="relative z-20 mb-[10%] h-fit w-full max-w-[550px] bg-[var(--color-white)] px-6 py-12 shadow-none min-[821px]:mr-[80px] min-[821px]:bg-[var(--color-white)]/95 min-[821px]:py-[80px] min-[821px]:pr-[120px] min-[821px]:pl-[80px] min-[821px]:shadow-sm">
+					<div className="relative flex h-full w-full justify-center min-[821px]:-mt-[120px]">
+						<div className="relative z-20 mb-[10%] h-fit w-full max-w-[550px] bg-[var(--color-white)] px-6 py-12 shadow-none min-[821px]:mr-[80px] min-[821px]:bg-[var(--color-white)]/95 min-[821px]:py-[80px] min-[821px]:pr-[120px] min-[821px]:pl-[60px] min-[821px]:shadow-sm">
 							<h2 className="font-stories text-foreground mb-8 text-[40px] leading-none tracking-wide min-[821px]:text-[56px]">
 								{page.formCardHeading || 'Write To Us'}
 							</h2>
