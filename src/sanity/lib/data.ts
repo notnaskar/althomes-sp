@@ -114,7 +114,7 @@ export async function getProperty(slug: string) {
 export async function getAllPosts() {
 	return await sanityFetchLive<ALL_POSTS_QUERY_RESULT>({
 		query: ALL_POSTS_QUERY,
-		tags: ['post'],
+		tags: ['blog.post'],
 	})
 }
 
@@ -122,7 +122,7 @@ export async function getPostBySlug(slug: string) {
 	return await sanityFetchLive<POST_BY_SLUG_QUERY_RESULT>({
 		query: POST_BY_SLUG_QUERY,
 		params: { slug },
-		tags: ['post', `post:${slug}`],
+		tags: ['blog.post', `blog.post:${slug}`],
 	})
 }
 
