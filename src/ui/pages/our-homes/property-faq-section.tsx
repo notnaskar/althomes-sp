@@ -19,11 +19,12 @@ export default function PropertyFaqSection({
 	return (
 		<section className="bg-primary text-card-shell relative px-4 py-16 md:px-[90px] md:py-24">
 			{/* Circle Badge — absolutely positioned */}
-			<div className="absolute -top-10 right-4 md:top-24 md:right-auto md:left-[90px] lg:-top-10">
+			<div className="absolute -top-10 right-4 rotate-[65deg] md:top-24 md:right-auto md:left-[90px] md:rotate-0 lg:-top-10">
 				<CircleBadge
 					text={badgeText?.trim() || 'your questions, answered'}
 					bgClass="bg-card-shell"
 					textClass="fill-foreground"
+					textOffset="86%"
 				/>
 			</div>
 

@@ -5,7 +5,9 @@ import { urlFor } from '@/sanity/lib/image'
 import type { ALT_WAY_PAGE_QUERY_RESULT } from '@/sanity/types'
 import Img from '@/ui/img'
 
-type SanityImg = NonNullable<NonNullable<ALT_WAY_PAGE_QUERY_RESULT>['promiseBackground']>
+type SanityImg = NonNullable<
+	NonNullable<ALT_WAY_PAGE_QUERY_RESULT>['promiseBackground']
+>
 
 type Props = {
 	ctaQuestion: string | null
@@ -29,8 +31,8 @@ export default function TheAltWayCta({
 	return (
 		<section
 			className={cn(
-				'relative flex min-h-[500px] flex-col items-center justify-end overflow-hidden pb-32 md:min-h-[720px] md:pb-[190px]',
-				!noOverlap && 'z-[1] mt-[-300px]',
+				'relative flex min-h-[300px] flex-col items-center justify-end overflow-hidden pb-32 md:pb-[190px] lg:min-h-[600px]',
+				!noOverlap && 'z-[1]',
 			)}
 		>
 			{ctaBackground?.asset ? (
@@ -39,15 +41,15 @@ export default function TheAltWayCta({
 					alt={ctaBackground.alt ?? ''}
 					fill
 					sizes="100vw"
-					className="object-cover object-top"
+					className="object-center object-cover"
 					aria-hidden="true"
 				/>
 			) : (
-				<div className="absolute inset-0 bg-muted" />
+				<div className="bg-muted absolute inset-0" />
 			)}
 
 			{ctaDecorLeft && (
-				<div className="absolute bottom-[-60px] left-0 z-20 w-[480px]">
+				<div className="absolute bottom-[-60px] -left-50 z-20 w-[60%] md:w-[40%]">
 					<Img
 						image={ctaDecorLeft}
 						width={280}
@@ -58,7 +60,7 @@ export default function TheAltWayCta({
 			)}
 
 			{ctaDecorRight && (
-				<div className="absolute right-[5%] top-[15%] z-20 w-[80px] md:right-[15%] md:top-[25%] md:w-[140px]">
+				<div className="absolute top-[15%] right-[5%] z-20 w-[80px] md:top-[25%] md:right-[15%] md:w-[140px]">
 					<Img
 						image={ctaDecorRight}
 						width={140}
@@ -70,13 +72,13 @@ export default function TheAltWayCta({
 
 			<div className="relative z-10 mx-[18px] flex max-w-[800px] flex-col items-center gap-6 rounded-[5px] md:p-12">
 				{ctaQuestion && (
-					<p className="text-center font-heading text-[24px] leading-[34px] tracking-[0.1em] text-foreground md:text-[30px] md:leading-[40px]">
+					<p className="font-heading text-foreground text-center text-[24px] leading-[34px] tracking-[0.1em] md:text-[30px] md:leading-[40px]">
 						{ctaQuestion}
 					</p>
 				)}
 				<Link
 					href={ctaHref ?? '/our-homes'}
-					className="inline-flex items-center justify-center rounded-[5px] bg-accent px-[22px] py-4 text-[12px] font-bold uppercase tracking-[0.3em] whitespace-nowrap text-accent-foreground"
+					className="bg-accent text-accent-foreground inline-flex items-center justify-center rounded-[5px] px-[22px] py-4 text-[12px] font-bold tracking-[0.3em] whitespace-nowrap uppercase"
 				>
 					{ctaButtonLabel ?? 'EXPLORE ALL ALT HOMES'}
 				</Link>

@@ -147,7 +147,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 						{/* Left: subtitle (Playfair 30px) */}
 						{property.detailIntroHeading && (
 							<div className="w-full shrink-0 lg:w-[527px]">
-								<p className="font-heading text-foreground text-[30px] leading-[40px] tracking-[0.1em]">
+								<p className="font-heading text-foreground text-[19px] leading-[30px] tracking-[0.1em] lg:text-[30px] lg:leading-[40px]">
 									{property.detailIntroHeading}
 								</p>
 							</div>
@@ -265,7 +265,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 						)}
 						<div className="contents lg:flex lg:w-[435px] lg:shrink-0 lg:flex-col lg:gap-[44px]">
 							{property.locationBody && (
-								<div className="text-foreground order-1 mx-4 font-sans text-[15px] leading-[23px] tracking-[0.1em] lg:order-none [&_p]:mb-[8px] [&_p:last-child]:mb-0 [&_strong]:font-bold">
+								<div className="text-foreground order-1 font-sans text-[15px] leading-[23px] tracking-[0.1em] lg:order-none [&_p]:mb-[8px] [&_p:last-child]:mb-0 [&_strong]:font-bold">
 									<PortableText value={property.locationBody} />
 								</div>
 							)}
@@ -328,7 +328,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 					<section className="bg-background text-foreground flex min-h-0 flex-col justify-center px-[18px] py-16 md:px-[90px] md:py-24 lg:min-h-[80vh]">
 						<div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-start gap-12 md:justify-between md:gap-[60px] lg:grid-cols-[45fr_50fr]">
 							{/* Left: images */}
-							<div className="relative w-full">
+							<div className="relative w-[90%] sm:w-full">
 								{property.causeImages?.[0] && (
 									<div className="relative w-full">
 										<Img
@@ -342,7 +342,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 									</div>
 								)}
 								{property.causeImages?.[1] && (
-									<div className="absolute right-0 bottom-0 z-10 w-[120px] md:w-[160px]">
+									<div className="absolute right-[-40px] bottom-0 z-10 w-[140px] md:w-[200px]">
 										<Img
 											image={property.causeImages[1]}
 											width={200}
@@ -357,7 +357,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 							{/* Right: text */}
 							<div className="text-star flex flex-col items-start md:items-start md:text-left lg:items-start">
 								{property.causeHeadline && (
-									<h2 className="font-heading text-foreground mb-5 max-w-[515px] text-[32px] leading-[1.1] tracking-[0.1em] md:text-[40px]">
+									<h2 className="font-heading text-foreground mb-5 max-w-[515px] text-[19px] leading-[29px] tracking-[0.1em] md:text-[30px] md:leading-[40px]">
 										{property.causeHeadline}
 									</h2>
 								)}

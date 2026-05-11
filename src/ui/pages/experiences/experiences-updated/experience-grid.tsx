@@ -91,7 +91,7 @@ export default function ExperienceGrid({
 	}, [])
 
 	return (
-		<section className="bg-background relative z-10 w-full overflow-x-clip px-[90px] pt-[48px] pb-[80px] max-[820px]:px-[18px] max-[820px]:pt-[32px] max-[820px]:pb-[56px]">
+		<section className="bg-background relative z-10 w-full overflow-x-clip px-[5%] pt-[48px] pb-[80px] sm:px-[10%] sm:pt-[32px] sm:pb-[56px]">
 			{/* ── Decorative bleeds — config in ./experience-grid-decor.tsx ── */}
 			<DecorBleed placement="flower" asset={heroFlower} />
 			<DecorBleed placement="galaxy" asset={decorGalaxy} />
@@ -103,7 +103,7 @@ export default function ExperienceGrid({
 			{(supportingTagline || badgeText) && (
 				<div className="relative mb-[48px] flex items-end justify-between gap-[32px] max-[820px]:mb-[32px] max-[820px]:flex-col max-[820px]:items-stretch max-[820px]:gap-[24px]">
 					{supportingTagline ? (
-						<p className="text-foreground font-heading max-w-[432px] text-[30px] leading-[40px] tracking-[0.1em] max-[820px]:max-w-none max-[820px]:text-[19px] max-[820px]:leading-[29px]">
+						<p className="text-foreground font-heading w-[50%] text-[30px] leading-[40px] tracking-[0.1em] max-[820px]:max-w-none max-[820px]:text-[19px] max-[820px]:leading-[29px]">
 							{supportingTagline}
 						</p>
 					) : (
@@ -112,11 +112,12 @@ export default function ExperienceGrid({
 
 					<CircleBadge
 						text={badgeText?.trim() || 'your questions, answered'}
-						textOffset="50%"
+						textOffset="80%"
 						bgClass="bg-[var(--color-terracotta)]"
 						textClass="fill-primary-foreground"
 						arrowColorClass="bg-primary-foreground"
-						className="absolute -top-[48px] right-0 z-10 shrink-0 max-[820px]:self-end"
+						className="absolute right-0 bottom-0 z-10 shrink-0 rotate-100 max-[820px]:self-end md:-top-[48px]"
+						arrowRotationDeg={-25}
 					/>
 				</div>
 			)}
@@ -163,7 +164,7 @@ export default function ExperienceGrid({
 						<div
 							id="filter-panel"
 							role="menu"
-							className="absolute top-[44px] left-0 z-10 w-[288px] rounded-b-[16px] bg-white py-[8px] shadow-[0_4px_10px_rgba(0,0,0,0.08)] max-[820px]:w-[calc(100vw-36px)]"
+							className="absolute top-[60px] left-0 z-10 w-[288px] rounded-b-[16px] bg-white py-[8px] shadow-[0_4px_10px_rgba(0,0,0,0.08)] max-[820px]:w-[calc(100vw-36px)]"
 						>
 							{/* All locations row */}
 							<label className="text-foreground hover:bg-background flex cursor-pointer items-center gap-[12px] px-[24px] font-sans text-[15px] leading-[42px] tracking-[0.1em] transition-colors">
@@ -182,7 +183,7 @@ export default function ExperienceGrid({
 							{properties.map((p) => (
 								<label
 									key={p._id}
-									className="text-foreground hover:bg-background flex cursor-pointer items-center gap-[12px] px-[24px] font-sans text-[15px] leading-[42px] tracking-[0.1em] transition-colors"
+									className="text-foreground hover:bg-background mb-2 flex cursor-pointer items-center gap-[12px] px-[24px] font-sans text-[15px] leading-[24px] tracking-[0.1em] transition-colors"
 								>
 									<input
 										type="checkbox"

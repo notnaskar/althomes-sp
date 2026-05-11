@@ -58,7 +58,7 @@ export default async function JoinUsPage() {
 					</div>
 				)}
 
-				<div className="absolute top-45 right-0 bottom-2/5 left-0 grid items-center gap-x-[80px] p-4 md:text-center lg:mx-auto lg:w-[70%] lg:grid-cols-[30%_70%] lg:items-start">
+				<div className="absolute top-25 right-0 bottom-2/5 left-0 grid items-center gap-x-[80px] p-4 md:top-45 md:text-center lg:mx-auto lg:w-[70%] lg:grid-cols-[30%_70%] lg:items-start">
 					<div className="flex w-full flex-col gap-[80px] justify-self-center md:gap-[24px]">
 						<h1 className="text-foreground font-stories text-start text-[60px] leading-[52px] font-normal tracking-[0.1em] lg:text-[72px] lg:leading-[90px]">
 							{(page.heroHeadline || 'Partner With Us')

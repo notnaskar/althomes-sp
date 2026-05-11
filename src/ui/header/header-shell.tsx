@@ -24,7 +24,7 @@ export default function HeaderShell({
 
 	return (
 		<header
-			className={`fixed top-0 right-0 left-0 z-50 flex w-full flex-row-reverse items-center justify-between gap-3 px-[18px] py-4 transition-[background-color,box-shadow] duration-200 [padding-top:calc(env(safe-area-inset-top)+16px)] lg:flex-row lg:gap-6 lg:px-[90px] lg:py-6 ${
+			className={`fixed top-0 right-0 left-0 z-50 flex! w-full flex-row-reverse! items-center justify-between gap-3 px-[18px] py-4 [padding-top:calc(env(safe-area-inset-top)+16px)] transition-[background-color,box-shadow] duration-200 min-[480px]:flex-row! min-[480px]:gap-6 min-[480px]:py-6 lg:px-[90px] ${
 				scrolled
 					? 'bg-background shadow-[0_2px_10px_rgba(0,0,0,0.08)]'
 					: 'bg-transparent shadow-none'

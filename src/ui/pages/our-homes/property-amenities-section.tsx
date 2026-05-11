@@ -42,7 +42,7 @@ export default function PropertyAmenitiesSection({
 
 			{/* Right: content */}
 			<div className="w-full px-[18px] py-[48px] lg:w-4/5 lg:py-[72px] lg:pr-[90px] lg:pl-[64px]">
-				<h2 className="font-heading text-foreground mb-[48px] text-[30px] leading-[40px] font-normal tracking-[0.3em]">
+				<h2 className="font-heading text-foreground mb-[48px] text-[19px] leading-[29px] md:text-[30px] md:leading-[40px] font-normal tracking-[0.3em]">
 					FOR US, IT&rsquo;S COMFORT FIRST
 				</h2>
 

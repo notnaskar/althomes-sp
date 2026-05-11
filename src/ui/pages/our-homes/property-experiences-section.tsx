@@ -95,11 +95,10 @@ export default function PropertyExperiencesSection({
 										title={exp.title ?? ''}
 										description={exp.description}
 										image={
-											exp.image as Parameters<
-												typeof ExperienceCard
-											>[0]['image']
+											exp.image as Parameters<typeof ExperienceCard>[0]['image']
 										}
 										tilt={i % 2 === 0 ? 'cw' : 'ccw'}
+										color="var(--color-white)"
 									/>
 								</div>
 							))}

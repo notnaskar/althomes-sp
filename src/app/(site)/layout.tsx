@@ -87,6 +87,14 @@ export default async function RootLayout({
 			data-scroll-behavior="smooth"
 			suppressHydrationWarning
 		>
+			<head>
+				<link
+					rel="preconnect"
+					href="https://cdn.sanity.io"
+					crossOrigin=""
+				/>
+				<link rel="dns-prefetch" href="https://cdn.sanity.io" />
+			</head>
 			<NuqsAdapter>
 				<body
 					className="bg-background text-foreground antialiased"
@@ -98,7 +106,7 @@ export default async function RootLayout({
 					<main>{children}</main>
 					<Footer />
 					{isDraft && <SanityLive />}
-					<Toaster position="bottom-right" richColors />
+					<Toaster position="top-center" richColors />
 					<VisualEditing />
 				</body>
 			</NuqsAdapter>

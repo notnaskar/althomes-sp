@@ -90,7 +90,7 @@ export default function PropertyShowcase({
 				)}
 
 				{/* Overlay */}
-				<div className="absolute inset-x-0 top-0 bottom-0 z-[2] flex flex-col items-center gap-1 bg-gradient-to-t from-black/[0.55] to-transparent px-[24px] pt-[120px] pb-6 lg:pb-[40px]">
+				<div className="absolute inset-x-0 top-0 bottom-0 z-[2] flex flex-col items-center gap-1 bg-gradient-to-t from-black/[0.55] to-transparent px-[24px] pt-[60px] pb-6 lg:pb-[40px]">
 					{/* CONTENT: tagline */}
 					{tagline && (
 						<span className="text-center text-[clamp(11px,1.8vw,14px)] tracking-[0.07em] text-white">

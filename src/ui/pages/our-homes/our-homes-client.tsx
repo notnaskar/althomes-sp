@@ -1,7 +1,7 @@
 'use client'
 
 import { format } from 'date-fns'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import {
 	DayPicker,
 	useDayPicker,
@@ -20,10 +20,8 @@ type Props = {
 const labelTypography =
 	'text-[10px] font-semibold uppercase tracking-[0.1em] text-muted font-sans'
 
-const labelClass = `block ${labelTypography} mb-1.5`
-
 const counterBtnClass =
-	'flex h-7 w-7 items-center justify-center rounded-full border border-muted text-foreground text-sm font-semibold transition hover:border-foreground hover:bg-accent hover:text-accent-foreground select-none'
+	'flex h-6 w-6 items-center justify-center rounded-md text-foreground/70 text-base leading-none transition-colors hover:bg-primary/10 hover:text-primary focus:outline-none disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-foreground/70 select-none'
 
 const MONTH_NAMES = [
 	'January',
@@ -40,114 +38,120 @@ const MONTH_NAMES = [
 	'December',
 ]
 
+function ChevronIcon({ dir }: { dir: 'left' | 'right' }) {
+	const points = dir === 'left' ? '15 18 9 12 15 6' : '9 18 15 12 9 6'
+	return (
+		<svg
+			width="16"
+			height="16"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			strokeWidth="2.25"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			aria-hidden
+		>
+			<polyline points={points} />
+		</svg>
+	)
+}
+
 function CustomCaption({
 	calendarMonth,
 	displayIndex: _displayIndex,
 	...rest
 }: MonthCaptionProps) {
-	const { goToMonth, nextMonth, previousMonth, dayPickerProps } = useDayPicker()
+	const { goToMonth, nextMonth, previousMonth } = useDayPicker()
 	const d = calendarMonth.date
-	const month = d.getMonth()
-	const year = d.getFullYear()
-	const startYear = (dayPickerProps.startMonth ?? new Date()).getFullYear()
-	const endYear = (
-		dayPickerProps.endMonth ?? new Date(year + 2, 11)
-	).getFullYear()
-	const years = Array.from(
-		{ length: endYear - startYear + 1 },
-		(_, i) => startYear + i,
-	)
-
-	const selectClass =
-		'appearance-none bg-transparent text-xs font-semibold uppercase tracking-[0.1em] text-foreground cursor-pointer focus:outline-none'
-	const navBtnClass =
-		'flex h-7 w-7 items-center justify-center text-muted hover:text-foreground transition-colors disabled:opacity-30 disabled:cursor-not-allowed text-base'
+	const title = `${MONTH_NAMES[d.getMonth()]} ${d.getFullYear()}`
+	const navBtn =
+		'absolute top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center text-foreground/80 hover:text-foreground transition-colors focus:outline-none'
 
 	return (
-		<div {...rest} className="mb-3 flex items-center gap-2">
-			<button
-				type="button"
-				onClick={() => previousMonth && goToMonth(previousMonth)}
-				disabled={!previousMonth}
-				className={navBtnClass}
-				aria-label="Previous month"
-			>
-				←
-			</button>
-			<div className="flex flex-1 items-center justify-center gap-2">
-				<select
-					value={month}
-					onChange={(e) => goToMonth(new Date(year, Number(e.target.value), 1))}
-					className={selectClass}
+		<div
+			{...rest}
+			className="relative mb-3 flex h-9 items-center justify-center"
+		>
+			{previousMonth && (
+				<button
+					type="button"
+					onClick={() => goToMonth(previousMonth)}
+					className={`${navBtn} left-0`}
+					aria-label="Previous month"
 				>
-					{MONTH_NAMES.map((name, i) => (
-						<option key={i} value={i}>
-							{name}
-						</option>
-					))}
-				</select>
-				<select
-					value={year}
-					onChange={(e) =>
-						goToMonth(new Date(Number(e.target.value), month, 1))
-					}
-					className={selectClass}
+					<ChevronIcon dir="left" />
+				</button>
+			)}
+			<span className="font-heading text-foreground text-lg font-bold tracking-tight lg:text-xl">
+				{title}
+			</span>
+			{nextMonth && (
+				<button
+					type="button"
+					onClick={() => goToMonth(nextMonth)}
+					className={`${navBtn} right-0`}
+					aria-label="Next month"
 				>
-					{years.map((y) => (
-						<option key={y} value={y}>
-							{y}
-						</option>
-					))}
-				</select>
-			</div>
-			<button
-				type="button"
-				onClick={() => nextMonth && goToMonth(nextMonth)}
-				disabled={!nextMonth}
-				className={navBtnClass}
-				aria-label="Next month"
-			>
-				→
-			</button>
+					<ChevronIcon dir="right" />
+				</button>
+			)}
 		</div>
 	)
 }
 
 const pickerClassNames = {
-	root: 'p-3 lg:p-5 font-sans select-none',
+	root: 'p-3 lg:p-4 font-sans select-none w-[280px] lg:w-[300px]',
 	months: 'flex',
 	month: 'w-full',
 	month_caption: '',
 	nav: 'hidden',
-	month_grid: 'w-full border-collapse',
-	weekdays: 'flex',
+	month_grid: 'w-full',
+	weekdays: 'flex gap-1',
 	weekday:
-		'flex-1 text-center text-[10px] font-semibold tracking-widest text-muted pb-2 uppercase',
-	week: 'flex',
-	day: 'flex-1 relative',
+		'flex-1 text-center text-[10px] font-medium text-foreground/50 pb-1.5',
+	week: 'flex gap-1 mt-1',
+	day: 'flex-1 aspect-square',
 	day_button:
-		'mx-auto flex h-7 w-7 lg:h-8 lg:w-8 items-center justify-center text-sm text-foreground transition-all rounded-full hover:bg-accent/40 focus:outline-none',
+		'flex h-full w-full items-center justify-center rounded-md bg-transparent text-[12px] text-foreground transition-colors hover:bg-primary/10 focus:outline-none',
 	selected: '',
 	range_start:
-		'bg-accent/20 rounded-l-full [&>button]:bg-accent [&>button]:text-accent-foreground [&>button]:font-semibold',
+		'[&>button]:bg-primary [&>button]:!text-primary-foreground [&>button]:hover:bg-primary [&>button]:font-semibold',
 	range_end:
-		'bg-accent/20 rounded-r-full [&>button]:bg-accent [&>button]:text-accent-foreground [&>button]:font-semibold',
+		'[&>button]:bg-primary [&>button]:!text-primary-foreground [&>button]:hover:bg-primary [&>button]:font-semibold',
 	range_middle:
-		'bg-accent/20 [&>button]:rounded-none [&>button]:hover:rounded-none [&>button]:hover:bg-accent/40',
-	today: '[&>button]:font-bold [&>button]:underline',
-	outside: '[&>button]:text-muted [&>button]:hover:bg-transparent',
+		'[&>button]:bg-primary/40 [&>button]:!text-primary-foreground [&>button]:hover:bg-primary/40',
+	today: '[&>button]:font-bold',
+	outside: '[&>button]:text-foreground/25 [&>button]:hover:bg-transparent',
 	disabled:
-		'[&>button]:text-muted/40 [&>button]:cursor-not-allowed [&>button]:hover:bg-transparent',
+		'[&>button]:text-foreground/25 [&>button]:cursor-not-allowed [&>button]:hover:bg-transparent',
+}
+
+const pickerModifierClassNames = {
+	preview: '[&>button]:bg-primary/15 [&>button]:hover:bg-primary/15',
 }
 
 export default function OurHomesClient({ properties }: Props) {
 	const [range, setRange] = useState<DateRange | undefined>()
+	const [hoveredDate, setHoveredDate] = useState<Date | null>(null)
+	const previewMatcher = useMemo<DateRange | []>(() => {
+		if (!range?.from || !hoveredDate) return []
+		const fromTime = range.from.getTime()
+		const hoverTime = hoveredDate.getTime()
+		const hasFullRange = range.to && range.to.getTime() !== fromTime
+		if (hasFullRange) return []
+		if (hoverTime === fromTime) return []
+		const DAY = 86400000
+		if (hoverTime > fromTime) {
+			return { from: new Date(fromTime + DAY), to: hoveredDate }
+		}
+		return { from: hoveredDate, to: new Date(fromTime - DAY) }
+	}, [range?.from, range?.to, hoveredDate])
 	const [adults, setAdults] = useState(1)
 	const [children, setChildren] = useState(0)
 	const [calendarOpen, setCalendarOpen] = useState(false)
 	const [availableIds, setAvailableIds] = useState<string[] | null>(null)
 	const [isSearching, setIsSearching] = useState(false)
-	const [errors, setErrors] = useState<{ dates?: string }>({})
 	const barRef = useRef<HTMLDivElement>(null)
 	const resultsRef = useRef<HTMLElement>(null)
 
@@ -179,7 +183,6 @@ export default function OurHomesClient({ properties }: Props) {
 		setRange(undefined)
 		setAdults(1)
 		setChildren(0)
-		setErrors({})
 	}
 
 	const displayed = availableIds
@@ -192,10 +195,9 @@ export default function OurHomesClient({ properties }: Props) {
 
 	async function handleSearch() {
 		if (!range?.from || !range?.to) {
-			setErrors({ dates: 'Select check-in and check-out dates' })
+			toast.error('Select check-in and check-out dates')
 			return
 		}
-		setErrors({})
 		setIsSearching(true)
 		const result = await searchAvailability({
 			checkIn: format(range.from, 'yyyy-MM-dd'),
@@ -245,7 +247,7 @@ export default function OurHomesClient({ properties }: Props) {
 						onClick={() => setCalendarOpen((v) => !v)}
 						className="group w-full text-left focus:outline-none"
 					>
-						<div className="border-muted group-focus:border-foreground flex h-6 items-center gap-2 border-b pb-[10px] leading-6 transition-colors">
+						<div className="border-muted group-focus:border-foreground flex items-center gap-2 border-b pb-[10px] leading-6 transition-colors">
 							<span className="text-foreground font-sans text-[15px] tracking-[0.1em]">
 								{range?.from ? (
 									format(range.from, 'dd MMM yyyy')
@@ -263,15 +265,9 @@ export default function OurHomesClient({ properties }: Props) {
 							</span>
 						</div>
 					</button>
-					{errors.dates && (
-						<p className="mt-1 text-xs text-[color:var(--color-terracotta)]">
-							{errors.dates}
-						</p>
-					)}
-
 					{/* Calendar popover — anchored to this field's width */}
 					{calendarOpen && (
-						<div className="absolute top-full left-0 z-50 mt-1 w-full max-w-[calc(100vw-3rem)] overflow-x-auto rounded-xl border border-[color:var(--color-stroke)] bg-white shadow-[0_4px_10px_rgba(0,0,0,0.08)] lg:w-auto lg:max-w-none lg:min-w-full">
+						<div className="absolute top-full left-0 z-50 mt-1 overflow-x-auto rounded-xl border border-[color:var(--color-stroke)] bg-white shadow-[0_4px_10px_rgba(0,0,0,0.08)]">
 							<DayPicker
 								mode="range"
 								selected={range}
@@ -281,6 +277,10 @@ export default function OurHomesClient({ properties }: Props) {
 								endMonth={new Date(new Date().getFullYear() + 2, 11)}
 								disabled={{ before: new Date() }}
 								classNames={pickerClassNames}
+								modifiersClassNames={pickerModifierClassNames}
+								modifiers={{ preview: previewMatcher }}
+								onDayMouseEnter={(date) => setHoveredDate(date)}
+								onDayMouseLeave={() => setHoveredDate(null)}
 								components={{ MonthCaption: CustomCaption }}
 							/>
 						</div>
@@ -291,55 +291,65 @@ export default function OurHomesClient({ properties }: Props) {
 				<div className="flex gap-5 lg:contents">
 					{/* Adults */}
 					<div className="flex flex-1 flex-col">
-						<span className={labelClass}>Adults</span>
-						<div className="border-muted flex items-center gap-3 border-b pb-[10px] leading-6">
-							<button
-								type="button"
-								onClick={() => setAdults((v) => Math.max(1, v - 1))}
-								className={counterBtnClass}
-								aria-label="Decrease adults"
-							>
-								−
-							</button>
-							<span className="text-foreground w-4 text-center font-sans text-[15px] tracking-[0.1em]">
+						<div className="mb-1.5 flex items-center justify-between">
+							<span className={labelTypography}>Adults</span>
+						</div>
+						<div className="border-muted focus-within:border-foreground flex items-center justify-between gap-2 border-b pb-[10px] leading-6 transition-colors">
+							<span className="text-foreground font-sans text-[15px] tracking-[0.1em]">
 								{adults}
 							</span>
-							<button
-								type="button"
-								onClick={() => setAdults((v) => Math.min(16, v + 1))}
-								disabled={adults >= 16}
-								className={counterBtnClass}
-								aria-label="Increase adults"
-							>
-								+
-							</button>
+							<div className="flex items-center gap-1">
+								<button
+									type="button"
+									onClick={() => setAdults((v) => Math.max(1, v - 1))}
+									disabled={adults <= 1}
+									className={counterBtnClass}
+									aria-label="Decrease adults"
+								>
+									−
+								</button>
+								<button
+									type="button"
+									onClick={() => setAdults((v) => Math.min(16, v + 1))}
+									disabled={adults >= 16}
+									className={counterBtnClass}
+									aria-label="Increase adults"
+								>
+									+
+								</button>
+							</div>
 						</div>
 					</div>
 
 					{/* Children */}
 					<div className="flex flex-1 flex-col">
-						<span className={labelClass}>Children</span>
-						<div className="border-muted flex items-center gap-3 border-b pb-[10px] leading-6">
-							<button
-								type="button"
-								onClick={() => setChildren((v) => Math.max(0, v - 1))}
-								className={counterBtnClass}
-								aria-label="Decrease children"
-							>
-								−
-							</button>
-							<span className="text-foreground w-4 text-center font-sans text-[15px] tracking-[0.1em]">
+						<div className="mb-1.5 flex items-center justify-between">
+							<span className={labelTypography}>Children</span>
+						</div>
+						<div className="border-muted focus-within:border-foreground flex items-center justify-between gap-2 border-b pb-[10px] leading-6 transition-colors">
+							<span className="text-foreground font-sans text-[15px] tracking-[0.1em]">
 								{children}
 							</span>
-							<button
-								type="button"
-								onClick={() => setChildren((v) => Math.min(16, v + 1))}
-								disabled={children >= 16}
-								className={counterBtnClass}
-								aria-label="Increase children"
-							>
-								+
-							</button>
+							<div className="flex items-center gap-1">
+								<button
+									type="button"
+									onClick={() => setChildren((v) => Math.max(0, v - 1))}
+									disabled={children <= 0}
+									className={counterBtnClass}
+									aria-label="Decrease children"
+								>
+									−
+								</button>
+								<button
+									type="button"
+									onClick={() => setChildren((v) => Math.min(16, v + 1))}
+									disabled={children >= 16}
+									className={counterBtnClass}
+									aria-label="Increase children"
+								>
+									+
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -356,7 +366,7 @@ export default function OurHomesClient({ properties }: Props) {
 			</div>
 
 			{availableIds !== null && (
-				<div className="text-muted relative z-20 mb-2 flex items-center gap-2 px-[18px] font-sans text-xs tracking-[0.05em] lg:px-[90px]">
+				<div className="text-muted relative z-20 mx-[6%] my-8 flex items-center gap-2 font-sans text-xs tracking-[0.05em] lg:mx-[10%]">
 					<span>
 						Showing {displayed.length} of {properties.length} propert
 						{displayed.length === 1 ? 'y' : 'ies'}
