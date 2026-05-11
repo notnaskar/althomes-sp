@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import { PortableText } from 'next-sanity'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { getLegalPage, getSite } from '@/sanity/lib/data'
 import { urlFor } from '@/sanity/lib/image'
@@ -16,32 +16,28 @@ export default async function LegalPage({
 
 	return (
 		<main className="flex-1">
-			<section className="px-6 pt-20 pb-12 lg:px-60">
-				<h1 className="font-stories text-secondary-foreground text-[48px] leading-tight lg:text-[88px]">
-					<span className="block w-fit bg-accent px-4 pt-2">
-						{page.displayTitle || page.seoTitle}
-					</span>
-					{page.displayTitleLine2 && (
-						<span className="mt-2 block w-fit bg-accent px-4 py-2">
-							{page.displayTitleLine2}
-						</span>
-					)}
-				</h1>
-			</section>
-
 			<section className="px-6 pb-20">
-				<div className="prose mx-auto max-w-[720px] text-left">
+				<div className="mx-auto mt-40 mb-10 max-w-[1024px] text-left md:mt-40">
+					<h1 className="font-stories text-secondary-foreground text-[64px] leading-tight lg:text-[88px]">
+						<span className="bg-accent block w-fit px-4 pt-2">
+							{page.displayTitle || page.seoTitle}
+						</span>
+						{page.displayTitleLine2 && (
+							<span className="bg-accent mt-2 block w-fit px-4 py-2">
+								{page.displayTitleLine2}
+							</span>
+						)}
+					</h1>
+				</div>
+				<div className="prose mx-auto max-w-[1024px] text-left">
 					{page.body && <PortableText value={page.body as any} />}
 				</div>
 			</section>
 
 			{page.ctaBackground?.asset && (
-				<section className="relative flex min-h-[400px] flex-col overflow-hidden lg:min-h-[720px]">
+				<section className="relative -mt-60 flex min-h-[400px] flex-col overflow-hidden lg:min-h-[720px]">
 					<Image
-						src={urlFor(page.ctaBackground.asset)
-							.width(1440)
-							.quality(85)
-							.url()}
+						src={urlFor(page.ctaBackground.asset).width(1440).quality(85).url()}
 						alt={page.ctaBackground.alt ?? ''}
 						fill
 						sizes="100vw"

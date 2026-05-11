@@ -34,26 +34,26 @@ export default function StatsSlider({ stats }: { stats: Stat[] }) {
 			<div className="md:hidden">
 				<div
 					ref={trackRef}
-					className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide"
+					className="scrollbar-hide flex snap-x snap-mandatory overflow-x-auto"
 					style={{ scrollbarWidth: 'none' }}
 				>
 					{stats.map((stat) => (
 						<div
 							key={stat._key}
-							className="min-w-full snap-center text-center px-8 py-4"
+							className="min-w-full snap-center px-8 py-4 text-center"
 						>
 							{stat.value && (
-								<p className="text-5xl font-bold text-primary-foreground">
+								<p className="text-primary-foreground text-5xl font-bold">
 									{stat.value}
 								</p>
 							)}
 							{stat.label && (
-								<p className="mt-2 text-sm font-semibold tracking-wide text-primary-foreground/80 uppercase">
+								<p className="text-primary-foreground/80 mt-2 text-sm font-semibold tracking-wide uppercase">
 									{stat.label}
 								</p>
 							)}
 							{stat.subtext && (
-								<p className="mt-1 mx-auto max-w-[60%] text-primary-foreground/50">
+								<p className="text-primary-foreground/50 mx-auto mt-1 max-w-[60%]">
 									{stat.subtext}
 								</p>
 							)}
@@ -70,8 +70,8 @@ export default function StatsSlider({ stats }: { stats: Stat[] }) {
 							aria-label={`Go to stat ${i + 1}`}
 							className={`h-2 rounded-full transition-all duration-300 ${
 								i === activeIndex
-									? 'w-6 bg-primary-foreground'
-									: 'w-2 bg-primary-foreground/40'
+									? 'bg-primary-foreground w-6'
+									: 'bg-primary-foreground/40 w-2'
 							}`}
 						/>
 					))}
@@ -79,21 +79,23 @@ export default function StatsSlider({ stats }: { stats: Stat[] }) {
 			</div>
 
 			{/* Desktop: 4-column grid */}
-			<div className="hidden md:grid md:grid-cols-4 gap-8">
+			<div className="hidden gap-8 md:grid md:grid-cols-4">
 				{stats.map((stat) => (
-					<div key={stat._key} className="text-center justify-items-center">
+					<div key={stat._key} className="justify-items-center text-center">
 						{stat.value && (
-							<p className="text-5xl font-bold text-primary-foreground">
+							<p className="text-primary-foreground text-5xl font-bold">
 								{stat.value}
 							</p>
 						)}
 						{stat.label && (
-							<p className="mt-2 text-sm font-semibold tracking-wide text-primary-foreground/80 uppercase">
+							<p className="text-primary-foreground/80 mt-2 text-sm font-semibold tracking-wide uppercase">
 								{stat.label}
 							</p>
 						)}
 						{stat.subtext && (
-							<p className="mt-1 w-[60%] text-primary-foreground/50">{stat.subtext}</p>
+							<p className="text-primary-foreground/50 mt-1 w-[80%]">
+								{stat.subtext}
+							</p>
 						)}
 					</div>
 				))}

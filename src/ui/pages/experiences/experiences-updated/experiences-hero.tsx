@@ -39,10 +39,10 @@ export default function ExperiencesHero({
 			)}
 
 			{/* Two-column editorial grid */}
-			<div className="absolute right-0 bottom-2/5 left-0 grid items-center gap-x-[80px] md:grid-cols-2 md:text-center lg:mx-auto lg:w-[70%]">
+			<div className="absolute right-0 bottom-2/5 left-0 grid w-full grid-cols-1 items-center gap-x-[80px] px-[10%] lg:grid-cols-2 lg:text-center">
 				{/* LEFT — display headline */}
-				<div className="flex w-2/3 flex-col gap-[80px] justify-self-center md:gap-[24px]">
-					<h1 className="text-foreground font-stories text-center text-[60px] leading-[52px] font-normal tracking-[0.1em] md:text-start md:text-[60px] md:text-[72px] md:leading-[52px] md:tracking-[0.09em] lg:text-[72px] lg:leading-[70px]">
+				<div className="flex flex-col gap-[80px] justify-self-center md:w-2/3 md:gap-[24px] lg:justify-self-start">
+					<h1 className="text-foreground font-stories text-center text-[60px] leading-[52px] font-normal tracking-[0.1em] md:leading-[52px] md:tracking-[0.09em] lg:text-start lg:text-[72px] lg:leading-[70px]">
 						{headlineLines.map((line, i) => (
 							<span key={i}>
 								{line}
@@ -54,7 +54,7 @@ export default function ExperiencesHero({
 
 				{/* RIGHT — leading tagline */}
 				<div className="relative flex flex-col justify-center md:pt-0">
-					<p className="text-foreground font-heading text-center text-[19px] leading-[30px] tracking-[0.1em] md:text-start md:text-[30px] md:leading-[40px]">
+					<p className="text-foreground font-heading text-center text-[19px] leading-[30px] tracking-[0.1em] md:leading-[40px] lg:text-start lg:text-[30px]">
 						{(leadingTagline ?? '').split('\n').map((line, i, arr) => (
 							<span key={i}>
 								{line}

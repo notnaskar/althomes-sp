@@ -16,33 +16,47 @@ type Box = {
 }
 
 type Placement = {
-	desktop: Box
+	desktop: Box | 'hidden'
 	/** 'hidden' = hidden under 820px. Box = mobile size/position (Phase 2 — not yet wired). */
 	mobile: Box | 'hidden'
 	objectPosition?: string
+	zIndex?: number
 }
 
 export const DECOR_PLACEMENTS = {
 	flower: {
-		desktop: { top: '-180px', left: '0', width: '500px', height: '560px' },
+		desktop: {
+			top: '-190px',
+			left: '0',
+			width: '500px',
+			height: '560px',
+		},
 		mobile: 'hidden',
 		objectPosition: 'top left',
+		zIndex: -1,
 	},
 	galaxy: {
-		desktop: { top: '40%', left: '-100px', width: '340px', height: '340px' },
+		desktop: { top: '30%', left: '-100px', width: '340px', height: '340px' },
 		mobile: 'hidden',
 		objectPosition: 'center left',
 	},
 	stars: {
-		desktop: { top: '50%', left: '-80px', width: '380px', height: '220px' },
+		desktop: {
+			top: '50%',
+			left: '-80px',
+			width: '380px',
+			height: '220px',
+		},
 		mobile: 'hidden',
+		zIndex: -1,
 	},
 	basket: {
-		desktop: { top: '60px', right: '0', width: '354px', height: '284px' },
+		desktop: { top: '50%', right: '-100px', width: '600px', height: '540px' },
 		mobile: 'hidden',
+		zIndex: -1,
 	},
 	daisy: {
-		desktop: { right: '40px', bottom: '80px', width: '200px', height: '200px' },
+		desktop: 'hidden',
 		mobile: 'hidden',
 	},
 } as const satisfies Record<string, Placement>
@@ -61,6 +75,8 @@ export function DecorBleed({
 	const cfg: Placement = DECOR_PLACEMENTS[placement]
 	const d = cfg.desktop
 
+	if (d === 'hidden') return null
+
 	const style: CSSProperties = {
 		top: d.top,
 		left: d.left,
@@ -68,6 +84,7 @@ export function DecorBleed({
 		bottom: d.bottom,
 		width: d.width,
 		height: d.height,
+		zIndex: cfg.zIndex,
 	}
 
 	const hideMobile = cfg.mobile === 'hidden'

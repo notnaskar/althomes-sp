@@ -18,6 +18,8 @@ interface ExperienceCardProps {
 	image?: ExperienceCardImage | null
 	/** Derived from grid index — even = clockwise, odd = counter-clockwise */
 	tilt?: 'cw' | 'ccw'
+	/** Shell background color. Accepts any CSS color (hex, rgb, var(...), token). Defaults to `bg-card-shell`. */
+	color?: string
 }
 
 export default function ExperienceCard({
@@ -25,16 +27,20 @@ export default function ExperienceCard({
 	description,
 	image,
 	tilt = 'cw',
+	color,
 }: ExperienceCardProps) {
 	const tiltClass =
 		tilt === 'cw'
-			? 'motion-safe:rotate-[1.5deg]'
-			: 'motion-safe:-rotate-[1.5deg]'
+			? 'motion-safe:max-[820px]:rotate-[1.5deg]'
+			: 'motion-safe:max-[820px]:-rotate-[1.5deg]'
 
 	return (
 		<div className={`block w-full ${tiltClass}`}>
-			{/* Outer beige shell */}
-			<div className="bg-card-shell rounded-[5px] p-[16px] pb-[20px]">
+			{/* Outer shell */}
+			<div
+				className={`rounded-[5px] p-[16px] pb-[20px] ${color ? '' : 'bg-card-shell'}`}
+				style={color ? { backgroundColor: color } : undefined}
+			>
 				{/* Image area — fixed aspect ratio matches Figma 327×340 */}
 				<div
 					className="bg-muted relative w-full overflow-hidden rounded-[5px]"

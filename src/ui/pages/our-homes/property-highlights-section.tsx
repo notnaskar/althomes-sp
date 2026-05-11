@@ -76,20 +76,25 @@ const GRID_CONFIG = {
 	},
 	mobilePaddingX: '18px',
 	decor: {
-		wrap: { left: '80px', top: '60px', width: '45%', rotate: '0deg' },
-		leaf: { left: '80px', bottom: '0px', width: '160px', rotate: '0deg' },
-		wrapMobile: { left: '-20px', top: '40px', width: '140px', rotate: '0deg' },
+		wrap: { right: '16rem', bottom: '-50px', width: '350px', rotate: '0deg' },
+		leaf: { right: '26rem', bottom: '0px', width: '160px', rotate: '0deg' },
+		wrapMobile: {
+			right: '-30px',
+			bottom: '-50px',
+			width: '200px',
+			rotate: '45deg',
+		},
 		leafMobile: {
-			right: '-10px',
-			top: '120px',
-			width: '110px',
-			rotate: '15deg',
+			left: '0px',
+			bottom: '0px',
+			width: '6rem',
+			rotate: '0deg',
 		},
 	},
 } as const
 
 const TITLE_CLASS =
-	'font-heading text-[20px] leading-[28px] tracking-[0.2em] text-foreground mb-3'
+	'font-bold text-[15px] leading-[28px] tracking-[0.2em] font-sans mb-3'
 const BODY_CLASS =
 	'font-sans text-[15px] leading-[23px] tracking-[0.1em] text-foreground'
 
@@ -140,7 +145,7 @@ export default function PropertyHighlightsSection({
 				</div>
 			)}
 
-			<h2 className="font-heading text-foreground mb-16 px-[18px] text-center text-[30px] leading-[40px] font-normal tracking-[0.3em]">
+			<h2 className="font-heading text-foreground mb-4 px-[18px] text-start text-[19px] leading-[30px] font-normal tracking-[0.3em] md:mb-16 md:text-center md:text-[30px] md:leading-[40px]">
 				WHAT&rsquo;S WAITING FOR YOU?
 			</h2>
 
@@ -282,7 +287,7 @@ export default function PropertyHighlightsSection({
 				</div>
 
 				{/* Mobile stack */}
-				<div className="flex-col gap-12 px-[18px] max-lg:flex lg:hidden">
+				<div className="flex-col gap-4 px-[18px] max-lg:flex lg:hidden">
 					{/* Wind down text */}
 					<div>
 						{windDown?.title && (
@@ -293,8 +298,8 @@ export default function PropertyHighlightsSection({
 
 					{/* Tea-leaves collage with mobile decor */}
 					{wakeUp?.image?.asset && (
-						<div className="relative h-[360px] w-full">
-							<div className="absolute inset-0 overflow-hidden rounded-[5px]">
+						<div className="relative h-[260px] w-full sm:h-[360px]">
+							<div className="absolute right-0 aspect-[2/1] w-[90%] overflow-hidden rounded-[5px] md:inset-0 md:aspect-auto md:w-full">
 								<Img
 									image={wakeUp.image}
 									width={600}

@@ -25,7 +25,7 @@ export default function ReviewsSection({ reviews }: { reviews: Review[] }) {
 					{/* Section label */}
 
 					{/* Heading */}
-					<h2 className="font-heading text-secondary-foreground max-w-[90%] self-center text-center text-[28px] leading-[1.45] md:self-start md:text-start lg:text-[34px]">
+					<h2 className="font-heading text-secondary-foreground mt-10 max-w-[90%] self-center text-center text-[28px] leading-[1.45] lg:self-start lg:text-start lg:text-[34px]">
 						{/* STATIC */}
 						Hearts full, stories shared by guests who took back more than just
 						memories. These are the{' '}
@@ -33,7 +33,7 @@ export default function ReviewsSection({ reviews }: { reviews: Review[] }) {
 					</h2>
 
 					{/* Slider controls — hidden on mobile (shown at bottom on mobile) */}
-					<div className="mt-12 flex items-center justify-center gap-6 max-lg:!hidden md:justify-start">
+					<div className="mt-12 flex items-center justify-center gap-6 max-lg:!hidden">
 						<button
 							onClick={prev}
 							aria-label="Previous review"

@@ -4,6 +4,7 @@ import { getAltWayPage, getSite } from '@/sanity/lib/data'
 import Img from '@/ui/img'
 import ReviewsSection from '@/ui/molecules/reviews-section'
 import OurHomesCta from '@/ui/pages/our-homes/our-homes-cta'
+import StatsSlider from '@/ui/pages/the-alt-way/stats-slider'
 import TheAltWayCta from '@/ui/pages/the-alt-way/the-alt-way-cta'
 
 export default async function AltWayPage() {
@@ -45,8 +46,8 @@ export default async function AltWayPage() {
 
 			{/* Mission split */}
 			{(page.missionImage || page.missionText) && (
-				<section className="grid grid-cols-1 items-center gap-4 px-4 py-4 md:grid-cols-2 md:gap-16 md:px-[90px] lg:mt-[-130px]">
-					<div className="relative order-2 md:order-1">
+				<section className="grid grid-cols-1 items-center gap-4 px-4 py-4 lg:mt-[-5%] lg:grid-cols-2 lg:gap-16 lg:px-[90px]">
+					<div className="relative order-2 lg:order-1">
 						{page.missionImage && (
 							<div className="overflow-hidden rounded-[5px]">
 								<Img
@@ -64,12 +65,12 @@ export default async function AltWayPage() {
 								width={288}
 								alt={page.missionDecorImage.alt ?? ''}
 								aria-hidden="true"
-								className="pointer-events-none absolute z-10 w-40 rotate-[-11deg] object-contain md:top-24 md:right-16 md:w-90 lg:-top-6 lg:-right-48"
+								className="pointer-events-none absolute -right-1 -bottom-20 z-10 w-40 rotate-[-11deg] object-contain lg:-top-6 lg:-right-48 lg:w-90"
 							/>
 						)}
 					</div>
 					{page.missionText && (
-						<p className="font-heading text-foreground order-1 text-left text-[19px] leading-[1.53] tracking-[0.07em] md:order-2 md:text-right md:text-[30px] md:leading-[1.33]">
+						<p className="font-heading text-foreground order-1 text-left text-[19px] leading-[1.53] tracking-[0.07em] lg:text-right lg:text-[30px] lg:leading-[1.33]">
 							{page.missionText}
 						</p>
 					)}
@@ -81,13 +82,13 @@ export default async function AltWayPage() {
 				<section className="bg-background flex items-center justify-center overflow-hidden py-12 lg:py-20">
 					<div className="px-[18px] lg:w-[1200px]">
 						{page.valuePropHeadline && (
-							<div className="mb-16 md:mb-20">
+							<div className="mb-4 md:mb-20">
 								<h2 className="font-heading text-[24px] tracking-[0.2em] uppercase md:text-left md:text-[40px] md:tracking-[0.3em] lg:text-center">
 									{page.valuePropHeadline}
 								</h2>
 							</div>
 						)}
-						<div className="relative flex flex-col items-start gap-12 md:grid md:grid-cols-3 md:gap-x-12 md:gap-y-16">
+						<div className="relative flex flex-col items-start gap-8 md:grid md:grid-cols-3 md:gap-x-12 md:gap-y-16">
 							{/* Row 1 */}
 							{page.valueProps[0] && (
 								<div className="flex flex-col justify-start">
@@ -120,7 +121,7 @@ export default async function AltWayPage() {
 							)}
 
 							<div className="relative z-10 w-full">
-								<div className="aspect-[4/4] w-full overflow-hidden rounded-[5px]">
+								<div className="aspect-[4/4] w-[90%] justify-self-end overflow-hidden rounded-[5px] lg:w-full">
 									{page.valuePropEditorialImage && (
 										<Img
 											image={page.valuePropEditorialImage}
@@ -228,30 +229,7 @@ export default async function AltWayPage() {
 								{page.statsHeadline}
 							</h2>
 						)}
-						<div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-							{page.stats.map((stat) => (
-								<div
-									key={stat._key}
-									className="justify-items-center text-center"
-								>
-									{stat.value && (
-										<p className="text-primary-foreground text-5xl font-bold">
-											{stat.value}
-										</p>
-									)}
-									{stat.label && (
-										<p className="text-primary-foreground/80 mt-2 text-sm font-semibold tracking-wide uppercase">
-											{stat.label}
-										</p>
-									)}
-									{stat.subtext && (
-										<p className="text-primary-foreground/50 mt-1 w-[60%]">
-											{stat.subtext}
-										</p>
-									)}
-								</div>
-							))}
-						</div>
+						<StatsSlider stats={page.stats} />
 					</div>
 				</section>
 			)}
