@@ -186,43 +186,43 @@ export default async function PropertyDetailPage({ params }: Props) {
 					{/* Left: collage — desktop dimensions scaled down on mobile */}
 					<div className="h-[319px] w-[374px] shrink-0 overflow-hidden lg:h-full lg:w-[575px]">
 						<div className="relative h-[490px] w-[575px] origin-top-left scale-[0.65] lg:scale-100">
-							{property.gallery?.[3] && (
+							{property.posterImages?.[3] && (
 								<div className="absolute top-[128px] -left-[11px] h-[159px] w-[238px] overflow-hidden rounded-[5px]">
 									<Img
-										image={property.gallery[3]}
+										image={property.posterImages[3]}
 										width={238}
-										alt={property.gallery[3].alt ?? ''}
+										alt={property.posterImages[3].alt ?? ''}
 										className="h-full w-full object-cover"
 									/>
 								</div>
 							)}
-							{property.gallery?.[0] && (
+							{property.posterImages?.[0] && (
 								<div className="absolute top-0 left-[142px] h-[364px] w-[433px] overflow-hidden rounded-[5px]">
 									<Img
-										image={property.gallery[0]}
+										image={property.posterImages[0]}
 										width={433}
-										alt={property.gallery[0].alt ?? ''}
+										alt={property.posterImages[0].alt ?? ''}
 										className="h-full w-full object-cover"
 									/>
 								</div>
 							)}
-							{property.gallery?.[1] && (
+							{property.posterImages?.[1] && (
 								<div className="absolute top-[265px] left-[46px] h-[216px] w-[288px] overflow-hidden rounded-[5px]">
 									<Img
-										image={property.gallery[1]}
+										image={property.posterImages[1]}
 										width={288}
-										alt={property.gallery[1].alt ?? ''}
+										alt={property.posterImages[1].alt ?? ''}
 										className="h-full w-full object-cover"
 									/>
 								</div>
 							)}
-							{property.gallery?.[2] && (
+							{property.posterImages?.[2] && (
 								<div className="absolute top-[310px] right-30 h-[147px] w-fit overflow-hidden rounded-[5px]">
 									<Img
-										image={property.gallery[2]}
+										image={property.posterImages[2]}
 										quality={100}
 										width={470}
-										alt={property.gallery[2].alt ?? ''}
+										alt={property.posterImages[2].alt ?? ''}
 										className="h-full w-full object-cover"
 									/>
 								</div>
@@ -241,9 +241,9 @@ export default async function PropertyDetailPage({ params }: Props) {
 				</section>
 
 				{/* 5. Gallery carousel */}
-				{property.gallery && property.gallery.length > 0 && (
+				{property.sliderGallery && property.sliderGallery.length > 0 && (
 					<PropertyGallerySection
-						gallery={property.gallery}
+						gallery={property.sliderGallery}
 						quote={property.gallerySectionQuote}
 						decorImage={property.galleryDecorImage}
 					/>

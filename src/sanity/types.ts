@@ -948,7 +948,16 @@ export type Property = {
 	detailIntroHeading?: string
 	detailIntroBody?: string
 	description?: BlockContent
-	gallery?: Array<{
+	posterImages?: Array<{
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+		_key: string
+	}>
+	sliderGallery?: Array<{
 		asset?: SanityImageAssetReference
 		media?: unknown
 		hotspot?: SanityImageHotspot
@@ -3538,31 +3547,24 @@ export type PROPERTY_QUERY_RESULT = {
 	detailIntroHeading?: string
 	detailIntroBody?: string
 	description?: BlockContent
-	gallery: Array<{
-		asset: {
-			_id: string
-			_type: 'sanity.imageAsset'
-			_createdAt: string
-			_updatedAt: string
-			_rev: string
-			originalFilename?: string
-			label?: string
-			title?: string
-			description?: string
-			altText?: string
-			sha1hash?: string
-			extension?: string
-			mimeType?: string
-			size?: number
-			assetId?: string
-			uploadId?: string
-			path?: string
-			url?: string
-			metadata?: SanityImageMetadata
-			source?: SanityAssetSourceData
-		} | null
-		alt: string | null
-	}> | null
+	posterImages?: Array<{
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+		_key: string
+	}>
+	sliderGallery?: Array<{
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+		_key: string
+	}>
 	gallerySectionQuote?: string
 	galleryDecorImage?: {
 		asset?: SanityImageAssetReference
@@ -3887,6 +3889,7 @@ export type PROPERTY_QUERY_RESULT = {
 		alt: string | null
 	} | null
 	seo?: Seo
+	gallery: null
 	reviews: Array<{
 		guestName: string | null
 		rating: number | null

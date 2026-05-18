@@ -5,7 +5,7 @@ import type { PROPERTY_QUERY_RESULT } from '@/sanity/types'
 import Img from '@/ui/img'
 
 type Props = {
-	gallery: NonNullable<NonNullable<PROPERTY_QUERY_RESULT>['gallery']>
+	gallery: NonNullable<NonNullable<PROPERTY_QUERY_RESULT>['sliderGallery']>
 	quote: string | null | undefined
 	decorImage:
 		| NonNullable<PROPERTY_QUERY_RESULT>['galleryDecorImage']

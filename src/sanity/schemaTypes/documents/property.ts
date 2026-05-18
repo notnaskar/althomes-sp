@@ -322,8 +322,32 @@ export default defineType({
 			group: 'intro',
 		}),
 		defineField({
-			name: 'gallery',
-			title: 'Gallery',
+			name: 'posterImages',
+			title: 'Poster Images',
+			description:
+				'Four images shown in the collage poster section (indices 0–3).',
+			type: 'array',
+			of: [
+				{
+					type: 'image',
+					options: { hotspot: true },
+					fields: [
+						{
+							name: 'alt',
+							type: 'string',
+							title: 'Alt text',
+							validation: (Rule) => Rule.required(),
+						},
+					],
+				},
+			],
+			validation: (Rule) => Rule.min(2),
+			group: 'intro',
+		}),
+		defineField({
+			name: 'sliderGallery',
+			title: 'Slider Gallery',
+			description: 'Images shown in the gallery carousel on the detail page.',
 			type: 'array',
 			of: [
 				{
