@@ -1,162 +1,127 @@
-# ♣️ SanityPress with TypeGen
+# Althomes
 
-> Zero setup stress. 100% type-safe.
+Boutique stay rentals — marketing site, property catalogue, and booking funnel.
 
-An improved successor to the acclaimed Next.js + Sanity.io starter template—now with auto-generated TypeScript types from your Sanity schema and GROQ queries.
+Built on **Next.js 16** (App Router) + **Sanity v3** CMS + **Tailwind 4**, with **RentalWise** PMS for live availability/booking and **Resend** for transactional email. Type-safe end-to-end via Sanity TypeGen.
 
-[Get started](https://www.sanity.io/get-started?template=sanitypress-with-typegen&ref=templates-sanitypress-with-typegen) | [Read more about TypeGen](https://typed.sanitypress.dev/blog/introducing-sanitypress-with-typegen) | [View on Sanity.io](https://www.sanity.io/templates/sanitypress-with-typegen)
+## Stack
 
-![](https://cdn.sanity.io/images/cyu7k2r0/production/24aee273834491b8706ab262d25dcda73b5a856b-2178x1085.png)
+- **Frontend**: Next.js 16 App Router, React 19, TypeScript, Tailwind 4
+- **CMS**: Sanity v3 (Studio at `/studio`), Live Content API, Visual Editing
+- **Booking**: RentalWise (OneMineral PMS) widget + JS SDK
+- **Email**: Resend (contact + partner-enquiry forms)
+- **Forms**: react-hook-form + Zod
+- **Deploy**: Hetzner / Coolify (standalone Next output)
+- **Tests**: Vitest (unit), Playwright (e2e)
 
-## Key Features
-
-- Next.js 16 (App Router, Server Components, TypeScript) with Tailwind 4
-- Improved successor to the acclaimed [SanityPress](https://sanitypress.dev) starter template (over 400 stars)
-- GROQ TypeGen for your Sanity Schema types
-- [Perfect PageSpeed Insight scores](https://pagespeed.web.dev/analysis/https-typed-sanitypress-dev/78sjwe1x39?form_factor=desktop)
-- Live Content API with Visual Editing
-- Optimized images with Next Image component and Sanity CDN
-- Auto-generated sitemap.xml and blog RSS feed
-
-## File Structure
+## Routes
 
 ```
-📂 sanitypress/
-├── public/                        # Static assets (favicon, etc.)
-├── src/
-│   ├── app/                       # Next.js App Router
-│   │   ├── (frontend)/            # Public-facing site
-│   │   │   ├── layout.tsx         # Frontend root layout
-│   │   │   ├── not-found.tsx      # 404 page
-│   │   │   ├── [[...slug]]/       # Catch-all for all standard pages
-│   │   │   ├── blog/[slug]/       # Individual blog post pages
-│   │   │   ├── blog/rss.xml/      # RSS feed endpoint
-│   │   │   └── api/               # API route handlers
-│   │   │       ├── draft-mode/    # Enable/disable Sanity draft mode
-│   │   │       ├── og/            # Open Graph image generation
-│   │   │       └── revalidate/    # ISR revalidation
-│   │   ├── (studio)/admin/        # Sanity Studio (CMS editor UI)
-│   │   └── sitemap.ts             # Auto-generated sitemap
-│   ├── ui/                        # React components
-│   │   ├── modules/               # One component per Sanity module
-│   │   │   ├── blog/              # Blog-specific components (post list, filters, etc.)
-│   │   │   ├── prose/             # Rich text components / portable text renderer
-│   │   │   ├── search/            # Search form + results
-│   │   │   └── custom-html/       # Custom HTML/CSS/JS injection
-│   │   ├── header/                # Header, navigation, megamenu
-│   │   ├── footer/                # Footer and link list
-│   │   ├── table-of-contents/     # Auto-generated TOC for long pages
-│   │   └── ...                    # Shared components (CTA, Img, Logo, etc.)
-│   ├── sanity/                    # Sanity CMS configuration
-│   │   ├── schemaTypes/
-│   │   │   ├── documents/         # Top-level content types (page, blog.post, site, navigation…)
-│   │   │   ├── modules/           # Page-building blocks (heroes, grids, prose, search…)
-│   │   │   ├── objects/           # Reusable field groups (cta, link, metadata…)
-│   │   │   └── fragments/         # Shared GROQ fragment definitions
-│   │   ├── lib/                   # Queries, fetch helpers, image builder
-│   │   ├── ui/                    # Custom Studio UI components
-│   │   ├── structure.ts           # Studio sidebar layout
-│   │   └── types.ts               # Auto-generated TypeScript types (via TypeGen)
-│   ├── lib/                       # Shared app utilities and env helpers
-│   ├── hooks/                     # Custom React hooks
-│   └── types/                     # Global TypeScript declarations
-├── .env.example                   # Environment variable template
-├── next.config.ts                 # Next.js configuration
-├── sanity.config.ts               # Sanity Studio configuration
-├── sanity.cli.ts                  # Sanity CLI configuration
-└── package.json
+src/app/
+├── (site)/
+│   ├── layout.tsx              # Root layout — <SanityLive /> mounts here ONLY
+│   ├── page.tsx                # /
+│   ├── our-homes/              # /our-homes, /our-homes/[slug]
+│   ├── the-alt-way/            # /the-alt-way
+│   ├── experiences/            # /experiences
+│   ├── join-us/                # /join-us — partner enquiry form
+│   ├── contact/                # /contact
+│   ├── blog/                   # /blog, /blog/[slug]
+│   ├── [slug]/                 # Legal pages (privacy-policy, terms-of-use…)
+│   └── api/og/                 # OG image generation
+└── (studio)/                   # Sanity Studio at /studio
 ```
+
+## Sanity Schema
+
+`src/sanity/schemaTypes/`:
+
+- **`documents/`** — 14 types: `site` (singleton), `property`, `experience`, `review`, `amenity`, `homePage`, `ourHomesPage`, `altWayPage`, `experiencesPage`, `joinUsPage`, `contactPage`, `legalPage`, `blog.post`, `redirect`
+- **`modules/`** — 13 page-building modules assembled into `modules[]` arrays
+- **`objects/`** — Reusable field groups: `seo`, `link`, `location`, `cta`, `blockContent`, `navLabel`, `megamenu`
+
+Module dispatcher: `src/ui/modules/index.tsx`. Queries: `src/sanity/lib/queries.ts`. Fetch helpers: `src/sanity/lib/data.ts`.
 
 ## Getting Started
 
-### 1. Initialize the project
-
-Click the [Sanity template link](https://www.sanity.io/get-started?template=sanitypress-with-typegen&ref=templates-sanitypress-with-typegen) -- OR -- install with the Sanity CLI:
-
-```sh
-npm create sanity@latest -- --template=nuotsu/sanitypress-with-typegen
-```
-
-### 2. Set environment variables
-
-If initialized via the Sanity template link, the `.env.local` file should be created automatically.
-
-If initialized via the CLI, duplicate the `.env.example` file as `.env.local` and assign the variables to your project:
-
-```sh
-# .env.local
-NEXT_PUBLIC_BASE_URL="https://example.com" # your website's domain
-
-NEXT_PUBLIC_SANITY_PROJECT_ID="abcd1234" # Sanity project id
-NEXT_PUBLIC_SANITY_DATASET="production" # Sanity dataset name
-
-SANITY_API_READ_TOKEN="..." # API token with "Viewer" permissions
-```
-
-⚠️ **Required**: Set `NEXT_PUBLIC_BASE_URL` to your production domain.
-
-### 3. Install and start local server
-
-Install required packages and dependencies with your desired package manager (e.g. npm, pnpm, deno, bun, etc.).
+### 1. Install
 
 ```sh
 npm install
 ```
 
-Once installed, run the development script:
+### 2. Environment
+
+Duplicate `.env.example` → `.env.local`:
 
 ```sh
-npm run dev
+# Sanity
+NEXT_PUBLIC_SANITY_PROJECT_ID=
+NEXT_PUBLIC_SANITY_DATASET=production
+SANITY_API_READ_TOKEN=             # Viewer scope only — never Editor
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+REVALIDATE_SECRET=                 # Sanity webhook secret
+
+# RentalWise (use staging for dev)
+RENTALWISE_API_HOST=https://app.onemineralstaging.com
+RENTALWISE_API_TOKEN=
+
+# Resend
+RESEND_API_KEY=
+RESEND_FROM_EMAIL=
+RESEND_TO_EMAIL=
 ```
 
-Then open:
-
-- Next.js frontend: http://localhost:3000
-- Sanity Studio: http://localhost:3000/admin
-
-### 4. Add content in your Sanity Studio
-
-Publish the **required** documents: `site` and `page` (with the slug "index"). Otherwise, you’ll just see a blank page on the Next.js frontend.
-
-What you'll need:
-
-| Document        | Slug or Path | Usage              | Required? | Notes                                |
-| --------------- | ------------ | ------------------ | :-------: | ------------------------------------ |
-| `site`          |              | Global settings    |    Yes    |                                      |
-| `page`          | `index`      | Homepage route     |    Yes    |                                      |
-| `page`          | `404`        | Not found route    |           |                                      |
-| `page`          | `blog`       | Blog listing route |           | Add the **Blog index** module        |
-| `global-module` | `blog/`      | Blog post template |           | Add the **Blog post content** module |
-
-Alternatively, you can run the following command to import a demo dataset with the required documents:
+### 3. Run
 
 ```sh
-sanity dataset import demo.tar.gz
+npm run dev          # Next dev server (webpack)
+npm run build        # Production build
+npm run typecheck    # tsc --noEmit
+npm run typegen      # Regenerate Sanity types from schema + queries
+npm run format       # Prettier
 ```
 
-> 📸 See what the Sanity Studio backend looks like on the [Screenshots page](https://typed.sanitypress.dev/docs/sanity-studio-screenshots).
+- Frontend: http://localhost:3000
+- Studio: http://localhost:3000/studio
 
-### 5. Set up deployments
+Run `typegen` after any GROQ change in `src/sanity/lib/queries.ts` or schema edit in `src/sanity/schemaTypes/`. Output: `src/sanity/types.ts` (auto-generated, do not hand-edit).
 
-Add a [Vercel](https://www.sanity.io/plugins/vercel-dashboard-widget) (default) or [Netlify widget](https://www.sanity.io/plugins/sanity-plugin-dashboard-widget-netlify) to enable deployments from the Studio.
+## Non-Negotiables
 
-### 6. Customize
+1. **`output: 'standalone'`** in `next.config.ts` — required for Hetzner/Coolify deploy
+2. **`<SanityLive />`** in `(site)/layout.tsx` only — nowhere else
+3. **`next/image` always** — never raw `<img>`
+4. **No Vercel-specific APIs** — `@vercel/kv`, `@vercel/blob` forbidden
+5. **Viewer-scoped token** for `SANITY_API_READ_TOKEN` — never Editor
+6. **No Sanity writes from forms** — Resend email is the only form destination
+7. **RentalWise calls server-side only** via server actions; `cache: 'no-store'` on availability
+8. **Every GROQ query uses `defineQuery()`** — plain `groq` tag breaks TypeGen silently
 
-Adjust frontend styles to your liking, edit or add new schema and modules, etc.
+## Path Aliases
 
-## Roadmap / To-do
+```
+@/*   → src/*
+@@/*  → ./
+```
 
-- read time for blog posts
-- improved error handling
-- featured post?
-  - reference to blog.post on blog-index, blog-post-list
-  - OR as `featured: true` on blog.post
-- Modules
-  - Announcement bar?
-- rename `global-module` to `module.global`?
+## Key Files
 
-## \*Not included
+| File | Purpose |
+|------|---------|
+| `src/sanity/lib/queries.ts` | All GROQ queries |
+| `src/sanity/lib/data.ts` | Fetch helpers |
+| `src/sanity/types.ts` | Auto-generated types |
+| `src/sanity/structure.ts` | Studio sidebar |
+| `src/ui/modules/index.tsx` | Module dispatcher |
+| `src/ui/UI_GUIDELINES.md` | Design tokens + component contracts |
+| `next.config.ts` | Redirects pulled from Sanity at build time |
+| `sanity.cli.ts` | TypeGen watch paths |
 
-- Internationalization (i18n) and multi-lingual support
-- Turbopack support ([pending issue with lightningcss](https://github.com/parcel-bundler/lightningcss/issues/1072))
-- Next.js 16 Cache Components (not suitable for Sanity Live Content API's real-time updates)
+## Deployment
+
+Standalone Next output → Hetzner via Coolify. RentalWise env must flip from staging to production host at final deploy. No Vercel.
+
+## Credits
+
+Built on the [SanityPress with TypeGen](https://typed.sanitypress.dev) starter, heavily extended for Althomes' property + experience domain.
