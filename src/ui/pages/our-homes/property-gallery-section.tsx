@@ -86,7 +86,7 @@ export default function PropertyGallerySection({
 
 			{/* Botanical decor illustration — absolute on section */}
 			{decorImage?.asset && (
-				<div className="pointer-events-none absolute top-0 right-0 z-10 h-[180px] w-[200px] lg:top-[-240px] lg:right-[-150px] lg:h-[405px] lg:w-[421px] xl:right-[-200px]">
+				<div className="pointer-events-none absolute top-0 -right-15 z-10 h-[180px] w-[200px] lg:top-[-240px] lg:right-[-150px] lg:h-[405px] lg:w-[421px] xl:right-[-200px]">
 					<Img
 						image={decorImage}
 						width={421}
