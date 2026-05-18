@@ -164,7 +164,7 @@ export const PROPERTY_QUERY =
 	ctaBackground { asset->, alt },
 	faqs[]{ question, answer },
 	location,
-	"reviews": *[_type=='review' && references(^._id) && published==true] | order(stayDate desc) [0..20]{
+	"reviews": *[_type=='review' && references(^._id) ] | order(stayDate desc) [0..20]{
 		guestName, rating, body, guestLocation, stayDate,
 		guestPhoto { asset->, alt },
 		"propertyTitle": property->title

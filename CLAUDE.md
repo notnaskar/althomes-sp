@@ -9,7 +9,6 @@ npm run dev          # Dev server (webpack mode)
 npm run build        # Production build (webpack)
 npm run typecheck    # tsc --noEmit
 npm run typegen      # Regenerate Sanity types from schema + queries
-npm run lint         # next lint
 npm run format       # Prettier on all TS/JS files
 ```
 

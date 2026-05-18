@@ -301,15 +301,19 @@ rw-quote-error {
 }
 
 /* ─── Tablet ≤820px: 3-col grid ─── */
+/* !important on grid-template-columns: needed to beat the
+   `rw-widget:not(:has(rw-quote-total:not(:empty)))` rule above,
+   which has higher specificity and would otherwise restore the
+   5-col desktop layout once a quote is computed. */
 @media (max-width: 820px) {
 	rw-widget {
-		grid-template-columns: 1fr 1fr 1fr;
+		grid-template-columns: 1fr 1fr 1fr !important;
 		row-gap: 28px;
 		padding: 28px 20px;
 	}
 
 	rw-quote-daterange-input {
-		grid-column: 1 / -1;
+		grid-column: 1 / -1 !important;
 	}
 
 	rw-quote-guests-input {
@@ -337,9 +341,17 @@ rw-quote-error {
 /* ─── Mobile ≤480px: single column ─── */
 @media (max-width: 480px) {
 	rw-widget {
-		grid-template-columns: 1fr;
+		grid-template-columns: 1fr !important;
 		row-gap: 24px;
 		padding: 24px 16px;
+	}
+
+	rw-quote-daterange-input,
+	rw-quote-guests-input,
+	rw-quote-coupon-input,
+	rw-quote-total,
+	rw-quote-book-button {
+		grid-column: 1 / -1 !important;
 	}
 
 	rw-quote-book-button a.rw-widget-book-now-link,

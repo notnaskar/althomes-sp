@@ -830,8 +830,6 @@ export type Review = {
 	rating?: number
 	stayDate?: string
 	body?: string
-	published?: boolean
-	featured?: boolean
 	guestPhoto?: {
 		asset?: SanityImageAssetReference
 		media?: unknown
@@ -950,7 +948,16 @@ export type Property = {
 	detailIntroHeading?: string
 	detailIntroBody?: string
 	description?: BlockContent
-	gallery?: Array<{
+	posterImages?: Array<{
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+		_key: string
+	}>
+	sliderGallery?: Array<{
 		asset?: SanityImageAssetReference
 		media?: unknown
 		hotspot?: SanityImageHotspot
@@ -1078,6 +1085,7 @@ export type Property = {
 		_type: 'faq'
 		_key: string
 	}>
+	hideCausesSection?: boolean
 	causeHeadline?: string
 	causeBody?: BlockContent
 	causeImages?: Array<{
@@ -3403,7 +3411,7 @@ export type ALL_PROPERTIES_QUERY_RESULT = Array<{
 
 // Source: src/sanity/lib/queries.ts
 // Variable: PROPERTY_QUERY
-// Query: *[_type == 'property' && slug.current == $slug][0]{	...,	heroImage { asset->, alt },	detailCoverImage { asset->, alt },	gallery[]{ asset->, alt },	cardThumbnail { asset->, alt },	amenities[]->{ name, icon },	amenitiesSectionImage { asset->, alt },	experiences[]->{		title,		description,		image { asset->, alt }	},	experiencesBgImage { asset->, alt, hotspot, crop },	windDownHighlight{		title,		body,		image { asset->, alt, hotspot, crop },		decorImage { asset-> },		secondaryDecorImage { asset-> }	},	wakeUpHighlight{		title,		body,		image { asset->, alt, hotspot, crop }	},	hostedWithHeartHighlight{		title,		body	},	symphonyHighlight{		title,		body,		image { asset->, alt, hotspot, crop }	},	causeImages[]{ asset->, alt },	ctaBackground { asset->, alt },	faqs[]{ question, answer },	location,	"reviews": *[_type=='review' && references(^._id) && published==true] | order(stayDate desc) [0..20]{		guestName, rating, body, guestLocation, stayDate,		guestPhoto { asset->, alt },		"propertyTitle": property->title	}}
+// Query: *[_type == 'property' && slug.current == $slug][0]{	...,	heroImage { asset->, alt },	detailCoverImage { asset->, alt },	gallery[]{ asset->, alt },	cardThumbnail { asset->, alt },	amenities[]->{ name, icon },	amenitiesSectionImage { asset->, alt },	experiences[]->{		title,		description,		image { asset->, alt }	},	experiencesBgImage { asset->, alt, hotspot, crop },	windDownHighlight{		title,		body,		image { asset->, alt, hotspot, crop },		decorImage { asset-> },		secondaryDecorImage { asset-> }	},	wakeUpHighlight{		title,		body,		image { asset->, alt, hotspot, crop }	},	hostedWithHeartHighlight{		title,		body	},	symphonyHighlight{		title,		body,		image { asset->, alt, hotspot, crop }	},	causeImages[]{ asset->, alt },	ctaBackground { asset->, alt },	faqs[]{ question, answer },	location,	"reviews": *[_type=='review' && references(^._id) ] | order(stayDate desc) [0..20]{		guestName, rating, body, guestLocation, stayDate,		guestPhoto { asset->, alt },		"propertyTitle": property->title	}}
 export type PROPERTY_QUERY_RESULT = {
 	_id: string
 	_type: 'property'
@@ -3539,31 +3547,24 @@ export type PROPERTY_QUERY_RESULT = {
 	detailIntroHeading?: string
 	detailIntroBody?: string
 	description?: BlockContent
-	gallery: Array<{
-		asset: {
-			_id: string
-			_type: 'sanity.imageAsset'
-			_createdAt: string
-			_updatedAt: string
-			_rev: string
-			originalFilename?: string
-			label?: string
-			title?: string
-			description?: string
-			altText?: string
-			sha1hash?: string
-			extension?: string
-			mimeType?: string
-			size?: number
-			assetId?: string
-			uploadId?: string
-			path?: string
-			url?: string
-			metadata?: SanityImageMetadata
-			source?: SanityAssetSourceData
-		} | null
-		alt: string | null
-	}> | null
+	posterImages?: Array<{
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+		_key: string
+	}>
+	sliderGallery?: Array<{
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		_type: 'image'
+		_key: string
+	}>
 	gallerySectionQuote?: string
 	galleryDecorImage?: {
 		asset?: SanityImageAssetReference
@@ -3831,6 +3832,7 @@ export type PROPERTY_QUERY_RESULT = {
 		question: string | null
 		answer: BlockContent | null
 	}> | null
+	hideCausesSection?: boolean
 	causeHeadline?: string
 	causeBody?: BlockContent
 	causeImages: Array<{
@@ -3887,6 +3889,7 @@ export type PROPERTY_QUERY_RESULT = {
 		alt: string | null
 	} | null
 	seo?: Seo
+	gallery: null
 	reviews: Array<{
 		guestName: string | null
 		rating: number | null
@@ -4361,7 +4364,7 @@ declare module '@sanity/client' {
 		"*[_type == 'legalPage' && slug.current == $slug][0] {\n\t\t...,\n\t\tctaBackground { asset->, alt }\n\t}": LEGAL_PAGE_QUERY_RESULT
 		"*[_type == 'legalPage' && defined(slug.current)].slug.current": ALL_LEGAL_PAGES_QUERY_RESULT
 		"*[_type == 'property' && status != 'hidden'] | order(displayOrder asc){\n\t_id,\n\ttitle,\n\t\"slug\": slug.current,\n\ttagline,\n\tshortDescription,\n\tcardThumbnail { asset->, alt },\n\theroImage { asset->, alt },\n\tshowcaseSecondaryImage { asset->, alt },\n\tshowcaseDecorImage { asset->, alt },\n\tshowcaseDecorTop,\n\tshowcaseDecorRight,\n\tshowcaseDecorBottom,\n\tshowcaseDecorLeft,\n\tshowcaseDecorWidth,\n\tshowcaseDecorHeight,\n\tshowcaseDecorRotation,\n\tshowcaseSecondaryDecorImage { asset->, alt },\n\tshowcaseSecondaryDecorTop,\n\tshowcaseSecondaryDecorRight,\n\tshowcaseSecondaryDecorBottom,\n\tshowcaseSecondaryDecorLeft,\n\tshowcaseSecondaryDecorWidth,\n\tshowcaseSecondaryDecorHeight,\n\tshowcaseSecondaryDecorRotation,\n\tpullQuote,\n\tlocationHeadline,\n\tcardAmenities,\n\tpropertyType,\n\tpriceFrom,\n\tmaxGuests,\n\tbedrooms,\n\tbathrooms,\n\tstatus,\n\tdisplayOrder,\n\trentalwisePropertyId\n}": ALL_PROPERTIES_QUERY_RESULT
-		'*[_type == \'property\' && slug.current == $slug][0]{\n\t...,\n\theroImage { asset->, alt },\n\tdetailCoverImage { asset->, alt },\n\tgallery[]{ asset->, alt },\n\tcardThumbnail { asset->, alt },\n\tamenities[]->{ name, icon },\n\tamenitiesSectionImage { asset->, alt },\n\texperiences[]->{\n\t\ttitle,\n\t\tdescription,\n\t\timage { asset->, alt }\n\t},\n\texperiencesBgImage { asset->, alt, hotspot, crop },\n\twindDownHighlight{\n\t\ttitle,\n\t\tbody,\n\t\timage { asset->, alt, hotspot, crop },\n\t\tdecorImage { asset-> },\n\t\tsecondaryDecorImage { asset-> }\n\t},\n\twakeUpHighlight{\n\t\ttitle,\n\t\tbody,\n\t\timage { asset->, alt, hotspot, crop }\n\t},\n\thostedWithHeartHighlight{\n\t\ttitle,\n\t\tbody\n\t},\n\tsymphonyHighlight{\n\t\ttitle,\n\t\tbody,\n\t\timage { asset->, alt, hotspot, crop }\n\t},\n\tcauseImages[]{ asset->, alt },\n\tctaBackground { asset->, alt },\n\tfaqs[]{ question, answer },\n\tlocation,\n\t"reviews": *[_type==\'review\' && references(^._id) && published==true] | order(stayDate desc) [0..20]{\n\t\tguestName, rating, body, guestLocation, stayDate,\n\t\tguestPhoto { asset->, alt },\n\t\t"propertyTitle": property->title\n\t}\n}': PROPERTY_QUERY_RESULT
+		'*[_type == \'property\' && slug.current == $slug][0]{\n\t...,\n\theroImage { asset->, alt },\n\tdetailCoverImage { asset->, alt },\n\tgallery[]{ asset->, alt },\n\tcardThumbnail { asset->, alt },\n\tamenities[]->{ name, icon },\n\tamenitiesSectionImage { asset->, alt },\n\texperiences[]->{\n\t\ttitle,\n\t\tdescription,\n\t\timage { asset->, alt }\n\t},\n\texperiencesBgImage { asset->, alt, hotspot, crop },\n\twindDownHighlight{\n\t\ttitle,\n\t\tbody,\n\t\timage { asset->, alt, hotspot, crop },\n\t\tdecorImage { asset-> },\n\t\tsecondaryDecorImage { asset-> }\n\t},\n\twakeUpHighlight{\n\t\ttitle,\n\t\tbody,\n\t\timage { asset->, alt, hotspot, crop }\n\t},\n\thostedWithHeartHighlight{\n\t\ttitle,\n\t\tbody\n\t},\n\tsymphonyHighlight{\n\t\ttitle,\n\t\tbody,\n\t\timage { asset->, alt, hotspot, crop }\n\t},\n\tcauseImages[]{ asset->, alt },\n\tctaBackground { asset->, alt },\n\tfaqs[]{ question, answer },\n\tlocation,\n\t"reviews": *[_type==\'review\' && references(^._id) ] | order(stayDate desc) [0..20]{\n\t\tguestName, rating, body, guestLocation, stayDate,\n\t\tguestPhoto { asset->, alt },\n\t\t"propertyTitle": property->title\n\t}\n}': PROPERTY_QUERY_RESULT
 		"*[_type == 'property' && defined(slug.current)].slug.current": ALL_PROPERTY_SLUGS_QUERY_RESULT
 		"*[_type == 'blog.post'] | order(publishDate desc)": ALL_POSTS_QUERY_RESULT
 		"*[_type == 'blog.post' && metadata.slug.current == $slug][0]": POST_BY_SLUG_QUERY_RESULT

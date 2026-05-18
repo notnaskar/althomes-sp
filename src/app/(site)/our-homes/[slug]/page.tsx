@@ -186,43 +186,43 @@ export default async function PropertyDetailPage({ params }: Props) {
 					{/* Left: collage — desktop dimensions scaled down on mobile */}
 					<div className="h-[319px] w-[374px] shrink-0 overflow-hidden lg:h-full lg:w-[575px]">
 						<div className="relative h-[490px] w-[575px] origin-top-left scale-[0.65] lg:scale-100">
-							{property.gallery?.[3] && (
+							{property.posterImages?.[3] && (
 								<div className="absolute top-[128px] -left-[11px] h-[159px] w-[238px] overflow-hidden rounded-[5px]">
 									<Img
-										image={property.gallery[3]}
+										image={property.posterImages[3]}
 										width={238}
-										alt={property.gallery[3].alt ?? ''}
+										alt={property.posterImages[3].alt ?? ''}
 										className="h-full w-full object-cover"
 									/>
 								</div>
 							)}
-							{property.gallery?.[0] && (
+							{property.posterImages?.[0] && (
 								<div className="absolute top-0 left-[142px] h-[364px] w-[433px] overflow-hidden rounded-[5px]">
 									<Img
-										image={property.gallery[0]}
+										image={property.posterImages[0]}
 										width={433}
-										alt={property.gallery[0].alt ?? ''}
+										alt={property.posterImages[0].alt ?? ''}
 										className="h-full w-full object-cover"
 									/>
 								</div>
 							)}
-							{property.gallery?.[1] && (
+							{property.posterImages?.[1] && (
 								<div className="absolute top-[265px] left-[46px] h-[216px] w-[288px] overflow-hidden rounded-[5px]">
 									<Img
-										image={property.gallery[1]}
+										image={property.posterImages[1]}
 										width={288}
-										alt={property.gallery[1].alt ?? ''}
+										alt={property.posterImages[1].alt ?? ''}
 										className="h-full w-full object-cover"
 									/>
 								</div>
 							)}
-							{property.gallery?.[2] && (
+							{property.posterImages?.[2] && (
 								<div className="absolute top-[310px] right-30 h-[147px] w-fit overflow-hidden rounded-[5px]">
 									<Img
-										image={property.gallery[2]}
+										image={property.posterImages[2]}
 										quality={100}
 										width={470}
-										alt={property.gallery[2].alt ?? ''}
+										alt={property.posterImages[2].alt ?? ''}
 										className="h-full w-full object-cover"
 									/>
 								</div>
@@ -241,9 +241,9 @@ export default async function PropertyDetailPage({ params }: Props) {
 				</section>
 
 				{/* 5. Gallery carousel */}
-				{property.gallery && property.gallery.length > 0 && (
+				{property.sliderGallery && property.sliderGallery.length > 0 && (
 					<PropertyGallerySection
-						gallery={property.gallery}
+						gallery={property.sliderGallery}
 						quote={property.gallerySectionQuote}
 						decorImage={property.galleryDecorImage}
 					/>
@@ -251,7 +251,7 @@ export default async function PropertyDetailPage({ params }: Props) {
 
 				{/* 3. Location — Getting Here */}
 				{(property.locationBody || property.locationCta) && (
-					<section className="bg-background flex flex-col gap-8 py-[48px] lg:flex-row lg:items-center lg:justify-center lg:gap-[45px]">
+					<section className="bg-background flex flex-col gap-8 px-4 py-[48px] lg:flex-row lg:items-center lg:justify-center lg:gap-[45px]">
 						{property.locationImage?.asset && (
 							<div className="order-2 h-[310px] w-full shrink-0 overflow-hidden lg:order-none lg:w-[576px]">
 								<Img
@@ -322,54 +322,55 @@ export default async function PropertyDetailPage({ params }: Props) {
 				)}
 
 				{/* 7. Causes */}
-				{(property.causeHeadline ||
-					property.causeBody ||
-					(property.causeImages && property.causeImages.length >= 1)) && (
-					<section className="bg-background text-foreground flex min-h-0 flex-col justify-center px-[18px] py-16 md:px-[90px] md:py-24 lg:min-h-[80vh]">
-						<div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-start gap-12 md:justify-between md:gap-[60px] lg:grid-cols-[45fr_50fr]">
-							{/* Left: images */}
-							<div className="relative w-[90%] sm:w-full">
-								{property.causeImages?.[0] && (
-									<div className="relative w-full">
-										<Img
-											image={property.causeImages[0]}
-											width={624}
-											height={497}
-											sizes="(max-width: 767px) calc(100vw - 36px), 624px"
-											alt={property.causeImages[0].alt ?? ''}
-											className="h-auto w-full rounded-[8px] object-cover"
-										/>
-									</div>
-								)}
-								{property.causeImages?.[1] && (
-									<div className="absolute right-[-40px] bottom-0 z-10 w-[140px] md:w-[200px]">
-										<Img
-											image={property.causeImages[1]}
-											width={200}
-											height={280}
-											alt={property.causeImages[1].alt ?? ''}
-											className="h-auto w-full object-contain"
-										/>
-									</div>
-								)}
-							</div>
+				{!property.hideCausesSection &&
+					(property.causeHeadline ||
+						property.causeBody ||
+						(property.causeImages && property.causeImages.length >= 1)) && (
+						<section className="bg-background text-foreground flex min-h-0 flex-col justify-center px-[18px] py-16 md:px-[90px] md:py-24 lg:min-h-[80vh]">
+							<div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-start gap-12 md:justify-between md:gap-[60px] lg:grid-cols-[45fr_50fr]">
+								{/* Left: images */}
+								<div className="relative w-[90%] sm:w-full">
+									{property.causeImages?.[0] && (
+										<div className="relative w-full">
+											<Img
+												image={property.causeImages[0]}
+												width={624}
+												height={497}
+												sizes="(max-width: 767px) calc(100vw - 36px), 624px"
+												alt={property.causeImages[0].alt ?? ''}
+												className="h-auto w-full rounded-[8px] object-cover"
+											/>
+										</div>
+									)}
+									{property.causeImages?.[1] && (
+										<div className="absolute right-[-40px] bottom-0 z-10 w-[140px] md:w-[200px]">
+											<Img
+												image={property.causeImages[1]}
+												width={200}
+												height={280}
+												alt={property.causeImages[1].alt ?? ''}
+												className="h-auto w-full object-contain"
+											/>
+										</div>
+									)}
+								</div>
 
-							{/* Right: text */}
-							<div className="text-star flex flex-col items-start md:items-start md:text-left lg:items-start">
-								{property.causeHeadline && (
-									<h2 className="font-heading text-foreground mb-5 max-w-[515px] text-[19px] leading-[29px] tracking-[0.1em] md:text-[30px] md:leading-[40px]">
-										{property.causeHeadline}
-									</h2>
-								)}
-								{property.causeBody && (
-									<div className="text-foreground max-w-[100%] space-y-4 text-[15px] leading-[1.6] md:text-[16px] md:leading-[1.8]">
-										<PortableText value={property.causeBody} />
-									</div>
-								)}
+								{/* Right: text */}
+								<div className="text-star flex flex-col items-start md:items-start md:text-left lg:items-start">
+									{property.causeHeadline && (
+										<h2 className="font-heading text-foreground mb-5 max-w-[515px] text-[19px] leading-[29px] tracking-[0.1em] md:text-[30px] md:leading-[40px]">
+											{property.causeHeadline}
+										</h2>
+									)}
+									{property.causeBody && (
+										<div className="text-foreground max-w-[100%] space-y-4 text-[15px] leading-[1.6] md:text-[16px] md:leading-[1.8]">
+											<PortableText value={property.causeBody} />
+										</div>
+									)}
+								</div>
 							</div>
-						</div>
-					</section>
-				)}
+						</section>
+					)}
 
 				{/* 8. Reviews */}
 				{cappedReviews.length > 0 && <ReviewsSection reviews={cappedReviews} />}
