@@ -5806,20 +5806,6 @@
         },
         "optional": true
       },
-      "published": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "boolean"
-        },
-        "optional": true
-      },
-      "featured": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "boolean"
-        },
-        "optional": true
-      },
       "guestPhoto": {
         "type": "objectAttribute",
         "value": {
@@ -7403,6 +7389,13 @@
               }
             }
           }
+        },
+        "optional": true
+      },
+      "hideCausesSection": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "boolean"
         },
         "optional": true
       },

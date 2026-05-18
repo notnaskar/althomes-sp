@@ -322,9 +322,10 @@ export default async function PropertyDetailPage({ params }: Props) {
 				)}
 
 				{/* 7. Causes */}
-				{(property.causeHeadline ||
-					property.causeBody ||
-					(property.causeImages && property.causeImages.length >= 1)) && (
+				{!property.hideCausesSection &&
+					(property.causeHeadline ||
+						property.causeBody ||
+						(property.causeImages && property.causeImages.length >= 1)) && (
 					<section className="bg-background text-foreground flex min-h-0 flex-col justify-center px-[18px] py-16 md:px-[90px] md:py-24 lg:min-h-[80vh]">
 						<div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-start gap-12 md:justify-between md:gap-[60px] lg:grid-cols-[45fr_50fr]">
 							{/* Left: images */}

@@ -652,6 +652,14 @@ export default defineType({
 
 		// Causes
 		defineField({
+			name: 'hideCausesSection',
+			title: 'Hide Causes Section',
+			type: 'boolean',
+			description: 'Hide the causes section from the property detail page.',
+			initialValue: false,
+			group: 'causes',
+		}),
+		defineField({
 			name: 'causeHeadline',
 			title: 'Cause Headline',
 			type: 'string',
