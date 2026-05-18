@@ -51,7 +51,6 @@
     "dev:turbopack": "next dev",
     "build": "next build --webpack",
     "start": "next start",
-    "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "typegen": "sanity schema extract --path=./src/sanity && sanity typegen generate",
     "format": "prettier --write '**/*.{ts,tsx,js,jsx}'",
